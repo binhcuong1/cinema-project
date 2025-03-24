@@ -1,7 +1,7 @@
 # Web Rạp Chiếu Phim
 
 ## 1. Giới thiệu dự án
-Dự án **Web Rạp Chiếu Phim** được phát triển bởi nhóm 1 trong đồ án tại Trường Đại học Công nghệ Thông tin, TP. HCM. Mục tiêu là xây dựng một website cho phép người dùng xem danh sách phim, quản lý cụm rạp, đặt vé trực tuyến, và quản lý tài khoản cá nhân.
+Dự án **Web Rạp Chiếu Phim** được phát triển bởi nhóm 1 trong đồ án tại Trường Đại học Công nghệ TP. HCM. Mục tiêu là xây dựng một website cho phép người dùng xem danh sách phim, quản lý cụm rạp, đặt vé trực tuyến, và quản lý tài khoản cá nhân.
 
 ### Thông tin nhóm
 - **Nhóm trưởng:** Dương Bình Cương - MSSV: 2280600332

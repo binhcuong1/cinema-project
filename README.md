@@ -75,7 +75,7 @@ Giao diện sẽ chạy tại `http://localhost:3000`.
 ## 6. Công nghệ sử dụng
 - **Back-end:** Node.js, Express.
 - **Front-end:** HTML, CSS, JavaScript (hoặc React nếu nhóm chọn).
-- **Database:** MongoDB (hoặc MySQL).
+- **Database:** MySQL.
 - **Công cụ hỗ trợ:** Git, npm, Postman.
 
 ---

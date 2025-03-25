@@ -95,3 +95,4 @@ Giao diện sẽ chạy tại `http://localhost:3000`.
 ## 9. Ghi chú
 - Dự án đang phát triển, các tính năng có thể được cập nhật.
 - Nếu gặp lỗi cài đặt, kiểm tra Node.js và npm đã cài đúng chưa.
+

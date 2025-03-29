@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Rạp Chiếu Phim</title>
+    <link rel="stylesheet" href="../assets/css/style.css">  
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Trang Chủ</a>
+            <a href="theater.html">Chọn Rạp</a>
+            <a href="booking.html">Đặt Vé</a>
+            <a href="search.html">Tìm Kiếm</a>
+            <a href="profile.html">Tài Khoản</a>
+            <!-- Thêm biểu tượng kính lúp để tìm kiếm -->
+            <div class="search-icon">
+                <i class="fas fa-search" onclick="toggleSearchBar()"></i> <!-- Icon kính lúp -->
+            </div>
+        </nav>
+        <!-- Thanh tìm kiếm, mặc định ẩn -->
+        <div class="search-bar" id="search-bar" style="display: none;">
+            <input type="text" id="search-input" placeholder="Tìm kiếm tên phim..." onkeyup="searchMovies()"> <!-- Ô nhập tìm kiếm -->
+            <button onclick="searchMovies()">Tìm</button> <!-- Nút tìm kiếm -->
+        </div>
+    </header>
+
+    <main>
+        <h1>BCDH Cinema</h1>
+        <div class="filter-section">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="showMovies('now-showing')">Đang chiếu</button>
+                <button class="tab" onclick="showMovies('coming-soon')">Sắp chiếu</button>
+                <div class="country-filter">
+                    <select id="country" onchange="filterByCountry()">
+                        <option value="all">Toàn quốc</option>
+                        <option value="hcm">Tp Hồ Chí Minh</option>
+                        <option value="dn">Đà Nẵng</option>
+                        <option value="vungtau">Bà Rịa - Vũng Tàu</option>
+                        <option value="hn">Hà Nội</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="movie-list" class="movie-container">
+            <!-- Danh sách phim sẽ được thêm bằng JS -->
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Giới Thiệu</h3>
+                <ul>
+                    <li><a href="xx">Về Chúng Tôi</a></li>
+                    <li><a href="xx">Thỏa Thuận Sử Dụng</a></li>
+                    <li><a href="xx">Quy Chế Hoạt Động</a></li>
+                    <li><a href="xx">Chính Sách Bảo Mật</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Góc Điện Ảnh</h3>
+                <ul>
+                    <li><a href="xx">Thể Loại Phim</a></li>
+                    <li><a href="xx">Bình Luận Phim</a></li>
+                    <li><a href="xx">Blog Điện Ảnh</a></li>
+                    <li><a href="xx">Phim Hay Tháng</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Hỗ Trợ</h3>
+                <ul>
+                    <li><a href="xx">Góp Ý</a></li>
+                    <li><a href="xx">Sale & Services</a></li>
+                    <li><a href="xx">Rạp / Giá Vé</a></li>
+                    <li><a href="xx">Tuyển Dụng</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-right">
+                <img src="/images/" alt="BCDH CINEMA LOGO">
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/wocdat.16" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/_qwodac" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="footer-bottom">
+            <div>
+                <img src="/images/" alt="BCDH CINEMA">
+            </div>
+            <div>
+                123 Hutech, Phường..., Quận 9, TP.Hồ Chí Minh, Việt Nam<br>
+                0123456789 - 0987654321 (9 : 00 - 22 : 00) - <a href="xx"> hotro@BCDHstudio.vn</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Font Awesome để dùng icon mạng xã hội và kính lúp -->
+    <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+    <script>
+        // Dữ liệu giả lập danh sách phim
+        const movies = [
+            { title: "Phim 1", status: "now-showing", location: "hcm", poster: "../assets/images/poster1.jpg" },
+            { title: "Phim 2", status: "coming-soon", location: "hcm", poster: "../assets/images/poster2.jpg" },
+            { title: "Phim 3", status: "now-showing", location: "hn", poster: "../assets/images/poster3.jpg" },
+            { title: "Phim 4", status: "coming-soon", location: "dn", poster: "../assets/images/poster4.jpg" },
+            { title: "Phim 5", status: "now-showing", location: "vungtau", poster: "../assets/images/poster5.jpg" },
+        ];
+
+        let currentStatus = "now-showing"; // Trạng thái phim hiện tại (đang chiếu hoặc sắp chiếu)
+        let currentLocation = "all"; // Vị trí hiện tại (mặc định là toàn quốc)
+
+        // Hiển thị danh sách phim
+        function showMovies(status) {
+            currentStatus = status;
+            // Cập nhật trạng thái active cho tab
+            document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+            document.querySelector(`button[onclick="showMovies('${status}')"]`).classList.add("active");
+            filterMovies();
+        }
+
+        // Lọc phim theo vị trí
+        function filterByCountry() {
+            currentLocation = document.getElementById("country").value;
+            filterMovies();
+        }
+
+        // Lọc phim dựa trên trạng thái, vị trí và từ khóa tìm kiếm
+        function filterMovies(searchTerm = "") {
+            const movieList = document.getElementById("movie-list");
+            movieList.innerHTML = ""; // Xóa danh sách phim hiện tại
+
+            const filteredMovies = movies.filter(movie => {
+                const matchesStatus = movie.status === currentStatus;
+                const matchesLocation = currentLocation === "all" || movie.location === currentLocation;
+                const matchesSearch = searchTerm ? movie.title.toLowerCase().includes(searchTerm.toLowerCase()) : true;
+                return matchesStatus && matchesLocation && matchesSearch;
+            });
+
+            // Hiển thị danh sách phim đã lọc
+            filteredMovies.forEach(movie => {
+                const movieCard = document.createElement("div");
+                movieCard.classList.add("movie-card");
+                movieCard.innerHTML = `
+                    <img src="${movie.poster}" alt="${movie.title}">
+                    <h3>${movie.title}</h3>
+                    <button onclick="window.location.href='booking.html'">Đặt vé</button>
+                `;
+                movieList.appendChild(movieCard);
+            });
+
+            //Nếu không có phim nào phù hợp, hiển thị thông báo
+            if (filteredMovies.length === 0) {
+                movieList.innerHTML = "<p>Không tìm thấy phim nào.</p>";
+            }
+        }
+
+        // Hiển thị/ẩn thanh tìm kiếm
+        function toggleSearchBar() {
+            const searchBar = document.getElementById("search-bar");
+            searchBar.style.display = searchBar.style.display === "none" ? "block" : "none";
+            // Xóa nội dung ô tìm kiếm khi ẩn
+            if (searchBar.style.display === "none") {
+                document.getElementById("search-input").value = "";
+                filterMovies(); // Reset danh sách phim khi ẩn thanh tìm kiếm
+            }
+        }
+
+        // Tìm kiếm phim theo từ khóa
+        function searchMovies() {
+            const searchTerm = document.getElementById("search-input").value;
+            filterMovies(searchTerm);
+        }
+
+        // Hiển thị danh sách phim mặc định khi tải trang
+        window.onload = () => {
+            showMovies("now-showing");
+        };
+    </script>
+</body>
+</html>

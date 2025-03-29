@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài Khoản - Rạp Chiếu Phim</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Trang Chủ</a>
+            <a href="theater.html">Chọn Rạp</a>
+            <a href="booking.html">Đặt Vé</a>
+            <a href="search.html">Tìm Kiếm</a>
+            <a href="profile.html">Tài Khoản</a>
+        </nav>
+    </header>
+    <main>
+        <!-- Form Đăng Nhập -->
+        <div class="auth-container" id="login-form">
+            <h1>Đăng Nhập Tài Khoản</h1>
+            <form>
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" placeholder="Nhập Email" required>
+
+                <label for="login-password">Mật Khẩu</label>
+                <div class="password-wrapper">
+                    <input type="password" id="login-password" placeholder="Nhập Mật khẩu" required>
+                    <span class="eye-icon">👁️</span>
+                </div>
+
+                <button type="submit" class="auth-btn">ĐĂNG NHẬP</button>
+
+                <a href="#" class="forgot-password" onclick="showForgotPasswordForm()">Quên mật khẩu?</a>
+                <hr>
+                <a href="#" class="switch-form" onclick="showRegisterForm()">Bạn chưa có tài khoản? <span>Đăng ký</span></a>
+            </form>
+        </div>
+
+        <!-- Form Đăng Ký -->
+        <div class="auth-container" id="register-form" style="display: none;">
+            <h1>Đăng Ký Tài Khoản</h1>
+            <form em> 
+                <label for="fullname">Họ và tên</label>
+                <input type="text" id="fullname" placeholder="Nhập Họ và tên" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Nhập Email" required>
+
+                <label for="phone">Số điện thoại</label>
+                <input type="tel" id="phone" placeholder="Nhập Số điện thoại" required>
+
+                <label for="date">Ngày Sinh</label>
+                <input type="date" id="phone" placeholder="Ngày/Tháng/Năm"required> 
+
+                <!-- <label for="dob">Ngày sinh</label>
+                <div class="dob-wrapper">
+                    <select id="day" required>
+                        <option value="">Ngày</option>
+                    </select>
+                    <select id="month" required>
+                        <option value="">Tháng</option>
+                    </select>
+                    <select id="year" required>
+                        <option value="">Năm</option>
+                    </select>
+                </div>  -->
+
+                <label for="password">Mật Khẩu</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" placeholder="Nhập Mật khẩu" required>
+                    <span class="eye-icon">👁️</span>
+                </div>
+
+                <label for="confirm-password">Nhập lại mật khẩu</label>
+                <div class="password-wrapper">
+                    <input type="password" id="confirm-password" placeholder="Nhập lại mật khẩu" required>
+                    <span class="eye-icon">👁️</span>
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">Bằng việc đăng ký tài khoản, tôi đồng ý với <a href="#">Điều khoản dịch vụ</a> và <a href="#">Chính sách bảo mật</a> của BCDH CINEMA.</label>
+                </div>
+
+                <button type="submit" class="auth-btn">HOÀN THÀNH</button>
+
+                <hr>
+                <a href="#" class="switch-form" onclick="showLoginForm()">Bạn đã có tài khoản? <span>Đăng nhập</span></a>
+            </form>
+        </div>
+
+        <!-- Form Quên Mật Khẩu -->
+        <div class="auth-container" id="forgot-password-form" style="display: none;">
+            <h1>Quên Mật Khẩu?</h1>
+            <p>Vui lòng cung cấp email đăng nhập, chúng tôi sẽ gửi link kích hoạt cho bạn.</p>
+            <form>
+                <label for="forgot-email">Email</label>
+                <input type="email" id="forgot-email" placeholder="Nhập Email" required>
+
+                <button type="submit" class="auth-btn">CẬP LẠI MẬT KHẨU</button>
+
+                <hr>
+                <a href="#" class="switch-form" onclick="showLoginForm()">Quay lại <span>Đăng nhập</span></a>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <!-- Container footer -->
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Giới Thiệu</h3> <!-- Tiêu đề phần Giới Thiệu -->
+                <ul>
+                    <li><a href="xx">Về Chúng Tôi</a></li>
+                    <li><a href="xx">Thỏa Thuận Sử Dụng</a></li>
+                    <li><a href="xx">Quy Chế Hoạt Động</a></li>
+                    <li><a href="xx">Chính Sách Bảo Mật</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Góc Điện Ảnh</h3> <!-- Tiêu đề phần Góc Điện Ảnh -->
+                <ul>
+                    <li><a href="xx">Thể Loại Phim</a></li>
+                    <li><a href="xx">Bình Luận Phim</a></li>
+                    <li><a href="xx">Blog Điện Ảnh</a></li>
+                    <li><a href="xx">Phim Hay Tháng</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Hỗ Trợ</h3> <!-- Tiêu đề phần Hỗ Trợ -->
+                <ul>
+                    <li><a href="xx">Góp Ý</a></li>
+                    <li><a href="xx">Sale & Services</a></li>
+                    <li><a href="xx">Rạp / Giá Vé</a></li>
+                    <li><a href="xx">Tuyển Dụng</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <img src="/images/" alt="BCDH CINEMA LOGO"> <!-- Logo của rạp -->
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/wocdat.16" target="_blank"><i class="fa-brands fa-facebook"></i></a> <!-- Liên kết đến Facebook -->
+                    <a href="https://www.instagram.com/_qwodac" target="_blank"><i class="fab fa-instagram"></i></a> <!-- Liên kết đến Instagram -->
+                </div>
+            </div>
+        </div> 
+        <div class="footer-bottom">
+            <div>
+                <img src="/images/" alt="BCDH CINEMA"> <!-- Logo nhỏ ở footer -->
+            </div>
+            <div>
+                123 Hutech, Phường..., Quận 9, TP.Hồ Chí Minh, Việt Nam<br>
+                0123456789 - 0987654321 (9 : 00 - 22 : 00) - <a href="xx"> hotro@BCDHstudio.vn</a> <!-- Địa chỉ và liên hệ -->
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Toggle giữa các form
+        function showLoginForm() {
+            document.getElementById("login-form").style.display = "block";
+            document.getElementById("register-form").style.display = "none";
+            document.getElementById("forgot-password-form").style.display = "none";
+        }
+
+        function showRegisterForm() {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("register-form").style.display = "block";
+            document.getElementById("forgot-password-form").style.display = "none";
+        }
+
+        function showForgotPasswordForm() {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("register-form").style.display = "none";
+            document.getElementById("forgot-password-form").style.display = "block";
+        }
+
+        // Toggle hiển thị mật khẩu
+        const passwordInputs = document.querySelectorAll('input[type="password"]');
+        const eyeIcons = document.querySelectorAll(".eye-icon");
+
+        eyeIcons.forEach((eyeIcon, index) => {
+            eyeIcon.addEventListener("click", () => {
+                const input = passwordInputs[index];
+                if (input.type === "password") {
+                    input.type = "text";
+                    eyeIcon.textContent = "👁️‍🗨️";
+                } else {
+                    input.type = "password";
+                    eyeIcon.textContent = "👁️";
+                }
+            });
+        });
+
+        // Tạo danh sách ngày, tháng, năm động cho form đăng ký
+        const daySelect = document.getElementById("day");
+        const monthSelect = document.getElementById("month");
+        const yearSelect = document.getElementById("year");
+
+        for (let i = 1; i <= 31; i++) {
+            const option = document.createElement("option");
+            option.value = i;
+            option.textContent = i;
+            daySelect.appendChild(option);
+        }
+
+        for (let i = 1; i <= 12; i++) {
+            const option = document.createElement("option");
+            option.value = i;
+            option.textContent = i;
+            monthSelect.appendChild(option);
+        }
+
+        for (let i = 2025; i >= 1900; i--) {
+            const option = document.createElement("option");
+            option.value = i;
+            option.textContent = i;
+            yearSelect.appendChild(option);
+        }
+    </script>
+</body>
+</html>

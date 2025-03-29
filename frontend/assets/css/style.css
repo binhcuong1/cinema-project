@@ -1,0 +1,583 @@
+/* assets/css/style.css */
+
+/* Định dạng container ĐẶT VÉ */
+.booking-container {
+    max-width: 1200px; /* Chiều rộng tối đa */
+    margin: 20px auto; /* Căn giữa */
+    padding: 20px; /* Khoảng cách bên trong */
+}
+
+/* Định dạng tiêu đề chính */
+.booking-container h1 {
+    font-size: 24px; /* Kích thước chữ */
+    margin-bottom: 20px; /* Khoảng cách dưới */
+    color: #333; /* Màu chữ */
+    text-align: center; /* Căn giữa */
+}
+
+/* Định dạng tab các bước đặt vé */
+.booking-tabs {
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    gap: 20px; /* Khoảng cách giữa các tab */
+    justify-content: center; /* Căn giữa */
+    margin-bottom: 20px; /* Khoảng cách dưới */
+    border-bottom: 2px solid #007bff; /* Đường viền dưới màu xanh */
+    padding-bottom: 5px; /* Khoảng cách dưới của tab */
+}
+
+/* Định dạng từng tab */
+.booking-tabs .tab {
+    font-size: 16px; /* Kích thước chữ */
+    color: #555; /* Màu chữ */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+}
+
+/* Định dạng tab đang active */
+.booking-tabs .tab.active {
+    color: #007bff; /* Màu chữ khi active */
+    font-weight: bold; /* Chữ đậm */
+}
+
+/* Định dạng form đặt vé */
+.booking-form {
+    max-width: 1000px; /* Chiều rộng tối đa */
+    margin: 0 auto; /* Căn giữa */
+    background-color: white; /* Màu nền trắng */
+    padding: 20px; /* Khoảng cách bên trong */
+    border-radius: 5px; /* Bo góc */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Bóng đổ */
+}
+
+/* Định dạng nhóm input/select */
+.form-group {
+    margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+/* Định dạng nhãn của input/select */
+.form-group label {
+    display: block; /* Hiển thị dạng block */
+    font-size: 14px; /* Kích thước chữ */
+    color: #333; /* Màu chữ */
+    margin-bottom: 5px; /* Khoảng cách dưới */
+}
+
+/* Định dạng dropdown */
+.form-group select {
+    width: 100%; /* Chiều rộng 100% */
+    padding: 10px; /* Khoảng cách bên trong */
+    border: 1px solid #ddd; /* Đường viền */
+    border-radius: 5px; /* Bo góc */
+    font-size: 14px; /* Kích thước chữ */
+}
+
+/* Định dạng dropdown khi focus */
+.form-group select:focus {
+    outline: none; /* Bỏ viền mặc định khi focus */
+    border-color: #ff6200; /* Đổi màu viền khi focus */
+}
+
+/* Định dạng phần tổng cộng */
+.total {
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    justify-content: space-between; /* Căn hai bên */
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold; /* Chữ đậm */
+    margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+/* Định dạng giá trị tổng cộng */
+.total span:last-child {
+    color: #ff6200; /* Màu chữ cam */
+}
+
+/* Định dạng container chứa các nút */
+.form-actions {
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    justify-content: space-between; /* Căn hai bên */
+}
+
+/* Định dạng nút chung */
+.back-btn, .next-btn {
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    border: none; /* Bỏ viền */
+    border-radius: 5px; /* Bo góc */
+    font-size: 16px; /* Kích thước chữ */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+}
+
+/* Định dạng nút Quay lại */
+.back-btn {
+    background-color: #ddd; /* Màu nền xám */
+    color: #333; /* Màu chữ */
+}
+
+/* Hiệu ứng hover cho nút Quay lại */
+.back-btn:hover {
+    background-color: #ccc; /* Màu nền khi hover */
+}
+
+/* Định dạng nút Tiếp tục */
+.next-btn {
+    background-color: #ff6200; /* Màu nền cam */
+    color: white; /* Màu chữ trắng */
+}
+
+/* Hiệu ứng hover cho nút Tiếp tục */
+.next-btn:hover {
+    background-color: #e55a00; /* Màu nền khi hover */
+}
+
+/* Định dạng sơ đồ ghế */
+.seat-selection {
+    margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+/* Định dạng nút chọn suất chiếu */
+.showtime-buttons {
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+/* Định dạng từng nút suất chiếu */
+.showtime-btn {
+    padding: 5px 10px; /* Khoảng cách bên trong */
+    border: 1px solid #ddd; /* Đường viền */
+    border-radius: 5px; /* Bo góc */
+    background-color: #f0f0f0; /* Màu nền */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+}
+
+/* Định dạng nút suất chiếu khi active */
+.showtime-btn.active {
+    background-color: #007bff; /* Màu nền khi active */
+    color: white; /* Màu chữ */
+}
+
+/* Định dạng nhãn màn hình */
+.screen {
+    text-align: center; /* Căn giữa */
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold; /* Chữ đậm */
+    margin-bottom: 20px; /* Khoảng cách dưới */
+    border-bottom: 2px solid #ff6200; /* Đường viền dưới màu cam */
+    padding-bottom: 5px; /* Khoảng cách dưới */
+}
+
+/* Định dạng sơ đồ ghế */
+.seat-map {
+    display: flex; /* Sử dụng flexbox */
+    flex-direction: column; /* Xếp dọc */
+    gap: 5px; /* Khoảng cách giữa các hàng */
+}
+
+/* Định dạng hàng ghế */
+.seat-row {
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    gap: 5px; /* Khoảng cách giữa các ghế */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+/* Định dạng nhãn hàng ghế (A, B, C, ...) */
+.row-label {
+    width: 20px; /* Chiều rộng cố định */
+    font-weight: bold; /* Chữ đậm */
+}
+
+/* Định dạng từng ghế */
+.seat {
+    width: 30px; /* Chiều rộng ghế */
+    height: 30px; /* Chiều cao ghế */
+    background-color: #ddd; /* Màu nền mặc định */
+    border-radius: 5px; /* Bo góc */
+    display: flex; /* Sử dụng flexbox để căn giữa số ghế */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    font-size: 12px; /* Kích thước chữ */
+}
+
+/* Định dạng ghế đã bán */
+.seat.occupied {
+    background-color: #ccc; /* Màu nền ghế đã bán */
+    cursor: not-allowed; /* Con trỏ chuột khi không thể chọn */
+}
+
+/* Định dạng ghế đang chọn */
+.seat.selected {
+    background-color: #ff6200; /* Màu nền ghế đang chọn */
+    color: white; /* Màu chữ */
+}
+
+/* Định dạng ghế VIP */
+.seat.vip {
+    background-color: #ffd700; /* Màu nền ghế VIP */
+}
+
+/* Định dạng ghế đôi */
+.seat.couple {
+    background-color: #ff69b4; /* Màu nền ghế đôi */
+}
+
+/* Định dạng chú thích trạng thái ghế */
+.seat-legend {
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    gap: 20px; /* Khoảng cách giữa các chú thích */
+    justify-content: center; /* Căn giữa */
+    margin-top: 20px; /* Khoảng cách trên */
+}
+
+/* Định dạng phần thông tin phim */
+.summary {
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    gap: 20px; /* Khoảng cách giữa các phần */
+    margin-top: 20px; /* Khoảng cách trên */
+    padding: 20px; /* Khoảng cách bên trong */
+    border-top: 1px solid #ddd; /* Đường viền trên */
+}
+
+/* Định dạng hình ảnh poster */
+.summary img {
+    width: 150px; /* Chiều rộng poster */
+    height: auto; /* Chiều cao tự động */
+    border-radius: 5px; /* Bo góc */
+}
+
+/* Định dạng chi tiết thông tin phim */
+.summary-details {
+    flex: 1; /* Chiếm toàn bộ không gian còn lại */
+}
+
+/* Định dạng danh sách combo thức ăn */
+.food-selection {
+    margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+/* Định dạng từng combo */
+.food-item {
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    gap: 20px; /* Khoảng cách giữa các phần */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-bottom: 20px; /* Khoảng cách dưới */
+    border-bottom: 1px solid #ddd; /* Đường viền dưới */
+    padding-bottom: 10px; /* Khoảng cách dưới */
+}
+
+/* Định dạng hình ảnh combo */
+.food-item img {
+    width: 100px; /* Chiều rộng hình ảnh */
+    height: auto; /* Chiều cao tự động */
+    border-radius: 5px; /* Bo góc */
+}
+
+/* Định dạng chi tiết combo */
+.food-details {
+    flex: 1; /* Chiếm toàn bộ không gian còn lại */
+}
+
+/* Định dạng số lượng combo */
+.quantity {
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    gap: 10px; /* Khoảng cách giữa các nút */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+/* Định dạng nút tăng/giảm số lượng */
+.quantity button {
+    padding: 5px 10px; /* Khoảng cách bên trong */
+    border: none; /* Bỏ viền */
+    background-color: #ddd; /* Màu nền */
+    border-radius: 5px; /* Bo góc */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+}
+
+/* Hiệu ứng hover cho nút tăng/giảm */
+.quantity button:hover {
+    background-color: #ccc; /* Màu nền khi hover */
+}
+
+/* Định dạng phần xác nhận */
+.confirmation {
+    text-align: center; /* Căn giữa */
+    margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+
+
+
+
+/* ĐỊNH DẠNG HEADER VÀ NAV */
+header {
+    background-color: #1c2526; /* Màu nền header */
+    padding: 10px 0; /* Khoảng cách bên trong */
+}
+
+nav {
+    max-width: 1200px; /* Chiều rộng tối đa */
+    margin: 0 auto; /* Căn giữa */
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: space-between; /* Căn các phần tử cách đều */
+}
+
+nav a {
+    color: white; /* Màu chữ trắng */
+    text-decoration: none; /* Bỏ gạch chân */
+    margin: 0 15px; /* Khoảng cách giữa các liên kết */
+    font-size: 16px; /* Kích thước chữ */
+}
+
+nav a:hover {
+    color: #ff6200; /* Màu chữ khi hover */
+}
+
+/* Định dạng biểu tượng kính lúp */
+.search-icon {
+    cursor: pointer; /* Con trỏ chuột khi hover */
+}
+
+.search-icon i {
+    color: white; /* Màu biểu tượng trắng */
+    font-size: 20px; /* Kích thước biểu tượng */
+}
+
+.search-icon i:hover {
+    color: #ff6200; /* Màu biểu tượng khi hover */
+}
+
+/* Định dạng thanh tìm kiếm */
+.search-bar {
+    max-width: 1200px; /* Chiều rộng tối đa */
+    margin: 10px auto; /* Căn giữa */
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    gap: 10px; /* Khoảng cách giữa ô nhập và nút */
+}
+
+.search-bar input {
+    flex: 1; /* Chiếm toàn bộ không gian còn lại */
+    padding: 10px; /* Khoảng cách bên trong */
+    border: 1px solid #ddd; /* Đường viền */
+    border-radius: 5px; /* Bo góc */
+    font-size: 14px; /* Kích thước chữ */
+}
+
+.search-bar input:focus {
+    outline: none; /* Bỏ viền mặc định khi focus */
+    border-color: #ff6200; /* Đổi màu viền khi focus */
+}
+
+.search-bar button {
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    background-color: #ff6200; /* Màu nền nút */
+    color: white; /* Màu chữ trắng */
+    border: none; /* Bỏ viền */
+    border-radius: 5px; /* Bo góc */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+}
+
+.search-bar button:hover {
+    background-color: #e55a00; /* Màu nền khi hover */
+}
+
+/* Định dạng danh sách phim */
+.movie-container {
+    max-width: 1200px; /* Chiều rộng tối đa */
+    margin: 20px auto; /* Căn giữa */
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    flex-wrap: wrap; /* Cho phép xuống dòng */
+    gap: 20px; /* Khoảng cách giữa các phim */
+}
+
+.movie-card {
+    width: 200px; /* Chiều rộng thẻ phim */
+    text-align: center; /* Căn giữa nội dung */
+}
+
+.movie-card img {
+    width: 100%; /* Chiều rộng ảnh 100% */
+    height: auto; /* Chiều cao tự động */
+    border-radius: 5px; /* Bo góc */
+}
+
+.movie-card h3 {
+    font-size: 16px; /* Kích thước chữ tiêu đề */
+    margin: 10px 0; /* Khoảng cách trên dưới */
+}
+
+.movie-card button {
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    background-color: #ff6200; /* Màu nền nút */
+    color: white; /* Màu chữ trắng */
+    border: none; /* Bỏ viền */
+    border-radius: 5px; /* Bo góc */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+}
+
+.movie-card button:hover {
+    background-color: #e55a00; /* Màu nền khi hover */
+}
+
+/* Định dạng các tab và bộ lọc */
+.filter-section {
+    max-width: 1200px; /* Chiều rộng tối đa */
+    margin: 20px auto; /* Căn giữa */
+}
+
+.tabs {
+    display: flex; /* Sử dụng flexbox để xếp ngang */
+    gap: 20px; /* Khoảng cách giữa các tab */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+.tab {
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    background-color: #f0f0f0; /* Màu nền tab */
+    border: none; /* Bỏ viền */
+    border-radius: 5px; /* Bo góc */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+}
+
+.tab.active {
+    background-color: #ff6200; /* Màu nền tab active */
+    color: white; /* Màu chữ trắng */
+}
+
+.country-filter select {
+    padding: 10px; /* Khoảng cách bên trong */
+    border: 1px solid #ddd; /* Đường viền */
+    border-radius: 5px; /* Bo góc */
+    font-size: 14px; /* Kích thước chữ */
+}
+
+.country-filter select:focus {
+    outline: none; /* Bỏ viền mặc định khi focus */
+    border-color: #ff6200; /* Đổi màu viền khi focus */
+}
+
+
+
+
+
+
+/* FOOTERRRRRRRRRRRRRRRRR */
+footer {
+    background-color: #1c2526; /* Màu nền tối của footer, giống với thiết kế Galaxy Cinema */
+    color: #fff; /* Màu chữ trắng */
+    padding: 40px 20px; /* Khoảng cách bên trong footer: 40px trên/dưới, 20px trái/phải */
+    font-family: Arial, sans-serif; /* Font chữ sử dụng là Arial */
+    font-size: 14px; /* Kích thước chữ mặc định là 14px */
+    line-height: 1.6; /* Khoảng cách giữa các dòng là 1.6 lần kích thước chữ */
+}
+
+.footer-container {
+    max-width: 1200px; /* Chiều rộng tối đa của nội dung footer là 1200px */
+    margin: 0 auto; /* Căn giữa nội dung footer */
+    display: flex; /* Sử dụng flexbox để bố trí các cột */
+    justify-content: space-between; /* Các cột được phân bố đều, khoảng cách giữa chúng tối ưu */
+    flex-wrap: wrap; /* Nếu không đủ chỗ, các cột sẽ tự động xuống dòng */
+}
+
+.footer-section {
+    flex: 1; /* Mỗi cột chiếm đều không gian trong flexbox */
+    min-width: 200px; /* Chiều rộng tối thiểu của mỗi cột là 200px */
+    margin: 0 15px 20px; /* Khoảng cách bên ngoài: 15px trái/phải, 20px dưới */
+}
+
+.footer-section h3 {
+    color: #fff; /* Màu chữ của tiêu đề là trắng */
+    font-size: 16px; /* Kích thước chữ của tiêu đề là 16px */
+    margin-bottom: 15px; /* Khoảng cách dưới tiêu đề là 15px */
+    text-transform: uppercase; /* Chuyển tiêu đề thành chữ in hoa */
+}
+
+.footer-section ul {
+    list-style: none; /* Bỏ dấu đầu dòng của danh sách */
+    padding: 0; /* Bỏ khoảng cách bên trong của danh sách */
+}
+
+.footer-section ul li {
+    margin-bottom: 8px; /* Khoảng cách dưới mỗi mục trong danh sách là 8px */
+}
+
+.footer-section ul li a {
+    color: #ccc; /* Màu chữ của liên kết là xám nhạt */
+    text-decoration: none; /* Bỏ gạch chân của liên kết */
+    transition: color 0.3s; /* Hiệu ứng chuyển màu chữ trong 0.3 giây khi hover */
+}
+
+.footer-section ul li a:hover {
+    color: #fff; /* Khi hover, màu chữ chuyển thành trắng */
+}
+
+.footer-right {
+    text-align: right; /* Căn phải nội dung trong phần này (logo, mạng xã hội, chứng nhận) */
+}
+
+.footer-right img {
+    max-width: 150px; /* Chiều rộng tối đa của logo là 150px */
+    margin-bottom: 10px; /* Khoảng cách dưới logo là 10px */
+}
+
+.social-icons {
+    margin-bottom: 15px; /* Khoảng cách dưới các biểu tượng mạng xã hội là 15px */
+}
+
+.social-icons a {
+    margin-left: 10px; /* Khoảng cách giữa các biểu tượng mạng xã hội là 10px */
+    font-size: 24px; /* Kích thước biểu tượng là 24px */
+    color: #fff; /* Màu của biểu tượng là trắng */
+    text-decoration: none; /* Bỏ gạch chân của liên kết */
+}
+
+.social-icons a:hover {
+    color: #ccc; /* Khi hover, màu biểu tượng chuyển thành xám nhạt */
+}
+
+.certification img {
+    max-width: 120px; /* Chiều rộng tối đa của biểu tượng chứng nhận là 120px */
+}
+
+.footer-bottom {
+    border-top: 1px solid #333; /* Đường viền trên của phần footer-bottom, màu xám đậm */
+    padding-top: 20px; /* Khoảng cách bên trong phía trên là 20px */
+    margin-top: 20px; /* Khoảng cách bên ngoài phía trên là 20px */
+    font-size: 12px; /* Kích thước chữ là 12px */
+    color: #888; /* Màu chữ là xám nhạt */
+    display: flex; /* Sử dụng flexbox để bố trí nội dung */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: space-between; /* Phân bố đều nội dung, khoảng cách tối ưu */
+}
+
+.footer-bottom img {
+    max-width: 100px; /* Chiều rộng tối đa của logo ở footer-bottom là 100px */
+    margin-right: 10px; /* Khoảng cách bên phải của logo là 10px */
+}
+
+.footer-bottom a {
+    color: #888; /* Màu chữ của liên kết là xám nhạt */
+    text-decoration: none; /* Bỏ gạch chân của liên kết */
+}
+
+.footer-bottom a:hover {
+    color: #fff; /* Khi hover, màu chữ chuyển thành trắng */
+}
+
+@media (max-width: 768px) { /* Quy tắc CSS cho màn hình nhỏ hơn 768px (mobile) */
+    .footer-container {
+        flex-direction: column; /* Chuyển các cột thành xếp dọc */
+    }
+
+    .footer-right {
+        text-align: left; /* Căn trái nội dung trong phần footer-right */
+    }
+
+    .footer-bottom {
+        flex-direction: column; /* Chuyển nội dung footer-bottom thành xếp dọc */
+        text-align: center; /* Căn giữa nội dung */
+    }
+
+    .footer-bottom img {
+        margin-bottom: 10px; /* Khoảng cách dưới logo là 10px */
+    }
+}

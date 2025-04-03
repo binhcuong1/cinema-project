@@ -1,138 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Chủ - Rạp Chiếu Phim</title>
-    <link rel="stylesheet" href="../assets/css/style.css">  
+    <meta charset="UTF-8"> <!-- Thiết lập mã hóa ký tự UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Đảm bảo giao diện responsive trên thiết bị di động -->
+    <title>Cinestar - Rạp Chiếu Phim</title> <!-- Tiêu đề của trang web -->
+    <link rel="stylesheet" href="../assets/css/style.css"> <!-- Liên kết tới file CSS để định dạng giao diện -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Liên kết tới Font Awesome để dùng icon -->
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="index.html">Trang Chủ</a>
-            <a href="theater.html">Chọn Rạp</a>
-            <a href="booking.html">Đặt Vé</a>
-            <a href="search.html">Tìm Kiếm</a>
-            <a href="profile.html">Tài Khoản</a>
-            <!-- Thêm biểu tượng kính lúp để tìm kiếm -->
-            <div class="search-icon">
-                <i class="fas fa-search" onclick="toggleSearchBar()"></i> <!-- Icon kính lúp -->
-            </div>
-        </nav>
-        <!-- Thanh tìm kiếm, mặc định ẩn -->
-        <div class="search-bar" id="search-bar" style="display: none;">
-            <input type="text" id="search-input" placeholder="Tìm kiếm tên phim..." onkeyup="searchMovies()"> <!-- Ô nhập tìm kiếm -->
-            <button onclick="searchMovies()">Tìm</button> <!-- Nút tìm kiếm -->
+    <!-- Thanh điều hướng đẹp mắt (Fancy Navigation Bar) -->
+    <div class="fancy-nav">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="index.html"> <!-- Liên kết logo về trang chủ -->
+                <img src="/frontend/assets/images/Screenshot_2025-04-01_204018-removebg-preview.png" alt=""> <!-- Hình ảnh logo Cinestar -->
+            </a>
         </div>
-    </header>
+        
+        <!-- Các liên kết điều hướng -->
+        <div class="nav-links">
+            <a href="promotions.html">Khuyến Mãi</a> <!-- Liên kết tới trang khuyến mãi -->
+            <a href="intro.html">Giới Thiệu</a> <!-- Liên kết tới trang giới thiệu -->
+        </div>
+        
+        <!-- Các nút chức năng -->
+        <div class="nav-buttons">
+            <a href="booking.html" class="nav-btn book-ticket"> <!-- Nút đặt vé -->
+                <i class="fas fa-ticket-alt"></i> Đặt Vé Ngay <!-- Icon vé và chữ -->
+            </a>
+            <a href="food.html" class="nav-btn order-food"> <!-- Nút đặt bắp nước -->
+                <i class="fas fa-popcorn"></i> Đặt Bắp Nước <!-- Icon bắp rang và chữ -->
+            </a>
+        </div>
+        
+        <!-- Thanh tìm kiếm -->
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm phim, rạp..." onkeyup="searchMovies()"> <!-- Ô nhập từ khóa tìm kiếm, gõ sẽ lọc phim -->
+            <button class="search-btn"><i class="fas fa-search"></i></button> <!-- Nút tìm kiếm với icon kính lúp -->
+        </div>
+        
+        <!-- Phần đăng nhập -->
+        <div class="auth">
+            <a href="profile.html" class="nav-btn login-btn"> <!-- Nút đăng nhập -->
+                <i class="fas fa-user"></i> Đăng Nhập <!-- Icon người dùng và chữ -->
+            </a>
+        </div>
+    </div>
 
+    <!-- Nội dung chính (Main) -->
     <main>
-        <h1>BCDH Cinema</h1>
-        <div class="filter-section">
-            <!-- Tabs -->
-            <div class="tabs">
-                <button class="tab active" onclick="showMovies('now-showing')">Đang chiếu</button>
-                <button class="tab" onclick="showMovies('coming-soon')">Sắp chiếu</button>
-                <div class="country-filter">
-                    <select id="country" onchange="filterByCountry()">
-                        <option value="all">Toàn quốc</option>
-                        <option value="hcm">Tp Hồ Chí Minh</option>
-                        <option value="dn">Đà Nẵng</option>
-                        <option value="vungtau">Bà Rịa - Vũng Tàu</option>
+        <a href="theater.html">Chọn Rạp</a> <!-- Liên kết tới trang chọn rạp -->
+            <a href="schedule.html">Lịch Chiếu</a> <!-- Liên kết tới trang lịch chiếu -->
+        <!-- Phần banner chính (Hero Banner) -->
+        <section class="hero-banner">
+            <div class="banner-container">
+                <!-- Nút điều hướng banner -->
+                <div class="banner-arrows">
+                    <button onclick="prevBanner()"><i class="fas fa-chevron-left"></i></button> <!-- Nút quay lại banner trước -->
+                    <button onclick="nextBanner()"><i class="fas fa-chevron-right"></i></button> <!-- Nút chuyển tới banner sau -->
+                </div>
+                <!-- Nội dung banner -->
+                <div class="banner-content">
+                    <img id="banner-image" src="/frontend/assets/images/MAIN_2_ADL_1215x365.png" alt="Banner"> <!-- Hình ảnh banner -->
+                    <div class="banner-info">
+                        <h1>Âm Dương Lộ</h1> <!-- Tiêu đề phim trên banner -->
+                        <p class="movie-genre">Phim kinh dị, Hành động</p> <!-- Thể loại phim -->
+                        <div class="rating">
+                            <span><i class="fas fa-star"></i> 8.5/10</span> <!-- Điểm đánh giá -->
+                            <span>2 giờ 15 phút</span> <!-- Thời lượng phim -->
+                        </div>
+                        <button onclick="bookTicket()" class="banner-btn">Đặt Vé Ngay</button> <!-- Nút đặt vé từ banner -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phần đặt vé nhanh (Quick Booking) -->
+        <section class="quick-booking">
+            <div class="booking-card">
+                <h2><i class="fas fa-bolt"></i> Đặt Vé Nhanh</h2> <!-- Tiêu đề phần đặt vé nhanh -->
+                
+                <div class="booking-steps">
+                    <!-- Bước 1: Chọn rạp -->
+                    <div class="booking-step">
+                        <button class="step-btn" id="select-theater"> <!-- Nút chọn rạp -->
+                            <span class="step-number">1</span> <!-- Số bước -->
+                            <span class="step-label">Chọn Rạp</span> <!-- Nhãn bước -->
+                            <i class="fas fa-chevron-down"></i> <!-- Icon mũi tên xuống -->
+                        </button>
+                        <div class="step-dropdown" id="theater-dropdown"> <!-- Dropdown danh sách rạp -->
+                            <div onclick="selectTheater('CINESTAR Hà Nội')">CINESTAR Hà Nội</div>
+                            <div onclick="selectTheater('CINESTAR TP.HCM')">CINESTAR TP.HCM</div>
+                            <div onclick="selectTheater('CINESTAR Đà Nẵng')">CINESTAR Đà Nẵng</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bước 2: Chọn phim -->
+                    <div class="booking-step">
+                        <button class="step-btn" id="select-movie" disabled> <!-- Nút chọn phim, mặc định bị khóa -->
+                            <span class="step-number">2</span>
+                            <span class="step-label">Chọn Phim</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="step-dropdown" id="movie-dropdown"> <!-- Dropdown danh sách phim -->
+                            <div onclick="selectMovie('Âm Dương Lộ')">Âm Dương Lộ</div>
+                            <div onclick="selectMovie('Phim 2')">Phim 2</div>
+                            <div onclick="selectMovie('Phim 3')">Phim 3</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bước 3: Chọn ngày -->
+                    <div class="booking-step">
+                        <button class="step-btn" id="select-date" disabled> <!-- Nút chọn ngày, mặc định bị khóa -->
+                            <span class="step-number">3</span>
+                            <span class="step-label">Chọn Ngày</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="step-dropdown" id="date-dropdown"> <!-- Dropdown danh sách ngày -->
+                            <div onclick="selectDate('01/04/2025')">01/04/2025</div>
+                            <div onclick="selectDate('02/04/2025')">02/04/2025</div>
+                            <div onclick="selectDate('03/04/2025')">03/04/2025</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bước 4: Chọn suất chiếu -->
+                    <div class="booking-step">
+                        <button class="step-btn" id="select-showtime" disabled> <!-- Nút chọn suất, mặc định bị khóa -->
+                            <span class="step-number">4</span>
+                            <span class="step-label">Chọn Suất</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="step-dropdown" id="showtime-dropdown"> <!-- Dropdown danh sách suất chiếu -->
+                            <div onclick="selectShowtime('10:00')">10:00</div>
+                            <div onclick="selectShowtime('14:00')">14:00</div>
+                            <div onclick="selectShowtime('18:00')">18:00</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="book-now-btn" id="book-now" disabled> <!-- Nút đặt vé ngay, mặc định bị khóa -->
+                    <i class="fas fa-ticket-alt"></i> Đặt Ngay
+                </button>
+            </div>
+        </section>
+
+        <!-- Phần danh mục phim (Movie Categories) -->
+        <section class="movie-categories">
+            <div class="category-tabs">
+                <!-- Tab phim đang chiếu -->
+                <button class="category-tab active" onclick="showMovies('now-showing')">
+                    <i class="fas fa-play"></i> Phim Đang Chiếu
+                </button>
+                <!-- Tab phim sắp chiếu -->
+                <button class="category-tab" onclick="showMovies('coming-soon')">
+                    <i class="fas fa-clock"></i> Phim Sắp Chiếu
+                </button>
+                <!-- Bộ lọc theo khu vực -->
+                <div class="filter-container">
+                    <select id="country" onchange="filterByCountry()"> <!-- Dropdown chọn khu vực -->
+                        <option value="all">Tất cả rạp</option>
+                        <option value="hcm">TP.HCM</option>
                         <option value="hn">Hà Nội</option>
+                        <option value="dn">Đà Nẵng</option>
+                        <option value="vungtau">Vũng Tàu</option>
                     </select>
                 </div>
             </div>
-        </div>
-        <div id="movie-list" class="movie-container">
-            <!-- Danh sách phim sẽ được thêm bằng JS -->
-        </div>
-    </main>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Giới Thiệu</h3>
-                <ul>
-                    <li><a href="xx">Về Chúng Tôi</a></li>
-                    <li><a href="xx">Thỏa Thuận Sử Dụng</a></li>
-                    <li><a href="xx">Quy Chế Hoạt Động</a></li>
-                    <li><a href="xx">Chính Sách Bảo Mật</a></li>
-                </ul>
-            </div>
 
-            <div class="footer-section">
-                <h3>Góc Điện Ảnh</h3>
-                <ul>
-                    <li><a href="xx">Thể Loại Phim</a></li>
-                    <li><a href="xx">Bình Luận Phim</a></li>
-                    <li><a href="xx">Blog Điện Ảnh</a></li>
-                    <li><a href="xx">Phim Hay Tháng</a></li>
-                </ul>
+            <div id="movie-list" class="movie-grid"> <!-- Container hiển thị danh sách phim -->
+                <!-- Danh sách phim sẽ được tải bằng JavaScript -->
             </div>
+        </section>
 
-            <div class="footer-section">
-                <h3>Hỗ Trợ</h3>
-                <ul>
-                    <li><a href="xx">Góp Ý</a></li>
-                    <li><a href="xx">Sale & Services</a></li>
-                    <li><a href="xx">Rạp / Giá Vé</a></li>
-                    <li><a href="xx">Tuyển Dụng</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-right">
-                <img src="/images/" alt="BCDH CINEMA LOGO">
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/wocdat.16" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/_qwodac" target="_blank"><i class="fab fa-instagram"></i></a>
+        <!-- Phần khuyến mãi (Promotions) -->
+        <section class="promotions">
+            <h2 class="section-title">Ưu Đãi Đặc Biệt</h2> <!-- Tiêu đề phần khuyến mãi -->
+            <div class="promo-slider">
+                <!-- Card khuyến mãi 1 -->
+                <div class="promo-card">
+                    <img src="../assets/images/promo1.jpg" alt="Khuyến mãi 1"> <!-- Hình ảnh khuyến mãi -->
+                    <div class="promo-info">
+                        <h3>Ưu đãi sinh nhật</h3> <!-- Tiêu đề khuyến mãi -->
+                        <p>Tặng vé xem phim miễn phí cho thành viên vào tháng sinh nhật</p> <!-- Mô tả khuyến mãi -->
+                        <a href="promotions.html" class="promo-btn">Xem chi tiết</a> <!-- Nút xem chi tiết -->
+                    </div>
+                </div>
+                <!-- Card khuyến mãi 2 -->
+                <div class="promo-card">
+                    <img src="../assets/images/promo2.jpg" alt="Khuyến mãi 2"> <!-- Hình ảnh khuyến mãi -->
+                    <div class="promo-info">
+                        <h3>Ngày hội thành viên</h3> <!-- Tiêu đề khuyến mãi -->
+                        <p>Giảm 50% cho thành viên vào thứ Tư hàng tuần</p> <!-- Mô tả khuyến mãi -->
+                        <a href="promotions.html" class="promo-btn">Xem chi tiết</a> <!-- Nút xem chi tiết -->
+                    </div>
                 </div>
             </div>
-        </div> 
-        
-        <div class="footer-bottom">
-            <div>
-                <img src="/images/" alt="BCDH CINEMA">
+        </section>
+    </main>
+
+    <!-- Phần chân trang (Footer) -->
+    <footer>
+        <div class="footer-container">
+            <!-- Cột Giới Thiệu -->
+            <div class="footer-section">
+                <h3>Giới Thiệu</h3> <!-- Tiêu đề cột -->
+                <ul>
+                    <li><a href="#">Về Chúng Tôi</a></li> <!-- Liên kết tới trang giới thiệu -->
+                    <li><a href="#">Thỏa Thuận Sử Dụng</a></li> <!-- Liên kết tới thỏa thuận sử dụng -->
+                    <li><a href="#">Quy Chế Hoạt Động</a></li> <!-- Liên kết tới quy chế hoạt động -->
+                    <li><a href="#">Chính Sách Bảo Mật</a></li> <!-- Liên kết tới chính sách bảo mật -->
+                </ul>
             </div>
-            <div>
-                123 Hutech, Phường..., Quận 9, TP.Hồ Chí Minh, Việt Nam<br>
-                0123456789 - 0987654321 (9 : 00 - 22 : 00) - <a href="xx"> hotro@BCDHstudio.vn</a>
+            <!-- Cột Góc Điện Ảnh -->
+            <div class="footer-section">
+                <h3>Góc Điện Ảnh</h3> <!-- Tiêu đề cột -->
+                <ul>
+                    <li><a href="#">Thể Loại Phim</a></li> <!-- Liên kết tới thể loại phim -->
+                    <li><a href="#">Bình Luận Phim</a></li> <!-- Liên kết tới bình luận phim -->
+                    <li><a href="#">Blog Điện Ảnh</a></li> <!-- Liên kết tới blog điện ảnh -->
+                    <li><a href="#">Phim Hay Tháng</a></li> <!-- Liên kết tới phim hay trong tháng -->
+                </ul>
+            </div>
+            <!-- Cột Hỗ Trợ -->
+            <div class="footer-section">
+                <h3>Hỗ Trợ</h3> <!-- Tiêu đề cột -->
+                <ul>
+                    <li><a href="#">Góp Ý</a></li> <!-- Liên kết tới trang góp ý -->
+                    <li><a href="#">Sale & Services</a></li> <!-- Liên kết tới dịch vụ và ưu đãi -->
+                    <li><a href="#">Rạp / Giá Vé</a></li> <!-- Liên kết tới thông tin rạp và giá vé -->
+                    <li><a href="#">Tuyển Dụng</a></li> <!-- Liên kết tới trang tuyển dụng -->
+                </ul>
+            </div>
+            <!-- Cột Kết Nối -->
+            <div class="footer-section">
+                <h3>Kết Nối</h3> <!-- Tiêu đề cột -->
+                <div class="social-icons"> <!-- Biểu tượng mạng xã hội -->
+                    <a href="#"><i class="fab fa-facebook"></i></a> <!-- Liên kết Facebook -->
+                    <a href="#"><i class="fab fa-instagram"></i></a> <!-- Liên kết Instagram -->
+                    <a href="#"><i class="fab fa-youtube"></i></a> <!-- Liên kết YouTube -->
+                    <a href="#"><i class="fab fa-tiktok"></i></a> <!-- Liên kết TikTok -->
+                </div>
+                <div class="app-download"> <!-- Phần tải ứng dụng -->
+                    <p>Tải ứng dụng</p>
+                    <div class="app-buttons">
+                        <a href="#"><img src="../assets/images/app-store.png" alt="App Store"></a> <!-- Nút tải từ App Store -->
+                        <a href="#"><img src="../assets/images/google-play.png" alt="Google Play"></a> <!-- Nút tải từ Google Play -->
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="copyright">
+            <p>© 2025 CINESTAR. Tất cả các quyền được bảo lưu.</p> <!-- Bản quyền -->
+        </div>
     </footer>
-    <!-- Font Awesome để dùng icon mạng xã hội và kính lúp -->
+
+    <!-- Thư viện Font Awesome -->
     <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+
+    
+    <!-- Script JavaScript để xử lý logic của trang -->
     <script>
-        // Dữ liệu giả lập danh sách phim
-        const movies = [
-            { title: "Phim 1", status: "now-showing", location: "hcm", poster: "../assets/images/poster1.jpg" },
-            { title: "Phim 2", status: "coming-soon", location: "hcm", poster: "../assets/images/poster2.jpg" },
-            { title: "Phim 3", status: "now-showing", location: "hn", poster: "../assets/images/poster3.jpg" },
-            { title: "Phim 4", status: "coming-soon", location: "dn", poster: "../assets/images/poster4.jpg" },
-            { title: "Phim 5", status: "now-showing", location: "vungtau", poster: "../assets/images/poster5.jpg" },
+        // Xử lý banner
+        const banners = [
+            { image: "/frontend/assets/images/MAIN_2_ADL_1215x365.png", title: "Âm Dương Lộ" }, // Banner 1
+            { image: "/frontend/assets/images/", title: "Phim 2" }, // Banner 2
+            { image: "/frontend/assets/images/banner3.png", title: "Phim 3" } // Banner 3
         ];
 
-        let currentStatus = "now-showing"; // Trạng thái phim hiện tại (đang chiếu hoặc sắp chiếu)
-        let currentLocation = "all"; // Vị trí hiện tại (mặc định là toàn quốc)
+        let currentBannerIndex = 0; // Chỉ số banner hiện tại
+        
+        function prevBanner() { // Chuyển về banner trước
+            currentBannerIndex = (currentBannerIndex - 1 + banners.length) % banners.length;
+            updateBanner();
+        }
 
-        // Hiển thị danh sách phim
-        function showMovies(status) {
+        function nextBanner() { // Chuyển tới banner sau
+            currentBannerIndex = (currentBannerIndex + 1) % banners.length;
+            updateBanner();
+        }
+
+        function updateBanner() { // Cập nhật nội dung banner
+            const bannerImage = document.getElementById('banner-image');
+            bannerImage.src = banners[currentBannerIndex].image; // Cập nhật hình ảnh
+            document.querySelector('.banner-info h1').textContent = banners[currentBannerIndex].title; // Cập nhật tiêu đề
+        }
+
+        function bookTicket() { // Chức năng đặt vé từ banner
+            alert(`Bạn đã chọn đặt vé cho phim: ${banners[currentBannerIndex].title}`);
+            window.location.href = 'booking.html'; // Chuyển tới trang đặt vé
+        }
+
+        setInterval(nextBanner, 5000); // Tự động chuyển banner mỗi 5 giây
+
+        // Chức năng đặt vé nhanh
+        let selectedTheater = null; // Biến lưu rạp đã chọn
+        let selectedMovie = null; // Biến lưu phim đã chọn
+        let selectedDate = null; // Biến lưu ngày đã chọn
+        let selectedShowtime = null; // Biến lưu suất chiếu đã chọn
+
+        const theaterBtn = document.getElementById('select-theater'); // Nút chọn rạp
+        const movieBtn = document.getElementById('select-movie'); // Nút chọn phim
+        const dateBtn = document.getElementById('select-date'); // Nút chọn ngày
+        const showtimeBtn = document.getElementById('select-showtime'); // Nút chọn suất
+        const bookNowBtn = document.getElementById('book-now'); // Nút đặt ngay
+
+        const theaterDropdown = document.getElementById('theater-dropdown'); // Dropdown rạp
+        const movieDropdown = document.getElementById('movie-dropdown'); // Dropdown phim
+        const dateDropdown = document.getElementById('date-dropdown'); // Dropdown ngày
+        const showtimeDropdown = document.getElementById('showtime-dropdown'); // Dropdown suất chiếu
+
+        function toggleDropdown(button, dropdown) { // Hiển thị/ẩn dropdown
+            const isVisible = dropdown.classList.contains('active');
+            document.querySelectorAll('.step-dropdown').forEach(dd => dd.classList.remove('active'));
+            if (!isVisible && !button.disabled) {
+                dropdown.classList.add('active');
+            }
+        }
+
+        theaterBtn.addEventListener('click', () => toggleDropdown(theaterBtn, theaterDropdown)); // Sự kiện click nút rạp
+        movieBtn.addEventListener('click', () => toggleDropdown(movieBtn, movieDropdown)); // Sự kiện click nút phim
+        dateBtn.addEventListener('click', () => toggleDropdown(dateBtn, dateDropdown)); // Sự kiện click nút ngày
+        showtimeBtn.addEventListener('click', () => toggleDropdown(showtimeBtn, showtimeDropdown)); // Sự kiện click nút suất
+
+        function selectTheater(theater) { // Chọn rạp
+            selectedTheater = theater;
+            theaterBtn.querySelector('.step-label').textContent = theater;
+            theaterBtn.classList.add('selected');
+            theaterDropdown.classList.remove('active');
+            movieBtn.disabled = false; // Mở khóa nút chọn phim
+        }
+
+        function selectMovie(movie) { // Chọn phim
+            selectedMovie = movie;
+            movieBtn.querySelector('.step-label').textContent = movie;
+            movieBtn.classList.add('selected');
+            movieDropdown.classList.remove('active');
+            dateBtn.disabled = false; // Mở khóa nút chọn ngày
+        }
+
+        function selectDate(date) { // Chọn ngày
+            selectedDate = date;
+            dateBtn.querySelector('.step-label').textContent = date;
+            dateBtn.classList.add('selected');
+            dateDropdown.classList.remove('active');
+            showtimeBtn.disabled = false; // Mở khóa nút chọn suất
+        }
+
+        function selectShowtime(showtime) { // Chọn suất chiếu
+            selectedShowtime = showtime;
+            showtimeBtn.querySelector('.step-label').textContent = showtime;
+            showtimeBtn.classList.add('selected');
+            showtimeDropdown.classList.remove('active');
+            bookNowBtn.disabled = false; // Mở khóa nút đặt ngay
+        }
+
+        bookNowBtn.addEventListener('click', () => { // Sự kiện click nút đặt ngay
+            if (!bookNowBtn.disabled) {
+                alert(`Bạn đã đặt vé thành công!\nRạp: ${selectedTheater}\nPhim: ${selectedMovie}\nNgày: ${selectedDate}\nSuất: ${selectedShowtime}`);
+                resetBookingForm(); // Reset form sau khi đặt
+            }
+        });
+
+        function resetBookingForm() { // Reset form đặt vé
+            selectedTheater = null;
+            selectedMovie = null;
+            selectedDate = null;
+            selectedShowtime = null;
+            
+            theaterBtn.querySelector('.step-label').textContent = 'Chọn Rạp';
+            movieBtn.querySelector('.step-label').textContent = 'Chọn Phim';
+            dateBtn.querySelector('.step-label').textContent = 'Chọn Ngày';
+            showtimeBtn.querySelector('.step-label').textContent = 'Chọn Suất';
+            
+            theaterBtn.classList.remove('selected');
+            movieBtn.classList.remove('selected');
+            dateBtn.classList.remove('selected');
+            showtimeBtn.classList.remove('selected');
+            
+            movieBtn.disabled = true;
+            dateBtn.disabled = true;
+            showtimeBtn.disabled = true;
+            bookNowBtn.disabled = true;
+        }
+
+        document.addEventListener('click', (e) => { // Đóng dropdown khi click ngoài
+            if (!e.target.closest('.booking-step')) {
+                document.querySelectorAll('.step-dropdown').forEach(dd => dd.classList.remove('active'));
+            }
+        });
+
+        // Chức năng danh sách phim
+
+    
+        const movies = [
+            { title: "Âm Dương Lộ", status: "now-showing", location: "hcm", poster:"/frontend/assets/images/am-duong-lo.webp", rating: "8.5", duration: "135 phút" },
+            { title: "Phim 2", status: "coming-soon", location: "hcm", poster: "/frontend/assets/images/", rating: "8.0", duration: "120 phút" },
+            { title: "Phim 3", status: "now-showing", location: "hn", poster: "/frontend/assets/images/", rating: "7.8", duration: "110 phút" },
+            { title: "Phim 4", status: "coming-soon", location: "dn", poster: "/frontend/assets/images/", rating: "8.2", duration: "125 phút" },
+            { title: "Phim 5", status: "now-showing", location: "vungtau", poster: "/frontend/assets/images/", rating: "7.5", duration: "115 phút" },
+            { title: "Phim 6", status: "now-showing", location: "hcm", poster: "frontend/assets/images/", rating: "8.7", duration: "140 phút" },
+        ];
+
+        let currentStatus = "now-showing"; // Trạng thái phim hiện tại
+        let currentLocation = "all"; // Khu vực hiện tại
+
+        function showMovies(status) { // Hiển thị phim theo trạng thái
             currentStatus = status;
-            // Cập nhật trạng thái active cho tab
-            document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+            document.querySelectorAll(".category-tab").forEach(tab => tab.classList.remove("active"));
             document.querySelector(`button[onclick="showMovies('${status}')"]`).classList.add("active");
             filterMovies();
         }
 
-        // Lọc phim theo vị trí
-        function filterByCountry() {
+        function filterByCountry() { // Lọc phim theo khu vực
             currentLocation = document.getElementById("country").value;
             filterMovies();
         }
 
-        // Lọc phim dựa trên trạng thái, vị trí và từ khóa tìm kiếm
-        function filterMovies(searchTerm = "") {
+        function filterMovies(searchTerm = "") { // Lọc phim theo trạng thái, khu vực, từ khóa
             const movieList = document.getElementById("movie-list");
-            movieList.innerHTML = ""; // Xóa danh sách phim hiện tại
+            movieList.innerHTML = "";
 
             const filteredMovies = movies.filter(movie => {
                 const matchesStatus = movie.status === currentStatus;
@@ -141,45 +427,44 @@
                 return matchesStatus && matchesLocation && matchesSearch;
             });
 
-            // Hiển thị danh sách phim đã lọc
-            filteredMovies.forEach(movie => {
+            filteredMovies.forEach(movie => { // Tạo card phim
                 const movieCard = document.createElement("div");
                 movieCard.classList.add("movie-card");
                 movieCard.innerHTML = `
-                    <img src="${movie.poster}" alt="${movie.title}">
-                    <h3>${movie.title}</h3>
-                    <button onclick="window.location.href='booking.html'">Đặt vé</button>
+                    <div class="movie-poster">
+                        <img src="${movie.poster}" alt="${movie.title}">
+                        <div class="movie-overlay">
+                            <button onclick="window.location.href='booking.html'">Đặt vé</button>
+                            <button onclick="window.location.href='movie-detail.html'">Chi tiết</button>
+                        </div>
+                    </div>
+                    <div class="movie-info">
+                        <h3>${movie.title}</h3>
+                        <div class="movie-meta">
+                            <span><i class="fas fa-star"></i> ${movie.rating}</span>
+                            <span><i class="fas fa-clock"></i> ${movie.duration}</span>
+                        </div>
+                    </div>
                 `;
                 movieList.appendChild(movieCard);
             });
 
-            //Nếu không có phim nào phù hợp, hiển thị thông báo
-            if (filteredMovies.length === 0) {
-                movieList.innerHTML = "<p>Không tìm thấy phim nào.</p>";
+            if (filteredMovies.length === 0) { // Thông báo nếu không có phim
+                movieList.innerHTML = "<p class='no-results'>Không tìm thấy phim nào.</p>";
             }
         }
 
-        // Hiển thị/ẩn thanh tìm kiếm
-        function toggleSearchBar() {
-            const searchBar = document.getElementById("search-bar");
-            searchBar.style.display = searchBar.style.display === "none" ? "block" : "none";
-            // Xóa nội dung ô tìm kiếm khi ẩn
-            if (searchBar.style.display === "none") {
-                document.getElementById("search-input").value = "";
-                filterMovies(); // Reset danh sách phim khi ẩn thanh tìm kiếm
-            }
-        }
-
-        // Tìm kiếm phim theo từ khóa
-        function searchMovies() {
-            const searchTerm = document.getElementById("search-input").value;
+        function searchMovies() { // Tìm kiếm phim theo từ khóa
+            const searchTerm = document.querySelector(".search-bar input").value;
             filterMovies(searchTerm);
         }
 
-        // Hiển thị danh sách phim mặc định khi tải trang
-        window.onload = () => {
+        window.onload = () => { // Khởi tạo trang
             showMovies("now-showing");
         };
     </script>
+
+    <!-- Script bảo mật từ Cloudflare (không chỉnh sửa) -->
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92989c039bd09c42',t:'MTc0MzUxNTk5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>

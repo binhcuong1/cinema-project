@@ -15,6 +15,8 @@ const movie = {
         db.query(`SELECT * FROM ${table_name} WHERE ma_phim = ?`, [id], (err, result) => {
             if (err)
                 return callback(err,null);
+            if (result.length === 0)
+                return callback(null, null);
             callback(null, result);
         });
     },

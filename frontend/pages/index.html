@@ -49,8 +49,18 @@
 
     <!-- Nội dung chính (Main) -->
     <main>
-        <a href="theater.html">Chọn Rạp</a> <!-- Liên kết tới trang chọn rạp -->
-            <a href="schedule.html">Lịch Chiếu</a> <!-- Liên kết tới trang lịch chiếu -->
+        <div class="theater-selector dropdown">
+            <a href="#" class="dropdown-toggle">Chọn Rạp</a>
+            <div class="dropdown-menu">
+                <!-- Thay form bằng danh sách rạp -->
+                <div class="theater-list">
+                    <div onclick="selectTheater('CINESTAR Hà Nội')">CINESTAR Hà Nội</div>
+                    <div onclick="selectTheater('CINESTAR TP.HCM')">CINESTAR TP.HCM</div>
+                    <div onclick="selectTheater('CINESTAR Đà Nẵng')">CINESTAR Đà Nẵng</div>
+                </div>
+            </div>
+        </div>
+        <a href="schedule.html">Lịch Chiếu</a> <!-- Liên kết tới trang lịch chiếu -->
         <!-- Phần banner chính (Hero Banner) -->
         <section class="hero-banner">
             <div class="banner-container">
@@ -152,19 +162,19 @@
                     <i class="fas fa-play"></i> Phim Đang Chiếu
                 </button>
                 <!-- Tab phim sắp chiếu -->
-                <button class="category-tab" onclick="showMovies('coming-soon')">
+                <!-- <button class="category-tab" onclick="showMovies('coming-soon')">
                     <i class="fas fa-clock"></i> Phim Sắp Chiếu
-                </button>
+                </button> -->
                 <!-- Bộ lọc theo khu vực -->
-                <div class="filter-container">
-                    <select id="country" onchange="filterByCountry()"> <!-- Dropdown chọn khu vực -->
-                        <option value="all">Tất cả rạp</option>
-                        <option value="hcm">TP.HCM</option>
-                        <option value="hn">Hà Nội</option>
-                        <option value="dn">Đà Nẵng</option>
-                        <option value="vungtau">Vũng Tàu</option>
-                    </select>
-                </div>
+                <!-- <div class="filter-container"> -->
+                    <!-- <select id="country" onchange="filterByCountry()"> Dropdown chọn khu vực -->
+                        <!-- <option value="all">Tất cả rạp</option> -->
+                        <!-- <option value="hcm">TP.HCM</option> -->
+                        <!-- <option value="hn">Hà Nội</option> -->
+                        <!-- <option value="dn">Đà Nẵng</option> -->
+                        <!-- <option value="vungtau">Vũng Tàu</option> -->
+                    <!-- </select> -->
+                <!-- </div> -->
             </div>
 
             <div id="movie-list" class="movie-grid"> <!-- Container hiển thị danh sách phim -->
@@ -263,8 +273,8 @@
         // Xử lý banner
         const banners = [
             { image: "/frontend/assets/images/MAIN_2_ADL_1215x365.png", title: "Âm Dương Lộ" }, // Banner 1
-            { image: "/frontend/assets/images/", title: "Phim 2" }, // Banner 2
-            { image: "/frontend/assets/images/banner3.png", title: "Phim 3" } // Banner 3
+            { image: "/frontend/assets/images/gau-yeu-cua-anh-banner.jpg", title: "Gấu Yêu Của Anh" }, // Banner 2
+            // { image: "/frontend/assets/images/banner3.png", title: "Phim 3" } // Banner 3
         ];
 
         let currentBannerIndex = 0; // Chỉ số banner hiện tại
@@ -394,11 +404,11 @@
     
         const movies = [
             { title: "Âm Dương Lộ", status: "now-showing", location: "hcm", poster:"/frontend/assets/images/am-duong-lo.webp", rating: "8.5", duration: "135 phút" },
-            { title: "Phim 2", status: "coming-soon", location: "hcm", poster: "/frontend/assets/images/", rating: "8.0", duration: "120 phút" },
-            { title: "Phim 3", status: "now-showing", location: "hn", poster: "/frontend/assets/images/", rating: "7.8", duration: "110 phút" },
-            { title: "Phim 4", status: "coming-soon", location: "dn", poster: "/frontend/assets/images/", rating: "8.2", duration: "125 phút" },
-            { title: "Phim 5", status: "now-showing", location: "vungtau", poster: "/frontend/assets/images/", rating: "7.5", duration: "115 phút" },
-            { title: "Phim 6", status: "now-showing", location: "hcm", poster: "frontend/assets/images/", rating: "8.7", duration: "140 phút" },
+            { title: "Phim 2", status: "coming-soon", location: "hcm", poster: "/frontend/assets/images/cuoi-ma-giai-han.webp", rating: "8.0", duration: "120 phút" },
+            { title: "Phim 3", status: "now-showing", location: "hn", poster:"/frontend/assets/images/dia-dao-cu-chi_1.webp", rating: "7.8", duration: "110 phút" },
+            { title: "Phim 4", status: "coming-soon", location: "dn", poster: "/frontend/assets/images/tim-xac.webp", rating: "8.2", duration: "125 phút" },
+            { title: "Phim 5", status: "now-showing", location: "vungtau", poster: "/frontend/assets/images/cuoc-xe-kinh-hoang.webp", rating: "7.5", duration: "115 phút" },
+            { title: "Phim 6", status: "now-showing", location: "hcm", poster: "/frontend/assets/images/poporo.webp", rating: "8.7", duration: "140 phút" },
         ];
 
         let currentStatus = "now-showing"; // Trạng thái phim hiện tại
@@ -436,6 +446,9 @@
                         <div class="movie-overlay">
                             <button onclick="window.location.href='booking.html'">Đặt vé</button>
                             <button onclick="window.location.href='movie-detail.html'">Chi tiết</button>
+                            <button onclick="window.location.href=''">Thêm</button>
+                            <button onclick="window.location.href='#'">Xóa</button>
+                            <button onclick="window.location.href='#'">Sửa</button>
                         </div>
                     </div>
                     <div class="movie-info">

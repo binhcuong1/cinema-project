@@ -56,7 +56,7 @@ const movie = {
         db.query('UPDATE phim SET da_xoa = 1 WHERE ma_phim = ?', [id], (err, results) => {
             if (err) return callback(err, null);
             callback(null, results);
-          });
+        });
     },
 }
 

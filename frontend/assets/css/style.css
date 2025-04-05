@@ -238,7 +238,7 @@
 
 /* Định dạng hình ảnh poster */
 .summary img {
-    width: 150px; /* Chiều rộng poster là 150px */
+    width: 105px; /* Chiều rộng poster là 150px */
     height: auto; /* Chiều cao tự động điều chỉnh theo tỷ lệ */
     border-radius: 5px; /* Bo góc 5px */
 }
@@ -787,7 +787,7 @@ button {
 
 .movie-poster img {
     width: 100%;
-    height: 200px;
+    height: auto;
     object-fit: cover;
     border-radius: 8px;
 }

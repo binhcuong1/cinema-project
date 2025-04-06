@@ -179,6 +179,7 @@
 
             <div id="movie-list" class="movie-grid"> <!-- Container hiển thị danh sách phim -->
                 <!-- Danh sách phim sẽ được tải bằng JavaScript -->
+                <script src="../assets/js/movie.js"></script>
             </div>
         </section>
 
@@ -188,7 +189,7 @@
             <div class="promo-slider">
                 <!-- Card khuyến mãi 1 -->
                 <div class="promo-card">
-                    <img src="../assets/images/promo1.jpg" alt="Khuyến mãi 1"> <!-- Hình ảnh khuyến mãi -->
+                    <img src="#" alt="Khuyến mãi 1"> <!-- Hình ảnh khuyến mãi -->
                     <div class="promo-info">
                         <h3>Ưu đãi sinh nhật</h3> <!-- Tiêu đề khuyến mãi -->
                         <p>Tặng vé xem phim miễn phí cho thành viên vào tháng sinh nhật</p> <!-- Mô tả khuyến mãi -->
@@ -197,7 +198,7 @@
                 </div>
                 <!-- Card khuyến mãi 2 -->
                 <div class="promo-card">
-                    <img src="../assets/images/promo2.jpg" alt="Khuyến mãi 2"> <!-- Hình ảnh khuyến mãi -->
+                    <img src="#" alt="Khuyến mãi 2"> <!-- Hình ảnh khuyến mãi -->
                     <div class="promo-info">
                         <h3>Ngày hội thành viên</h3> <!-- Tiêu đề khuyến mãi -->
                         <p>Giảm 50% cho thành viên vào thứ Tư hàng tuần</p> <!-- Mô tả khuyến mãi -->
@@ -253,8 +254,8 @@
                 <div class="app-download"> <!-- Phần tải ứng dụng -->
                     <p>Tải ứng dụng</p>
                     <div class="app-buttons">
-                        <a href="#"><img src="../assets/images/app-store.png" alt="App Store"></a> <!-- Nút tải từ App Store -->
-                        <a href="#"><img src="../assets/images/google-play.png" alt="Google Play"></a> <!-- Nút tải từ Google Play -->
+                        <a href="#"><img src="#" alt="App Store"></a> <!-- Nút tải từ App Store -->
+                        <a href="#"><img src="#" alt="Google Play"></a> <!-- Nút tải từ Google Play -->
                     </div>
                 </div>
             </div>
@@ -267,7 +268,6 @@
     <!-- Thư viện Font Awesome -->
     <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
 
-    
     <!-- Script JavaScript để xử lý logic của trang -->
     <script>
         // Xử lý banner
@@ -418,7 +418,7 @@
             currentStatus = status;
             document.querySelectorAll(".category-tab").forEach(tab => tab.classList.remove("active"));
             document.querySelector(`button[onclick="showMovies('${status}')"]`).classList.add("active");
-            filterMovies();
+            // filterMovies();
         }
 
         function filterByCountry() { // Lọc phim theo khu vực
@@ -426,46 +426,46 @@
             filterMovies();
         }
 
-        function filterMovies(searchTerm = "") { // Lọc phim theo trạng thái, khu vực, từ khóa
-            const movieList = document.getElementById("movie-list");
-            movieList.innerHTML = "";
+        // function filterMovies(searchTerm = "") { // Lọc phim theo trạng thái, khu vực, từ khóa
+        //     const movieList = document.getElementById("movie-list");
+        //     movieList.innerHTML = "";
 
-            const filteredMovies = movies.filter(movie => {
-                const matchesStatus = movie.status === currentStatus;
-                const matchesLocation = currentLocation === "all" || movie.location === currentLocation;
-                const matchesSearch = searchTerm ? movie.title.toLowerCase().includes(searchTerm.toLowerCase()) : true;
-                return matchesStatus && matchesLocation && matchesSearch;
-            });
+        //     const filteredMovies = movies.filter(movie => {
+        //         const matchesStatus = movie.status === currentStatus;
+        //         const matchesLocation = currentLocation === "all" || movie.location === currentLocation;
+        //         const matchesSearch = searchTerm ? movie.title.toLowerCase().includes(searchTerm.toLowerCase()) : true;
+        //         return matchesStatus && matchesLocation && matchesSearch;
+        //     });
 
-            filteredMovies.forEach(movie => { // Tạo card phim
-                const movieCard = document.createElement("div");
-                movieCard.classList.add("movie-card");
-                movieCard.innerHTML = `
-                    <div class="movie-poster">
-                        <img src="${movie.poster}" alt="${movie.title}">
-                        <div class="movie-overlay">
-                            <button onclick="window.location.href='booking.html'">Đặt vé</button>
-                            <button onclick="window.location.href='movie-detail.html'">Chi tiết</button>
-                            <button onclick="window.location.href=''">Thêm</button>
-                            <button onclick="window.location.href='#'">Xóa</button>
-                            <button onclick="window.location.href='#'">Sửa</button>
-                        </div>
-                    </div>
-                    <div class="movie-info">
-                        <h3>${movie.title}</h3>
-                        <div class="movie-meta">
-                            <span><i class="fas fa-star"></i> ${movie.rating}</span>
-                            <span><i class="fas fa-clock"></i> ${movie.duration}</span>
-                        </div>
-                    </div>
-                `;
-                movieList.appendChild(movieCard);
-            });
+        //     filteredMovies.forEach(movie => { // Tạo card phim
+        //         const movieCard = document.createElement("div");
+        //         movieCard.classList.add("movie-card");
+        //         movieCard.innerHTML = `
+        //             <div class="movie-poster">
+        //                 <img src="${movie.poster}" alt="${movie.title}">
+        //                 <div class="movie-overlay">
+        //                     <button onclick="window.location.href='booking.html'">Đặt vé</button>
+        //                     <button onclick="window.location.href='movie-detail.html'">Chi tiết</button>
+        //                     <button onclick="window.location.href=''">Thêm</button>
+        //                     <button onclick="window.location.href='#'">Xóa</button>
+        //                     <button onclick="window.location.href='#'">Sửa</button>
+        //                 </div>
+        //             </div>
+        //             <div class="movie-info">
+        //                 <h3>${movie.title}</h3>
+        //                 <div class="movie-meta">
+        //                     <span><i class="fas fa-star"></i> ${movie.rating}</span>
+        //                     <span><i class="fas fa-clock"></i> ${movie.duration}</span>
+        //                 </div>
+        //             </div>
+        //         `;
+        //         movieList.appendChild(movieCard);
+        //     });
 
-            if (filteredMovies.length === 0) { // Thông báo nếu không có phim
-                movieList.innerHTML = "<p class='no-results'>Không tìm thấy phim nào.</p>";
-            }
-        }
+        //     if (filteredMovies.length === 0) { // Thông báo nếu không có phim
+        //         movieList.innerHTML = "<p class='no-results'>Không tìm thấy phim nào.</p>";
+        //     }
+        // }
 
         function searchMovies() { // Tìm kiếm phim theo từ khóa
             const searchTerm = document.querySelector(".search-bar input").value;

@@ -409,6 +409,7 @@ button {
     transition: all 0.3s ease; /* Hiệu ứng mượt mà trong 0.3 giây */
 }
 
+
 .book-ticket {
     background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient từ cam đậm sang cam nhạt */
     color: white; /* Màu chữ trắng */
@@ -1017,6 +1018,7 @@ footer {
 .footer-bottom a:hover {
     color: #fff; /* Đổi màu thành trắng khi hover */
 }
+
 
 /* Responsive cho màn hình nhỏ */
 @media (max-width: 768px) {

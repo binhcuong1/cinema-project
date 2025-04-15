@@ -15,7 +15,7 @@ connection.connect(err => {
     console.error("Lỗi kết nối database!", err.message);
     process.exit(1); // Thoát chương trình nếu kết nối thất bại
   }
-  console.log('Connected to MySQL');
+  console.log('Đã kết nối tới MySQL');
 });
 
 module.exports = connection;

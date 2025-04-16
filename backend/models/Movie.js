@@ -11,6 +11,17 @@ const movie = {
         });
     },
 
+    getNowShowing: (limit, callback) => {
+        db.query(
+            `SELECT * FROM ${table_name} WHERE trang_thai = 'dang-chieu' AND da_xoa = 0 LIMIT ?`,
+            [limit],
+            (err, result) => {
+                if (err) return callback(err, null);
+                callback(null, result);
+            }
+        );
+    },
+
     getByID: (id, callback) => {
         db.query(`SELECT * FROM ${table_name} WHERE ma_phim = ?`, [id], (err, result) => {
             if (err)

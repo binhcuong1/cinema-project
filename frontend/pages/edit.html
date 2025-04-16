@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa phim</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body data-page = "edit">
+    <h2>Chỉnh sửa phim</h2>
+    
+    <form id="edit-movie-form">
+        <label>Tên phim:</label>
+        <input type="text" id="ten_phim" name="ten_phim"><br>
+        <label>Mô tả:</label>
+        <input type="text" id="mo_ta" name="mo_ta"><br>
+        <label>Thời lượng (phút):</label>
+        <input type="text" id="thoi_luong_phut" name="thoi_luong_phut"><br>
+        <label>Nội dung phim:</label>
+        <input type="text" id="noi_dung_phim" name="noi_dung_phim"><br>
+
+        <button type="button" onclick="submitEditMovie()"> Lưu </button>
+        <button type="button" onclick="window.location.href='index.html'"> Hủy </button>
+    </form>
+
+    <script src="../assets/js/movie.js"></script>
+</body>
+</html>

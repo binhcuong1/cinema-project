@@ -1,8 +1,16 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
 // Router
 const router = require('./routes/index');
+
+// Cấu hình CORS
+app.use(cors({
+    origin: 'http://127.0.0.1:5500',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type'] 
+}));
 
 // Lấy thông tin từ file .env
 require('dotenv').config();

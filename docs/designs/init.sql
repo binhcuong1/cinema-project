@@ -174,3 +174,7 @@ INSERT INTO khuyen_mai (ten_khuyen_mai, dieu_kieu, luu_y, image, da_xoa) VALUES
 ('Giảm 20% vé thường', 'Đặt ít nhất 2 vé thường', 'Chỉ áp dụng cho vé thường, không áp dụng cho vé VIP', '/images/khuyenmai1.jpg', 0),
 ('Mua 1 tặng 1 combo nhỏ', 'Mua combo nhỏ trong ngày thứ 4', 'Áp dụng vào thứ 4 hàng tuần', '/images/khuyenmai2.jpg', 0),
 ('Giảm 10% cho khách hàng mới', 'Áp dụng cho khách hàng lần đầu đặt vé', 'Chỉ áp dụng cho đơn đầu tiên', '/images/khuyenmai3.jpg', 0);
+
+-- Thêm thuộc tính trang_thai cho bảng phim
+alter table phim
+add column trang_thai enum('dang-chieu', 'sap-chieu', 'khong-chieu') default 'sap-chieu';

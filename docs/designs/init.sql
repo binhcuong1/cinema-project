@@ -178,3 +178,20 @@ INSERT INTO khuyen_mai (ten_khuyen_mai, dieu_kieu, luu_y, image, da_xoa) VALUES
 -- Thêm thuộc tính trang_thai cho bảng phim
 alter table phim
 add column trang_thai enum('dang-chieu', 'sap-chieu', 'khong-chieu') default 'sap-chieu';
+
+CREATE TABLE khuyen_mai (
+    ma_khuyen_mai INT AUTO_INCREMENT PRIMARY KEY,
+    ten_khuyen_mai VARCHAR(255) NOT NULL,
+    mo_ta VARCHAR(255),
+    dieu_kien VARCHAR(255),
+    luu_y TEXT,
+    trang_thai ENUM('dang_hoat_dong', 'het_han', 'chua_kich_hoat') DEFAULT 'chua_kich_hoat',
+    image VARCHAR(255),
+    da_xoa TINYINT(1) DEFAULT 0,
+    gia_2d INT, -- Giá 2D khuyến mãi
+    gia_3d INT, -- Giá 3D khuyến mãi
+    gio_bat_dau TIME,
+    gio_ket_thuc TIME,
+    ngay_trong_tuan VARCHAR(10),
+    doi_tuong VARCHAR(100) -- Đối tượng áp dụng
+);

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xoá phim</title>
+    <!-- <link rel="stylesheet" href="/frontend/assets/css/delete.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body data-page="delete">
+    <div class="delete-movie-container">
+        <h2>Xoá phim</h2>
+        <form id="delete-movie-form">
+            <div class="form-group">
+                <label for="delete-movie-select">Chọn phim cần xoá:</label>
+                <select id="delete-movie-select" required>
+                    <option value="">-- Chọn phim --</option>
+                </select>
+            </div>
+            <button type="submit">🗑️ Xoá phim</button>
+        </form>
+    </div>
+
+    <script src="/frontend/assets/js/movie.js"></script>
+
+</body>
+
+</html>

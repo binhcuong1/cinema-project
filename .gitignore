@@ -1,0 +1,5 @@
+# Thư mục chứa thư viện (được tạo bởi npm install)
+node_modules/
+
+# File chứa các biến môi trường (environment variables)
+.env

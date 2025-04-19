@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chỉnh sửa khuyến mãi</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body data-page="promotion-edit">
+  <h2>Chỉnh sửa khuyến mãi</h2>
+
+  <form id="edit-promotion-form">
+    <label for="promotion-select">Chọn khuyến mãi:</label>
+    <select id="promotion-select">
+      <option value="">-- Chọn khuyến mãi --</option>
+    </select>
+
+    <div id="form-fields" style="display:none;">
+      <label>Tên khuyến mãi: <input type="text" id="ten_khuyen_mai" /></label><br />
+      <label>Mô tả: <textarea id="mo_ta"></textarea></label><br />
+      <label>Điều kiện: <input type="text" id="dieu_kien" /></label><br />
+      <label>Lưu ý: <textarea id="luu_y"></textarea></label><br />
+      <label>Trạng thái:
+        <select id="trang_thai">
+          <option value="dang_hoat_dong">Đang hoạt động</option>
+          <option value="chua_kich_hoat">Chưa kích hoạt</option>
+          <option value="het_han">Hết hạn</option>
+        </select>
+      </label><br />
+      <label>Link ảnh: <input type="url" id="image" /></label><br />
+      <label>Giá vé 2D: <input type="number" id="gia_2d" /></label><br />
+      <label>Giá vé 3D: <input type="number" id="gia_3d" /></label><br />
+      <label>Giờ bắt đầu: <input type="time" id="gio_bat_dau" /></label><br />
+      <label>Giờ kết thúc: <input type="time" id="gio_ket_thuc" /></label><br />
+      <label>Ngày trong tuần: <input type="text" id="ngay_trong_tuan" /></label><br />
+      <label>Đối tượng áp dụng: <input type="text" id="doi_tuong" /></label><br />
+      <button type="submit">Cập nhật khuyến mãi</button>
+    </div>
+  </form>
+
+  <script src="/frontend/assets/js/promotion.js"></script>
+</body>
+</html>

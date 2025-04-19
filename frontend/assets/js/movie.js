@@ -69,7 +69,7 @@ async function submitAddMovie() {
         if (result.success !== "true") throw new Error(result.message || "Thêm phim thất bại");
 
         alert("🎉 Thêm phim thành công!");
-        window.location.href = "index.html";
+        window.location.href = "/frontend/pages/index.html";
     } catch (error) {
         console.error("Lỗi khi thêm phim:", error);
         alert("❌ Thêm phim thất bại!");
@@ -154,7 +154,7 @@ async function submitEditMovie() {
         if (result.success !== "true") throw new Error("Lỗi khi cập nhật phim");
 
         alert("✅ Cập nhật phim thành công!");
-        window.location.href = "index.html";
+        window.location.href = "/frontend/pages/index.html";
     } catch (error) {
         console.log("Lỗi khi cập nhật phim:", error);
         alert("❌ Lỗi khi cập nhật phim!");

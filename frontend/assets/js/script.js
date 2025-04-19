@@ -193,126 +193,126 @@ function filterMovies(searchTerm = "") {
 }
 
 // Hiển thị modal và form đăng nhập
-function showLoginForm() {
-    const modal = document.getElementById('auth-modal');
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    const forgotPasswordForm = document.getElementById('forgot-password-form');
+// function showLoginForm() {
+//     const modal = document.getElementById('auth-modal');
+//     const loginForm = document.getElementById('login-form');
+//     const registerForm = document.getElementById('register-form');
+//     const forgotPasswordForm = document.getElementById('forgot-password-form');
 
-    modal.classList.add('active');
-    loginForm.style.display = 'block';
-    registerForm.style.display = 'none';
-    forgotPasswordForm.style.display = 'none';
+//     modal.classList.add('active');
+//     loginForm.style.display = 'block';
+//     registerForm.style.display = 'none';
+//     forgotPasswordForm.style.display = 'none';
 
-    document.querySelector('#login-form .tab:nth-child(1)').classList.add('active');
-    document.querySelector('#login-form .tab:nth-child(2)').classList.remove('active');
-}
+//     document.querySelector('#login-form .tab:nth-child(1)').classList.add('active');
+//     document.querySelector('#login-form .tab:nth-child(2)').classList.remove('active');
+// }
 
 // Chuyển từ form đăng nhập sang form đăng ký
-function switchToRegister() {
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    const forgotPasswordForm = document.getElementById('forgot-password-form');
+// function switchToRegister() {
+//     const loginForm = document.getElementById('login-form');
+//     const registerForm = document.getElementById('register-form');
+//     const forgotPasswordForm = document.getElementById('forgot-password-form');
 
-    loginForm.style.display = 'none';
-    registerForm.style.display = 'block';
-    forgotPasswordForm.style.display = 'none';
+//     loginForm.style.display = 'none';
+//     registerForm.style.display = 'block';
+//     forgotPasswordForm.style.display = 'none';
 
-    document.querySelector('#register-form .tab:nth-child(1)').classList.remove('active');
-    document.querySelector('#register-form .tab:nth-child(2)').classList.add('active');
-}
+//     document.querySelector('#register-form .tab:nth-child(1)').classList.remove('active');
+//     document.querySelector('#register-form .tab:nth-child(2)').classList.add('active');
+// }
 
 // Chuyển từ form đăng ký về form đăng nhập
-function switchToLogin() {
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    const forgotPasswordForm = document.getElementById('forgot-password-form');
+// function switchToLogin() {
+//     const loginForm = document.getElementById('login-form');
+//     const registerForm = document.getElementById('register-form');
+//     const forgotPasswordForm = document.getElementById('forgot-password-form');
 
-    loginForm.style.display = 'block';
-    registerForm.style.display = 'none';
-    forgotPasswordForm.style.display = 'none';
+//     loginForm.style.display = 'block';
+//     registerForm.style.display = 'none';
+//     forgotPasswordForm.style.display = 'none';
 
-    document.querySelector('#login-form .tab:nth-child(1)').classList.add('active');
-    document.querySelector('#login-form .tab:nth-child(2)').classList.remove('active');
-}
+//     document.querySelector('#login-form .tab:nth-child(1)').classList.add('active');
+//     document.querySelector('#login-form .tab:nth-child(2)').classList.remove('active');
+// }
 
 // Chuyển đến form quên mật khẩu
-function switchToForgotPassword() {
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    const forgotPasswordForm = document.getElementById('forgot-password-form');
+// function switchToForgotPassword() {
+//     const loginForm = document.getElementById('login-form');
+//     const registerForm = document.getElementById('register-form');
+//     const forgotPasswordForm = document.getElementById('forgot-password-form');
 
-    loginForm.style.display = 'none';
-    registerForm.style.display = 'none';
-    forgotPasswordForm.style.display = 'block';
+//     loginForm.style.display = 'none';
+//     registerForm.style.display = 'none';
+//     forgotPasswordForm.style.display = 'block';
 
-    document.querySelector('#forgot-password-form .tab:nth-child(1)').classList.remove('active');
-    document.querySelector('#forgot-password-form .tab:nth-child(2)').classList.add('active');
-}
+//     document.querySelector('#forgot-password-form .tab:nth-child(1)').classList.remove('active');
+//     document.querySelector('#forgot-password-form .tab:nth-child(2)').classList.add('active');
+// }
 
 // Đóng toàn bộ modal
-function closeAuthModal() {
-    const modal = document.getElementById('auth-modal');
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    const forgotPasswordForm = document.getElementById('forgot-password-form');
+// function closeAuthModal() {
+//     const modal = document.getElementById('auth-modal');
+//     const loginForm = document.getElementById('login-form');
+//     const registerForm = document.getElementById('register-form');
+//     const forgotPasswordForm = document.getElementById('forgot-password-form');
 
-    modal.classList.remove('active');
-    loginForm.style.display = 'none';
-    registerForm.style.display = 'none';
-    forgotPasswordForm.style.display = 'none';
+//     modal.classList.remove('active');
+//     loginForm.style.display = 'none';
+//     registerForm.style.display = 'none';
+//     forgotPasswordForm.style.display = 'none';
 
-    document.querySelector('#login-form .tab:nth-child(1)').classList.add('active');
-    document.querySelector('#login-form .tab:nth-child(2)').classList.remove('active');
-}
+//     document.querySelector('#login-form .tab:nth-child(1)').classList.add('active');
+//     document.querySelector('#login-form .tab:nth-child(2)').classList.remove('active');
+// }
 
 // Xử lý hiện/ẩn mật khẩu
-document.querySelectorAll('.eye-icon').forEach(icon => {
-    icon.addEventListener('click', function () {
-        const input = this.parentElement.querySelector('input');
-        if (input.type === 'password') {
-            input.type = 'text';
-            this.innerHTML = '<i class="fas fa-eye-slash"></i>';
-        } else {
-            input.type = 'password';
-            this.innerHTML = '<i class="fas fa-eye"></i>';
-        }
-    });
-});
+// document.querySelectorAll('.eye-icon').forEach(icon => {
+//     icon.addEventListener('click', function () {
+//         const input = this.parentElement.querySelector('input');
+//         if (input.type === 'password') {
+//             input.type = 'text';
+//             this.innerHTML = '<i class="fas fa-eye-slash"></i>';
+//         } else {
+//             input.type = 'password';
+//             this.innerHTML = '<i class="fas fa-eye"></i>';
+//         }
+//     });
+// });
 
 // Xử lý đăng nhập bằng Google
-function continueWithGoogle() {
-    // Cấu hình thông tin đăng nhập Google
-    const clientId = 'YOUR_CLIENT_ID.apps.googleusercontent.com'; // Thay YOUR_CLIENT_ID bằng Client ID của bạn
-    const redirectUri = 'http://localhost:3000/auth/google/callback'; // Thay bằng redirect URI của bạn
-    const scope = 'profile email'; // Quyền truy cập: thông tin hồ sơ và email
-    const responseType = 'code'; // Loại phản hồi: mã xác thực
+// function continueWithGoogle() {
+//     // Cấu hình thông tin đăng nhập Google
+//     const clientId = 'YOUR_CLIENT_ID.apps.googleusercontent.com'; // Thay YOUR_CLIENT_ID bằng Client ID của bạn
+//     const redirectUri = 'http://localhost:3000/auth/google/callback'; // Thay bằng redirect URI của bạn
+//     const scope = 'profile email'; // Quyền truy cập: thông tin hồ sơ và email
+//     const responseType = 'code'; // Loại phản hồi: mã xác thực
 
-    // Tạo URL đăng nhập Google
-    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&access_type=offline&prompt=consent`;
+//     // Tạo URL đăng nhập Google
+//     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&access_type=offline&prompt=consent`;
 
-    // Chuyển hướng người dùng đến trang đăng nhập Google
-    window.location.href = authUrl;
-}
+//     // Chuyển hướng người dùng đến trang đăng nhập Google
+//     window.location.href = authUrl;
+// }
 
 // Xử lý callback sau khi đăng nhập Google (nếu cần)
-function handleGoogleCallback() {
-    // Lấy mã xác thực từ URL (nếu redirect URI được gọi lại)
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
+// function handleGoogleCallback() {
+//     // Lấy mã xác thực từ URL (nếu redirect URI được gọi lại)
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const code = urlParams.get('code');
 
-    if (code) {
-        // Gửi mã xác thực đến backend để lấy token và thông tin người dùng
-        console.log('Authorization code:', code);
-        // Gọi API backend để xử lý mã này (cần triển khai phía server)
-        alert('Đăng nhập bằng Google thành công! Mã xác thực: ' + code);
-    }
-}
+//     if (code) {
+//         // Gửi mã xác thực đến backend để lấy token và thông tin người dùng
+//         console.log('Authorization code:', code);
+//         // Gọi API backend để xử lý mã này (cần triển khai phía server)
+//         alert('Đăng nhập bằng Google thành công! Mã xác thực: ' + code);
+//     }
+// }
 
 // Gọi hàm xử lý callback khi trang được tải
-window.onload = function () {
-    handleGoogleCallback();
-};
+// window.onload = function () {
+//     handleGoogleCallback();
+// };
 
 function searchMovies() {
     const searchTerm = document.querySelector(".search-bar input").value;

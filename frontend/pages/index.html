@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinestar - Rạp Chiếu Phim</title>
     <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -21,11 +24,12 @@
             </a>
         </div>
 
+
         <!-- Các liên kết điều hướng -->
         <div class="dropdown" id="movie-dropdown" style="display: inline-block;">
             <a href="#" class="dropdown-toggle">Phim</a>
             <div class="dropdown-menu">
-                <a href="#" onclick="showAddMovieForm()">Thêm</a>
+                <a href="/frontend/pages/movie/add.html" onclick="showAddMovieForm()">Thêm</a>
                 <a href="#" onclick="showDeleteMovieForm()">Xóa</a>
                 <a href="#" onclick="showEditMovieForm()">Sửa</a>
             </div>
@@ -55,6 +59,12 @@
 
     <!-- Main Content -->
     <main>
+        <!-- Nút vào trang admin -->
+        <button id="adminBtn">Trang Quản Lý</button>
+        <div id="adminOverlay" class="hidden">
+            <iframe src="admin.html"></iframe>
+        </div>
+      
         <div class="theater-selector dropdown">
             <a href="#" class="dropdown-toggle">Chọn Rạp</a>
             <div class="dropdown-menu">
@@ -190,6 +200,9 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/frontend/assets/js/main.js"></script>
     <script src="/frontend/assets/js/auth.js"></script>
+
+    <script src="/frontend/assets/js/admin.js"></script>
+
     <script defer src="/frontend/assets/js/script.js"></script>
     <!-- <script src="/frontend/assets/js/movie.js"></script> -->
 

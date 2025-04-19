@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chỉnh sửa phim</title>
+    <link rel="stylesheet" href="/frontend/assets/css/edit.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body data-page="edit">
+    <div class="edit-movie-container">
+        <h2>Chỉnh sửa thông tin phim</h2>
+
+        <form id="edit-movie-form" class="edit-movie-form">
+            <!-- Dropdown chọn phim -->
+            <div class="form-group">
+                <label for="movie-select">Chọn phim:</label>
+                <select id="movie-select" required>
+                    <option value="">-- Chọn phim cần chỉnh sửa --</option>
+                </select>
+            </div>
+
+            <!-- Các trường dữ liệu -->
+            <div class="form-group">
+                <label for="ten_phim">Tên phim:</label>
+                <input type="text" id="ten_phim" required />
+            </div>
+
+            <div class="form-group">
+                <label for="mo_ta">Mô tả:</label>
+                <textarea id="mo_ta" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="ngay_phat_hanh">Ngày phát hành:</label>
+                <input type="date" id="ngay_phat_hanh" required />
+            </div>
+
+            <div class="form-group">
+                <label for="thoi_luong_phut">Thời lượng (phút):</label>
+                <input type="number" id="thoi_luong_phut" required />
+            </div>
+
+            <div class="form-group">
+                <label for="noi_dung_phim">Nội dung phim:</label>
+                <textarea id="noi_dung_phim" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="gioi_han_tuoi">Giới hạn tuổi:</label>
+                <input type="number" id="gioi_han_tuoi" required />
+            </div>
+
+            <div class="form-group">
+                <label for="image">Link ảnh poster:</label>
+                <input type="url" id="image" required />
+            </div>
+
+            <div class="form-group">
+                <label for="trang_thai">Trạng thái:</label>
+                <select id="trang_thai" required>
+                    <option value="dang-chieu">Đang chiếu</option>
+                    <option value="sap-chieu">Sắp chiếu</option>
+                    <option value="khong-chieu">Không chiếu</option>
+                </select>
+            </div>
+
+            <button type="submit">Cập nhật phim</button>
+        </form>
+    </div>
+
+    <script src="/frontend/assets/js/movie.js"></script>
+</body>
+
+</html>

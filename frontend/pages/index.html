@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8"> <!-- Thiết lập mã hóa ký tự UTF-8 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Đảm bảo giao diện responsive trên thiết bị di động -->
-    <title>Cinestar - Rạp Chiếu Phim</title> <!-- Tiêu đề của trang web -->
-    <link rel="stylesheet" href="../assets/css/style.css"> <!-- Liên kết tới file CSS để định dạng giao diện -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinestar - Rạp Chiếu Phim</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <!-- Liên kết tới Font Awesome để dùng icon -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body data-page = "index">
-    <!-- Thanh điều hướng đẹp mắt (Fancy Navigation Bar) -->
-    <div class="fancy-nav">
+
+<body data-page="index">
+    <!-- HEADER -->
+    <div id="header-container" class="fancy-nav">
         <!-- Logo -->
         <div class="logo">
             <a href="index.html">
-                <img src="/frontend/assets/images/Screenshot_2025-04-01_204018-removebg-preview.png" alt="">
+                <img src="/frontend/assets/images/Screenshot_2025-04-01_204018-removebg-preview.png" alt="Logo">
             </a>
         </div>
-        
+
         <!-- Các liên kết điều hướng -->
         <div class="dropdown" id="movie-dropdown" style="display: inline-block;">
             <a href="#" class="dropdown-toggle">Phim</a>
@@ -28,7 +30,6 @@
                 <a href="#" onclick="showEditMovieForm()">Sửa</a>
             </div>
         </div>
-        
         <!-- Các nút chức năng -->
         <div class="nav-buttons">
             <a href="booking.html" class="nav-btn book-ticket">
@@ -38,137 +39,25 @@
                 <i class="fas fa-popcorn"></i> Đặt Bắp Nước
             </a>
         </div>
-        
         <!-- Thanh tìm kiếm -->
         <div class="search-bar">
             <input type="text" placeholder="Tìm phim, rạp..." onkeyup="searchMovies()">
             <button class="search-btn"><i class="fas fa-search"></i></button>
         </div>
-        
         <!-- Phần đăng nhập -->
         <div class="auth">
             <a class="nav-btn login-btn" onclick="showLoginForm()">
                 <i class="fas fa-user"></i> Đăng Nhập
             </a>
         </div>
+        <div id="auth-container"></div>
     </div>
 
-    <main>
-        <!-- Form Đăng Nhập (Ẩn mặc định) -->
-        <main>
-          <!-- Modal Overlay chứa các form -->
-<div class="modal-overlay" id="auth-modal">
-    <!-- Form Đăng Nhập -->
-    <div class="auth-container" id="login-form" style="display: none;">
-        <button class="close-form-btn" onclick="closeAuthModal()">×</button>
-        <div class="auth-tabs">
-            <span class="tab active" onclick="switchToLogin()">ĐĂNG NHẬP</span>
-            <span class="tab" onclick="switchToRegister()">ĐĂNG KÝ</span>
-        </div>
-        <form>
-            <div class="inputs-row">
-                <div class="input-group">
-                    <label for="login-email">Tài khoản, Email hoặc số điện thoại <span class="required">*</span></label>
-                    <input type="text" id="login-email" placeholder="Nhập tài khoản, Email hoặc số điện thoại" required>
-                </div>
-                <div class="input-group">
-                    <label for="login-password">Mật khẩu <span class="required">*</span></label>
-                    <div class="password-wrapper">
-                        <input type="password" id="login-password" placeholder="Nhập mật khẩu" required>
-                        <span class="eye-icon"><i class="fas fa-eye"></i></span>
-                    </div>
-                </div>
-            </div>
-            <button type="submit" class="auth-btn">ĐĂNG NHẬP</button>
-            <div class="form-footer">
-                <div class="terms">
-                    <input type="checkbox" id="remember-password">
-                    <label for="remember-password">Lưu mật khẩu đăng nhập</label>
-                </div>
-                <button class="google-login-btn" onclick="continueWithGoogle()">
-                    <i class="fab fa-google"></i> Continue with Google
-                </button>
-                <a href="#" class="forgot-password" onclick="switchToForgotPassword()">Quên mật khẩu?</a>
-            </div>
-        </form>
-    </div>
-
-    <!-- Form Đăng Ký -->
-    <div class="auth-container" id="register-form" style="display: none;">
-        <button class="close-form-btn" onclick="closeAuthModal()">×</button>
-        <div class="auth-tabs">
-            <span class="tab" onclick="switchToLogin()">ĐĂNG NHẬP</span>
-            <span class="tab active" onclick="switchToRegister()">ĐĂNG KÝ</span>
-        </div>
-        <form>
-            <div class="inputs-row">
-                <div class="input-group">
-                    <label for="fullname">Họ và tên</label>
-                    <input type="text" id="fullname" placeholder="Nhập Họ và tên" required>
-                </div>
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Nhập Email" required>
-                </div>
-            </div>
-            <div class="inputs-row">
-                <div class="input-group">
-                    <label for="phone">Số điện thoại</label>
-                    <input type="tel" id="phone" placeholder="Nhập Số điện thoại" required>
-                </div>
-                <div class="input-group">
-                    <label for="date">Ngày Sinh</label>
-                    <input type="date" id="date" placeholder="Ngày/Tháng/Năm" required>
-                </div>
-            </div>
-            <div class="inputs-row">
-                <div class="input-group">
-                    <label for="password">Mật Khẩu</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="password" placeholder="Nhập Mật Khẩu" required>
-                        <span class="eye-icon"><i class="fas fa-eye"></i></span>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <label for="confirm-password">Nhập lại mật khẩu</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="confirm-password" placeholder="Nhập lại mật khẩu" required>
-                        <span class="eye-icon"><i class="fas fa-eye"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="terms">
-                <input type="checkbox" id="terms" required>
-                <label for="terms">Bằng việc đăng ký tài khoản, tôi đồng ý với <a href="#">Điều khoản dịch vụ</a> và <a href="#">Chính sách bảo mật</a> của BCDH CINEMA.</label>
-            </div>
-            <button type="submit" class="auth-btn">HOÀN THÀNH</button>
-        </form>
-    </div>
-
-    <!-- Form Quên Mật Khẩu -->
-    <div class="auth-container" id="forgot-password-form" style="display: none;">
-        <button class="close-form-btn" onclick="closeAuthModal()">×</button>
-        <div class="auth-tabs">
-            <span class="tab" onclick="switchToLogin()">ĐĂNG NHẬP</span>
-            <span class="tab">QUÊN MẬT KHẨU?</span>
-        </div>
-        <p>Vui lòng cung cấp email đăng nhập, chúng tôi sẽ gửi link kích hoạt cho bạn.</p>
-        <form>
-            <div class="input-group">
-                <label for="forgot-email">Email</label>
-                <input type="email" id="forgot-email" placeholder="Nhập Email" required>
-            </div>
-            <button type="submit" class="auth-btn">CẬP NHẬT MẬT KHẨU</button>
-        </form>
-    </div>
-</div>
-
-    <!-- Nội dung chính (Main) -->
+    <!-- Main Content -->
     <main>
         <div class="theater-selector dropdown">
             <a href="#" class="dropdown-toggle">Chọn Rạp</a>
             <div class="dropdown-menu">
-                <!-- Thay form bằng danh sách rạp -->
                 <div class="theater-list">
                     <div onclick="selectTheater('CINESTAR Hà Nội')">CINESTAR Hà Nội</div>
                     <div onclick="selectTheater('CINESTAR TP.HCM')">CINESTAR TP.HCM</div>
@@ -176,220 +65,136 @@
                 </div>
             </div>
         </div>
-        <a href="schedule.html">Lịch Chiếu</a> <!-- Liên kết tới trang lịch chiếu -->
-        <!-- Phần banner chính (Hero Banner) -->
+        <a href="schedule.html">Lịch Chiếu</a>
+
+        <!-- Hero Banner -->
         <section class="hero-banner">
             <div class="banner-container">
-                <!-- Nút điều hướng banner -->
                 <div class="banner-arrows">
-                    <button onclick="prevBanner()"><i class="fas fa-chevron-left"></i></button> <!-- Nút quay lại banner trước -->
-                    <button onclick="nextBanner()"><i class="fas fa-chevron-right"></i></button> <!-- Nút chuyển tới banner sau -->
+                    <button onclick="prevBanner()"><i class="fas fa-chevron-left"></i></button>
+                    <button onclick="nextBanner()"><i class="fas fa-chevron-right"></i></button>
                 </div>
-                <!-- Nội dung banner -->
                 <div class="banner-content">
-                    <img id="banner-image" src="#" alt="Banner"> <!-- Hình ảnh banner -->
+                    <img id="banner-image" src="#" alt="Banner">
                     <div class="banner-info">
-                        <h1>Âm Dương Lộ</h1> <!-- Tiêu đề phim trên banner -->
-                        <p class="movie-genre">Phim kinh dị, Hành động</p> <!-- Thể loại phim -->
+                        <h1>Âm Dương Lộ</h1>
+                        <p class="movie-genre">Phim kinh dị, Hành động</p>
                         <div class="rating">
-                            <!-- <span><i class="fas fa-star"></i> 8.5/10 </span> Điểm đánh giá -->
-                            <span>2 giờ 15 phút</span> <!-- Thời lượng phim -->
+                            <span>2 giờ 15 phút</span>
                         </div>
-                        <button onclick="bookTicket()" class="banner-btn">Đặt Vé Ngay</button> <!-- Nút đặt vé từ banner -->
+                        <button onclick="bookTicket()" class="banner-btn">Đặt Vé Ngay</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Phần đặt vé nhanh (Quick Booking) -->
+        <!-- Quick Booking -->
         <section class="quick-booking">
             <div class="booking-card">
-                <h2><i class="fas fa-bolt"></i> Đặt Vé Nhanh</h2> <!-- Tiêu đề phần đặt vé nhanh -->
-                
+                <h2><i class="fas fa-bolt"></i> Đặt Vé Nhanh</h2>
                 <div class="booking-steps">
-                    <!-- Bước 1: Chọn rạp -->
                     <div class="booking-step">
-                        <button class="step-btn" id="select-theater"> <!-- Nút chọn rạp -->
-                            <span class="step-number">1</span> <!-- Số bước -->
-                            <span class="step-label">Chọn Rạp</span> <!-- Nhãn bước -->
-                            <i class="fas fa-chevron-down"></i> <!-- Icon mũi tên xuống -->
+                        <button class="step-btn" id="select-theater">
+                            <span class="step-number">1</span>
+                            <span class="step-label">Chọn Rạp</span>
+                            <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="step-dropdown" id="theater-dropdown"> <!-- Dropdown danh sách rạp -->
+                        <div class="step-dropdown" id="theater-dropdown">
                             <div onclick="selectTheater('CINESTAR Hà Nội')">CINESTAR Hà Nội</div>
                             <div onclick="selectTheater('CINESTAR TP.HCM')">CINESTAR TP.HCM</div>
                             <div onclick="selectTheater('CINESTAR Đà Nẵng')">CINESTAR Đà Nẵng</div>
                         </div>
                     </div>
-                    
-                    <!-- Bước 2: Chọn phim -->
                     <div class="booking-step">
-                        <button class="step-btn" id="select-movie" disabled> <!-- Nút chọn phim, mặc định bị khóa -->
+                        <button class="step-btn" id="select-movie" disabled>
                             <span class="step-number">2</span>
                             <span class="step-label">Chọn Phim</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="step-dropdown" id="movie-dropdown"> <!-- Dropdown danh sách phim -->
+                        <div class="step-dropdown" id="movie-dropdown">
                             <div onclick="selectMovie('Âm Dương Lộ')">Âm Dương Lộ</div>
                             <div onclick="selectMovie('Phim 2')">Phim 2</div>
                             <div onclick="selectMovie('Phim 3')">Phim 3</div>
                         </div>
                     </div>
-                    
-                    <!-- Bước 3: Chọn ngày -->
                     <div class="booking-step">
-                        <button class="step-btn" id="select-date" disabled> <!-- Nút chọn ngày, mặc định bị khóa -->
+                        <button class="step-btn" id="select-date" disabled>
                             <span class="step-number">3</span>
                             <span class="step-label">Chọn Ngày</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="step-dropdown" id="date-dropdown"> <!-- Dropdown danh sách ngày -->
+                        <div class="step-dropdown" id="date-dropdown">
                             <div onclick="selectDate('01/04/2025')">01/04/2025</div>
                             <div onclick="selectDate('02/04/2025')">02/04/2025</div>
                             <div onclick="selectDate('03/04/2025')">03/04/2025</div>
                         </div>
                     </div>
-                    
-                    <!-- Bước 4: Chọn suất chiếu -->
                     <div class="booking-step">
-                        <button class="step-btn" id="select-showtime" disabled> <!-- Nút chọn suất, mặc định bị khóa -->
+                        <button class="step-btn" id="select-showtime" disabled>
                             <span class="step-number">4</span>
                             <span class="step-label">Chọn Suất</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="step-dropdown" id="showtime-dropdown"> <!-- Dropdown danh sách suất chiếu -->
+                        <div class="step-dropdown" id="showtime-dropdown">
                             <div onclick="selectShowtime('10:00')">10:00</div>
                             <div onclick="selectShowtime('14:00')">14:00</div>
                             <div onclick="selectShowtime('18:00')">18:00</div>
                         </div>
                     </div>
                 </div>
-                
-                <button class="book-now-btn" id="book-now" disabled> <!-- Nút đặt vé ngay, mặc định bị khóa -->
+                <button class="book-now-btn" id="book-now" disabled>
                     <i class="fas fa-ticket-alt"></i> Đặt Ngay
                 </button>
             </div>
         </section>
 
-        <!-- Phần danh mục phim (Movie Categories) -->
+        <!-- Movie Categories -->
         <section class="movie-categories">
             <div class="category-tabs">
-                <!-- Tab phim đang chiếu -->
                 <button class="category-tab active" onclick="showMovies('now-showing')">
                     <i class="fas fa-play"></i> Phim Đang Chiếu
                 </button>
-                <!-- Tab phim sắp chiếu -->
-                <!-- <button class="category-tab" onclick="showMovies('coming-soon')">
-                    <i class="fas fa-clock"></i> Phim Sắp Chiếu
-                </button> -->
-                <!-- Bộ lọc theo khu vực -->
-                <!-- <div class="filter-container"> -->
-                    <!-- <select id="country" onchange="filterByCountry()"> Dropdown chọn khu vực -->
-                        <!-- <option value="all">Tất cả rạp</option> -->
-                        <!-- <option value="hcm">TP.HCM</option> -->
-                        <!-- <option value="hn">Hà Nội</option> -->
-                        <!-- <option value="dn">Đà Nẵng</option> -->
-                        <!-- <option value="vungtau">Vũng Tàu</option> -->
-                    <!-- </select> -->
-                <!-- </div> -->
             </div>
-
-            <div id="movie-list" class="movie-grid"> <!-- Container hiển thị danh sách phim -->
-                <!-- Danh sách phim sẽ được tải bằng JavaScript -->
-            </div>
+            <div id="movie-list" class="movie-grid"></div>
         </section>
 
-        <!-- Phần khuyến mãi (Promotions) -->
+        <!-- Promotions -->
         <section class="promotions">
-            <h2 class="section-title">Ưu Đãi Đặc Biệt</h2> <!-- Tiêu đề phần khuyến mãi -->
+            <h2 class="section-title">Ưu Đãi Đặc Biệt</h2>
             <div class="promo-slider">
-                <!-- Card khuyến mãi 1 -->
                 <div class="promo-card">
-                    <img src="#" alt="Khuyến mãi 1"> <!-- Hình ảnh khuyến mãi -->
+                    <img src="#" alt="Khuyến mãi 1">
                     <div class="promo-info">
-                        <h3>Ưu đãi sinh nhật</h3> <!-- Tiêu đề khuyến mãi -->
-                        <p>Tặng vé xem phim miễn phí cho thành viên vào tháng sinh nhật</p> <!-- Mô tả khuyến mãi -->
-                        <a href="promotions.html" class="promo-btn">Xem chi tiết</a> <!-- Nút xem chi tiết -->
+                        <h3>Ưu đãi sinh nhật</h3>
+                        <p>Tặng vé xem phim miễn phí cho thành viên vào tháng sinh nhật</p>
+                        <a href="promotions.html" class="promo-btn">Xem chi tiết</a>
                     </div>
                 </div>
-                <!-- Card khuyến mãi 2 -->
                 <div class="promo-card">
-                    <img src="#" alt="Khuyến mãi 2"> <!-- Hình ảnh khuyến mãi -->
+                    <img src="#" alt="Khuyến mãi 2">
                     <div class="promo-info">
-                        <h3>Ngày hội thành viên</h3> <!-- Tiêu đề khuyến mãi -->
-                        <p>Giảm 50% cho thành viên vào thứ Tư hàng tuần</p> <!-- Mô tả khuyến mãi -->
-                        <a href="promotions.html" class="promo-btn">Xem chi tiết</a> <!-- Nút xem chi tiết -->
+                        <h3>Ngày hội thành viên</h3>
+                        <p>Giảm 50% cho thành viên vào thứ Tư hàng tuần</p>
+                        <a href="promotions.html" class="promo-btn">Xem chi tiết</a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- FOOTER -->
+    <footer id="footer-container"></footer>
 
-    <!-- Phần chân trang (Footer) -->
-    <footer>
-        <div class="footer-container">
-            <!-- Cột Giới Thiệu -->
-            <div class="footer-section">
-                <h3>Giới Thiệu</h3> <!-- Tiêu đề cột -->
-                <ul>
-                    <li><a href="#">Về Chúng Tôi</a></li> <!-- Liên kết tới trang giới thiệu -->
-                    <li><a href="#">Thỏa Thuận Sử Dụng</a></li> <!-- Liên kết tới thỏa thuận sử dụng -->
-                    <li><a href="#">Quy Chế Hoạt Động</a></li> <!-- Liên kết tới quy chế hoạt động -->
-                    <li><a href="#">Chính Sách Bảo Mật</a></li> <!-- Liên kết tới chính sách bảo mật -->
-                </ul>
-            </div>
-            <!-- Cột Góc Điện Ảnh -->
-            <div class="footer-section">
-                <h3>Góc Điện Ảnh</h3> <!-- Tiêu đề cột -->
-                <ul>
-                    <li><a href="#">Thể Loại Phim</a></li> <!-- Liên kết tới thể loại phim -->
-                    <li><a href="#">Bình Luận Phim</a></li> <!-- Liên kết tới bình luận phim -->
-                    <li><a href="#">Blog Điện Ảnh</a></li> <!-- Liên kết tới blog điện ảnh -->
-                    <li><a href="#">Phim Hay Tháng</a></li> <!-- Liên kết tới phim hay trong tháng -->
-                </ul>
-            </div>
-            <!-- Cột Hỗ Trợ -->
-            <div class="footer-section">
-                <h3>Hỗ Trợ</h3> <!-- Tiêu đề cột -->
-                <ul>
-                    <li><a href="#">Góp Ý</a></li> <!-- Liên kết tới trang góp ý -->
-                    <li><a href="#">Sale & Services</a></li> <!-- Liên kết tới dịch vụ và ưu đãi -->
-                    <li><a href="#">Rạp / Giá Vé</a></li> <!-- Liên kết tới thông tin rạp và giá vé -->
-                    <li><a href="#">Tuyển Dụng</a></li> <!-- Liên kết tới trang tuyển dụng -->
-                </ul>
-            </div>
-            <!-- Cột Kết Nối -->
-            <div class="footer-section">
-                <h3>Kết Nối</h3> <!-- Tiêu đề cột -->
-                <div class="social-icons"> <!-- Biểu tượng mạng xã hội -->
-                    <a href="https://www.facebook.com/wocdat.16"><i class="fab fa-facebook"></i></a> <!-- Liên kết Facebook -->
-                    <a href="https://www.instagram.com/_qwodac/"><i class="fab fa-instagram"></i></a> <!-- Liên kết Instagram -->
-                    <a href="#"><i class="fab fa-youtube"></i></a> <!-- Liên kết YouTube -->
-                    <a href="#"><i class="fab fa-tiktok"></i></a> <!-- Liên kết TikTok -->
-                </div>
-                <div class="app-download"> <!-- Phần tải ứng dụng -->
-                    <p>Tải ứng dụng</p>
-                    <div class="app-buttons">
-                        <a href="#"><img src="#" alt="App Store"></a> <!-- Nút tải từ App Store -->
-                        <a href="#"><img src="#" alt="Google Play"></a> <!-- Nút tải từ Google Play -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>© 2025 CINESTAR. Tất cả các quyền được bảo lưu.</p> <!-- Bản quyền -->
-        </div>
-    </footer>
-
-    <!-- Thư viện Font Awesome -->
+    <!-- Scripts -->
     <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/frontend/assets/js/main.js"></script>
+    <script src="/frontend/assets/js/auth.js"></script>
+    <script defer src="/frontend/assets/js/script.js"></script>
+    <!-- <script src="/frontend/assets/js/movie.js"></script> -->
 
-
-    <!-- <script src="/frontend/assets/js/script.js"></script> -->
-    <script src="/frontend/assets/js/movie.js"></script>
-    
-
-    <!-- Script bảo mật từ Cloudflare (không chỉnh sửa) -->
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92989c039bd09c42',t:'MTc0MzUxNTk5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <!-- Cloudflare Security Script -->
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'92989c039bd09c42',t:'MTc0MzUxNTk5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
 </body>
+
 </html>

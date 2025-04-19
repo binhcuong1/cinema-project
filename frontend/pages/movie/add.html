@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm Phim Mới - Cinestar</title>
+    <link rel="stylesheet" href="/frontend/assets/css/add.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body data-page="add">
+    <div class="add-movie-container">
+        <h2>Thêm Phim Mới</h2>
+
+        <form id="add-movie-form" class="add-movie-form">
+            <div class="form-group">
+                <label for="new-movie-title">Tên phim:</label>
+                <input type="text" id="new-movie-title" placeholder="Nhập tên phim" required />
+            </div>
+
+            <div class="form-group">
+                <label for="new-movie-description">Mô tả:</label>
+                <textarea id="new-movie-description" placeholder="Nhập mô tả phim" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="new-movie-release-date">Ngày phát hành:</label>
+                <input type="date" id="new-movie-release-date" required />
+            </div>
+
+            <div class="form-group">
+                <label for="new-movie-age-restriction">Giới hạn độ tuổi:</label>
+                <input type="number" id="new-movie-age-restriction" placeholder="Ví dụ: 13" required />
+            </div>
+
+            <div class="form-group">
+                <label for="new-movie-content">Nội dung phim:</label>
+                <textarea id="new-movie-content" placeholder="Tóm tắt nội dung phim" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="new-movie-poster">Link ảnh poster:</label>
+                <input type="url" id="new-movie-poster" placeholder="http://example.com/poster.jpg" required />
+            </div>
+
+            <div class="form-group">
+                <label for="new-movie-duration">Thời lượng:</label>
+                <input type="text" id="new-movie-duration" placeholder="Ví dụ: 120" required />
+            </div>
+
+            <button type="submit">Thêm Phim</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/frontend/assets/js/movie.js"></script>
+</body>
+
+</html>

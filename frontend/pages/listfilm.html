@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- CSS -->
+     <link rel="stylesheet" href="../assets/css/movielist/listfilm.css">
+    <title>Danh sách phim</title>
+
+</head>
+    <h1>Danh sách phim</h1>
+    <a href="index.html">Quay lại trang chủ</a>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm phim...">
+        <button onclick="searchFilms()">Tìm kiếm</button>
+    </div>
+    <div class="film-container">
+        <div class="film" data-id="1">
+            <img src="https://via.placeholder.com/150" alt="Poster phim 1">
+            <h3>Phim A</h3>
+            <button onclick="editFilm(1)">Sửa</button>
+            <button onclick="deleteFilm(1)">Xóa</button>
+        </div>
+        <div class="film" data-id="2">
+            <img src="https://via.placeholder.com/150" alt="Poster phim 2">
+            <h3>Phim B</h3>
+            <button onclick="editFilm(2)">Sửa</button>
+            <button onclick="deleteFilm(2)">Xóa</button>
+        </div>
+        <div class="film" data-id="3">
+            <img src="https://via.placeholder.com/150" alt="Poster phim 3">
+            <h3>Phim C</h3>
+            <button onclick="editFilm(3)">Sửa</button>
+            <button onclick="deleteFilm(3)">Xóa</button>
+        </div>
+    </div>
+
+
+    <!-- JSS xử lý logic của danh sách phim -->
+    <script>
+        // Dữ liệu phim mẫu (lưu vào localStorage)
+        const initialFilms = [
+            { id: 1, name: 'Phim A', duration: '120 phút', description: 'Mô tả phim A', poster: 'https://via.placeholder.com/150' },
+            { id: 2, name: 'Phim B', duration: '90 phút', description: 'Mô tả phim B', poster: 'https://via.placeholder.com/150' },
+            { id: 3, name: 'Phim C', duration: '100 phút', description: 'Mô tả phim C', poster: 'https://via.placeholder.com/150' }
+        ];
+        if (!localStorage.getItem('films')) {
+            localStorage.setItem('films', JSON.stringify(initialFilms));
+        }
+
+        function editFilm(id) {
+            window.location.href = `edit-film.html?id=${id}`;
+        }
+
+        function deleteFilm(id) {
+            if (confirm('Bạn có chắc chắn muốn xóa phim này?')) {
+                let films = JSON.parse(localStorage.getItem('films'));
+                films = films.filter(film => film.id !== id);
+                localStorage.setItem('films', JSON.stringify(films));
+                alert('Xóa phim có ID: ' + id);
+                location.reload(); // Tải lại trang để cập nhật danh sách
+            }
+        }
+
+        function searchFilms() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+            var films = document.getElementsByClassName('film');
+            for (var i = 0; i < films.length; i++) {
+                var filmName = films[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                var filmId = films[i].getAttribute('data-id');
+                if (filmName.includes(input) || (filmId && filmId.includes(input))) {
+                    films[i].style.display = '';
+                } else {
+                    films[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

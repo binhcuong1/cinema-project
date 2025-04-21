@@ -1,8 +1,8 @@
 axios.defaults.baseURL = 'http://localhost:3000';
 
-//DANH SÁCH PHIM
+//DANH SÁCH PHIM ĐANG CHIẾU
 async function fetchNowShowingMovies() {
-    const movieList = document.getElementById("movie-list");
+    const movieList = document.getElementById("movie-list-nowShowing");
     if (!movieList) return;
 
     try {
@@ -49,6 +49,54 @@ async function fetchNowShowingMovies() {
     }
 }
 
+async function fetchAllMovieToList() {
+    const movieList = document.getElementById("movie-list");
+    if (!movieList) return;
+
+    try {
+        const response = await axios.get('/api/movies/');
+        const movies = response.data;
+
+        if (movies.success !== "true") throw new Error("Dữ liệu không hợp lệ");
+
+        movieList.innerHTML = "";
+
+        if (movies.data.length === 0) {
+            movieList.innerHTML = "<p class='no-results'>Không có phim.</p>";
+            return;
+        }
+
+        const fragment = document.createDocumentFragment();
+
+        movies.data.forEach(movie => {
+            const movieCard = document.createElement("div");
+            movieCard.classList.add("movie-card");
+            movieCard.innerHTML = `
+                <div class="movie-poster">
+                    <img src="${movie.image}" alt="${movie.ten_phim}">
+                </div>
+                <div class="movie-overlay">
+                    <button onclick="viewDetails('avengers-endgame')">Chi tiết</button>
+                    <button onclick="editMovie('avengers-endgame')">Sửa</button>
+                    <button onclick="deleteMovie('avengers-endgame')" class="delete-btn">Xóa</button>
+                </div>
+                <div class="movie-info">
+                    <h3>${movie.ten_phim}</h3>
+                    <div class="movie-meta">
+                        <span><i class="fas fa-clock"></i> ${movie.thoi_luong_phut}</span>
+                    </div>
+                </div>
+            `;
+            fragment.appendChild(movieCard);
+        });
+
+        movieList.appendChild(fragment);
+    } catch (error) {
+        console.error("Lỗi khi lấy phim:", error);
+        movieList.innerHTML = `<p class='error'>${error.message}</p>`;
+    }
+}
+
 //THÊM PHIM
 async function submitAddMovie() {
     const addMovieForm = document.getElementById('add-movie-form');
@@ -67,7 +115,6 @@ async function submitAddMovie() {
 
                 if (response.status === 201) {
                     alert('Thêm phim thành công!');
-
 
                     const posterPath = response.data.poster; // Lấy đường dẫn file poster từ response
                     const fileName = posterPath.split('/').pop(); // Lấy tên file
@@ -261,5 +308,9 @@ window.onload = () => {
         loadMoviesToDelete();
         const form = document.getElementById("delete-movie-form");
         form?.addEventListener("submit", handleDeleteMovie);
+    } else if (currentPage === 'list') {
+        fetchAllMovieToList();
+        // const form = document.getElementById("delete-movie-form");
+        // form?.addEventListener("submit", handleDeleteMovie);
     }
 };

@@ -37,9 +37,17 @@ exports.createMovie = (req, res) => {
     if (isEmptyData)
         return res.status(400).json({ error: 'Đã có thuộc tính bị trống!' });
 
+    const posterPath = req.file ? `./frontend/assets/images/${req.file.filename}` : null;
+    if (!posterPath)
+        return res.status(400).json({error: 'Chưa upload ảnh poster!'});
+
+    movieData.image = posterPath;
+
+    console.log('Dữ liệu gửi lên database:', movieData); // Log để kiểm tra dữ liệu
+
     movie.create(movieData, (err, result) => {
         if (err) return res.status(500).json({ error: err });
-        res.status(201).json({ success: 'true' });
+        res.status(201).json({ success: 'true', poster: posterPath});
     });
 }
 

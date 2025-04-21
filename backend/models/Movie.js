@@ -1,4 +1,3 @@
-const express = require('express');
 const db = require('../config/db');
 const table_name = 'phim';
 

@@ -51,33 +51,40 @@ async function fetchNowShowingMovies() {
 
 //THÊM PHIM
 async function submitAddMovie() {
-    const newMovie = {
-        ten_phim: document.getElementById('new-movie-title').value,
-        mo_ta: document.getElementById('new-movie-description').value,
-        ngay_phat_hanh: document.getElementById('new-movie-release-date').value,
-        gioi_han_tuoi: parseInt(document.getElementById('new-movie-age-restriction').value),
-        noi_dung_phim: document.getElementById('new-movie-content').value,
-        image: document.getElementById('new-movie-poster').value,
-        thoi_luong_phut: parseInt(document.getElementById('new-movie-duration').value),
-        // trang_thai: document.getElementById('new-movie-status').value
-    };
+    const addMovieForm = document.getElementById('add-movie-form');
 
-    try {
-        const response = await axios.post('/api/movies', newMovie);
-        const result = response.data;
+    if (addMovieForm) {
+        addMovieForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(addMovieForm);
 
-        if (result.success !== "true") throw new Error(result.message || "Thêm phim thất bại");
+            try {
+                const response = await axios.post('/api/movies/', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
 
-        alert("🎉 Thêm phim thành công!");
-        window.location.href = "/frontend/pages/index.html";
-    } catch (error) {
-        console.error("Lỗi khi thêm phim:", error);
-        alert("❌ Thêm phim thất bại!");
+                if (response.status === 201) {
+                    alert('Thêm phim thành công!');
+
+
+                    const posterPath = response.data.poster; // Lấy đường dẫn file poster từ response
+                    const fileName = posterPath.split('/').pop(); // Lấy tên file
+                    console.log('Tên file poster:', fileName); // Ví dụ: 1698765432112-123456789.jpg
+
+                    addMovieForm.reset();
+                } else {
+                    alert('Có lỗi xảy ra khi thêm phim.');
+                }
+            } catch (error) {
+                console.error('Lỗi khi gửi yêu cầu:', error);
+                alert('Lỗi: ' + (error.response?.data?.error || 'Không thể thêm phim.'));            }
+        });
     }
 }
 
 //CHỈNH SỬA PHIM
-
 async function fetchAllMoviesForDropdown() {
     try {
         const res = await axios.get("/api/movies");
@@ -126,6 +133,29 @@ async function fetchMovieById(movieId) {
     } catch (error) {
         console.log('Lỗi khi lấy phim:', error);
         alert('Không thể tải thông tin phim!');
+    }
+}
+
+// Lấy danh sách giới hạn độ tuổi và điền vào dropdown
+async function fetchAgeRestriction() {
+    try {
+        const response = await axios.get('/api/ages/');
+        const ageRestrictions = response.data;
+
+        if (ageRestrictions.success !== "true") 
+            throw new Error("Không lấy được danh sách giới hạn độ tuổi");
+
+        const select = document.getElementById('new-movie-age-restriction');
+        select.innerHTML = "";
+
+        ageRestrictions.data.forEach(restriction => {
+            const option = document.createElement("option");
+            option.value = restriction.ma_gioi_han; // Giá trị là mã giới hạn (P, K, T13, ...)
+            option.textContent = `${restriction.ma_gioi_han}`;
+            select.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Lỗi khi lấy danh sách giới hạn độ tuổi:", error);
     }
 }
 
@@ -217,6 +247,8 @@ window.onload = () => {
             e.preventDefault();
             submitAddMovie();
         });
+
+        fetchAgeRestriction();
     } else if (currentPage === 'edit') {
         fetchAllMoviesForDropdown();
 

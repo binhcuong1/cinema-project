@@ -1,30 +1,35 @@
-// Hàm để tải và chèn modal vào DOM
 function initializeAuthModal() {
-    const authContainer = document.getElementById('auth-container');
-    if (!authContainer) {
-        console.error('Không tìm thấy auth-container trong trang');
-        return;
-    }
+    return new Promise((resolve, reject) => {
+        const authContainer = document.getElementById('auth-container');
+        if (!authContainer) {
+            console.error('Không tìm thấy auth-container trong trang');
+            reject('Không tìm thấy auth-container');
+            return;
+        }
 
-    axios.get('/frontend/pages/auth/auth-modal.html') 
-    .then(response => {
-        const html = response.data;
-        authContainer.innerHTML = html;
+        axios.get('http://127.0.0.1:5500/frontend/pages/auth/auth-modal.html')
+            .then(response => {
+                const html = response.data;
+                authContainer.innerHTML = html;
 
-        document.querySelectorAll('.eye-icon').forEach(icon => {
-            icon.addEventListener('click', () => {
-                const input = icon.parentElement.querySelector('input');
-                const isPassword = input.type == 'password';
-                input.type = isPassword ? 'text' : 'password';
-                icon.innerHTML = `<span class="eye-icon"><i class="fas fa-eye${isPassword ? '-slash' : ''}"></i></span>`;
+                // Gắn sự kiện cho icon mắt (eye-icon)
+                document.querySelectorAll('.eye-icon').forEach(icon => {
+                    icon.addEventListener('click', () => {
+                        const input = icon.parentElement.querySelector('input');
+                        const isPassword = input.type === 'password';
+                        input.type = isPassword ? 'text' : 'password';
+                        icon.innerHTML = `<span class="eye-icon"><i class="fas fa-eye${isPassword ? '-slash' : ''}"></i></span>`;
+                    });
+                });
+
+                resolve();
+            })
+            .catch(error => {
+                console.error('Lỗi khi tải modal:', error);
+                reject(error);
             });
-        });
-    })
-    .catch(error => console.error('Lỗi khi tải modal:', error));
+    });
 }
-
-// Gọi ngay lập tức để đảm bảo modal sẵn sàng
-initializeAuthModal();
 
 // Hiển thị modal và form đăng nhập
 function showLoginForm() {
@@ -122,5 +127,5 @@ function handleGoogleCallback() {
 
 // Khởi tạo
 window.onload = () => {
-    handleGoogleCallback(); 
+    handleGoogleCallback();
 };

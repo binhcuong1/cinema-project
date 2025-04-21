@@ -38,12 +38,20 @@ button {
 }
 
 .logo img {
-    height: 50px; /* Chiều cao logo là 50px */
-    transition: transform 0.3s ease; /* Hiệu ứng phóng to mượt mà trong 0.3 giây */
+    height: 90px; /* Chiều cao logo là 50px */
+    /* width: auto; */
+    transition: transform 0.3s ease, filter 0.3s ease; /* Hiệu ứng phóng to mượt mà trong 0.3 giây */
 }
 
 .logo img:hover {
-    transform: scale(1.05); /* Phóng to logo lên 5% khi hover */
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Thêm hiệu ứng khi chuột rời khỏi logo */
+.logo img:not(:hover) {
+    transform: scale(1); /* Trở về kích thước ban đầu */
+    filter: brightness(1); /* Trở về độ sáng ban đầu */
 }
 
 .nav-links {

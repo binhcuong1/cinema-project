@@ -6,71 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinestar - Rạp Chiếu Phim</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/header.css">
-    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/shares/header.css">
+    <link rel="stylesheet" href="../assets/css/shares/admin.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body data-page="index">
-    <!-- HEADER -->
-    <div id="header-container" class="fancy-nav">
-        <!-- Logo -->
-        <div class="logo">
-            <a href="index.html">
-                <img src="/frontend/assets/images/Screenshot_2025-04-01_204018-removebg-preview.png" alt="Logo">
-            </a>
-        </div>
+    <!-- Placeholder cho header -->
+    <div id="header-placeholder"></div>
 
-        <!-- Các liên kết điều hướng -->
-        <div class="dropdown" id="movie-dropdown" style="display: inline-block;">
-            <a href="#" class="dropdown-toggle">Phim</a>
-            <div class="dropdown-menu">
-                <a href="/frontend/pages/movie/add.html" onclick="showAddMovieForm()">Thêm</a>
-                <a href="#" onclick="showDeleteMovieForm()">Xóa</a>
-                <a href="#" onclick="showEditMovieForm()">Sửa</a>
-            </div>
-        </div>
-        <!-- Các nút chức năng -->
-        <div class="nav-buttons">
-            <a href="booking.html" class="nav-btn book-ticket">
-                <i class="fas fa-ticket-alt"></i> Đặt Vé Ngay
-            </a>
-            <a href="food.html" class="nav-btn order-food">
-                <i class="fas fa-popcorn"></i> Đặt Bắp Nước
-            </a>
-        </div>
-        <!-- Thanh tìm kiếm -->
-        <div class="search-bar">
-            <input type="text" placeholder="Tìm phim, rạp..." onkeyup="searchMovies()">
-            <button class="search-btn"><i class="fas fa-search"></i></button>
-        </div>
-        <!-- Phần đăng nhập -->
-        <div class="auth">
-            <a class="nav-btn login-btn" onclick="showLoginForm()">
-                <i class="fas fa-user"></i> Đăng Nhập
-            </a>
-        </div>
-        <div id="auth-container"></div>
-    </div>
+    <!-- Placeholder cho sidebar -->
+    <div id="sidebar-placeholder"></div>
 
-    <!-- Main Content -->
+    <!-- Nội dung chính của trang -->
     <main>
-        <!-- Nút vào trang admin -->
-        <button id="adminBtn">Trang Quản Lý</button>
-        <div id="adminOverlay" class="hidden">
-            <button id="closeAdmin">Đóng</button>
-            <iframe src="admin.html"></iframe>
-        </div>
-        
-        <!-- Nút danh sách phim-->
-        <div class="nav-buttons">
-            <a href="/frontend/pages/listfilm.html" class="nav-btn movie-list">
-                <i class="fas fa-film"></i> Danh Sách Phim
-            </a>
-        </div>
-        
+        <!-- Nút chọn rạp -->
         <div class="theater-selector dropdown">
             <a href="#" class="dropdown-toggle">Chọn Rạp</a>
             <div class="dropdown-menu">
@@ -81,7 +33,6 @@
                 </div>
             </div>
         </div>
-        <a href="schedule.html">Lịch Chiếu</a>
 
         <!-- Hero Banner -->
         <section class="hero-banner">
@@ -104,7 +55,7 @@
             </div>
         </section>
 
-        <!-- Quick Booking -->
+        <!-- Thanh đặt vé -->
         <section class="quick-booking">
             <div class="booking-card">
                 <h2><i class="fas fa-bolt"></i> Đặt Vé Nhanh</h2>
@@ -171,7 +122,7 @@
                     <i class="fas fa-play"></i> Phim Đang Chiếu
                 </button>
             </div>
-            <div id="movie-list" class="movie-grid"></div>
+            <div id="movie-list-nowShowing" class="movie-grid"></div>
         </section>
 
         <!-- Promotions -->
@@ -204,12 +155,9 @@
     <!-- Scripts -->
     <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <script src="/frontend/assets/js/auth.js"></script> -->
     <script src="/frontend/assets/js/main.js"></script>
-    <script src="/frontend/assets/js/auth.js"></script>
-
     <script src="/frontend/assets/js/admin.js"></script>
-
-    <!-- <script defer src="/frontend/assets/js/script.js"></script> -->
     <script src="/frontend/assets/js/movie.js"></script>
 
     <!-- Cloudflare Security Script -->

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,45 +7,46 @@
     <link rel="stylesheet" href="/frontend/assets/css/add.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
-
 <body data-page="add">
     <div class="add-movie-container">
         <h2>Thêm Phim Mới</h2>
 
-        <form id="add-movie-form" class="add-movie-form">
+        <form id="add-movie-form" class="add-movie-form" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="new-movie-title">Tên phim:</label>
-                <input type="text" id="new-movie-title" placeholder="Nhập tên phim" required />
+                <input type="text" id="new-movie-title" name="ten_phim" placeholder="Nhập tên phim" required />
             </div>
 
             <div class="form-group">
                 <label for="new-movie-description">Mô tả:</label>
-                <textarea id="new-movie-description" placeholder="Nhập mô tả phim" required></textarea>
+                <textarea id="new-movie-description" name="mo_ta" placeholder="Nhập mô tả phim" required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="new-movie-release-date">Ngày phát hành:</label>
-                <input type="date" id="new-movie-release-date" required />
+                <input type="date" id="new-movie-release-date" name="ngay_phat_hanh" required />
             </div>
 
             <div class="form-group">
                 <label for="new-movie-age-restriction">Giới hạn độ tuổi:</label>
-                <input type="number" id="new-movie-age-restriction" placeholder="Ví dụ: 13" required />
+                <select id="new-movie-age-restriction" name="gioi_han_tuoi" required>
+                    <option value="">Chọn giới hạn độ tuổi</option>
+                </select>
             </div>
 
             <div class="form-group">
                 <label for="new-movie-content">Nội dung phim:</label>
-                <textarea id="new-movie-content" placeholder="Tóm tắt nội dung phim" required></textarea>
+                <textarea id="new-movie-content" name="noi_dung_phim" placeholder="Tóm tắt nội dung phim" required></textarea>
             </div>
 
             <div class="form-group">
-                <label for="new-movie-poster">Link ảnh poster:</label>
-                <input type="url" id="new-movie-poster" placeholder="http://example.com/poster.jpg" required />
+                <label for="new-movie-poster">Ảnh poster:</label>
+                <input type="file" id="new-movie-poster" name="poster" accept="image/*" required />
             </div>
 
             <div class="form-group">
                 <label for="new-movie-duration">Thời lượng:</label>
-                <input type="text" id="new-movie-duration" placeholder="Ví dụ: 120" required />
+                <input type="text" id="new-movie-duration" name="thoi_luong_phut" placeholder="Ví dụ: 120" required />
             </div>
 
             <button type="submit">Thêm Phim</button>
@@ -55,5 +55,4 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/frontend/assets/js/movie.js"></script>
 </body>
-
 </html>

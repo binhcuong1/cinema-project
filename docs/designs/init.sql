@@ -195,3 +195,26 @@ CREATE TABLE khuyen_mai (
     ngay_trong_tuan VARCHAR(10),
     doi_tuong VARCHAR(100) -- Đối tượng áp dụng
 );
+
+-- Thêm bảng giới hạn độ tuổi
+CREATE TABLE gioi_han_do_tuoi (
+    ma_gioi_han VARCHAR(10) PRIMARY KEY,
+    mo_ta VARCHAR(255),
+    tuoi_toi_thieu INT NOT NULL
+);
+
+INSERT INTO my_cinema.gioi_han_do_tuoi (ma_gioi_han, mo_ta, tuoi_toi_thieu) VALUES
+    ('P', 'Phim dành cho mọi lứa tuổi', 0),
+    ('K', 'Phim dành cho trẻ em dưới 13 tuổi, cần có sự đồng hành của cha mẹ hoặc người giám hộ', 0),
+    ('T13', 'Phim dành cho khán giả từ 13 tuổi trở lên', 13),
+    ('T16', 'Phim dành cho khán giả từ 16 tuổi trở lên', 16),
+    ('T18', 'Phim dành cho khán giả từ 18 tuổi trở lên', 18);
+
+-- Xóa cột gioi_han_tuoi cũ
+ALTER TABLE phim DROP COLUMN gioi_han_tuoi;
+
+-- Thêm cột gioi_han_tuoi mới với kiểu VARCHAR và liên kết khóa ngoại
+ALTER TABLE phim
+ADD COLUMN gioi_han_tuoi VARCHAR(10),
+ADD CONSTRAINT fk_gioi_han_tuoi
+FOREIGN KEY (gioi_han_tuoi) REFERENCES gioi_han_do_tuoi(ma_gioi_han);

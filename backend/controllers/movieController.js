@@ -37,7 +37,7 @@ exports.createMovie = (req, res) => {
     if (isEmptyData)
         return res.status(400).json({ error: 'Đã có thuộc tính bị trống!' });
 
-    const posterPath = req.file ? `./frontend/assets/images/${req.file.filename}` : null;
+    const posterPath = req.file ? `/frontend/assets/images/${req.file.filename}` : null;
     if (!posterPath)
         return res.status(400).json({error: 'Chưa upload ảnh poster!'});
 
@@ -84,6 +84,6 @@ exports.deleteMovie = (req, res) => {
         if (result.affectedRows === 0)
             return res.status(404).json({ error: 'Không tìm thấy thông tin phim!' });
 
-        res.status(200).json({ success: true });
+        res.status(200).json({ success: 'true' });
     });
 }

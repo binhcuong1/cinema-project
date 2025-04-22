@@ -1,576 +1,285 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đặt Vé - Rạp Chiếu Phim</title>
-    <link rel="stylesheet" href="../assets/css/style.css"> <!-- Liên kết đến file CSS -->
+    <title>Đặt Vé Nhanh - Cinestar</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/frontend/assets/css/shares/header.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css">
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="/frontend/assets/css/login.css">
+    <link rel="stylesheet" href="/frontend/assets/css/schedule.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <header>
-        <nav>
-            <a href="index.html">Trang Chủ</a> <!-- Liên kết đến trang chủ -->
-            <a href="theater.html">Chọn Rạp</a> <!-- Liên kết đến trang chọn rạp -->
-            <a href="search.html">Tìm kiếm</a> <!-- Liên kết đến trang tìm kiếm -->
-            <a href="booking.html">Đặt Vé</a> <!-- Liên kết đến trang đặt vé (trang hiện tại) -->
-            <a href="profile.html">Tài Khoản</a> <!-- Liên kết đến trang tài khoản -->
-        </nav>
-    </header>
-    <main>
-        <div class="booking-container">
-            <h1>Đặt Vé Xem Phim</h1> <!-- Tiêu đề chính của trang -->
-            <!-- Tabs hiển thị các bước đặt vé -->
-            <div class="booking-tabs">
-                <span class="tab active" id="tab-1">Chọn phim/Rạp/Suất</span> <!-- Tab bước 1 -->
-                <span class="tab" id="tab-2">Chọn ghế</span> <!-- Tab bước 2 -->
-                <span class="tab" id="tab-3">Chọn thức ăn</span> <!-- Tab bước 3 -->
-                <span class="tab" id="tab-4">Thanh toán</span> <!-- Tab bước 4 -->
-                <span class="tab" id="tab-5">Xác nhận</span> <!-- Tab bước 5 -->
-            </div>
+<body data-page="booking">
+    <!-- Placeholder cho header -->
+    <div id="header-placeholder"></div>
 
-            <!-- Form bước 1: Chọn phim/Rạp/Suất -->
-            <div class="booking-form" id="step-1">
-                <div class="form-group">
-                    <label>Chọn vị trí</label> <!-- Nhãn cho dropdown chọn vị trí -->
-                    <select id="location" onchange="updateMovies()"> <!-- Dropdown chọn vị trí -->
-                        <option value="">Chọn vị trí</option>
-                        <option value="hcm">TP Hồ Chí Minh</option>
-                        <option value="hn">Hà Nội</option>
-                        <option value="dn">Đà Nẵng</option>
-                        <option value="angiang">An Giang</option>
-                        <option value="vungtau">Bà Rịa - Vũng Tàu</option>
-                        <option value="bentre">Bến Tre</option>
-                        <option value="camau">Cà Mau</option>
-                        <option value="daklak">Đắk Lắk</option>
-                        <option value="haiphong">Hải Phòng</option>
-                        <option value="khanhhoa">Khánh Hòa</option>
-                        <option value="nghean">Nghệ An</option>
-                        <option value="thuathienhue">Thừa Thiên Huế</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Chọn phim</label> <!-- Nhãn cho dropdown chọn phim -->
-                    <select id="movie" onchange="updateShowtimes()"> <!-- Dropdown chọn phim -->
-                        <option value="">Chọn phim</option>
-                        <!-- Danh sách phim sẽ được thêm bằng JS -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Chọn suất</label> <!-- Nhãn cho dropdown chọn suất chiếu -->
-                    <select id="showtime" onchange="updateBookingData()"> <!-- Dropdown chọn suất chiếu -->
-                        <option value="">Chọn suất</option>
-                        <!-- Suất chiếu sẽ được thêm bằng JS -->
-                    </select>
-                </div>
-                <div class="total">
-                    <span>Tổng cộng</span> <!-- Nhãn "Tổng cộng" -->
-                    <span id="total-price-step1">0 đ</span> <!-- Giá trị tổng cộng, luôn là 0 đ ở bước này -->
-                </div>
-                <div class="form-actions">
-                    <button class="back-btn" onclick="window.location.href='index.html'">Quay lại</button> <!-- Nút quay lại -->
-                    <button class="next-btn" onclick="goToStep(2)">Tiếp tục</button> <!-- Nút tiếp tục -->
-                </div>
-            </div>
+    <!-- Placeholder cho sidebar -->
+    <div id="sidebar-placeholder"></div>
 
-            <!-- Form bước 2: Chọn ghế -->
-            <div class="booking-form" id="step-2" style="display: none;">
-                <div class="seat-selection">
-                    <h3>Đổi Xuất Chiếu</h3> <!-- Tiêu đề suất chiếu -->
-                    <div class="showtime-buttons">
-                        <button class="showtime-btn active">19:00</button> <!-- Nút chọn suất chiếu -->
-                        <button class="showtime-btn">19:45</button>
-                        <button class="showtime-btn">21:15</button>
-                        <button class="showtime-btn">22:00</button>
-                    </div>
-                    <div class="seat-map">
-                        <!-- Sơ đồ ghế -->
-                        <div class="screen">Màn Hình</div> <!-- Nhãn màn hình -->
-                        <!-- Tạo sơ đồ ghế từ A đến P -->
-                        <div class="seats">
-                            <!-- Hàng ghế từ A đến P -->
-                            <div class="seat-row">
-                                <span class="row-label">A</span>
-                                <div class="seat" data-seat="A1">1</div>
-                                <div class="seat" data-seat="A2">2</div>
-                                <div class="seat" data-seat="A3">3</div>
-                                <div class="seat" data-seat="A4">4</div>
-                                <div class="seat" data-seat="A5">5</div>
-                                <div class="seat" data-seat="A6">6</div>
-                                <div class="seat" data-seat="A7">7</div>
-                                <div class="seat" data-seat="A8">8</div>
-                                <div class="seat" data-seat="A9">9</div>
-                                <div class="seat" data-seat="A10">10</div>
-                                <div class="seat" data-seat="A11">11</div>
-                                <div class="seat" data-seat="A12">12</div>
-                                <div class="seat" data-seat="A13">13</div>
-                                <div class="seat" data-seat="A14">14</div>
-                                <div class="seat" data-seat="A15">15</div>
-                                <div class="seat" data-seat="A16">16</div>
-                            </div>
-                            <div class="seat-row">
-                                <span class="row-label">B</span>
-                                <div class="seat" data-seat="B1">1</div>
-                                <div class="seat" data-seat="B2">2</div>
-                                <div class="seat" data-seat="B3">3</div>
-                                <div class="seat" data-seat="B4">4</div>
-                                <div class="seat" data-seat="B5">5</div>
-                                <div class="seat" data-seat="B6">6</div>
-                                <div class="seat" data-seat="B7">7</div>
-                                <div class="seat" data-seat="B8">8</div>
-                                <div class="seat" data-seat="B9">9</div>
-                                <div class="seat" data-seat="B10">10</div>
-                                <div class="seat" data-seat="B11">11</div>
-                                <div class="seat" data-seat="B12">12</div>
-                                <div class="seat" data-seat="B13">13</div>
-                                <div class="seat" data-seat="B14">14</div>
-                                <div class="seat" data-seat="B15">15</div>
-                                <div class="seat" data-seat="B16">16</div>
-                            </div>
-                            <div class="seat-row">
-                                <span class="row-label">C</span>
-                                <div class="seat" data-seat="C1">1</div>
-                                <div class="seat" data-seat="C2">2</div>
-                                <div class="seat" data-seat="C3">3</div>
-                                <div class="seat" data-seat="C4">4</div>
-                                <div class="seat" data-seat="C5">5</div>
-                                <div class="seat" data-seat="C6">6</div>
-                                <div class="seat" data-seat="C7">7</div>
-                                <div class="seat" data-seat="C8">8</div>
-                                <div class="seat" data-seat="C9">9</div>
-                                <div class="seat" data-seat="C10">10</div>
-                                <div class="seat" data-seat="C11">11</div>
-                                <div class="seat" data-seat="C12">12</div>
-                                <div class="seat" data-seat="C13">13</div>
-                                <div class="seat" data-seat="C14">14</div>
-                                <div class="seat" data-seat="C15">15</div>
-                                <div class="seat" data-seat="C16">16</div>
-                            </div>
-                            <div class="seat-row">
-                                <span class="row-label">D</span>
-                                <div class="seat" data-seat="D1">1</div>
-                                <div class="seat" data-seat="D2">2</div>
-                                <div class="seat" data-seat="D3">3</div>
-                                <div class="seat" data-seat="D4">4</div>
-                                <div class="seat" data-seat="D5">5</div>
-                                <div class="seat" data-seat="D6">6</div>
-                                <div class="seat" data-seat="D7">7</div>
-                                <div class="seat" data-seat="D8">8</div>
-                                <div class="seat" data-seat="D9">9</div>
-                                <div class="seat" data-seat="D10">10</div>
-                                <div class="seat" data-seat="D11">11</div>
-                                <div class="seat" data-seat="D12">12</div>
-                                <div class="seat" data-seat="D13">13</div>
-                                <div class="seat" data-seat="D14">14</div>
-                                <div class="seat" data-seat="D15">15</div>
-                                <div class="seat" data-seat="D16">16</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Chú thích trạng thái ghế -->
-                    <div class="seat-legend">
-                        <div><span class="seat occupied"></span> Ghế đã bán</div>
-                        <div><span class="seat selected"></span> Ghế đang chọn</div>
-                        <div><span class="seat vip"></span> Ghế VIP</div>
-                        <div><span class="seat standard"></span> Ghế đơn</div>
-                        <div><span class="seat couple"></span> Ghế đôi</div>
-                    </div>
-                </div>
-                <!-- Thông tin phim và ghế đã chọn -->
-                <div class="summary">
-                    <img src="../assets/images/poster1.jpg" alt="Movie Poster"> <!-- Poster phim -->
-                    <div class="summary-details">
-                        <h3 id="movie-title-step2">Đại Đạo: Mật Trí Trong Bóng Tối</h3> <!-- Tiêu đề phim -->
-                        <p>2D Phụ Đề - T16</p> <!-- Loại phim -->
-                        <p id="theater-step2">Galaxy Nguyễn Du - RẠP 1</p> <!-- Rạp chiếu -->
-                        <p id="showtime-step2">Suất: 19:00 - Thứ Tư, 04/02/2025</p> <!-- Suất chiếu -->
-                        <p id="seats-step2">Ghế: Chưa chọn</p> <!-- Ghế đã chọn -->
-                        <p>Tổng cộng: <span id="total-price-step2">0 đ</span></p> <!-- Tổng cộng -->
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <button class="back-btn" onclick="goToStep(1)">Quay lại</button> <!-- Nút quay lại -->
-                    <button class="next-btn" onclick="goToStep(3)">Tiếp tục</button> <!-- Nút tiếp tục -->
-                </div>
+    <!-- Nội dung chính -->
+    <main class="main-content">
+        <div class="movies-container">
+            <div class="page-header">
+                <h1><i class="fas fa-ticket-alt"></i> Đặt Vé Nhanh</h1>
             </div>
+            <nav class="breadcrumb">
+                <a href="/frontend/pages/index.html">Trang Chủ</a> /
+                <span>Đặt Vé Nhanh</span>
+            </nav>
 
-            <!-- Form bước 3: Chọn thức ăn -->
-            <div class="booking-form" id="step-3" style="display: none;">
-                <div class="food-selection">
-                    <h3>Chọn Combo</h3> <!-- Tiêu đề chọn combo -->
-                    <!-- Danh sách combo -->
-                    <div class="food-item">
-                        <img src="../assets/images/combo1.jpg" alt="Combo 1"> <!-- Hình ảnh combo -->
-                        <div class="food-details">
-                            <h4>Combo 1 Big Extra STD</h4> <!-- Tên combo -->
-                            <p>01 Ly nước ngọt size L + 01 Hộp bắp + 1 Snack</p> <!-- Mô tả combo -->
-                            <p>Giá: 109.000 đ</p> <!-- Giá combo -->
-                        </div>
-                        <div class="quantity">
-                            <button onclick="updateQuantity('combo1', -1)">-</button> <!-- Nút giảm số lượng -->
-                            <span id="quantity-combo1">0</span> <!-- Số lượng -->
-                            <button onclick="updateQuantity('combo1', 1)">+</button> <!-- Nút tăng số lượng -->
-                        </div>
-                    </div>
-                    <div class="food-item">
-                        <img src="../assets/images/combo2.jpg" alt="Combo 2"> <!-- Hình ảnh combo -->
-                        <div class="food-details">
-                            <h4>Combo 2 Big Extra STD</h4> <!-- Tên combo -->
-                            <p>02 Ly nước ngọt size L + 01 Hộp bắp + 1 Snack</p> <!-- Mô tả combo -->
-                            <p>Giá: 129.000 đ</p> <!-- Giá combo -->
-                        </div>
-                        <div class="quantity">
-                            <button onclick="updateQuantity('combo2', -1)">-</button> <!-- Nút giảm số lượng -->
-                            <span id="quantity-combo2">0</span> <!-- Số lượng -->
-                            <button onclick="updateQuantity('combo2', 1)">+</button> <!-- Nút tăng số lượng -->
-                        </div>
-                    </div>
-                    <!-- Thêm các combo khác tương tự -->
+            <section class="movie-categories">
+                <div class="category-tabs">
+                    <button class="category-tab active">
+                        <i class="fas fa-bolt"></i> Đặt Vé
+                    </button>
                 </div>
-                <!-- Thông tin phim và tổng cộng -->
-                <div class="summary">
-                    <img src="../assets/images/poster1.jpg" alt="Movie Poster"> <!-- Poster phim -->
-                    <div class="summary-details">
-                        <h3 id="movie-title-step3">Đại Đạo: Mật Trí Trong Bóng Tối</h3> <!-- Tiêu đề phim -->
-                        <p>2D Phụ Đề - T16</p> <!-- Loại phim -->
-                        <p id="theater-step3">Galaxy Nguyễn Du - RẠP 1</p> <!-- Rạp chiếu -->
-                        <p id="showtime-step3">Suất: 19:00 - Thứ Tư, 04/02/2025</p> <!-- Suất chiếu -->
-                        <p id="seats-step3">Ghế: Chưa chọn</p> <!-- Ghế đã chọn -->
-                        <p id="food-step3">Combo: Chưa chọn</p> <!-- Combo đã chọn -->
-                        <p>Tổng cộng: <span id="total-price-step3">0 đ</span></p> <!-- Tổng cộng -->
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <button class="back-btn" onclick="goToStep(2)">Quay lại</button> <!-- Nút quay lại -->
-                    <button class="next-btn" onclick="goToStep(4)">Tiếp tục</button> <!-- Nút tiếp tục -->
-                </div>
-            </div>
-
-            <!-- Form bước 4: Thanh toán -->
-            <div class="booking-form" id="step-4" style="display: none;">
-                <div class="payment-selection">
-                    <h3>Thanh Toán</h3> <!-- Tiêu đề thanh toán -->
+                <form class="schedule-form">
                     <div class="form-group">
-                        <label>Chọn phương thức thanh toán</label> <!-- Nhãn cho dropdown thanh toán -->
-                        <select id="payment-method"> <!-- Dropdown chọn phương thức thanh toán -->
-                            <option value="">Chọn phương thức</option>
-                            <option value="momo">Momo</option>
-                            <option value="zalopay">ZaloPay</option>
-                            <option value="bank">Thẻ ngân hàng</option>
-                            <option value="cash">Tiền mặt</option>
+                        <label for="booking-theater">1. Chọn Rạp <i class="fa-solid fa-location-dot"></i></label>
+                        <select id="booking-theater" name="theater">
+                            <option value="">Chọn rạp</option>
+                            <option value="CINESTAR Hà Nội">CINESTAR Hà Nội</option>
+                            <option value="CINESTAR TP.HCM">CINESTAR TP.HCM</option>
+                            <option value="CINESTAR Đà Nẵng">CINESTAR Đà Nẵng</option>
                         </select>
                     </div>
-                </div>
-                <!-- Thông tin phim và tổng cộng -->
-                <div class="summary">
-                    <img src="../assets/images/poster1.jpg" alt="Movie Poster"> <!-- Poster phim -->
-                    <div class="summary-details">
-                        <h3 id="movie-title-step4">Đại Đạo: Mật Trí Trong Bóng Tối</h3> <!-- Tiêu đề phim -->
-                        <p>2D Phụ Đề - T16</p> <!-- Loại phim -->
-                        <p id="theater-step4">Galaxy Nguyễn Du - RẠP 1</p> <!-- Rạp chiếu -->
-                        <p id="showtime-step4">Suất: 19:00 - Thứ Tư, 04/02/2025</p> <!-- Suất chiếu -->
-                        <p id="seats-step4">Ghế: Chưa chọn</p> <!-- Ghế đã chọn -->
-                        <p id="food-step4">Combo: Chưa chọn</p> <!-- Combo đã chọn -->
-                        <p>Tổng cộng: <span id="total-price-step4">0 đ</span></p> <!-- Tổng cộng -->
+
+                    <div class="form-group">
+                        <label for="booking-movie">2. Chọn Phim <i class="fa-solid fa-film"></i></label>
+                        <select id="booking-movie" name="movie" disabled>
+                            <option value="">Chọn phim</option>
+                            <option value="Âm Dương Lộ">Âm Dương Lộ</option>
+                            <option value="Phim 2">Phim 2</option>
+                            <option value="Phim 3">Phim 3</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="booking-date">3. Chọn Ngày <i class="fa-solid fa-calendar-days"></i></label>
+                        <select id="booking-date" name="date" disabled>
+                            <option value="">Chọn ngày</option>
+                            <option value="2025-04-01">01/04/2025</option>
+                            <option value="2025-04-02">02/04/2025</option>
+                            <option value="2025-04-03">03/04/2025</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="booking-showtime">4. Chọn Suất <i class="fa-solid fa-clock"></i></label>
+                        <select id="booking-showtime" name="showtime" disabled>
+                            <option value="">Chọn suất</option>
+                            <option value="10:00">10:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="18:00">18:00</option>
+                        </select>
+                    </div>
+                </form>
+
+                <!-- Phần hiển thị kết quả đặt vé -->
+                <div id="booking-results" class="schedule-results" style="margin-top: 20px; color: #fff;">
+                    <h2>Kết Quả Đặt Vé</h2>
+                    <div class="booking-details">
+                        <div class="poster">
+                            <img src="/frontend/assets/images/tim-xac_1.webp" alt="Movie Poster">
+                        </div>
+                        <div class="booking-info">
+                            <p><strong></strong> Tìm xác: Ma Không Đầu(T18)</p>
+                        </div>
+                        <a href="booking-button.html" class="book-button">Đặt Vé</a>
                     </div>
                 </div>
-                <div class="form-actions">
-                    <button class="back-btn" onclick="goToStep(3)">Quay lại</button> <!-- Nút quay lại -->
-                    <button class="next-btn" onclick="goToStep(5)">Tiếp tục</button> <!-- Nút tiếp tục -->
-                </div>
-            </div>
-
-            <!-- Form bước 5: Xác nhận -->
-            <div class="booking-form" id="step-5" style="display: none;">
-                <div class="confirmation">
-                    <h3>Xác Nhận Đặt Vé</h3> <!-- Tiêu đề xác nhận -->
-                    <p id="confirmation-details">Bạn đã đặt vé thành công!</p> <!-- Thông tin xác nhận -->
-                    <p id="movie-title-step5">Đại Đạo: Mật Trí Trong Bóng Tối</p> <!-- Tiêu đề phim -->
-                    <p id="theater-step5">Galaxy Nguyễn Du - RẠP 1</p> <!-- Rạp chiếu -->
-                    <p id="showtime-step5">Suất: 19:00 - Thứ Tư, 04/02/2025</p> <!-- Suất chiếu -->
-                    <p id="seats-step5">Ghế: Chưa chọn</p> <!-- Ghế đã chọn -->
-                    <p id="food-step5">Combo: Chưa chọn</p> <!-- Combo đã chọn -->
-                    <p id="payment-step5">Phương thức thanh toán: Chưa chọn</p> <!-- Phương thức thanh toán -->
-                    <p>Tổng cộng: <span id="total-price-step5">0 đ</span></p> <!-- Tổng cộng -->
-                </div>
-                <div class="form-actions">
-                    <button class="back-btn" onclick="goToStep(4)">Quay lại</button> <!-- Nút quay lại -->
-                    <button class="next-btn" onclick="window.location.href='index.html'">Hoàn tất</button> <!-- Nút hoàn tất -->
-                </div>
-            </div>
+            </section>
         </div>
     </main>
-    <footer>
-        <!-- Container footer -->
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Giới Thiệu</h3> <!-- Tiêu đề phần Giới Thiệu -->
-                <ul>
-                    <li><a href="xx">Về Chúng Tôi</a></li>
-                    <li><a href="xx">Thỏa Thuận Sử Dụng</a></li>
-                    <li><a href="xx">Quy Chế Hoạt Động</a></li>
-                    <li><a href="xx">Chính Sách Bảo Mật</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Góc Điện Ảnh</h3> <!-- Tiêu đề phần Góc Điện Ảnh -->
-                <ul>
-                    <li><a href="xx">Thể Loại Phim</a></li>
-                    <li><a href="xx">Bình Luận Phim</a></li>
-                    <li><a href="xx">Blog Điện Ảnh</a></li>
-                    <li><a href="xx">Phim Hay Tháng</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Hỗ Trợ</h3> <!-- Tiêu đề phần Hỗ Trợ -->
-                <ul>
-                    <li><a href="xx">Góp Ý</a></li>
-                    <li><a href="xx">Sale & Services</a></li>
-                    <li><a href="xx">Rạp / Giá Vé</a></li>
-                    <li><a href="xx">Tuyển Dụng</a></li>
-                </ul>
-            </div>
-            <div class="footer-right">
-                <img src="/images/" alt="BCDH CINEMA LOGO"> <!-- Logo của rạp -->
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/wocdat.16" target="_blank"><i class="fa-brands fa-facebook"></i></a> <!-- Liên kết đến Facebook -->
-                    <a href="https://www.instagram.com/_qwodac" target="_blank"><i class="fab fa-instagram"></i></a> <!-- Liên kết đến Instagram -->
-                </div>
-            </div>
-        </div> 
-        <div class="footer-bottom">
-            <div>
-                <img src="/images/" alt="BCDH CINEMA"> <!-- Logo nhỏ ở footer -->
-            </div>
-            <div>
-                123 Hutech, Phường..., Quận 9, TP.Hồ Chí Minh, Việt Nam<br>
-                0123456789 - 0987654321 (9 : 00 - 22 : 00) - <a href="xx"> hotro@BCDHstudio.vn</a> <!-- Địa chỉ và liên hệ -->
-            </div>
-        </div>
-    </footer>
-    <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script> <!-- Thư viện Font Awesome -->
-    <script>
-        // Dữ liệu giả lập cho phim và suất chiếu
-        const moviesByLocation = {
-            hcm: [
-                { title: "Phim 1", showtimes: ["19:00", "19:45", "21:15", "22:00"] },
-                { title: "Phim 2", showtimes: ["11:00", "15:00", "19:00"] },
-            ],
-            hn: [
-                { title: "Phim 3", showtimes: ["12:00", "16:00", "20:00"] },
-            ],
-            dn: [
-                { title: "Phim 4", showtimes: ["13:00", "17:00", "21:00"] },
-            ],
-            angiang: [
-                { title: "Phim 5", showtimes: ["10:30", "14:30", "18:30"] },
-            ],
-            vungtau: [
-                { title: "Phim 6", showtimes: ["11:30", "15:30", "19:30"] },
-            ],
-            bentre: [
-                { title: "Phim 7", showtimes: ["12:30", "16:30", "20:30"] },
-            ],
-            camau: [
-                { title: "Phim 8", showtimes: ["13:30", "17:30", "21:30"] },
-            ],
-            daklak: [
-                { title: "Phim 9", showtimes: ["10:00", "14:00", "18:00"] },
-            ],
-            haiphong: [
-                { title: "Phim 10", showtimes: ["11:00", "15:00", "19:00"] },
-            ],
-            khanhhoa: [
-                { title: "Phim 11", showtimes: ["12:00", "16:00", "20:00"] },
-            ],
-            nghean: [
-                { title: "Phim 12", showtimes: ["13:00", "17:00", "21:00"] },
-            ],
-            thuathienhue: [
-                { title: "Phim 13", showtimes: ["10:30", "14:30", "18:30"] },
-            ]
-        };
 
-        // Dữ liệu giả lập cho combo thức ăn
-        const foodCombos = [
-            { id: "combo1", name: "Combo 1 Big Extra STD", description: "01 Ly nước ngọt size L + 01 Hộp bắp + 1 Snack", price: 109000 },
-            { id: "combo2", name: "Combo 2 Big Extra STD", description: "02 Ly nước ngọt size L + 01 Hộp bắp + 1 Snack", price: 129000 },
+    <!-- Footer -->
+    <footer id="footer-container"></footer>
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/frontend/assets/js/main.js"></script>
+    <script src="/frontend/assets/js/admin.js"></script>
+    <script src="/frontend/assets/js/movie.js"></script>
+    <script src="/frontend/assets/js/"></script>
+    <script>
+        // Dữ liệu phim (bao gồm thông tin chi tiết để hiển thị poster)
+        const movies = [
+            { 
+                name: 'Âm Dương Lộ', 
+                duration: '120 phút', 
+                ageLimit: '16+', 
+                description: 'Đây là mô tả của Âm Dương Lộ.', 
+                poster: 'https://via.placeholder.com/200x300?text=Âm+Dương+Lộ' 
+            },
+            { 
+                name: 'Phim 2', 
+                duration: '135 phút', 
+                ageLimit: '18+', 
+                description: 'Đây là mô tả của Phim 2.', 
+                poster: 'https://via.placeholder.com/200x300?text=Phim+2' 
+            },
+            { 
+                name: 'Phim 3', 
+                duration: '110 phút', 
+                ageLimit: '13+', 
+                description: 'Đây là mô tả của Phim 3.', 
+                poster: 'https://via.placeholder.com/200x300?text=Phim+3' 
+            }
         ];
 
-        // Lưu trữ thông tin đặt vé
-        let bookingData = {
-            location: "",
-            movie: "",
-            showtime: "",
-            seats: [],
-            food: [],
-            paymentMethod: "",
-            total: 0
-        };
+        // Xử lý logic đặt vé
+        const theaterSelect = document.getElementById('booking-theater');
+        const movieSelect = document.getElementById('booking-movie');
+        const dateSelect = document.getElementById('booking-date');
+        const showtimeSelect = document.getElementById('booking-showtime');
+        const bookingDetails = document.getElementById('booking-details');
 
-        // Lấy các phần tử từ DOM
-        const movieSelect = document.getElementById("movie");
-        const showtimeSelect = document.getElementById("showtime");
-        const seats = document.querySelectorAll(".seat");
-        const totalPriceElements = {
-            step1: document.getElementById("total-price-step1"),
-            step2: document.getElementById("total-price-step2"),
-            step3: document.getElementById("total-price-step3"),
-            step4: document.getElementById("total-price-step4"),
-            step5: document.getElementById("total-price-step5")
-        };
-
-        // Cập nhật danh sách phim khi chọn vị trí
-        function updateMovies() {
-            const location = document.getElementById("location").value;
-            movieSelect.innerHTML = '<option value="">Chọn phim</option>';
-            showtimeSelect.innerHTML = '<option value="">Chọn suất</option>';
-
-            if (location && moviesByLocation[location]) {
-                moviesByLocation[location].forEach(movie => {
-                    const option = document.createElement("option");
-                    option.value = movie.title;
-                    option.textContent = movie.title;
-                    movieSelect.appendChild(option);
-                });
-            }
-            bookingData.location = location;
-            // Không cập nhật giá ở bước này, giữ tổng cộng là 0 đ
-            totalPriceElements.step1.textContent = "0 đ";
-        }
-
-        // Cập nhật danh sách suất chiếu khi chọn phim
-        function updateShowtimes() {
-            const location = document.getElementById("location").value;
-            const movieTitle = movieSelect.value;
-            showtimeSelect.innerHTML = '<option value="">Chọn suất</option>';
-
-            if (location && movieTitle) {
-                const movie = moviesByLocation[location].find(m => m.title === movieTitle);
-                if (movie) {
-                    movie.showtimes.forEach(time => {
-                        const option = document.createElement("option");
-                        option.value = time;
-                        option.textContent = time;
-                        showtimeSelect.appendChild(option);
-                    });
-                }
-            }
-            bookingData.movie = movieTitle;
-            // Không cập nhật giá ở bước này, giữ tổng cộng là 0 đ
-            totalPriceElements.step1.textContent = "0 đ";
-        }
-
-        // Cập nhật thông tin đặt vé khi chọn suất chiếu
-        function updateBookingData() {
-            const showtime = showtimeSelect.value;
-            bookingData.showtime = showtime;
-            // Không cập nhật giá ở bước này, giữ tổng cộng là 0 đ
-            totalPriceElements.step1.textContent = "0 đ";
-        }
-
-        // Chuyển giữa các bước
-        function goToStep(step) {
-            // Ẩn tất cả các bước
-            for (let i = 1; i <= 5; i++) {
-                document.getElementById(`step-${i}`).style.display = "none";
-                document.getElementById(`tab-${i}`).classList.remove("active");
-            }
-            // Hiển thị bước hiện tại
-            document.getElementById(`step-${step}`).style.display = "block";
-            document.getElementById(`tab-${step}`).classList.add("active");
-
-            // Cập nhật thông tin ở các bước
-            if (step >= 2) {
-                document.getElementById("movie-title-step2").textContent = bookingData.movie;
-                document.getElementById("theater-step2").textContent = `Galaxy Nguyễn Du - RẠP 1`;
-                document.getElementById("showtime-step2").textContent = `Suất: ${bookingData.showtime} - Thứ Tư, 04/02/2025`;
-                totalPriceElements.step2.textContent = bookingData.total.toLocaleString() + " đ";
-            }
-            if (step >= 3) {
-                document.getElementById("movie-title-step3").textContent = bookingData.movie;
-                document.getElementById("theater-step3").textContent = `Galaxy Nguyễn Du - RẠP 1`;
-                document.getElementById("showtime-step3").textContent = `Suất: ${bookingData.showtime} - Thứ Tư, 04/02/2025`;
-                document.getElementById("seats-step3").textContent = `Ghế: ${bookingData.seats.join(", ") || "Chưa chọn"}`;
-                totalPriceElements.step3.textContent = bookingData.total.toLocaleString() + " đ";
-            }
-            if (step >= 4) {
-                document.getElementById("movie-title-step4").textContent = bookingData.movie;
-                document.getElementById("theater-step4").textContent = `Galaxy Nguyễn Du - RẠP 1`;
-                document.getElementById("showtime-step4").textContent = `Suất: ${bookingData.showtime} - Thứ Tư, 04/02/2025`;
-                document.getElementById("seats-step4").textContent = `Ghế: ${bookingData.seats.join(", ") || "Chưa chọn"}`;
-                document.getElementById("food-step4").textContent = `Combo: ${bookingData.food.map(f => `${f.name} x${f.quantity}`).join(", ") || "Chưa chọn"}`;
-                totalPriceElements.step4.textContent = bookingData.total.toLocaleString() + " đ";
-            }
-            if (step === 5) {
-                document.getElementById("movie-title-step5").textContent = bookingData.movie;
-                document.getElementById("theater-step5").textContent = `Galaxy Nguyễn Du - RẠP 1`;
-                document.getElementById("showtime-step5").textContent = `Suất: ${bookingData.showtime} - Thứ Tư, 04/02/2025`;
-                document.getElementById("seats-step5").textContent = `Ghế: ${bookingData.seats.join(", ") || "Chưa chọn"}`;
-                document.getElementById("food-step5").textContent = `Combo: ${bookingData.food.map(f => `${f.name} x${f.quantity}`).join(", ") || "Chưa chọn"}`;
-                document.getElementById("payment-step5").textContent = `Phương thức thanh toán: ${bookingData.paymentMethod || "Chưa chọn"}`;
-                totalPriceElements.step5.textContent = bookingData.total.toLocaleString() + " đ";
-            }
-        }
-
-        // Xử lý chọn ghế và tính giá vé
-        seats.forEach(seat => {
-            seat.addEventListener("click", () => {
-                if (!seat.classList.contains("occupied")) {
-                    seat.classList.toggle("selected");
-                    const seatId = seat.dataset.seat;
-                    if (seat.classList.contains("selected")) {
-                        bookingData.seats.push(seatId);
-                    } else {
-                        bookingData.seats = bookingData.seats.filter(s => s !== seatId);
-                    }
-                    // Tính giá vé dựa trên vị trí ghế
-                    let total = 0;
-                    bookingData.seats.forEach(seat => {
-                        const row = seat.charAt(0); // Lấy ký tự đầu tiên (hàng A, B, C, ...)
-                        if (["A", "B", "C", "D", "E"].includes(row)) {
-                            total += 80000; // Ghế gần màn hình (A-E): 80.000 đ
-                        } else {
-                            total += 60000; // Ghế xa màn hình (F-P): 60.000 đ
-                        }
-                    });
-                    bookingData.total = total;
-                    document.getElementById("seats-step2").textContent = `Ghế: ${bookingData.seats.join(", ") || "Chưa chọn"}`;
-                    totalPriceElements.step2.textContent = bookingData.total.toLocaleString() + " đ";
-                }
-            });
+        // Kích hoạt các bước tiếp theo khi chọn
+        theaterSelect.addEventListener('change', function() {
+            movieSelect.disabled = !this.value;
+            dateSelect.disabled = true;
+            showtimeSelect.disabled = true;
+            bookingDetails.innerHTML = ''; // Xóa kết quả khi thay đổi
         });
 
-        // Xử lý chọn số lượng combo
-        function updateQuantity(comboId, change) {
-            const quantityElement = document.getElementById(`quantity-${comboId}`);
-            let quantity = parseInt(quantityElement.textContent) + change;
-            if (quantity < 0) quantity = 0;
-            quantityElement.textContent = quantity;
+        movieSelect.addEventListener('change', function() {
+            dateSelect.disabled = !this.value;
+            showtimeSelect.disabled = true;
+            bookingDetails.innerHTML = ''; // Xóa kết quả khi thay đổi
+        });
 
-            const combo = foodCombos.find(c => c.id === comboId);
-            const existingFood = bookingData.food.find(f => f.id === comboId);
-            if (existingFood) {
-                existingFood.quantity = quantity;
-                if (quantity === 0) {
-                    bookingData.food = bookingData.food.filter(f => f.id !== comboId);
-                }
-            } else if (quantity > 0) {
-                bookingData.food.push({ id: comboId, name: combo.name, quantity, price: combo.price });
-            }
+        dateSelect.addEventListener('change', function() {
+            showtimeSelect.disabled = !this.value;
+            bookingDetails.innerHTML = ''; // Xóa kết quả khi thay đổi
+        });
 
-            // Cập nhật tổng cộng
-            bookingData.total = bookingData.seats.reduce((sum, seat) => {
-                const row = seat.charAt(0);
-                return sum + (["A", "B", "C", "D", "E"].includes(row) ? 80000 : 60000);
-            }, 0) + bookingData.food.reduce((sum, f) => sum + f.price * f.quantity, 0);
-            totalPriceElements.step3.textContent = bookingData.total.toLocaleString() + " đ";
-            document.getElementById("food-step3").textContent = `Combo: ${bookingData.food.map(f => `${f.name} x${f.quantity}`).join(", ") || "Chưa chọn"}`;
+        // Hàm mở trang đặt vé mới
+        function openBookingPage(theater, movie, date, showtime) {
+            const bookingWindow = window.open('', '_blank');
+            bookingWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Xác Nhận Đặt Vé</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #1a2a44;
+                            color: #fff;
+                            padding: 20px;
+                        }
+                        h1 {
+                            color: #ff6200;
+                        }
+                        .booking-info {
+                            margin-top: 20px;
+                        }
+                        p {
+                            margin: 5px 0;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>Xác Nhận Đặt Vé</h1>
+                    <div class="booking-info">
+                        <p><strong>Rạp:</strong> ${theater}</p>
+                        <p><strong>Phim:</strong> ${movie}</p>
+                        <p><strong>Ngày:</strong> ${date}</p>
+                        <p><strong>Suất chiếu:</strong> ${showtime}</p>
+                    </div>
+                    <!-- Bạn có thể thêm nội dung khác tại đây -->
+                </body>
+                </html>
+            `);
+            bookingWindow.document.close();
         }
 
-        // Xử lý chọn phương thức thanh toán
-        document.getElementById("payment-method").addEventListener("change", () => {
-            bookingData.paymentMethod = document.getElementById("payment-method").value;
+        // Hiển thị kết quả đặt vé khi chọn suất chiếu
+        showtimeSelect.addEventListener('change', function() {
+            if (theaterSelect.value && movieSelect.value && dateSelect.value && this.value) {
+                const selectedMovie = movies.find(movie => movie.name === movieSelect.value);
+
+                // Tạo layout chia đôi cho kết quả đặt vé
+                const container = document.createElement('div');
+                container.style.display = 'flex';
+                container.style.gap = '20px';
+                container.style.alignItems = 'flex-start';
+                container.style.marginBottom = '30px';
+
+                // Bên trái: Poster
+                const leftSection = document.createElement('div');
+                leftSection.style.flex = '1';
+                leftSection.style.display = 'flex';
+                leftSection.style.flexDirection = 'column';
+                leftSection.style.alignItems = 'flex-start';
+
+                const poster = document.createElement('img');
+                poster.src = selectedMovie.poster;
+                poster.alt = selectedMovie.name;
+                poster.style.width = '200px';
+                poster.style.height = '300px';
+                poster.style.borderRadius = '8px';
+                leftSection.appendChild(poster);
+
+                // Bên phải: Thông tin đặt vé và nút đặt vé
+                const rightSection = document.createElement('div');
+                rightSection.style.flex = '1';
+                rightSection.style.display = 'flex';
+                rightSection.style.flexDirection = 'column';
+
+                const bookingInfo = document.createElement('div');
+                bookingInfo.innerHTML = `
+                    <h3 style="margin: 0; font-size: 18px; color: #ff6200;">${selectedMovie.name}</h3>
+                    <p style="margin: 5px 0;"><strong>Thời lượng:</strong> ${selectedMovie.duration}</p>
+                    <p style="margin: 5px 0;"><strong>Giới hạn độ tuổi:</strong> ${selectedMovie.ageLimit}</p>
+                    <p style="margin: 5px 0;"><strong>Mô tả:</strong> ${selectedMovie.description}</p>
+                    <p style="margin: 5px 0;"><strong>Rạp:</strong> ${theaterSelect.value}</p>
+                    <p style="margin: 5px 0;"><strong>Ngày:</strong> ${dateSelect.value}</p>
+                    <p style="margin: 5px 0;"><strong>Suất chiếu:</strong> ${this.value}</p>
+                `;
+                rightSection.appendChild(bookingInfo);
+
+                // Nút đặt vé
+                const bookButton = document.createElement('button');
+                bookButton.className = 'book-now-btn';
+                bookButton.innerHTML = '<i class="fas fa-ticket-alt"></i> Đặt Vé';
+                bookButton.style.marginTop = '10px';
+                bookButton.style.padding = '10px 20px';
+                bookButton.style.backgroundColor = '#ff6200';
+                bookButton.style.border = 'none';
+                bookButton.style.borderRadius = '5px';
+                bookButton.style.color = '#fff';
+                bookButton.style.cursor = 'pointer';
+                bookButton.style.transition = 'background-color 0.3s ease';
+                bookButton.onmouseover = () => bookButton.style.backgroundColor = '#e05500';
+                bookButton.onmouseout = () => bookButton.style.backgroundColor = '#ff6200';
+                bookButton.onclick = () => openBookingPage(theaterSelect.value, movieSelect.value, dateSelect.value, this.value);
+                rightSection.appendChild(bookButton);
+
+                // Gộp hai phần vào container
+                container.appendChild(leftSection);
+                container.appendChild(rightSection);
+                bookingDetails.innerHTML = ''; // Xóa nội dung cũ
+                bookingDetails.appendChild(container);
+            } else {
+                bookingDetails.innerHTML = ''; // Xóa kết quả nếu chưa chọn đủ
+            }
+        });
+
+        // Ngăn submit form mặc định
+        document.querySelector('.schedule-form').addEventListener('submit', function(event) {
+            event.preventDefault();
         });
     </script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'934358433cf17b96',t:'MTc0NTMwNjI4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'934530274a374564',t:'MTc0NTMyNTYxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9345368a3d8e53b6',t:'MTc0NTMyNTg3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>

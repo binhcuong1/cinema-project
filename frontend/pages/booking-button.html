@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Vé Nhanh - Cinestar</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/frontend/assets/css/shares/header.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css">
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="/frontend/assets/css/login.css">
+    <link rel="stylesheet" href="/frontend/assets/css/schedule.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-page="booking">
+    <!-- Placeholder cho header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Placeholder cho sidebar -->
+    <div id="sidebar-placeholder"></div>
+
+    <!-- Nội dung chính -->
+    <main class="main-content">
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer-container"></footer>
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/frontend/assets/js/main.js"></script>
+    <script src="/frontend/assets/js/admin.js"></script>
+    <script src="/frontend/assets/js/movie.js"></script>
+    <script>
+        // Dữ liệu phim (bao gồm thông tin chi tiết để hiển thị poster)
+        const movies = [
+            { 
+                name: 'Âm Dương Lộ', 
+                duration: '120 phút', 
+                ageLimit: '16+', 
+                description: 'Đây là mô tả của Âm Dương Lộ.', 
+                poster: 'https://via.placeholder.com/200x300?text=Âm+Dương+Lộ' 
+            },
+            { 
+                name: 'Phim 2', 
+                duration: '135 phút', 
+                ageLimit: '18+', 
+                description: 'Đây là mô tả của Phim 2.', 
+                poster: 'https://via.placeholder.com/200x300?text=Phim+2' 
+            },
+            { 
+                name: 'Phim 3', 
+                duration: '110 phút', 
+                ageLimit: '13+', 
+                description: 'Đây là mô tả của Phim 3.', 
+                poster: 'https://via.placeholder.com/200x300?text=Phim+3' 
+            }
+        ];
+
+        // Xử lý logic đặt vé
+        const theaterSelect = document.getElementById('booking-theater');
+        const movieSelect = document.getElementById('booking-movie');
+        const dateSelect = document.getElementById('booking-date');
+        const showtimeSelect = document.getElementById('booking-showtime');
+        const bookingDetails = document.getElementById('booking-details');
+
+        // Kích hoạt các bước tiếp theo khi chọn
+        theaterSelect.addEventListener('change', function() {
+            movieSelect.disabled = !this.value;
+            dateSelect.disabled = true;
+            showtimeSelect.disabled = true;
+            bookingDetails.innerHTML = ''; // Xóa kết quả khi thay đổi
+        });
+
+        movieSelect.addEventListener('change', function() {
+            dateSelect.disabled = !this.value;
+            showtimeSelect.disabled = true;
+            bookingDetails.innerHTML = ''; // Xóa kết quả khi thay đổi
+        });
+
+        dateSelect.addEventListener('change', function() {
+            showtimeSelect.disabled = !this.value;
+            bookingDetails.innerHTML = ''; // Xóa kết quả khi thay đổi
+        });
+
+        // Hiển thị kết quả đặt vé khi chọn suất chiếu
+        showtimeSelect.addEventListener('change', function() {
+            if (theaterSelect.value && movieSelect.value && dateSelect.value && this.value) {
+                const selectedMovie = movies.find(movie => movie.name === movieSelect.value);
+
+                // Tạo layout chia đôi cho kết quả đặt vé
+                const container = document.createElement('div');
+                container.style.display = 'flex';
+                container.style.gap = '20px';
+                container.style.alignItems = 'flex-start';
+                container.style.marginBottom = '30px';
+
+                // Bên trái: Poster
+                const leftSection = document.createElement('div');
+                leftSection.style.flex = '1';
+                leftSection.style.display = 'flex';
+                leftSection.style.flexDirection = 'column';
+                leftSection.style.alignItems = 'flex-start';
+
+                const poster = document.createElement('img');
+                poster.src = selectedMovie.poster;
+                poster.alt = selectedMovie.name;
+                poster.style.width = '200px';
+                poster.style.height = '300px';
+                poster.style.borderRadius = '8px';
+                leftSection.appendChild(poster);
+
+                // Bên phải: Thông tin đặt vé và nút đặt vé
+                const rightSection = document.createElement('div');
+                rightSection.style.flex = '1';
+                rightSection.style.display = 'flex';
+                rightSection.style.flexDirection = 'column';
+
+                const bookingInfo = document.createElement('div');
+                bookingInfo.innerHTML = `
+                    <h3 style="margin: 0; font-size: 18px; color: #ff6200;">${selectedMovie.name}</h3>
+                    <p style="margin: 5px 0;"><strong>Thời lượng:</strong> ${selectedMovie.duration}</p>
+                    <p style="margin: 5px 0;"><strong>Giới hạn độ tuổi:</strong> ${selectedMovie.ageLimit}</p>
+                    <p style="margin: 5px 0;"><strong>Mô tả:</strong> ${selectedMovie.description}</p>
+                    <p style="margin: 5px 0;"><strong>Rạp:</strong> ${theaterSelect.value}</p>
+                    <p style="margin: 5px 0;"><strong>Ngày:</strong> ${dateSelect.value}</p>
+                    <p style="margin: 5px 0;"><strong>Suất chiếu:</strong> ${this.value}</p>
+                `;
+                rightSection.appendChild(bookingInfo);
+
+                // Nút đặt vé
+                const bookButton = document.createElement('a');
+                bookButton.className = 'book-now-btn';
+                bookButton.href = 'confirmation.html'; // Thay thế bằng URL trang xác nhận đặt vé
+                bookButton.innerHTML = '<i class="fas fa-ticket-alt"></i> Đặt Vé';
+                bookButton.style.marginTop = '10px';
+                bookButton.style.padding = '10px 20px';
+                bookButton.style.backgroundColor = '#ff6200';
+                bookButton.style.border = 'none';
+                bookButton.style.borderRadius = '5px';
+                bookButton.style.color = '#fff';
+                bookButton.style.cursor = 'pointer';
+                bookButton.style.transition = 'background-color 0.3s ease';
+                bookButton.onmouseover = () => bookButton.style.backgroundColor = '#e05500';
+                bookButton.onmouseout = () => bookButton.style.backgroundColor = '#ff6200';
+                rightSection.appendChild(bookButton);
+
+                // Gộp hai phần vào container
+                container.appendChild(leftSection);
+                container.appendChild(rightSection);
+                bookingDetails.innerHTML = ''; // Xóa nội dung cũ
+                bookingDetails.appendChild(container);
+            } else {
+                bookingDetails.innerHTML = ''; // Xóa kết quả nếu chưa chọn đủ
+            }
+        });
+
+        // Ngăn submit form mặc định
+        document.querySelector('.schedule-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+        });
+    </script>
+</body>
+</html>

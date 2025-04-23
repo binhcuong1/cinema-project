@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/frontend/assets/css/shares/header.css">
     <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css">
     <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css">
+    <link rel="stylesheet" href="/frontend/assets/css/book/bookticket.css">
     <link rel="stylesheet" href="/frontend/assets/css/style.css">
     <link rel="stylesheet" href="/frontend/assets/css/login.css">
     <link rel="stylesheet" href="/frontend/assets/css/schedule.css">
@@ -80,7 +81,7 @@
                 </form>
 
                 <!-- Phần hiển thị kết quả đặt vé -->
-                <div id="booking-results" class="schedule-results" style="margin-top: 20px; color: #fff;">
+                <div id="booking-results" class="schedule-results">
                     <h2>Kết Quả Đặt Vé</h2>
                     <div class="booking-details">
                         <div class="poster">
@@ -106,178 +107,11 @@
     <script src="/frontend/assets/js/admin.js"></script>
     <script src="/frontend/assets/js/movie.js"></script>
     <script src="/frontend/assets/js/"></script>
+    <!--Js-->
     <script>
-        // Dữ liệu phim (bao gồm thông tin chi tiết để hiển thị poster)
-        const movies = [
-            { 
-                name: 'Âm Dương Lộ', 
-                duration: '120 phút', 
-                ageLimit: '16+', 
-                description: 'Đây là mô tả của Âm Dương Lộ.', 
-                poster: 'https://via.placeholder.com/200x300?text=Âm+Dương+Lộ' 
-            },
-            { 
-                name: 'Phim 2', 
-                duration: '135 phút', 
-                ageLimit: '18+', 
-                description: 'Đây là mô tả của Phim 2.', 
-                poster: 'https://via.placeholder.com/200x300?text=Phim+2' 
-            },
-            { 
-                name: 'Phim 3', 
-                duration: '110 phút', 
-                ageLimit: '13+', 
-                description: 'Đây là mô tả của Phim 3.', 
-                poster: 'https://via.placeholder.com/200x300?text=Phim+3' 
-            }
-        ];
+        
+        </script>
 
-        // Xử lý logic đặt vé
-        const theaterSelect = document.getElementById('booking-theater');
-        const movieSelect = document.getElementById('booking-movie');
-        const dateSelect = document.getElementById('booking-date');
-        const showtimeSelect = document.getElementById('booking-showtime');
-        const bookingDetails = document.getElementById('booking-details');
-
-        // Kích hoạt các bước tiếp theo khi chọn
-        theaterSelect.addEventListener('change', function() {
-            movieSelect.disabled = !this.value;
-            dateSelect.disabled = true;
-            showtimeSelect.disabled = true;
-            bookingDetails.innerHTML = ''; // Xóa kết quả khi thay đổi
-        });
-
-        movieSelect.addEventListener('change', function() {
-            dateSelect.disabled = !this.value;
-            showtimeSelect.disabled = true;
-            bookingDetails.innerHTML = ''; // Xóa kết quả khi thay đổi
-        });
-
-        dateSelect.addEventListener('change', function() {
-            showtimeSelect.disabled = !this.value;
-            bookingDetails.innerHTML = ''; // Xóa kết quả khi thay đổi
-        });
-
-        // Hàm mở trang đặt vé mới
-        function openBookingPage(theater, movie, date, showtime) {
-            const bookingWindow = window.open('', '_blank');
-            bookingWindow.document.write(`
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Xác Nhận Đặt Vé</title>
-                    <style>
-                        body {
-                            font-family: Arial, sans-serif;
-                            background-color: #1a2a44;
-                            color: #fff;
-                            padding: 20px;
-                        }
-                        h1 {
-                            color: #ff6200;
-                        }
-                        .booking-info {
-                            margin-top: 20px;
-                        }
-                        p {
-                            margin: 5px 0;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <h1>Xác Nhận Đặt Vé</h1>
-                    <div class="booking-info">
-                        <p><strong>Rạp:</strong> ${theater}</p>
-                        <p><strong>Phim:</strong> ${movie}</p>
-                        <p><strong>Ngày:</strong> ${date}</p>
-                        <p><strong>Suất chiếu:</strong> ${showtime}</p>
-                    </div>
-                    <!-- Bạn có thể thêm nội dung khác tại đây -->
-                </body>
-                </html>
-            `);
-            bookingWindow.document.close();
-        }
-
-        // Hiển thị kết quả đặt vé khi chọn suất chiếu
-        showtimeSelect.addEventListener('change', function() {
-            if (theaterSelect.value && movieSelect.value && dateSelect.value && this.value) {
-                const selectedMovie = movies.find(movie => movie.name === movieSelect.value);
-
-                // Tạo layout chia đôi cho kết quả đặt vé
-                const container = document.createElement('div');
-                container.style.display = 'flex';
-                container.style.gap = '20px';
-                container.style.alignItems = 'flex-start';
-                container.style.marginBottom = '30px';
-
-                // Bên trái: Poster
-                const leftSection = document.createElement('div');
-                leftSection.style.flex = '1';
-                leftSection.style.display = 'flex';
-                leftSection.style.flexDirection = 'column';
-                leftSection.style.alignItems = 'flex-start';
-
-                const poster = document.createElement('img');
-                poster.src = selectedMovie.poster;
-                poster.alt = selectedMovie.name;
-                poster.style.width = '200px';
-                poster.style.height = '300px';
-                poster.style.borderRadius = '8px';
-                leftSection.appendChild(poster);
-
-                // Bên phải: Thông tin đặt vé và nút đặt vé
-                const rightSection = document.createElement('div');
-                rightSection.style.flex = '1';
-                rightSection.style.display = 'flex';
-                rightSection.style.flexDirection = 'column';
-
-                const bookingInfo = document.createElement('div');
-                bookingInfo.innerHTML = `
-                    <h3 style="margin: 0; font-size: 18px; color: #ff6200;">${selectedMovie.name}</h3>
-                    <p style="margin: 5px 0;"><strong>Thời lượng:</strong> ${selectedMovie.duration}</p>
-                    <p style="margin: 5px 0;"><strong>Giới hạn độ tuổi:</strong> ${selectedMovie.ageLimit}</p>
-                    <p style="margin: 5px 0;"><strong>Mô tả:</strong> ${selectedMovie.description}</p>
-                    <p style="margin: 5px 0;"><strong>Rạp:</strong> ${theaterSelect.value}</p>
-                    <p style="margin: 5px 0;"><strong>Ngày:</strong> ${dateSelect.value}</p>
-                    <p style="margin: 5px 0;"><strong>Suất chiếu:</strong> ${this.value}</p>
-                `;
-                rightSection.appendChild(bookingInfo);
-
-                // Nút đặt vé
-                const bookButton = document.createElement('button');
-                bookButton.className = 'book-now-btn';
-                bookButton.innerHTML = '<i class="fas fa-ticket-alt"></i> Đặt Vé';
-                bookButton.style.marginTop = '10px';
-                bookButton.style.padding = '10px 20px';
-                bookButton.style.backgroundColor = '#ff6200';
-                bookButton.style.border = 'none';
-                bookButton.style.borderRadius = '5px';
-                bookButton.style.color = '#fff';
-                bookButton.style.cursor = 'pointer';
-                bookButton.style.transition = 'background-color 0.3s ease';
-                bookButton.onmouseover = () => bookButton.style.backgroundColor = '#e05500';
-                bookButton.onmouseout = () => bookButton.style.backgroundColor = '#ff6200';
-                bookButton.onclick = () => openBookingPage(theaterSelect.value, movieSelect.value, dateSelect.value, this.value);
-                rightSection.appendChild(bookButton);
-
-                // Gộp hai phần vào container
-                container.appendChild(leftSection);
-                container.appendChild(rightSection);
-                bookingDetails.innerHTML = ''; // Xóa nội dung cũ
-                bookingDetails.appendChild(container);
-            } else {
-                bookingDetails.innerHTML = ''; // Xóa kết quả nếu chưa chọn đủ
-            }
-        });
-
-        // Ngăn submit form mặc định
-        document.querySelector('.schedule-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-        });
-    </script>
     <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'934358433cf17b96',t:'MTc0NTMwNjI4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'934530274a374564',t:'MTc0NTMyNTYxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9345368a3d8e53b6',t:'MTc0NTMyNTg3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>

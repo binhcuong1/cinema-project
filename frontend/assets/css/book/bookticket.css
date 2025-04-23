@@ -1,0 +1,30 @@
+
+/* CSS cho nút Đặt Vé */
+.book-button {
+    display: inline-block; /* Để nút có kích thước vừa với nội dung */
+    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient từ cam đậm sang cam nhạt */
+    color: #fff; /* Màu chữ trắng */
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    border-radius: 8px; /* Bo góc 8px */
+    text-decoration: none; /* Bỏ gạch chân của link */
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold; /* Chữ đậm */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt */
+}
+
+.book-button:hover {
+    background: rgba(255, 98, 0, 0.2); /* Màu nền cam mờ khi hover */
+    color: #ff6200; /* Màu chữ cam khi hover */
+}
+/* CSS cho phần Kết Quả Đặt Vé */
+.booking-info p {
+    color: #ff6200; /* Màu chữ cam cho Tìm xác: Ma Không Đầu(T18) */
+}
+
+/* CSS cho hình ảnh trong poster */
+.poster img {
+    width: 400px; /* Chiều rộng hình ảnh */
+    height: 500px; /* Chiều cao hình ảnh */
+    object-fit: cover; /* Đảm bảo hình ảnh không bị méo, cắt để vừa khung */
+    border-radius: 8px; /* Bo góc hình ảnh */
+}

@@ -1,5 +1,4 @@
-axios.defaults.baseURL = "http://localhost:3000";
-
+axios.defaults.baseURL = 'http://127.0.0.1:3000';
 //DANH SÁCH PHIM ĐANG CHIẾU
 async function fetchNowShowingMovies() {
   const movieList = document.getElementById("movie-list-nowShowing");
@@ -245,18 +244,14 @@ async function showMovieDetail() {
                 <div class="movie-info-details">
                     <h2>${data.ten_phim}</h2>
                     <div class="movie-meta-details">
-                        <p><i class="fas fa-clock"></i> <strong>Thời lượng:</strong> ${
-                          data.thoi_luong_phut
-                        } phút</p>
-                        <p><i class="fas fa-calendar-alt"></i> <strong>Ngày phát hành:</strong> ${
-                          data.ngay_phat_hanh?.split("T")[0]
-                        }</p>
-                        <p><i class="fas fa-user-shield"></i> <strong>Giới hạn độ tuổi:</strong> ${
-                          data.gioi_han_tuoi
-                        }</p>
-                        <p><i class="fas fa-tags"></i> <strong>Thể loại:</strong> ${
-                          data.the_loai || "Không có thông tin"
-                        }</p>
+                        <p><i class="fas fa-clock"></i> <strong>Thời lượng:</strong> ${data.thoi_luong_phut
+      } phút</p>
+                        <p><i class="fas fa-calendar-alt"></i> <strong>Ngày phát hành:</strong> ${data.ngay_phat_hanh?.split("T")[0]
+      }</p>
+                        <p><i class="fas fa-user-shield"></i> <strong>Giới hạn độ tuổi:</strong> ${data.gioi_han_tuoi
+      }</p>
+                        <p><i class="fas fa-tags"></i> <strong>Thể loại:</strong> ${data.the_loai || "Không có thông tin"
+      }</p>
                     </div>
                     <div class="movie-description">
                         <h3>Mô tả ngắn:</h3>
@@ -267,19 +262,16 @@ async function showMovieDetail() {
                         <p>${data.noi_dung_phim}</p>
                     </div>
                     <div class="movie-actions">
-                        <button class="book-btn" onclick="bookTicket('${
-                          data.ma_phim
-                        }')">
+                        <button class="book-btn" onclick="bookTicket('${data.ma_phim
+      }')">
                             <i class="fas fa-ticket-alt"></i> Đặt vé
                         </button>
-                        <button class="edit-btn" onclick="editMovie('${
-                          data.ma_phim
-                        }')">
+                        <button class="edit-btn" onclick="editMovie('${data.ma_phim
+      }')">
                             <i class="fas fa-edit"></i> Sửa
                         </button>
-                        <button class="delete-btn" onclick="deleteMovie('${
-                          data.ma_phim
-                        }')">
+                        <button class="delete-btn" onclick="deleteMovie('${data.ma_phim
+      }')">
                             <i class="fas fa-trash"></i> Xóa
                         </button>
                     </div>
@@ -423,24 +415,24 @@ async function showMovieEdit() {
   const movieID = urlParams.get("id");
 
   if (!movieID) {
-      alert("Không tìm thấy id phim!");
-      return;
+    alert("Không tìm thấy id phim!");
+    return;
   }
 
   try {
-      const response = await axios.get(`/api/movies/${movieID}`);
-      const movie = response.data;
+    const response = await axios.get(`/api/movies/${movieID}`);
+    const movie = response.data;
 
-      if (movie.success !== "true") {
-          throw new Error("Không thể tải thông tin phim!");
-      }
+    if (movie.success !== "true") {
+      throw new Error("Không thể tải thông tin phim!");
+    }
 
-      const data = movie.data[0]; // Lấy thông tin phim từ mảng data
+    const data = movie.data[0]; // Lấy thông tin phim từ mảng data
 
-      const movieDetail = document.getElementById("sectionEdit");
-      const movieCard = document.createElement("div");
-      movieCard.classList.add("form-container");
-      movieCard.innerHTML = `
+    const movieDetail = document.getElementById("sectionEdit");
+    const movieCard = document.createElement("div");
+    movieCard.classList.add("form-container");
+    movieCard.innerHTML = `
           <form id="edit-movie-form" class="add-movie-form" enctype="multipart/form-data">
               <div class="form-grid">
                   <div class="form-column">
@@ -503,14 +495,14 @@ async function showMovieEdit() {
           </form>
       `;
 
-      movieDetail.appendChild(movieCard);
+    movieDetail.appendChild(movieCard);
 
-      // Gán movieID vào dataset của form để sử dụng khi submit
-      document.getElementById("edit-movie-form").dataset.movieId = data.ma_phim;
+    // Gán movieID vào dataset của form để sử dụng khi submit
+    document.getElementById("edit-movie-form").dataset.movieId = data.ma_phim;
   } catch (error) {
-      console.error("Lỗi khi lấy phim:", error);
-      const movieDetail = document.getElementById("sectionEdit");
-      movieDetail.innerHTML = `<p class='error'>${error.message}</p>`;
+    console.error("Lỗi khi lấy phim:", error);
+    const movieDetail = document.getElementById("sectionEdit");
+    movieDetail.innerHTML = `<p class='error'>${error.message}</p>`;
   }
 }
 

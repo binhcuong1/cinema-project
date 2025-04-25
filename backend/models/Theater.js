@@ -12,7 +12,8 @@ const theater = {
     },
 
     getByID: (id, callback) => {
-        db.query(`SELECT * FROM ${table_name} WHERE ma_rap = ?`, [id], (err, result) => {
+        const query = `SELECT * FROM ${table_name} WHERE ma_rap = ?`;
+        db.query(query, [id], (err, result) => {
             if (err)
                 return callback(err,null);
             if (result.length === 0) 
@@ -29,11 +30,14 @@ const theater = {
     },
 
     update: (id, data, callback) => {
-        let theaterID = id;
-        
-        db.query(`UPDATE ${table_name} SET ? WHERE ma_rap = ?`, [data, theaterID], (err, result) => {
-            if (err) 
-                return callback(err, null);
+        const fields = Object.keys(data).map(key => `${key} = ?`).join(", ");
+        const values = Object.values(data);
+
+        values.push(id);
+
+        const query = `UPDATE ${table_name} SET ${fields} WHERE ma_rap = ?`;
+        db.query(query, values, (err, result) => {
+            if (err) return callback(err, null);
             callback(null, result);
         });
     },

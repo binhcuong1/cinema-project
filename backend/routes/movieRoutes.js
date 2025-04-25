@@ -37,7 +37,7 @@ router.get('/now-showing', movieController.getNowShowing);
 router.get('/:id', movieController.getMovieByID);
 router.get('/theater/:id', movieController.getMovieByTheater);
 router.post('/', upload.single('poster'), movieController.createMovie);
-router.put('/:id', movieController.updateMovie);
+router.put('/:id',upload.single('poster'), movieController.updateMovie);
 router.delete('/:id', movieController.deleteMovie);
 
 module.exports = router;

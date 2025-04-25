@@ -1,0 +1,55 @@
+{
+    "rows": [
+        {
+            "row_name": "A",
+            "seats": [
+                {
+                    "seat_number": 1,
+                    "type": "normal"
+                },
+                {
+                    "seat_number": 2,
+                    "type": "normal"
+                },
+                {
+                    "seat_number": 3,
+                    "type": "vip"
+                }
+            ]
+        },
+        {
+            "row_name": "B",
+            "seats": [
+                {
+                    "seat_number": 1,
+                    "type": "normal"
+                },
+                {
+                    "seat_number": 2,
+                    "type": "normal"
+                },
+                {
+                    "seat_number": 3,
+                    "type": "normal"
+                },
+                {
+                    "seat_number": 4,
+                    "type": "normal"
+                }
+            ]
+        },
+        {
+            "row_name": "C",
+            "seats": [
+                {
+                    "seat_number": 1,
+                    "type": "vip"
+                },
+                {
+                    "seat_number": 2,
+                    "type": "vip"
+                }
+            ]
+        }
+    ]
+}

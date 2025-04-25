@@ -53,11 +53,12 @@ const movie = {
     },
 
     update: (id, data, callback) => {
-        let movieID = id;
-        
-        db.query(`UPDATE ${table_name} SET ? WHERE ma_phim = ?`, [data, movieID], (err, result) => {
-            if (err) 
-                return callback(err, null);
+        const fields = Object.keys(data).map(key => `${key} = ?`).join(", ");
+        const values = Object.values(data);
+        values.push(id);
+        const query = `UPDATE ${table_name} SET ${fields} WHERE ma_phim = ?`;
+        db.query(query, values, (err, result) => {
+            if (err) return callback(err, null);
             callback(null, result);
         });
     },

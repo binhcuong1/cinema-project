@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đặt vé - Cinestar</title>
+    <style>
+        body {
+            background-color: #0a0e17;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .screen {
+            width: 80%;
+            height: 40px;
+            margin: 20px auto;
+            background: linear-gradient(to bottom, #ccc, #fff);
+            border-radius: 50% 50% 0 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .seat-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .seat-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .row-label {
+            width: 30px;
+            font-weight: bold;
+        }
+        .seat {
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .seat.available {
+            background-color: #fff;
+            color: #000;
+        }
+        .seat.booked {
+            background-color: #555;
+            color: #fff;
+            cursor: not-allowed;
+        }
+        .seat.vip {
+            background-color: #ffd700;
+            color: #000;
+        }
+        .seat.selected {
+            background-color: #ff6200;
+            color: #fff;
+        }
+        .info {
+            margin-top: 20px;
+            font-size: 16px;
+            padding-bottom: 20px;
+        }
+        .info button {
+            background-color: #ff6200;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="screen">Màn hình</div>
+    <div id="seat-grid"></div>
+    <div class="info">
+        <span>Lật Mặt 8: Vòng Tay Năng (T13)</span><br>
+        <span>Cinestar Quốc Thanh (TP.HCM)</span><br>
+        <span>Thời gian: 05-10 08:00</span>
+        <span id="total-price">Tổng tiền: 0 VND</span>
+        <button onclick="bookSeats()">Đồng ý</button>
+    </div>
+
+    <script>
+        // Dữ liệu mẫu tĩnh (không lấy từ API)
+        const seatLayout = {
+            "A": [
+                { ten_ghe: "A01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A07", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A08", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A09", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "A15", loai_ghe: "normal", trang_thai: "available" }
+            ],
+            "B": [
+                { ten_ghe: "B01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B07", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B08", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B09", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "B15", loai_ghe: "normal", trang_thai: "available" }
+            ],
+            "C": [
+                { ten_ghe: "C01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C07", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C08", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C09", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "C15", loai_ghe: "normal", trang_thai: "available" }
+            ],
+            "D": [
+                { ten_ghe: "D01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D07", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D08", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D09", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "D15", loai_ghe: "normal", trang_thai: "available" }
+            ],
+            "E": [
+                { ten_ghe: "E01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E07", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E08", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E09", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "E15", loai_ghe: "normal", trang_thai: "available" }
+            ],
+            "F": [
+                { ten_ghe: "F01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F07", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F08", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F09", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "F15", loai_ghe: "normal", trang_thai: "available" }
+            ],
+            "G": [
+                { ten_ghe: "G01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G07", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G08", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G09", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G15", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G16", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "G17", loai_ghe: "normal", trang_thai: "available" }
+            ],
+            "H": [
+                { ten_ghe: "H01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H07", loai_ghe: "normal", trang_thai: "booked" },
+                { ten_ghe: "H08", loai_ghe: "normal", trang_thai: "booked" },
+                { ten_ghe: "H09", loai_ghe: "normal", trang_thai: "booked" },
+                { ten_ghe: "H10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H15", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H16", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "H17", loai_ghe: "normal", trang_thai: "available" }
+            ],
+            "J": [
+                { ten_ghe: "J01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J07", loai_ghe: "normal", trang_thai: "booked" },
+                { ten_ghe: "J08", loai_ghe: "normal", trang_thai: "booked" },
+                { ten_ghe: "J09", loai_ghe: "normal", trang_thai: "booked" },
+                { ten_ghe: "J10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J15", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J16", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "J17", loai_ghe: "normal", trang_thai: "available" }
+            ],
+            "K": [
+                { ten_ghe: "K01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K07", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K08", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K09", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K15", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K16", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "K17", loai_ghe: "normal", trang_thai: "available" }
+            ],
+            "L": [
+                { ten_ghe: "L01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L07", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L08", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L09", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L15", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L16", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "L17", loai_ghe: "normal", trang_thai: "available" }
+            ],
+            "M": [
+                { ten_ghe: "M01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M07", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M08", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M09", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M15", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M16", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "M17", loai_ghe: "normal", trang_thai: "available" }
+            ],
+            "N": [
+                { ten_ghe: "N01", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N02", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N03", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N04", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N05", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N06", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N07", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N08", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N09", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N10", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N11", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N12", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N13", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N14", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N15", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N16", loai_ghe: "normal", trang_thai: "available" },
+                { ten_ghe: "N17", loai_ghe: "normal", trang_thai: "available" }
+            ]
+        };
+
+        let selectedSeats = [];
+
+        // Hiển thị lưới ghế
+        function renderSeatLayout() {
+            const seatGrid = document.getElementById('seat-grid');
+            seatGrid.innerHTML = '';
+
+            Object.keys(seatLayout).forEach(rowName => {
+                const row = seatLayout[rowName];
+                const rowDiv = document.createElement('div');
+                rowDiv.classList.add('seat-row');
+
+                const rowLabel = document.createElement('span');
+                rowLabel.classList.add('row-label');
+                rowLabel.textContent = rowName;
+                rowDiv.appendChild(rowLabel);
+
+                row.forEach(seat => {
+                    const seatDiv = document.createElement('div');
+                    seatDiv.classList.add('seat');
+                    seatDiv.classList.add(seat.trang_thai);
+                    if (seat.loai_ghe.toLowerCase() === 'vip') {
+                        seatDiv.classList.add('vip');
+                    }
+                    seatDiv.textContent = seat.ten_ghe;
+
+                    if (seat.trang_thai === 'available') {
+                        seatDiv.addEventListener('click', () => toggleSeatSelection(seatDiv, seat));
+                    }
+
+                    rowDiv.appendChild(seatDiv);
+                });
+
+                seatGrid.appendChild(rowDiv);
+            });
+        }
+
+        // Chọn/hủy chọn ghế
+        function toggleSeatSelection(seatDiv, seat) {
+            if (seatDiv.classList.contains('selected')) {
+                seatDiv.classList.remove('selected');
+                selectedSeats = selectedSeats.filter(s => s.ten_ghe !== seat.ten_ghe);
+            } else {
+                seatDiv.classList.add('selected');
+                selectedSeats.push(seat);
+            }
+            updateTotalPrice();
+        }
+
+        // Cập nhật tổng tiền
+        function updateTotalPrice() {
+            const pricePerSeat = 50000; // Giả định giá vé
+            const total = selectedSeats.length * pricePerSeat;
+            document.getElementById('total-price').textContent = `Tổng tiền: ${total} VND`;
+        }
+
+        // Xử lý đặt vé
+        function bookSeats() {
+            if (selectedSeats.length === 0) {
+                alert('Vui lòng chọn ít nhất một ghế!');
+                return;
+            }
+            alert(`Đặt vé thành công! Ghế đã chọn: ${selectedSeats.map(s => s.ten_ghe).join(', ')}`);
+        }
+
+        // Tải dữ liệu khi trang được tải
+        renderSeatLayout();
+    </script>
+</body>
+</html>

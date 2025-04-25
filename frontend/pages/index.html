@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinestar - Rạp Chiếu Phim</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/shares/header.css">
+    <link rel="stylesheet" href="../assets/css/shares/admin.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
+    <link rel="stylesheet" href="../assets/css/shares/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body data-page="index">
+    <!-- Placeholder cho header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Placeholder cho sidebar -->
+    <div id="sidebar-placeholder"></div>
+
+    <!-- Nội dung chính của trang -->
+    <main>
+        <!-- Nút chọn rạp -->
+        <div class="theater-selector dropdown">
+            <a href="#" class="dropdown-toggle">Chọn Rạp</a>
+            <div class="dropdown-menu">
+                <div class="theater-list">
+                    <div onclick="selectTheater('CINESTAR Hà Nội')">CINESTAR Hà Nội</div>
+                    <div onclick="selectTheater('CINESTAR TP.HCM')">CINESTAR TP.HCM</div>
+                    <div onclick="selectTheater('CINESTAR Đà Nẵng')">CINESTAR Đà Nẵng</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Banner -->
+        <section class="hero-banner">
+            <div class="banner-container">
+                <div class="banner-arrows">
+                    <button onclick="prevBanner()"><i class="fas fa-chevron-left"></i></button>
+                    <button onclick="nextBanner()"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="banner-content">
+                    <img id="banner-image" src="#" alt="Banner">
+                    <div class="banner-info">
+                        <h1>Âm Dương Lộ</h1>
+                        <p class="movie-genre">Phim kinh dị, Hành động</p>
+                        <div class="rating">
+                            <span>2 giờ 15 phút</span>
+                        </div>
+                        <button onclick="bookTicket()" class="banner-btn">Đặt Vé Ngay</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thanh đặt vé -->
+        <section class="quick-booking">
+            <div class="booking-card">
+                <h2><i class="fas fa-bolt"></i> Đặt Vé Nhanh</h2>
+                <div class="booking-steps">
+                    <div class="booking-step">
+                        <button class="step-btn" id="select-theater">
+                            <span class="step-number">1</span>
+                            <span class="step-label">Chọn Rạp</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="step-dropdown" id="theater-dropdown">
+                            <div onclick="selectTheater('CINESTAR Hà Nội')">CINESTAR Hà Nội</div>
+                            <div onclick="selectTheater('CINESTAR TP.HCM')">CINESTAR TP.HCM</div>
+                            <div onclick="selectTheater('CINESTAR Đà Nẵng')">CINESTAR Đà Nẵng</div>
+                        </div>
+                    </div>
+                    <div class="booking-step">
+                        <button class="step-btn" id="select-movie" disabled>
+                            <span class="step-number">2</span>
+                            <span class="step-label">Chọn Phim</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="step-dropdown" id="movie-dropdown">
+                            <div onclick="selectMovie('Âm Dương Lộ')">Âm Dương Lộ</div>
+                            <div onclick="selectMovie('Phim 2')">Phim 2</div>
+                            <div onclick="selectMovie('Phim 3')">Phim 3</div>
+                        </div>
+                    </div>
+                    <div class="booking-step">
+                        <button class="step-btn" id="select-date" disabled>
+                            <span class="step-number">3</span>
+                            <span class="step-label">Chọn Ngày</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="step-dropdown" id="date-dropdown">
+                            <div onclick="selectDate('01/04/2025')">01/04/2025</div>
+                            <div onclick="selectDate('02/04/2025')">02/04/2025</div>
+                            <div onclick="selectDate('03/04/2025')">03/04/2025</div>
+                        </div>
+                    </div>
+                    <div class="booking-step">
+                        <button class="step-btn" id="select-showtime" disabled>
+                            <span class="step-number">4</span>
+                            <span class="step-label">Chọn Suất</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="step-dropdown" id="showtime-dropdown">
+                            <div onclick="selectShowtime('10:00')">10:00</div>
+                            <div onclick="selectShowtime('14:00')">14:00</div>
+                            <div onclick="selectShowtime('18:00')">18:00</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="book-now-btn" id="book-now" disabled>
+                    <i class="fas fa-ticket-alt"></i> Đặt Ngay
+                </button>
+            </div>
+        </section>
+
+        <!-- Movie Categories -->
+        <section class="movie-categories">
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="showMovies('now-showing')">
+                    <i class="fas fa-play"></i> Phim Đang Chiếu
+                </button>
+            </div>
+            <div id="movie-list-nowShowing" class="movie-grid"></div>
+        </section>
+
+        <!-- Promotions -->
+        <section class="promotions">
+            <h2 class="section-title">Ưu Đãi Đặc Biệt</h2>
+            <div class="promo-slider">
+                <div class="promo-card">
+                    <img src="#" alt="Khuyến mãi 1">
+                    <div class="promo-info">
+                        <h3>Ưu đãi sinh nhật</h3>
+                        <p>Tặng vé xem phim miễn phí cho thành viên vào tháng sinh nhật</p>
+                        <a href="promotions.html" class="promo-btn">Xem chi tiết</a>
+                    </div>
+                </div>
+                <div class="promo-card">
+                    <img src="#" alt="Khuyến mãi 2">
+                    <div class="promo-info">
+                        <h3>Ngày hội thành viên</h3>
+                        <p>Giảm 50% cho thành viên vào thứ Tư hàng tuần</p>
+                        <a href="promotions.html" class="promo-btn">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="footer-container"></footer>
+
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Module: Main khởi tạo layout + auth -->
+    <script type="module" src="/frontend/assets/js/main.js"></script>
+
+    <!-- Sau khi DOM đã có modal, mới load các xử lý phía người dùng -->
+    <script defer src="/frontend/assets/js/user.js"></script>
+    <script defer src="/frontend/assets/js/admin.js"></script>
+    <script defer src="/frontend/assets/js/movie.js"></script>
+    <!-- Cloudflare Security Script -->
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'92989c039bd09c42',t:'MTc0MzUxNTk5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
+</html>

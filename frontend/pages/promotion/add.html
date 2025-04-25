@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm khuyến mãi</title>
+    <link rel="stylesheet" href="/frontend/assets/css/add.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body data-page="promotion-add">
+    <div class="add-promotion-container">
+        <h2>Thêm khuyến mãi</h2>
+
+        <form id="add-promotion-form">
+            <div class="form-group">
+                <label for="ten_khuyen_mai">Tên khuyến mãi:</label>
+                <input type="text" id="ten_khuyen_mai" required />
+            </div>
+
+            <div class="form-group">
+                <label for="mo_ta">Mô tả:</label>
+                <textarea id="mo_ta" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="dieu_kien">Điều kiện:</label>
+                <input type="text" id="dieu_kien" />
+            </div>
+
+            <div class="form-group">
+                <label for="luu_y">Lưu ý:</label>
+                <textarea id="luu_y"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="trang_thai">Trạng thái:</label>
+                <select id="trang_thai" required>
+                    <option value="dang_hoat_dong">Đang hoạt động</option>
+                    <option value="chua_kich_hoat">Chưa kích hoạt</option>
+                    <option value="het_han">Hết hạn</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Link ảnh:</label>
+                <input type="url" id="image" />
+            </div>
+
+            <div class="form-group">
+                <label for="gia_2d">Giá vé 2D:</label>
+                <input type="number" id="gia_2d" />
+            </div>
+
+            <div class="form-group">
+                <label for="gia_3d">Giá vé 3D:</label>
+                <input type="number" id="gia_3d" />
+            </div>
+
+            <div class="form-group">
+                <label for="gio_bat_dau">Giờ bắt đầu:</label>
+                <input type="time" id="gio_bat_dau" />
+            </div>
+
+            <div class="form-group">
+                <label for="gio_ket_thuc">Giờ kết thúc:</label>
+                <input type="time" id="gio_ket_thuc" />
+            </div>
+
+            <div class="form-group">
+                <label for="ngay_trong_tuan">Ngày trong tuần:</label>
+                <input type="text" id="ngay_trong_tuan" placeholder="Ví dụ: Monday, Tuesday..." />
+            </div>
+
+            <div class="form-group">
+                <label for="doi_tuong">Đối tượng áp dụng:</label>
+                <input type="text" id="doi_tuong" />
+            </div>
+
+            <button type="submit">Thêm khuyến mãi</button>
+        </form>
+    </div>
+
+    <script src="/frontend/assets/js/promotion.js"></script>
+</body>
+
+</html>

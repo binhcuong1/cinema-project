@@ -1,0 +1,150 @@
+/* Định dạng container chính */
+.movies-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Định dạng tiêu đề và nút Thêm Phim */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 24px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-movie-btn {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+}
+
+.add-movie-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+}
+
+/* Định dạng breadcrumb */
+.breadcrumb {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.breadcrumb a, .breadcrumb span {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #ff6200;
+}
+
+.breadcrumb span {
+    color: #ff6200;
+}
+
+/* Định dạng nút Xóa trong movie-overlay */
+.movie-overlay .delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.movie-overlay .delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Định dạng form lịch chiếu */
+.schedule-form {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px auto;
+    padding: 20px;
+    background: linear-gradient(to right, #0a0e17, #1a2a44); /* Gradient nền giống header */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Bóng đổ giống header */
+}
+
+/* Định dạng khung cho từng trường */
+.schedule-form .form-group {
+    flex: 1;
+    padding: 10px;
+    background: linear-gradient(to right, #0a0e17, #1a2a44); /* Sửa lỗi cú pháp, sử dụng gradient */
+    border: 1px solid #4a5b7b; /* Viền xanh nhạt */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.schedule-form label {
+    display: flex; /* Sử dụng flexbox để căn chỉnh */
+    justify-content: space-between; /* Đẩy icon sang bên phải */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ff6200; /* Màu chữ trắng */
+}
+
+.schedule-form .label-icon {
+    font-size: 16px; /* Kích thước icon */
+    color: #ff6200; /* Màu cam để nổi bật */
+}
+
+.schedule-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #4a5b7b; /* Đổi viền thành xanh nhạt */
+    border-radius: 5px;
+    background-color: #ffffff; /* Nền xanh đậm */
+    color: #0c0c0c; /* Màu chữ trắng */
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.schedule-form select:focus {
+    border-color: #ff6200;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 98, 0, 0.3);
+}
+
+.schedule-form button {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+}
+
+.schedule-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+}

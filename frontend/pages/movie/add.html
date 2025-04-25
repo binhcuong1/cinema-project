@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm Phim Mới - Cinestar</title>
+    <!-- CSS files -->
+    <link rel="stylesheet" href="/frontend/assets/css/shares/header.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css">
+    <link rel="stylesheet" href="/frontend/assets/css/style.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/movie/add.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body data-page="add">
+    <!-- Placeholder cho header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Placeholder cho sidebar -->
+    <div id="sidebar-placeholder"></div>
+
+    <!-- Main content -->
+    <main class="main-content">
+        <div class="movies-container">
+            <div class="page-header">
+                <h1><i class="fas fa-film"></i> Thêm Phim Mới</h1>
+                <nav class="breadcrumb">
+                    <a href="/frontend/pages/index.html">Trang Chủ</a> /
+                    <a href="/frontend/pages/admin/list.html">Quản Lý Phim</a> /
+                    <span>Thêm Phim Mới</span>
+                </nav>
+            </div>
+
+            <section class="add-movie-section">
+                <div class="form-container">
+                    <form id="add-movie-form" class="add-movie-form" enctype="multipart/form-data">
+                        <div class="form-grid">
+                            <div class="form-column">
+                                <div class="form-group">
+                                    <label for="new-movie-title">Tên phim:</label>
+                                    <input type="text" id="new-movie-title" name="ten_phim" placeholder="Nhập tên phim" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-movie-release-date">Ngày phát hành:</label>
+                                    <input type="date" id="new-movie-release-date" name="ngay_phat_hanh" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-movie-age-restriction">Giới hạn độ tuổi:</label>
+                                    <select id="new-movie-age-restriction" name="gioi_han_tuoi" required>
+                                        <option value="">Chọn giới hạn độ tuổi</option>
+                                        <option value="P">P - Phù hợp mọi lứa tuổi</option>
+                                        <option value="K">K - Khuyến cáo có người lớn đi kèm</option>
+                                        <option value="T13">T13 - Từ 13 tuổi trở lên</option>
+                                        <option value="T16">T16 - Từ 16 tuổi trở lên</option>
+                                        <option value="T18">T18 - Từ 18 tuổi trở lên</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-movie-duration">Thời lượng (phút):</label>
+                                    <input type="number" id="new-movie-duration" name="thoi_luong_phut" placeholder="Ví dụ: 120" required />
+                                </div>
+                            </div>
+                            <div class="form-column">
+                                <div class="form-group">
+                                    <label for="new-movie-description">Mô tả ngắn:</label>
+                                    <textarea id="new-movie-description" name="mo_ta" placeholder="Nhập mô tả ngắn về phim" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-movie-content">Nội dung chi tiết:</label>
+                                    <textarea id="new-movie-content" name="noi_dung_phim" placeholder="Tóm tắt nội dung phim" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group poster-upload">
+                            <label for="new-movie-poster">Ảnh poster:</label>
+                            <div class="poster-preview-container">
+                                <div class="upload-controls">
+                                    <label for="new-movie-poster" class="custom-file-upload">
+                                        <i class="fas fa-upload"></i> Chọn ảnh
+                                    </label>
+                                    <input type="file" id="new-movie-poster" name="poster" accept="image/*" required />
+                                    <p class="file-requirements">Định dạng: JPG, PNG. Kích thước tối đa: 5MB</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="back-btn" onclick="window.location.href='/frontend/pages/movie/list.html'">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </button>
+                            <button type="submit" class="next-btn">
+                                <i class="fas fa-plus-circle"></i> Thêm Phim
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer-container"></footer>
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/frontend/assets/js/main.js"></script>
+    <script src="/frontend/assets/js/admin.js"></script>
+    <script src="/frontend/assets/js/movie.js"></script>
+</body>
+</html>

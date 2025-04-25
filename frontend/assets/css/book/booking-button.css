@@ -1,0 +1,347 @@
+/* Đảm bảo thanh tạm tính luôn nằm ở dưới cùng */
+.summary-bar {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #333;
+    border-radius: 8px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+}
+
+.movies-container {
+    position: relative;
+    padding-bottom: 80px;
+    /* Đảm bảo đủ chỗ cho thanh tạm tính */
+}
+
+.schedule-btn {
+    text-align: center;
+    padding: 10px;
+    border: 2px solid #ff6200;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.schedule-btn.active {
+    background-color: #0a0e17;
+}
+
+/* Thêm CSS cho các nút lịch chiếu */
+.schedule-btn {
+    text-align: center;
+    padding: 10px;
+    border: 2px solid #ff6200;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.schedule-btn.active {
+    background-color: #0a0e17;
+}
+
+/* CSS cho tiêu đề và dropdown thành phố */
+.theater-header {
+    display: flex;
+    justify-content: space-between;
+    /* Tiêu đề bên trái, dropdown bên phải */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.theater-header h3 {
+    margin: 0;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: left;
+    /* Đảm bảo tiêu đề căn lề trái */
+}
+
+/* CSS cho dropdown chọn thành phố */
+.city-dropdown {
+    padding: 8px 15px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background: transparent;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.city-dropdown:hover {
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    color: #ff6200;
+}
+
+.city-dropdown:focus {
+    outline: none;
+    border-color: #1a2a44;
+}
+
+/* CSS cho danh sách rạp dạng dropdown */
+.theater-item {
+    margin-top: 20px;
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.theater-item summary {
+    padding: 15px;
+    font-size: 16px;
+    color: #ff6200;
+    cursor: pointer;
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    transition: background-color 0.3s ease;
+}
+
+.theater-item summary:hover {
+    background-color: #2a3b5a;
+}
+
+.theater-item details[open] summary {
+    background-color: #2a3b5a;
+}
+
+.theater-item .details-content {
+    padding: 15px;
+    color: #fff;
+}
+
+.theater-item p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.showtime-btn {
+    padding: 8px 15px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.showtime-btn:hover {
+    background-color: #ff6200;
+    color: #fff;
+}
+
+.showtime-btn.active {
+    background-color: #ffeb3b;
+    color: #000;
+}
+
+
+
+/* CSS cho phần chọn ghế */
+.seat-selection {
+    margin-top: 30px;
+    color: #fff;
+}
+
+.seat-selection h3 {
+    margin: 0;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.screen {
+    width: 60%;
+    height: 30px;
+    background-color: #ff6200;
+    margin: 20px auto;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.seat-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 5px;
+}
+
+.seat-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.row-label {
+    width: 30px;
+    text-align: center;
+    color: #ff6200;
+    font-weight: bold;
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    background-color: #555;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #fff;
+}
+
+.seat.available:hover {
+    background-color: #777;
+}
+
+.seat.selected {
+    background-color: #ffeb3b;
+    color: #000;
+}
+
+.seat.sold {
+    background-color: #ff0000;
+    cursor: not-allowed;
+}
+
+.seat-labels {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.seat-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.seat-label span {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+}
+
+.seat-label.available span {
+    background-color: #555;
+}
+
+.seat-label.selected span {
+    background-color: #ffeb3b;
+}
+
+.seat-label.sold span {
+    background-color: #ff0000;
+}
+
+/* CSS cho phần chọn loại vé và chọn bắp nước */
+.ticket-selection,
+.snack-selection {
+    margin-top: 30px;
+    color: #fff;
+}
+
+.ticket-selection h3,
+.snack-selection h3 {
+    margin: 0;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.ticket-options,
+.snack-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.ticket-option {
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 150px;
+}
+
+.snack-option {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    padding: 10px;
+    border-radius: 5px;
+    width: 350px;
+}
+
+.snack-option img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+
+.snack-option .info {
+    flex: 1;
+    text-align: left;
+}
+
+.ticket-option p,
+.snack-option p {
+    margin: 5px 0;
+}
+
+.ticket-option .price,
+.snack-option .price {
+    color: #fff;
+    font-weight: bold;
+}
+
+.counter {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.counter button {
+    background-color: #555;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.counter button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+.counter span {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}

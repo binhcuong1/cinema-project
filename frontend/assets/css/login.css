@@ -1,0 +1,278 @@
+/* Modal Authentication Styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-container {
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    /* Giảm chiều rộng vì các trường xếp dọc */
+    width: 90%;
+    position: relative;
+    z-index: 1001;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-overlay.active .auth-container {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.auth-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    /* Để tạo gạch chân */
+}
+
+.auth-container h1.tab {
+    text-align: left;
+    font-size: 20px;
+    color: #666;
+    /* Màu xám đậm hơn khi không được chọn, tăng độ tương phản */
+    margin-bottom: 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    position: relative;
+    /* Để thêm gạch chân */
+    padding-bottom: 5px;
+    /* Khoảng cách cho gạch chân */
+}
+
+.auth-container h1.tab.active {
+    color: #fff;
+    /* Màu trắng khi được chọn */
+    font-weight: bold;
+}
+
+.auth-container h1.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ff6200;
+    /* Gạch chân màu cam khi tab được chọn */
+}
+
+.auth-container h1.tab:hover {
+    color: #ff6200;
+    /* Màu cam khi hover */
+}
+
+.switch-tab {
+    color: #666;
+    /* Màu xám đậm hơn khi không được chọn */
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    position: relative;
+    /* Để thêm gạch chân */
+    padding-bottom: 5px;
+    /* Khoảng cách cho gạch chân */
+}
+
+.switch-tab.active {
+    color: #fff;
+    /* Màu trắng khi được chọn */
+}
+
+.switch-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ff6200;
+    /* Gạch chân màu cam khi tab được chọn */
+}
+
+.switch-tab:hover {
+    color: #ff6200;
+    /* Màu cam khi hover */
+}
+
+.auth-container p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    /* Khoảng cách giữa các trường */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #ff6200;
+}
+
+.auth-container input[type="date"] {
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.close-form-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.close-form-btn:hover {
+    color: #ff6200;
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #ccc;
+}
+
+.eye-icon:hover {
+    color: #ff6200;
+}
+
+.auth-btn {
+    background: #ffd700;
+    color: #1a2a44;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.auth-btn:hover {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+}
+
+.required {
+    color: #ff0000;
+}
+
+.forgot-password {
+    text-align: right;
+    margin: 5px 0 15px;
+    color: #ff6200;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    color: #e55a00;
+}
+
+.switch-form {
+    text-align: center;
+    color: #ccc;
+    text-decoration: none;
+}
+
+.switch-form span {
+    color: #ff6200;
+    font-weight: bold;
+}
+
+.switch-form:hover span {
+    color: #e55a00;
+}
+
+.terms {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.terms input {
+    margin-right: 10px;
+    accent-color: #ff6200;
+}
+
+.terms label {
+    font-weight: normal;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.terms a {
+    color: #ff6200;
+    text-decoration: none;
+}
+
+.terms a:hover {
+    color: #e55a00;
+}
+
+.form-error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 4px;
+}

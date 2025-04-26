@@ -1,5 +1,5 @@
-axios.defaults.baseURL = ' http://localhost:3000';
-import { closeAuthModal } from './auth.js';
+axios.defaults.baseURL = 'http://127.0.0.1:3000';
+import { closeAuthModal, switchToLogin } from './auth.js';
 
 
 // Xử lý đăng nhập

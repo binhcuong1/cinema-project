@@ -90,7 +90,7 @@ function switchToRegister() {
 }
 
 // Chuyển về form đăng nhập
-function switchToLogin() {
+export function switchToLogin() {
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
     const forgotPasswordForm = document.getElementById('forgot-password-form');

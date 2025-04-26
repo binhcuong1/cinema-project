@@ -1,5 +1,5 @@
 const db = require('../config/db'); // kết nối MySQL pool
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 exports.login = (ten_dang_nhap, mat_khau, callback) => {
     const query = 'SELECT * FROM tai_khoan WHERE ten_dang_nhap = ?';

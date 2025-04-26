@@ -1,4 +1,4 @@
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = 'http://127.0.0.1:3000';
 
 // Hàm hiển thị danh sách rạp
 async function renderList() {
@@ -66,20 +66,20 @@ async function submitUpdateTheater(id, form, modal) {
     const formData = new FormData(form);
     console.log("Dữ liệu gửi lên:", [...formData.entries()]); // Log dữ liệu gửi lên
     const response = await axios.put(`/api/theaters/${id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+      headers: { "Content-Type": "multipart/form-data" },
     });
     if (response.status === 200) {
-        alert("Cập nhật rạp thành công!");
-        await renderList();
-        modal.remove();
+      alert("Cập nhật rạp thành công!");
+      await renderList();
+      modal.remove();
     } else {
-        alert("Có lỗi xảy ra khi cập nhật rạp.");
+      alert("Có lỗi xảy ra khi cập nhật rạp.");
     }
-} catch (error) {
+  } catch (error) {
     console.error("Lỗi khi cập nhật rạp:", error);
     const errorMessage = error.response?.data?.error || "Không thể cập nhật rạp.";
     alert("Lỗi: " + (typeof errorMessage === "string" ? errorMessage : JSON.stringify(errorMessage)));
-}
+  }
 }
 
 // Hàm tạo và mở modal thêm/sửa rạp
@@ -113,36 +113,30 @@ async function openTheaterModal(id = null) {
             <form id="theater-form">
                 <div class="input-group">
                     <label for="theater-name">Tên rạp</label>
-                    <input type="text" id="theater-name" name="ten_rap" value="${
-                      theater ? theater.ten_rap : ""
-                    }" placeholder="Nhập tên rạp" required>
+                    <input type="text" id="theater-name" name="ten_rap" value="${theater ? theater.ten_rap : ""
+    }" placeholder="Nhập tên rạp" required>
                 </div>
                 <div class="input-group">
                     <label for="theater-address">Địa chỉ</label>
-                    <input type="text" id="theater-address" name="dia_chi" value="${
-                      theater ? theater.dia_chi : ""
-                    }" placeholder="Nhập địa chỉ" required>
+                    <input type="text" id="theater-address" name="dia_chi" value="${theater ? theater.dia_chi : ""
+    }" placeholder="Nhập địa chỉ" required>
                 </div>
                 <div class="input-group">
                     <label for="theater-phone">Số điện thoại</label>
-                    <input type="text" id="theater-phone" name="sdt" value="${
-                      theater ? theater.sdt : ""
-                    }" placeholder="Nhập số điện thoại" required>
+                    <input type="text" id="theater-phone" name="sdt" value="${theater ? theater.sdt : ""
+    }" placeholder="Nhập số điện thoại" required>
                 </div>
                 <div class="input-group">
                     <label for="theater-image">Hình ảnh</label>
-                    ${
-                      theater && theater.image
-                        ? `<img src="${theater.image}" alt="Hình ảnh hiện tại" style="width: 100px; height: auto; margin-bottom: 10px;">`
-                        : ""
-                    }
-                    <input type="file" id="image" name="image" accept="image/*" ${
-                      id ? "" : "required"
-                    }>
+                    ${theater && theater.image
+      ? `<img src="${theater.image}" alt="Hình ảnh hiện tại" style="width: 100px; height: auto; margin-bottom: 10px;">`
+      : ""
+    }
+                    <input type="file" id="image" name="image" accept="image/*" ${id ? "" : "required"
+    }>
                 </div>
-                <button type="submit" class="auth-btn">${
-                  id ? "Cập Nhật" : "Thêm"
-                }</button>
+                <button type="submit" class="auth-btn">${id ? "Cập Nhật" : "Thêm"
+    }</button>
             </form>
         </div>
     `;

@@ -21,7 +21,7 @@ exports.login = (req, res) => {
         const token = jwt.sign(
             {
                 ma_tai_khoan: user.ma_tai_khoan,
-                role_id: user.role_id // thêm dòng này
+                role_id: user.role_id
             },
             JWT_SECRET,
             { expiresIn: '1h' }

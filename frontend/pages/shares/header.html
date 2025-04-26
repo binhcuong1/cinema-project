@@ -29,9 +29,15 @@
     </div>
     <!-- Phần đăng nhập -->
     <div class="auth">
-        <a class="nav-btn login-btn">
+        <!-- Nút đăng nhập / hiển thị tên -->
+        <button id="auth-btn" class="nav-btn login-btn" onclick="showLoginForm()">
             <i class="fas fa-user"></i> Đăng Nhập
-        </a>
+        </button>
+
+        <!-- Nút đăng xuất -->
+        <button id="logout-btn" class="nav-btn" style="display: none;">
+            <i class="fas fa-sign-out-alt"></i> Đăng Xuất
+        </button>
     </div>
     <div id="auth-container"></div>
 </div>

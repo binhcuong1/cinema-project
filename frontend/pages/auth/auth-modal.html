@@ -1,12 +1,12 @@
 <div class="modal-overlay" id="auth-modal">
     <!-- Form Đăng Nhập -->
     <div class="auth-container" id="login-form" style="display: none;">
-        <button class="close-form-btn" onclick="closeAuthModal()">×</button>
+        <button class="close-form-btn">×</button>
         <div class="auth-tabs">
-            <span class="tab active" onclick="switchToLogin()">ĐĂNG NHẬP</span>
-            <span class="tab" onclick="switchToRegister()">ĐĂNG KÝ</span>
+            <span class="tab active switch-login">ĐĂNG NHẬP</span>
+            <span class="tab switch-register">ĐĂNG KÝ</span>
         </div>
-        <form>
+        <form id="login-form-submit">
             <div class="inputs-row">
                 <div class="input-group">
                     <label for="login-email">Tài khoản, Email hoặc số điện thoại <span class="required">*</span></label>
@@ -20,28 +20,29 @@
                     </div>
                 </div>
             </div>
+            <div id="login-error" class="form-error" style="display: none;"></div>
             <button type="submit" class="auth-btn">ĐĂNG NHẬP</button>
             <div class="form-footer">
                 <div class="terms">
                     <input type="checkbox" id="remember-password">
                     <label for="remember-password">Lưu mật khẩu đăng nhập</label>
                 </div>
-                <button class="google-login-btn" onclick="continueWithGoogle()">
+                <button class="google-login-btn">
                     <i class="fab fa-google"></i> Continue with Google
                 </button>
-                <a href="#" class="forgot-password" onclick="switchToForgotPassword()">Quên mật khẩu?</a>
+                <a href="#" class="forgot-password">Quên mật khẩu?</a>
             </div>
         </form>
     </div>
 
     <!-- Form Đăng Ký -->
     <div class="auth-container" id="register-form" style="display: none;">
-        <button class="close-form-btn" onclick="closeAuthModal()">×</button>
+        <button class="close-form-btn">×</button>
         <div class="auth-tabs">
-            <span class="tab" onclick="switchToLogin()">ĐĂNG NHẬP</span>
-            <span class="tab active" onclick="switchToRegister()">ĐĂNG KÝ</span>
+            <span class="tab switch-login">ĐĂNG NHẬP</span>
+            <span class="tab active switch-register">ĐĂNG KÝ</span>
         </div>
-        <form>
+        <form id="register-form-submit">
             <div class="inputs-row">
                 <div class="input-group">
                     <label for="fullname">Họ và tên</label>
@@ -50,16 +51,13 @@
                 <div class="input-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" placeholder="Nhập Email" required>
+                    <div id="register-error" class="form-error" style="display: none;"></div>
                 </div>
             </div>
             <div class="inputs-row">
                 <div class="input-group">
                     <label for="phone">Số điện thoại</label>
                     <input type="tel" id="phone" placeholder="Nhập Số điện thoại" required>
-                </div>
-                <div class="input-group">
-                    <label for="date">Ngày Sinh</label>
-                    <input type="date" id="date" placeholder="Ngày/Tháng/Năm" required>
                 </div>
             </div>
             <div class="inputs-row">
@@ -89,16 +87,17 @@
 
     <!-- Form Quên Mật Khẩu -->
     <div class="auth-container" id="forgot-password-form" style="display: none;">
-        <button class="close-form-btn" onclick="closeAuthModal()">×</button>
+        <button class="close-form-btn">×</button>
         <div class="auth-tabs">
-            <span class="tab" onclick="switchToLogin()">ĐĂNG NHẬP</span>
+            <span class="tab switch-login">ĐĂNG NHẬP</span>
             <span class="tab">QUÊN MẬT KHẨU?</span>
         </div>
         <p>Vui lòng cung cấp email đăng nhập, chúng tôi sẽ gửi link kích hoạt cho bạn.</p>
-        <form>
+        <form id="forgot-password-form-submit">
             <div class="input-group">
                 <label for="forgot-email">Email</label>
                 <input type="email" id="forgot-email" placeholder="Nhập Email" required>
+                <div id="forgot-error" class="form-error" style="display: none;"></div>
             </div>
             <button type="submit" class="auth-btn">CẬP NHẬT MẬT KHẨU</button>
         </form>

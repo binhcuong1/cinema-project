@@ -1,4 +1,4 @@
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'http://127.0.0.1:3000';
 
 // =================== THÊM KHUYẾN MÃI ===================
 async function submitAddPromotion() {

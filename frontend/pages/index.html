@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinestar - Rạp Chiếu Phim</title>
+    <title>BiCyHD Cinema</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/shares/header.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/header.css">
     <link rel="stylesheet" href="../assets/css/shares/admin.css">
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/login.css">
@@ -23,18 +23,6 @@
 
     <!-- Nội dung chính của trang -->
     <main>
-        <!-- Nút chọn rạp -->
-        <div class="theater-selector dropdown">
-            <a href="#" class="dropdown-toggle">Chọn Rạp</a>
-            <div class="dropdown-menu">
-                <div class="theater-list">
-                    <div onclick="selectTheater('CINESTAR Hà Nội')">CINESTAR Hà Nội</div>
-                    <div onclick="selectTheater('CINESTAR TP.HCM')">CINESTAR TP.HCM</div>
-                    <div onclick="selectTheater('CINESTAR Đà Nẵng')">CINESTAR Đà Nẵng</div>
-                </div>
-            </div>
-        </div>
-
         <!-- Hero Banner -->
         <section class="hero-banner">
             <div class="banner-container">
@@ -156,13 +144,15 @@
     <!-- Scripts -->
     <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <!-- <script src="/frontend/assets/js/auth.js"></script> -->
     <script src="/frontend/assets/js/main.js"></script>
+    <!-- <script src="/frontend/assets/js/auth.js"></script> -->
     <script src="/frontend/assets/js/admin.js"></script>
     <script src="/frontend/assets/js/movie.js"></script>
+    <link rel="stylesheet" href="../assets/css/shares/footer.css">
 
     <!-- Cloudflare Security Script -->
     <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'92989c039bd09c42',t:'MTc0MzUxNTk5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'935c28187f04c016',t:'MTc0NTU2NjQ1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 
 </html>

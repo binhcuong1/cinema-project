@@ -1,37 +1,70 @@
 <div id="header-container" class="fancy-nav">
-    <!-- Logo -->
-    <div class="logo">
-        <a href="/frontend/pages/index.html">
-            <img src="/frontend/assets/images/Screenshot_2025-04-01_204018-removebg-preview.png" alt="Logo">
-        </a>
+    <!-- Hàng trên: Logo, Nút chức năng, Thanh tìm kiếm, Đăng nhập -->
+    <div class="nav-top">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="/frontend/pages/index.html">
+                <img src="/frontend/assets/images/Screenshot_2025-04-01_204018-removebg-preview.png" alt="Logo">
+            </a>
+        </div>
+
+        <!-- Các nút chức năng -->
+        <div class="nav-buttons">
+            <a href="booking.html" class="nav-btn book-ticket">
+                <i class="fas fa-ticket-alt"></i> Đặt Vé Ngay
+            </a>
+            <a href="food.html" class="nav-btn order-food">
+                <i class="fas fa-popcorn"></i> Đặt Bắp Nước
+            </a>
+            <!-- Nút Trang Quản Lý (tùy chọn) -->
+            <button id="adminBtn" class="nav-btn">
+                <i class="fas fa-cogs"></i> Hệ thống
+            </button>
+        </div>
+
+        <!-- Thanh tìm kiếm -->
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm phim, rạp..." id="search-input">
+            <button class="search-btn" id="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+
+        <!-- Phần đăng nhập -->
+        <div class="auth">
+            <a class="nav-btn login-btn">
+                <i class="fas fa-user"></i> Đăng Nhập
+            </a>
+        </div>
     </div>
 
-    <!-- Các liên kết điều hướng -->
-    <div class="dropdown" id="movie-dropdown" style="display: inline-block;">
+    <!-- Hàng dưới: Liên kết điều hướng -->
+    <div class="nav-bottom">
+        <div class="nav-links-left">
+            <!-- Nút Chọn Rạp -->
+            <div class="theater-selector dropdown">
+                <a href="#" class="theater-link">
+                    <i class="fa-solid fa-location-dot"></i> Chọn Rạp
+                </a>
+                <div class="dropdown-menu">
+                    <div class="theater-list">
+                        <div onclick="selectTheater('BCHD Hà Nội')">BCHD Hà Nội</div>
+                        <div onclick="selectTheater('BCHD TP.HCM')">BCHD TP.HCM</div>
+                        <div onclick="selectTheater('BCHD Đà Nẵng')">BCHD Đà Nẵng</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Nút Lịch Chiếu -->
+            <a href="/frontend/pages/booking.html" class="schedule-link">
+                <i class="fa-solid fa-location-dot"></i> Lịch Chiếu
+            </a>
+        </div>
+        <div class="nav-links-right">
+            <!-- Nút Khuyến Mãi -->
+            <a href="/frontend/pages/promotion.html" class="nav-link">Khuyến Mãi</a>
+            <!-- Nút Giới Thiệu -->
+            <a href="#" class="nav-link">Giới Thiệu</a>
+        </div>
     </div>
-    <!-- Các nút chức năng -->
-    <div class="nav-buttons">
-        <a href="booking.html" class="nav-btn book-ticket">
-            <i class="fas fa-ticket-alt"></i> Đặt Vé Ngay
-        </a>
-        <a href="food.html" class="nav-btn order-food">
-            <i class="fas fa-popcorn"></i> Đặt Bắp Nước
-        </a>
-        <!-- Nút Trang Quản Lý -->
-        <button id="adminBtn" class="nav-btn">
-            <i class="fas fa-cogs"></i> Hệ thống
-        </button>
-    </div>
-    <!-- Thanh tìm kiếm -->
-    <div class="search-bar">
-        <input type="text" placeholder="Tìm phim, rạp..." onkeyup="searchMovies()">
-        <button class="search-btn"><i class="fas fa-search"></i></button>
-    </div>
-    <!-- Phần đăng nhập -->
-    <div class="auth">
-        <a class="nav-btn login-btn">
-            <i class="fas fa-user"></i> Đăng Nhập
-        </a>
-    </div>
+
     <div id="auth-container"></div>
+    
 </div>

@@ -1,0 +1,59 @@
+.promo-slider {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.promo-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 30px; /* Tạo khoảng cách giữa hai chương trình khuyến mãi */
+}
+.promo-card.reversed {
+    flex-direction: row-reverse ;
+}
+.promo-info {
+    flex: 1;
+    padding: 0 20px;
+}
+.promo-info h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+.promo-info p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+.promo-info ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+.promo-info ul li {
+    margin: 5px 0;
+}
+.promo-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient nền mặc định */
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+}
+.promo-btn:hover {
+    background: linear-gradient(to right, #0a0e17, #1a2a44); /* Gradient nền khi hover */
+    color: #fff; /* Đổi màu chữ để dễ đọc trên nền tối */
+}
+.promo-image {
+    flex: 1;
+    text-align: center;
+}
+.promo-image img {
+    max-width: 100%;
+    border-radius: 10px;
+}

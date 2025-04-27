@@ -25,3 +25,57 @@
 .dropdown:hover .dropdown-menu {
     display: block; /* Hiển thị menu dropdown khi di chuột vào dropdown */
 }
+
+/* Định dạng chung cho các nút trong theater-actions */
+.theater-actions {
+  display: flex;
+  gap: 10px; /* Khoảng cách giữa các nút */
+  justify-content: center;
+  padding: 10px 0;
+}
+
+/* Định dạng chung cho các nút */
+.theater-actions button {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Khoảng cách giữa icon và chữ */
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+/* Nút "Phòng chiếu" */
+.roomList-btn {
+  background-color: #ff6200; /* Màu cam nổi bật */
+}
+
+/* Nút "Sửa" */
+.edit-btn {
+  background-color: #007bff; /* Màu xanh dương */
+}
+
+/* Nút "Xóa" */
+.delete-btn {
+  background-color: #dc3545; /* Màu đỏ */
+}
+
+/* Hiệu ứng hover */
+.roomList-btn:hover {
+  background-color: #e55a00; /* Màu cam đậm hơn khi hover */
+  transform: scale(1.05);
+}
+
+.edit-btn:hover {
+  background-color: #0056b3; /* Màu xanh dương đậm hơn khi hover */
+  transform: scale(1.05);
+}
+
+.delete-btn:hover {
+  background-color: #c82333; /* Màu đỏ đậm hơn khi hover */
+  transform: scale(1.05);
+}

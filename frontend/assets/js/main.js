@@ -222,4 +222,3 @@ document.addEventListener('DOMContentLoaded', () => {
 window.onload = () => {
     handleGoogleCallback();
 };
-

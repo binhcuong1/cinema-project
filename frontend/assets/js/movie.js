@@ -58,8 +58,32 @@ function renderNowShowingMovie(movie) {
   return movieCard;
 }
 
+function renderComingSoonMovie(movie) {
+  const movieCard = document.createElement("div");
+  movieCard.classList.add("movie-card");
+  movieCard.innerHTML = `
+    <div class="movie-poster">
+      <img src="${movie.image}" alt="${movie.ten_phim}">
+      <div class="movie-overlay">
+        <button onclick="hrefToViewDetail('${movie.ma_phim}')">Chi tiết</button>
+      </div>
+    </div>
+    <div class="movie-info">
+      <h3>${movie.ten_phim}</h3>
+      <div class="movie-meta">
+        <span><i class="fas fa-clock"></i> ${movie.thoi_luong_phut} phút</span>
+      </div>
+    </div>
+  `;
+  return movieCard;
+}
+
 async function fetchNowShowingMovies() {
   await fetchAndRenderMovies("/api/movies/now-showing", "movie-list-nowShowing", renderNowShowingMovie);
+}
+
+async function fetchComingSoonMovies() {
+  await fetchAndRenderMovies("/api/movies/coming-soon", "movie-list-comingSoon", renderComingSoonMovie);
 }
 
 // Hiển thị tất cả phim trong trang quản lý
@@ -339,6 +363,7 @@ window.onload = () => {
   switch (currentPage) {
     case "index":
       fetchNowShowingMovies();
+      fetchComingSoonMovies();
       break;
     case "add":
       const addForm = document.getElementById("add-movie-form");

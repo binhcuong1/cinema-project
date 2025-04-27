@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinestar - Tìm Kiếm Phim</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/shares/header.css">
+    <link rel="stylesheet" href="../assets/css/shares/admin.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
+    <link rel="stylesheet" href="../assets/css/shares/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .search-bar input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+        .search-btn {
+            padding: 10px;
+            background-color: #ffd700;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        .search-btn i {
+            color: #000;
+        }
+        .search-results {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Hiển thị 4 cột */
+            gap: 20px;
+            padding: 20px;
+        }
+        .movie-card {
+            background-color: #1a1a3d;
+            border-radius: 10px;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+        .movie-card img {
+            max-width: 100%;
+            border-radius: 5px;
+            aspect-ratio: 2/3; /* Tỷ lệ poster phim */
+        }
+        .movie-card h4 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .movie-card p {
+            font-size: 14px;
+            color: #ccc;
+        }
+        .search-results p {
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            grid-column: span 4; /* Chiếm toàn bộ 4 cột */
+        }
+    </style>
+</head>
+
+<body data-page="search">
+    <!-- Placeholder cho header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Placeholder cho sidebar -->
+    <div id="sidebar-placeholder"></div>
+
+    <!-- Nội dung chính của trang -->
+    <main>
+        <!-- Thanh tìm kiếm -->
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm phim, rạp..." id="search-input">
+            <button class="search-btn" onclick="searchMovies()"><i class="fas fa-search"></i></button>
+        </div>
+
+        <!-- Khu vực hiển thị kết quả tìm kiếm -->
+        <section class="search-results" id="search-results">
+            <!-- Kết quả tìm kiếm sẽ được hiển thị tại đây -->
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="footer-container"></footer>
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/frontend/assets/js/main.js"></script>
+    <script src="/frontend/assets/js/admin.js"></script>
+    <script src="/frontend/assets/js/movie.js"></script>
+
+    <!-- Logic tìm kiếm -->
+    <script>
+        // Dữ liệu phim giả lập (có thể thay thế bằng API thực tế)
+        const movies = [
+            { title: "Âm Dương Lộ", genre: "Kinh dị, Hành động", image: "/frontend/assets/images/am-duong-lo.jpg" },
+            { title: "Phim 2", genre: "Hài, Tình cảm", image: "/frontend/assets/images/phim2.jpg" },
+            { title: "Phim 3", genre: "Hành động, Phiêu lưu", image: "/frontend/assets/images/phim3.jpg" },
+            { title: "Phim 4", genre: "Khoa học viễn tưởng", image: "/frontend/assets/images/phim4.jpg" },
+            { title: "Phim 5", genre: "Tâm lý, Hành động", image: "/frontend/assets/images/phim5.jpg" },
+        ];
+
+        function searchMovies() {
+            // Lấy giá trị từ thanh tìm kiếm hoặc từ URL query parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            let searchInput = urlParams.get('query') || document.getElementById('search-input').value.trim();
+            if (!searchInput) return; // Không tìm kiếm nếu input rỗng
+
+            searchInput = searchInput.toLowerCase();
+            const searchResults = document.getElementById('search-results');
+
+            // Lọc phim theo tiêu đề hoặc thể loại
+            const filteredMovies = movies.filter(movie =>
+                movie.title.toLowerCase().includes(searchInput) ||
+                movie.genre.toLowerCase().includes(searchInput)
+            );
+
+            // Giới hạn tối đa 4 phim
+            const limitedMovies = filteredMovies.slice(0, 4);
+
+            // Xóa kết quả cũ
+            searchResults.innerHTML = '';
+
+            // Hiển thị kết quả mới
+            if (limitedMovies.length > 0) {
+                limitedMovies.forEach(movie => {
+                    const movieCard = document.createElement('div');
+                    movieCard.classList.add('movie-card');
+                    movieCard.innerHTML = `
+                        <img src="${movie.image}" alt="${movie.title}">
+                        <h4>${movie.title}</h4>
+                        <p>${movie.genre}</p>
+                    `;
+                    searchResults.appendChild(movieCard);
+                });
+            } else {
+                searchResults.innerHTML = '<p>Không tìm thấy phim nào phù hợp.</p>';
+            }
+        }
+
+        // Gọi hàm searchMovies() khi trang tải để hiển thị kết quả từ query parameter
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('query');
+            if (query) {
+                document.getElementById('search-input').value = query; // Điền giá trị query vào input
+                searchMovies();
+            }
+        };
+
+        // Xử lý sự kiện Enter trên input
+        document.getElementById('search-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                searchMovies();
+            }
+        });
+    </script>
+
+    <!-- Cloudflare Security Script -->
+    <script>
+        (function () {
+            function c() {
+                var b = a.contentDocument || a.contentWindow.document;
+                if (b) {
+                    var d = b.createElement('script');
+                    d.innerHTML = "window.__CF$cv$params={r:'935b02e00ed94571',t:'MTc0NTU1NDQ0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                    b.getElementsByTagName('head')[0].appendChild(d);
+                }
+            }
+            if (document.body) {
+                var a = document.createElement('iframe');
+                a.height = 1;
+                a.width = 1;
+                a.style.position = 'absolute';
+                a.style.top = 0;
+                a.style.left = 0;
+                a.style.border = 'none';
+                a.style.visibility = 'hidden';
+                document.body.appendChild(a);
+                if ('loading' !== document.readyState) c();
+                else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c);
+                else {
+                    var e = document.onreadystatechange || function () {};
+                    document.onreadystatechange = function (b) {
+                        e(b);
+                        if ('loading' !== document.readyState) {
+                            document.onreadystatechange = e;
+                            c();
+                        }
+                    };
+                }
+            }
+        })();
+    </script>
+    <script> 
+        (function(){
+            function c(){
+                var b=a.contentDocument||a.contentWindow.document;
+                if(b){
+                    var d=b.createElement('script');
+                    d.innerHTML="window.__CF$cv$params={r:'935b1cd23d8a6779',t:'MTc0NTU1NTUwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                    b.getElementsByTagName('head')[0].appendChild(d);
+                }
+            }
+            if(document.body){
+                var a=document.createElement('iframe');
+                a.height=1;
+                a.width=1;
+                a.style.position='absolute';
+                a.style.top=0;
+                a.style.left=0;
+                a.style.border='none';
+                a.style.visibility='hidden';
+                document.body.appendChild(a);
+                if('loading'!==document.readyState)c();
+                else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);
+                else{
+                    var e=document.onreadystatechange||function(){};
+                    document.onreadystatechange=function(b){
+                        e(b);
+                        if('loading'!==document.readyState){
+                            document.onreadystatechange=e;
+                            c();
+                        }
+                    };
+                }
+            }
+        })();
+    </script>
+    <script>
+        (function(){
+            function c(){
+                var b=a.contentDocument||a.contentWindow.document;
+                if(b){
+                    var d=b.createElement('script');
+                    d.innerHTML="window.__CF$cv$params={r:'935bea7c8cc7bffb',t:'MTc0NTU2MzkyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                    b.getElementsByTagName('head')[0].appendChild(d);
+                }
+            }
+            if(document.body){
+                var a=document.createElement('iframe');
+                a.height=1;
+                a.width=1;
+                a.style.position='absolute';
+                a.style.top=0;
+                a.style.left=0;
+                a.style.border='none';
+                a.style.visibility='hidden';
+                document.body.appendChild(a);
+                if('loading'!==document.readyState)c();
+                else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);
+                else{
+                    var e=document.onreadystatechange||function(){};
+                    document.onreadystatechange=function(b){
+                        e(b);
+                        if('loading'!==document.readyState){
+                            document.onreadystatechange=e;
+                            c();
+                        }
+                    };
+                }
+            }
+        })();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'935c894959db04ef',t:'MTc0NTU3MDQzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>     

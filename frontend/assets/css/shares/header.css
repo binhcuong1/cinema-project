@@ -1,46 +1,54 @@
 /* ĐỊNH DẠNG HEADER VÀ NAV */
 /* Reset và định dạng toàn cục */
 * {
-    margin: 0; /* Xóa lề mặc định */
-    padding: 0; /* Xóa khoảng cách bên trong mặc định */
-    box-sizing: border-box; /* Đảm bảo padding và border không làm tăng kích thước phần tử */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font chữ sử dụng */
-    background-color: #0a0e17; /* Màu nền xanh đen đậm */
-    color: #fff; /* Màu chữ trắng */
-    line-height: 1.6; /* Khoảng cách dòng là 1.6 lần kích thước chữ */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0a0e17;
+    color: #fff;
+    line-height: 1.6;
 }
 
 a {
-    text-decoration: none; /* Bỏ gạch chân mặc định của liên kết */
-    color: inherit; /* Màu chữ kế thừa từ phần tử cha */
+    text-decoration: none;
+    color: inherit;
 }
 
 button {
-    cursor: pointer; /* Con trỏ chuột khi hover lên nút */
-    border: none; /* Bỏ viền mặc định */
-    outline: none; /* Bỏ đường viền khi focus */
+    cursor: pointer;
+    border: none;
+    outline: none;
 }
 
-/* Thanh điều hướng đẹp mắt (Fancy Navigation Bar) */
+/* Thanh điều hướng đẹp mắt */
 .fancy-nav {
-    display: flex; /* Sử dụng flexbox để xếp ngang các phần tử */
-    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
-    justify-content: space-between; /* Căn đều các phần tử, khoảng cách tối ưu */
-    padding: 15px 40px; /* Khoảng cách bên trong: 15px trên/dưới, 40px trái/phải */
-    background: linear-gradient(to right, #0a0e17, #1a2a44); /* Gradient nền từ xanh đen sang xanh đậm */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Bóng đổ */
-    position: sticky; /* Thanh nav cố định khi cuộn */
-    top: 0; /* Cố định ở đầu trang */
-    z-index: 1000; /* Độ ưu tiên hiển thị cao */
+    position: fixed; /* Cố định luôn trên màn hình, giống Facebook/Shopee */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    padding: 15px 40px;
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Hàng trên: Logo, Thanh tìm kiếm, Nút chức năng */
+.nav-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 10px;
 }
 
 .logo img {
-    height: 90px; /* Chiều cao logo là 50px */
-    /* width: auto; */
-    transition: transform 0.3s ease, filter 0.3s ease; /* Hiệu ứng phóng to mượt mà trong 0.3 giây */
+    height: 90px;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .logo img:hover {
@@ -48,185 +56,159 @@ button {
     filter: brightness(1.2);
 }
 
-/* Thêm hiệu ứng khi chuột rời khỏi logo */
 .logo img:not(:hover) {
-    transform: scale(1); /* Trở về kích thước ban đầu */
-    filter: brightness(1); /* Trở về độ sáng ban đầu */
-}
-
-.nav-links {
-    display: flex; /* Sử dụng flexbox để xếp ngang các liên kết */
-    gap: 30px; /* Khoảng cách giữa các liên kết là 30px */
-}
-
-.nav-links a {
-    color: #fff; /* Màu chữ trắng */
-    font-weight: 500; /* Độ đậm chữ trung bình */
-    font-size: 16px; /* Kích thước chữ là 16px */
-    position: relative; /* Định vị tương đối để thêm hiệu ứng gạch chân */
-    padding: 5px 0; /* Khoảng cách trên/dưới là 5px */
-    transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà trong 0.3 giây */
-}
-
-.nav-links a:after {
-    content: ''; /* Tạo phần tử giả để làm gạch chân */
-    position: absolute; /* Định vị tuyệt đối dưới liên kết */
-    width: 0; /* Chiều rộng ban đầu là 0 */
-    height: 2px; /* Chiều cao gạch chân là 2px */
-    bottom: 0; /* Đặt ở dưới cùng của liên kết */
-    left: 0; /* Căn trái */
-    background-color: #ff6200; /* Màu gạch chân là cam */
-    transition: width 0.3s ease; /* Hiệu ứng mở rộng chiều rộng trong 0.3 giây */
-}
-
-.nav-links a:hover {
-    color: #ff6200; /* Đổi màu chữ thành cam khi hover */
-}
-
-.nav-links a:hover:after {
-    width: 100%; /* Mở rộng gạch chân ra 100% khi hover */
-}
-
-.nav-buttons {
-    display: flex; /* Sử dụng flexbox để xếp ngang các nút */
-    gap: 15px; /* Khoảng cách giữa các nút là 15px */
-}
-
-.nav-btn {
-    padding: 10px 20px; /* Khoảng cách bên trong: 10px trên/dưới, 20px trái/phải */
-    border-radius: 50px; /* Bo góc tròn hoàn toàn */
-    font-weight: 600; /* Chữ đậm */
-    font-size: 14px; /* Kích thước chữ là 14px */
-    display: flex; /* Sử dụng flexbox để căn giữa icon và chữ */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    gap: 8px; /* Khoảng cách giữa icon và chữ là 8px */
-    transition: all 0.3s ease; /* Hiệu ứng mượt mà trong 0.3 giây */
-}
-
-
-.book-ticket {
-    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient từ cam đậm sang cam nhạt */
-    color: white; /* Màu chữ trắng */
-    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3); /* Bóng đổ màu cam nhạt */
-}
-
-.book-ticket:hover {
-    transform: translateY(-2px); /* Nâng nút lên 2px khi hover */
-    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5); /* Bóng đổ đậm hơn khi hover */
-}
-
-.order-food {
-    background: linear-gradient(45deg, #4b6cb7, #182848); /* Gradient từ xanh dương nhạt sang xanh đậm */
-    color: white; /* Màu chữ trắng */
-    box-shadow: 0 4px 15px rgba(75, 108, 183, 0.3); /* Bóng đổ màu xanh nhạt */
-}
-
-.order-food:hover {
-    transform: translateY(-2px); /* Nâng nút lên 2px khi hover */
-    box-shadow: 0 6px 20px rgba(75, 108, 183, 0.5); /* Bóng đổ đậm hơn khi hover */
+    transform: scale(1);
+    filter: brightness(1);
 }
 
 .search-bar {
-    display: flex; /* Sử dụng flexbox để xếp ngang ô nhập và nút tìm kiếm */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    background-color: rgba(255, 255, 255, 0.1); /* Màu nền trắng mờ */
-    border-radius: 50px; /* Bo góc tròn hoàn toàn */
-    padding: 5px 15px; /* Khoảng cách bên trong: 5px trên/dưới, 15px trái/phải */
-    transition: all 0.3s ease; /* Hiệu ứng mượt mà trong 0.3 giây */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Đường viền trắng mờ nhạt */
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 5px 15px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 20px;
+    width: 250px;
 }
 
 .search-bar:focus-within {
-    background-color: rgba(255, 255, 255, 0.15); /* Màu nền sáng hơn khi focus */
-    border-color: rgba(255, 255, 255, 0.2); /* Đường viền sáng hơn khi focus */
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .search-bar input {
-    background: transparent; /* Nền trong suốt */
-    border: none; /* Bỏ viền */
-    padding: 8px 10px; /* Khoảng cách bên trong: 8px trên/dưới, 10px trái/phải */
-    width: 180px; /* Chiều rộng ô nhập là 180px */
-    color: #fff; /* Màu chữ trắng */
-    font-size: 14px; /* Kích thước chữ là 14px */
-    outline: none; /* Bỏ đường viền khi focus */
+    background: transparent;
+    border: none;
+    padding: 8px 10px;
+    width: 100%;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
 }
 
 .search-bar input::placeholder {
-    color: rgba(255, 255, 255, 0.6); /* Màu chữ placeholder trắng mờ */
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .search-btn {
-    background: none; /* Không có nền */
-    border: none; /* Bỏ viền */
-    color: rgba(255, 255, 255, 0.6); /* Màu icon trắng mờ */
-    font-size: 16px; /* Kích thước icon là 16px */
-    padding: 5px; /* Khoảng cách bên trong là 5px */
-    transition: color 0.3s ease; /* Hiệu ứng đổi màu trong 0.3 giây */
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+    padding: 5px;
+    transition: color 0.3s ease;
 }
 
 .search-btn:hover {
-    color: #ff6200; /* Đổi màu icon thành cam khi hover */
+    color: #ff6200;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+    margin-right: 20px;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.book-ticket {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+}
+
+.book-ticket:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+}
+
+.order-food {
+    background: linear-gradient(45deg, #4b6cb7, #182848);
+    color: white;
+    box-shadow: 0 4px 15px rgba(75, 108, 183, 0.3);
+}
+
+.order-food:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(75, 108, 183, 0.5);
 }
 
 .login-btn {
-    background: linear-gradient(45deg, #304352, #4a5564); /* Gradient từ xanh xám sang xám đậm */
-    color: white; /* Màu chữ trắng */
-    box-shadow: 0 4px 15px rgba(48, 67, 82, 0.3); /* Bóng đổ màu xanh xám nhạt */
+    background: linear-gradient(45deg, #304352, #4a5564);
+    color: white;
+    box-shadow: 0 4px 15px rgba(48, 67, 82, 0.3);
 }
 
 .login-btn:hover {
-    transform: translateY(-2px); /* Nâng nút lên 2px khi hover */
-    box-shadow: 0 6px 20px rgba(48, 67, 82, 0.5); /* Bóng đổ đậm hơn khi hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(48, 67, 82, 0.5);
 }
 
-/* Đoạn CSS bạn đã có giữ nguyên */
-
-/* Thêm CSS cho phần dropdown menu */
-.dropdown {
-    position: relative;
-    display: inline-block;
+/* Hàng dưới: Chọn Rạp, Lịch Chiếu (trái) và Khuyến Mãi, Giới Thiệu (phải) */
+.nav-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
-.dropdown-toggle {
+.nav-links-left, .nav-links-right {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-links-left a, .nav-links-right a {
     color: #fff;
     font-weight: 500;
     font-size: 16px;
     position: relative;
     padding: 5px 0;
     transition: all 0.3s ease;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
-.dropdown-toggle:after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #ff6200;
-    transition: width 0.3s ease;
-}
-
-.dropdown-toggle:hover {
+.nav-links-left a:hover, .nav-links-right a:hover {
     color: #ff6200;
 }
 
-.dropdown-toggle:hover:after {
-    width: 100%;
+/* CSS cho dropdown menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    height: 100%;
 }
 
-/* Thêm icon mũi tên xuống cho dropdown */
-.dropdown-toggle::before {
-    content: '\f107'; /* Icon mũi tên xuống từ Font Awesome */
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    margin-left: 5px;
-    transition: transform 0.3s ease;
+.theater-link {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 5px 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
 }
 
-.dropdown:hover .dropdown-toggle::before {
-    transform: rotate(180deg); /* Xoay mũi tên khi hover */
+.theater-link i {
+    margin-right: 8px;
+}
+
+.theater-link:hover {
+    color: #fff;
 }
 
 .dropdown-menu {
@@ -252,26 +234,25 @@ button {
     transform: translateY(0);
 }
 
-.dropdown-menu a {
+.dropdown-menu div {
     display: block;
-    padding: 12px 15px;
+    padding: 10px 15px;
     color: #fff;
     font-size: 14px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.dropdown-menu a:last-child {
+.dropdown-menu div:last-child {
     border-bottom: none;
 }
 
-.dropdown-menu a:hover {
-    background-color: rgba(255, 98, 0, 0.1);
+.dropdown-menu div:hover {
+    background-color: linear-gradient(to bottom, #1a2a44, #0a0e17);
     color: #ff6200;
-    padding-left: 20px; /* Hiệu ứng trượt khi hover */
 }
 
-/* Thêm mũi tên chỉ lên menu dropdown */
 .dropdown-menu:before {
     content: '';
     position: absolute;
@@ -282,4 +263,35 @@ button {
     background: #1a2a44;
     transform: rotate(45deg);
     z-index: -1;
+}
+
+.nav-links-left i, .nav-links-right i {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+}
+
+body, #header-placeholder {
+    overflow: visible;
+    height: auto;
+}
+
+.fancy-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 40px;
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    position: fixed; /* Thay đổi về fixed để đảm bảo luôn ở đầu */
+    top: 0;
+}
+
+body, #header-placeholder {
+    overflow: visible;
+    height: auto;
+}
+
+main {
+    margin-top: 150px; /* Tuỳ vào chiều cao header thực tế */
 }

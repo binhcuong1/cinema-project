@@ -17,7 +17,8 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-    max-width: 400px; /* Giảm chiều rộng vì các trường xếp dọc */
+    max-width: 400px;
+    /* Giảm chiều rộng vì các trường xếp dọc */
     width: 90%;
     position: relative;
     z-index: 1001;
@@ -40,22 +41,27 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    position: relative; /* Để tạo gạch chân */
+    position: relative;
+    /* Để tạo gạch chân */
 }
 
 .auth-container h1.tab {
     text-align: left;
     font-size: 20px;
-    color: #666; /* Màu xám đậm hơn khi không được chọn, tăng độ tương phản */
+    color: #666;
+    /* Màu xám đậm hơn khi không được chọn, tăng độ tương phản */
     margin-bottom: 0;
     cursor: pointer;
     transition: color 0.3s ease;
-    position: relative; /* Để thêm gạch chân */
-    padding-bottom: 5px; /* Khoảng cách cho gạch chân */
+    position: relative;
+    /* Để thêm gạch chân */
+    padding-bottom: 5px;
+    /* Khoảng cách cho gạch chân */
 }
 
 .auth-container h1.tab.active {
-    color: #fff; /* Màu trắng khi được chọn */
+    color: #fff;
+    /* Màu trắng khi được chọn */
     font-weight: bold;
 }
 
@@ -66,25 +72,31 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background: #ff6200; /* Gạch chân màu cam khi tab được chọn */
+    background: #ff6200;
+    /* Gạch chân màu cam khi tab được chọn */
 }
 
 .auth-container h1.tab:hover {
-    color: #ff6200; /* Màu cam khi hover */
+    color: #ff6200;
+    /* Màu cam khi hover */
 }
 
 .switch-tab {
-    color: #666; /* Màu xám đậm hơn khi không được chọn */
+    color: #666;
+    /* Màu xám đậm hơn khi không được chọn */
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
     transition: color 0.3s ease;
-    position: relative; /* Để thêm gạch chân */
-    padding-bottom: 5px; /* Khoảng cách cho gạch chân */
+    position: relative;
+    /* Để thêm gạch chân */
+    padding-bottom: 5px;
+    /* Khoảng cách cho gạch chân */
 }
 
 .switch-tab.active {
-    color: #fff; /* Màu trắng khi được chọn */
+    color: #fff;
+    /* Màu trắng khi được chọn */
 }
 
 .switch-tab.active::after {
@@ -94,11 +106,13 @@
     left: 0;
     width: 100%;
     height: 2px;
-    background: #ff6200; /* Gạch chân màu cam khi tab được chọn */
+    background: #ff6200;
+    /* Gạch chân màu cam khi tab được chọn */
 }
 
 .switch-tab:hover {
-    color: #ff6200; /* Màu cam khi hover */
+    color: #ff6200;
+    /* Màu cam khi hover */
 }
 
 .auth-container p {
@@ -113,7 +127,8 @@
 }
 
 .input-group {
-    margin-bottom: 15px; /* Khoảng cách giữa các trường */
+    margin-bottom: 15px;
+    /* Khoảng cách giữa các trường */
 }
 
 .input-group label {
@@ -254,4 +269,10 @@
 
 .terms a:hover {
     color: #e55a00;
+}
+
+.form-error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 4px;
 }

@@ -9,20 +9,41 @@ function initializeAuthModal() {
 
         axios.get('http://127.0.0.1:5500/frontend/pages/auth/auth-modal.html')
             .then(response => {
-                const html = response.data;
-                authContainer.innerHTML = html;
+                authContainer.innerHTML = response.data;
 
-                // Gắn sự kiện cho icon mắt (eye-icon)
-                document.querySelectorAll('.eye-icon').forEach(icon => {
-                    icon.addEventListener('click', () => {
-                        const input = icon.parentElement.querySelector('input');
-                        const isPassword = input.type === 'password';
-                        input.type = isPassword ? 'text' : 'password';
-                        icon.innerHTML = `<span class="eye-icon"><i class="fas fa-eye${isPassword ? '-slash' : ''}"></i></span>`;
+                // Đợi DOM cập nhật rồi mới gắn sự kiện
+                requestAnimationFrame(() => {
+                    // Mắt hiện/ẩn mật khẩu
+                    document.querySelectorAll('.eye-icon').forEach(icon => {
+                        icon.addEventListener('click', () => {
+                            const input = icon.parentElement.querySelector('input');
+                            const isPassword = input.type === 'password';
+                            input.type = isPassword ? 'text' : 'password';
+                            icon.innerHTML = `<span class="eye-icon"><i class="fas fa-eye${isPassword ? '-slash' : ''}"></i></span>`;
+                        });
                     });
-                });
 
-                resolve();
+                    // TẮT modal
+                    document.querySelectorAll('.close-form-btn')?.forEach(btn =>
+                        btn.addEventListener('click', closeAuthModal)
+                    );
+
+                    // Gắn đúng cho tất cả form có nút này
+                    document.querySelectorAll('.switch-login')?.forEach(btn =>
+                        btn.addEventListener('click', switchToLogin)
+                    );
+                    document.querySelectorAll('.switch-register')?.forEach(btn =>
+                        btn.addEventListener('click', switchToRegister)
+                    );
+                    document.querySelectorAll('.forgot-password')?.forEach(link =>
+                        link.addEventListener('click', switchToForgotPassword)
+                    );
+                    document.querySelectorAll('.google-login-btn')?.forEach(btn =>
+                        btn.addEventListener('click', continueWithGoogle)
+                    );
+
+                    resolve();
+                });
             })
             .catch(error => {
                 console.error('Lỗi khi tải modal:', error);
@@ -30,6 +51,7 @@ function initializeAuthModal() {
             });
     });
 }
+
 
 // Hiển thị modal và form đăng nhập
 function showLoginForm() {
@@ -95,8 +117,7 @@ function switchToForgotPassword() {
     document.querySelector('#forgot-password-form .tab:nth-child(2)').classList.add('active');
 }
 
-// Đóng modal
-function closeAuthModal() {
+export function closeAuthModal() {
     const modal = document.getElementById('auth-modal');
     modal.classList.remove('active');
     document.getElementById('login-form').style.display = 'none';
@@ -106,14 +127,15 @@ function closeAuthModal() {
 
 // Đăng nhập bằng Google
 function continueWithGoogle() {
-    const clientId = 'YOUR_CLIENT_ID.apps.googleusercontent.com';
-    const redirectUri = 'http://localhost:3000/auth/google/callback';
+    const clientId = '645538866530-ntui5qvddhtr4dgiohal1nooj59t4q6h.apps.googleusercontent.com';
+    const redirectUri = 'http://127.0.0.1:3000/api/auth/google/callback';
     const scope = 'profile email';
     const responseType = 'code';
 
     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&access_type=offline&prompt=consent`;
     window.location.href = authUrl;
 }
+
 
 // Xử lý callback Google
 function handleGoogleCallback() {
@@ -128,4 +150,9 @@ function handleGoogleCallback() {
 // Khởi tạo
 window.onload = () => {
     handleGoogleCallback();
+};
+
+export {
+    initializeAuthModal,
+    showLoginForm
 };

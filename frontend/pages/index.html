@@ -4,22 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BiCyHD Cinema - Đặt vé xem phim nhanh chóng, ưu đãi hấp dẫn. Xem lịch chiếu phim mới nhất tại các rạp trên toàn quốc.">
+    <meta name="keywords" content="đặt vé xem phim, lịch chiếu phim, rạp chiếu phim, BiCyHD Cinema">
+    <meta property="og:title" content="BiCyHD Cinema">
+    <meta property="og:description" content="Đặt vé xem phim nhanh chóng tại BiCyHD Cinema.">
+    <meta property="og:image" content="/frontend/assets/images/logo.jpg">
     <title>BiCyHD Cinema</title>
+    <!-- Favicon -->
+    <link rel="icon" href="/frontend/assets/images/favicon.ico" type="image/x-icon">
     <!-- CSS -->
     <link rel="stylesheet" href="/frontend/assets/css/shares/header.css">
-    <link rel="stylesheet" href="../assets/css/shares/admin.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/login.css">
-    <link rel="stylesheet" href="../assets/css/shares/footer.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css">
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="/frontend/assets/css/login.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body data-page="index">
     <!-- Placeholder cho header -->
-    <div id="header-placeholder"></div>
+    <div id="header-placeholder">
+        <header>Header mặc định nếu JavaScript không tải</header>
+    </div>
 
     <!-- Placeholder cho sidebar -->
-    <div id="sidebar-placeholder"></div>
+    <div id="sidebar-placeholder">
+        <aside>Sidebar mặc định nếu JavaScript không tải</aside>
+    </div>
 
     <!-- Nội dung chính của trang -->
     <main>
@@ -31,7 +42,7 @@
                     <button onclick="nextBanner()"><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="banner-content">
-                    <img id="banner-image" src="/frontend/assets/images/panner-am-duon-lo.png" alt="Banner">
+                    <img id="banner-image" src="/frontend/assets/images/panner-am-duon-lo.png" alt="Banner phim Âm Dương Lộ">
                     <div class="banner-info">
                         <h1>Âm Dương Lộ</h1>
                         <p class="movie-genre">Phim kinh dị, Hành động</p>
@@ -104,14 +115,28 @@
             </div>
         </section>
 
+        <br>
         <!-- Movie Categories -->
-        <section class="movie-categories">
+        <section class="movie-categories-nowShowing">
             <div class="category-tabs">
-                <button class="category-tab active" onclick="showMovies('now-showing')">
+                <button class="category-tab active">
                     <i class="fas fa-play"></i> Phim Đang Chiếu
                 </button>
             </div>
-            <div id="movie-list-nowShowing" class="movie-grid"></div>
+            <div id="movie-list-nowShowing" class="movie-grid">
+                <p class="loading">Đang tải phim...</p>
+            </div>
+        </section>
+        <br>
+        <section class="movie-categories-comingSoon">
+            <div class="category-tabs">
+                <button class="category-tab active">
+                    <i class="fas fa-play"></i> Phim Sắp Chiếu
+                </button>
+            </div>
+            <div id="movie-list-comingSoon" class="movie-grid">
+                <p class="loading">Đang tải phim...</p>
+            </div>
         </section>
 
         <!-- Promotions -->
@@ -119,7 +144,7 @@
             <h2 class="section-title">Ưu Đãi Đặc Biệt</h2>
             <div class="promo-slider">
                 <div class="promo-card">
-                    <img src="#" alt="Khuyến mãi 1">
+                    <img src="/frontend/assets/images/promo1.jpg" alt="Ưu đãi sinh nhật tặng vé miễn phí">
                     <div class="promo-info">
                         <h3>Ưu đãi sinh nhật</h3>
                         <p>Tặng vé xem phim miễn phí cho thành viên vào tháng sinh nhật</p>
@@ -127,7 +152,7 @@
                     </div>
                 </div>
                 <div class="promo-card">
-                    <img src="#" alt="Khuyến mãi 2">
+                    <img src="/frontend/assets/images/promo2.jpg" alt="Ngày hội thành viên giảm 50% thứ Tư">
                     <div class="promo-info">
                         <h3>Ngày hội thành viên</h3>
                         <p>Giảm 50% cho thành viên vào thứ Tư hàng tuần</p>
@@ -139,12 +164,9 @@
     </main>
 
     <!-- FOOTER -->
-    <footer id="footer-container"></footer>
-
-    <!-- FontAwesome -->
-    <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
-    <script src="/frontend/assets/js/movie.js"></script>
-    <link rel="stylesheet" href="../assets/css/shares/footer.css">
+    <footer id="footer-container">
+        <p>Footer mặc định nếu JavaScript không tải</p>
+    </footer>
 
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -155,8 +177,9 @@
     <!-- Sau khi DOM đã có modal, mới load các xử lý phía người dùng -->
     <script defer src="/frontend/assets/js/user.js"></script>
     <script defer src="/frontend/assets/js/admin.js"></script>
+    <script defer src="/frontend/assets/js/movie.js"></script>
+
     <!-- Cloudflare Security Script -->
-    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'92989c039bd09c42',t:'MTc0MzUxNTk5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
     <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'935c28187f04c016',t:'MTc0NTU2NjQ1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 

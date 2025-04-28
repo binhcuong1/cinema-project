@@ -286,12 +286,39 @@
     color: #ff6200;
 }
 
+.movie-grid-container {
+    max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+    margin: 0 auto; /* Căn giữa container trên trang */
+    padding: 0 15px; /* Thêm padding để không sát mép */
+}
+
+/* Ẩn thanh cuộn nhưng vẫn cho phép cuộn */
+.movie-grid::-webkit-scrollbar {
+    display: none;
+}
+
 /* Định dạng lưới phim */
 .movie-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
+    display: flex; /* Chuyển sang flex để xếp ngang */
+    flex-wrap: nowrap; /* Không cho phép xuống dòng */
+    gap: 15px; /* Giữ khoảng cách giữa các thẻ phim */
     padding: 15px;
+    overflow-x: auto; /* Cho phép cuộn ngang */
+    scroll-snap-type: x mandatory; /* Tùy chọn: cuộn theo từng thẻ phim */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    justify-content: center; /* Căn giữa các thẻ phim */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+@media (max-width: 768px) {
+    .movie-card {
+        flex: 0 0 200px; /* Giảm kích thước trên mobile */
+    }
+    .movie-poster img {
+        height: 300px; /* Giảm chiều cao hình ảnh trên mobile */
+    }
 }
 
 .movie-card {
@@ -299,6 +326,7 @@
     overflow: hidden;
     border-radius: 8px;
     transition: transform 0.3s ease;
+    flex: 0 0 250px; /* Cố định chiều rộng 200px */
 }
 
 .movie-card:hover {
@@ -306,9 +334,9 @@
 }
 
 .movie-poster img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+    width: 100%; /* Hình ảnh chiếm toàn bộ chiều rộng của thẻ */
+    height: 350px; /* Cố định chiều cao hình ảnh */
+    object-fit: cover; /* Đảm bảo hình ảnh không méo */
     border-radius: 8px;
 }
 
@@ -353,7 +381,7 @@
 }
 
 .movie-info h3 {
-    font-size: 14px;
+    font-size: 18px;
     margin-bottom: 5px;
     color: #fff;
 }

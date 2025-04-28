@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BiCyHD Cinema - Đặt vé xem phim nhanh chóng, ưu đãi hấp dẫn. Xem lịch chiếu phim mới nhất tại các rạp trên toàn quốc.">
+    <meta name="description"
+        content="BiCyHD Cinema - Đặt vé xem phim nhanh chóng, ưu đãi hấp dẫn. Xem lịch chiếu phim mới nhất tại các rạp trên toàn quốc.">
     <meta name="keywords" content="đặt vé xem phim, lịch chiếu phim, rạp chiếu phim, BiCyHD Cinema">
     <meta property="og:title" content="BiCyHD Cinema">
     <meta property="og:description" content="Đặt vé xem phim nhanh chóng tại BiCyHD Cinema.">
@@ -42,7 +43,8 @@
                     <button onclick="nextBanner()"><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="banner-content">
-                    <img id="banner-image" src="/frontend/assets/images/panner-am-duon-lo.png" alt="Banner phim Âm Dương Lộ">
+                    <img id="banner-image" src="/frontend/assets/images/panner-am-duon-lo.png"
+                        alt="Banner phim Âm Dương Lộ">
                     <div class="banner-info">
                         <h1>Âm Dương Lộ</h1>
                         <p class="movie-genre">Phim kinh dị, Hành động</p>
@@ -115,7 +117,6 @@
             </div>
         </section>
 
-        <br>
         <!-- Movie Categories -->
         <section class="movie-categories-nowShowing">
             <div class="category-tabs">
@@ -123,19 +124,22 @@
                     <i class="fas fa-play"></i> Phim Đang Chiếu
                 </button>
             </div>
-            <div id="movie-list-nowShowing" class="movie-grid">
-                <p class="loading">Đang tải phim...</p>
+            <div class="movie-grid-container"> <!-- Thêm container mới -->
+                <div id="movie-list-nowShowing" class="movie-grid">
+                    <p class="loading">Đang tải phim...</p>
+                </div>
             </div>
         </section>
-        <br>
         <section class="movie-categories-comingSoon">
             <div class="category-tabs">
                 <button class="category-tab active">
                     <i class="fas fa-play"></i> Phim Sắp Chiếu
                 </button>
             </div>
-            <div id="movie-list-comingSoon" class="movie-grid">
-                <p class="loading">Đang tải phim...</p>
+            <div class="movie-grid-container"> <!-- Thêm container mới -->
+                <div id="movie-list-comingSoon" class="movie-grid">
+                    <p class="loading">Đang tải phim...</p>
+                </div>
             </div>
         </section>
 
@@ -182,7 +186,7 @@
     <!-- <script defer src="/frontend/assets/js/movie.js"></script> -->
 
     <!-- Cloudflare Security Script -->
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'935c28187f04c016',t:'MTc0NTU2NjQ1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'935c28187f04c016',t:'MTc0NTU2NjQ1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
 </body>
 
 </html>

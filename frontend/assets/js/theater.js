@@ -17,7 +17,7 @@ function createTheaterCard(theater) {
         <p><i class="fas fa-map-marker-alt"></i> ${theater.dia_chi}</p>
       </div>
       <div class="theater-actions">
-        <button class="roomList-btn" onclick="openRoomList('${theater.ma_rap}')"><i class="fas fa-door-open"></i> Phòng chiếu</button>
+        <button class="roomList-btn" onclick="hrefToRoomList('${theater.ma_rap}')"><i class="fas fa-door-open"></i> Phòng chiếu</button>
         <button class="edit-btn" onclick="editTheater('${theater.ma_rap}')"><i class="fas fa-edit"></i> Sửa</button>
         <button class="delete-btn" onclick="deleteTheater('${theater.ma_rap}', ${theater.da_xoa})"><i class="fas fa-trash-alt"></i> Xóa</button>
       </div>
@@ -226,6 +226,14 @@ async function openTheaterModal(id = null) {
       await submitAddTheater(form, modal);
     }
   });
+}
+
+//#endregion
+
+//#region === Khu vực Xử Lý Phòng Chiếu ===
+
+function hrefToRoomList(theaterID) {
+  window.location.href = `/frontend/pages/room/room.html?id=${theaterID}`;
 }
 
 //#endregion

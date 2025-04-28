@@ -31,7 +31,7 @@ body {
   padding: 20px;
   transform: translateX(-100%); /* Ẩn sidebar mặc định */
   transition: transform 0.3s ease; /* Hiệu ứng mượt mà */
-  z-index: 1000;
+  z-index: 2100;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3); /* Thêm bóng đổ */
 }
 

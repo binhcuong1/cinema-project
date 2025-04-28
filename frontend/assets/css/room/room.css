@@ -1,0 +1,317 @@
+/* #region Khu vực Container Chính */
+/* Container chính chứa toàn bộ nội dung của trang quản lý phòng chiếu */
+.room-container {
+  max-width: 1200px; /* Giới hạn chiều rộng tối đa của container */
+  margin: 20px auto; /* Căn giữa container và tạo khoảng cách trên/dưới */
+  padding: 20px; /* Khoảng cách bên trong container */
+}
+/* #endregion */
+
+/* #region Khu vực Header của Trang */
+/* Header chứa tiêu đề và các nút điều hướng */
+.page-header {
+  display: flex; /* Sử dụng flexbox để bố trí các phần tử bên trong */
+  justify-content: space-between; /* Căn đều hai bên (tiêu đề và nút) */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  margin-bottom: 30px; /* Khoảng cách dưới header */
+}
+
+/* Tiêu đề chính trong header */
+.page-header h1 {
+  font-size: 24px; /* Kích thước chữ của tiêu đề */
+  color: #fff; /* Màu chữ trắng */
+  display: flex; /* Sử dụng flexbox để căn chỉnh icon và chữ */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  gap: 10px; /* Khoảng cách giữa icon và chữ */
+  text-transform: uppercase; /* Chuyển chữ thành in hoa */
+}
+/* #endregion */
+
+/* #region Khu vực Nút Thêm Phòng Chiếu */
+/* Nút "Thêm Phòng" trong header */
+.add-btn {
+  padding: 10px 20px; /* Khoảng cách bên trong nút */
+  background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient màu cam từ trái sang phải */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Không có viền */
+  border-radius: 8px; /* Bo góc nút */
+  font-size: 16px; /* Kích thước chữ */
+  font-weight: bold; /* Chữ đậm */
+  display: flex; /* Sử dụng flexbox để căn chỉnh icon và chữ */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  gap: 8px; /* Khoảng cách giữa icon và chữ */
+  cursor: pointer; /* Con trỏ chuột dạng bàn tay khi hover */
+  transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà trong 0.3s */
+  box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3); /* Đổ bóng nhẹ */
+}
+
+/* Hiệu ứng khi hover vào nút "Thêm Phòng" */
+.add-btn:hover {
+  transform: translateY(-2px); /* Nâng nút lên 2px */
+  box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5); /* Tăng độ đậm của bóng */
+}
+/* #endregion */
+
+/* #region Khu vực Nút Quay Lại */
+/* Nút "Quay Lại" trong header */
+.back-btn {
+  padding: 10px 20px; /* Khoảng cách bên trong nút */
+  background-color: #6c757d; /* Màu nền xám */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Không có viền */
+  border-radius: 8px; /* Bo góc nút */
+  font-size: 16px; /* Kích thước chữ */
+  font-weight: bold; /* Chữ đậm */
+  display: flex; /* Sử dụng flexbox để căn chỉnh icon và chữ */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  gap: 8px; /* Khoảng cách giữa icon và chữ */
+  cursor: pointer; /* Con trỏ chuột dạng bàn tay khi hover */
+  transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà trong 0.3s */
+}
+
+/* Hiệu ứng khi hover vào nút "Quay Lại" */
+.back-btn:hover {
+  transform: translateY(-2px); /* Nâng nút lên 2px */
+  background-color: #5a6268; /* Đổi màu nền sang xám đậm hơn */
+}
+/* #endregion */
+
+/* #region Khu vực Breadcrumb (Đường dẫn điều hướng) */
+/* Breadcrumb hiển thị đường dẫn (ví dụ: Quản lý Rạp / Quản lý Phòng Chiếu) */
+.breadcrumb {
+  margin-top: 10px; /* Khoảng cách trên breadcrumb */
+  margin-bottom: 20px; /* Khoảng cách dưới breadcrumb */
+  font-size: 14px; /* Kích thước chữ */
+}
+
+/* Liên kết trong breadcrumb */
+.breadcrumb a {
+  color: #ccc; /* Màu chữ xám nhạt */
+  text-decoration: none; /* Bỏ gạch chân liên kết */
+}
+
+/* Hiệu ứng khi hover vào liên kết trong breadcrumb */
+.breadcrumb a:hover {
+  color: #ff6200; /* Đổi màu thành cam khi hover */
+}
+
+/* Phần không phải liên kết trong breadcrumb (hiện tại) */
+.breadcrumb span {
+  color: #ff6200; /* Màu cam cho phần hiện tại */
+}
+/* #endregion */
+
+/* #region Khu vực Danh sách Phòng Chiếu (Grid) */
+/* Grid chứa danh sách các thẻ phòng chiếu */
+.card-grid {
+  display: grid; /* Sử dụng grid để bố trí các thẻ */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Tự động chia cột, mỗi cột tối thiểu 250px */
+  gap: 20px; /* Khoảng cách giữa các thẻ */
+}
+/* #endregion */
+
+/* #region Khu vực Thẻ Phòng Chiếu */
+/* Thẻ hiển thị thông tin một phòng chiếu */
+.room-card {
+  background-color: #2a3b5a; /* Màu nền xanh đậm */
+  border-radius: 8px; /* Bo góc thẻ */
+  overflow: hidden; /* Ẩn phần nội dung tràn ra ngoài */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển đổi khi hover */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
+}
+
+/* Hiệu ứng khi hover vào thẻ phòng chiếu */
+.room-card:hover {
+  transform: scale(1.05); /* Phóng to thẻ 1.05 lần */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); /* Tăng độ đậm của bóng */
+}
+
+/* Phần thông tin của phòng chiếu trong thẻ */
+.room-info {
+  padding: 15px; /* Khoảng cách bên trong */
+}
+
+/* Tiêu đề tên phòng chiếu trong thẻ */
+.room-info h3 {
+  margin: 0 0 8px; /* Khoảng cách trên và dưới */
+  font-size: 18px; /* Kích thước chữ */
+  color: white; /* Màu chữ trắng */
+}
+
+/* Thông tin sức chứa trong thẻ */
+.room-info p {
+  margin: 4px 0; /* Khoảng cách trên và dưới */
+  font-size: 14px; /* Kích thước chữ */
+  color: rgba(255, 255, 255, 0.8); /* Màu chữ trắng mờ */
+}
+
+/* Phần chứa các nút hành động trong thẻ (Xem ghế, Sửa, Xóa) */
+.room-actions {
+  display: flex; /* Sử dụng flexbox để bố trí các nút */
+  gap: 10px; /* Khoảng cách giữa các nút */
+  justify-content: center; /* Căn giữa các nút */
+  padding: 12px; /* Khoảng cách bên trong */
+  background-color: #1a2a44; /* Màu nền xanh đậm hơn */
+}
+
+/* Định dạng chung cho các nút trong .room-actions */
+.room-actions button {
+  display: flex; /* Sử dụng flexbox để căn chỉnh icon và chữ */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  gap: 5px; /* Khoảng cách giữa icon và chữ */
+  padding: 8px 12px; /* Khoảng cách bên trong nút */
+  border: none; /* Không có viền */
+  border-radius: 5px; /* Bo góc nút */
+  font-size: 14px; /* Kích thước chữ */
+  font-weight: bold; /* Chữ đậm */
+  color: white; /* Màu chữ trắng */
+  cursor: pointer; /* Con trỏ chuột dạng bàn tay khi hover */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển đổi */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
+}
+
+/* Nút "Xem ghế" trong thẻ phòng chiếu */
+.view-seats-btn {
+  background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient màu cam */
+}
+
+/* Hiệu ứng khi hover vào nút "Xem ghế" */
+.view-seats-btn:hover {
+  transform: translateY(-2px); /* Nâng nút lên 2px */
+  box-shadow: 0 4px 16px rgba(255, 98, 0, 0.5); /* Tăng độ đậm của bóng */
+}
+
+/* Nút "Sửa" trong thẻ phòng chiếu */
+.edit-room-btn {
+  background: linear-gradient(45deg, #007bff, #0056b3); /* Gradient màu xanh dương */
+}
+
+/* Hiệu ứng khi hover vào nút "Sửa" */
+.edit-room-btn:hover {
+  transform: translateY(-2px); /* Nâng nút lên 2px */
+  box-shadow: 0 4px 16px rgba(0, 123, 255, 0.5); /* Tăng độ đậm của bóng */
+}
+
+/* Nút "Xóa" trong thẻ phòng chiếu */
+.delete-room-btn {
+  background: linear-gradient(45deg, #dc3545, #c82333); /* Gradient màu đỏ */
+}
+
+/* Hiệu ứng khi hover vào nút "Xóa" */
+.delete-room-btn:hover {
+  transform: translateY(-2px); /* Nâng nút lên 2px */
+  box-shadow: 0 4px 16px rgba(220, 53, 69, 0.5); /* Tăng độ đậm của bóng */
+}
+/* #endregion */
+
+/* #region Khu vực Modal */
+/* Lớp phủ của modal, bao bọc toàn bộ màn hình */
+.modal-overlay {
+  position: fixed; /* Cố định vị trí trên màn hình */
+  top: 0;
+  left: 0;
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  height: 100%; /* Chiếm toàn bộ chiều cao */
+  background: rgba(0, 0, 0, 0.5); /* Màu nền đen mờ */
+  display: flex; /* Sử dụng flexbox để căn giữa nội dung */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  z-index: 1000; /* Đảm bảo modal nằm trên các phần tử khác */
+}
+
+/* Container chính của modal (dùng để hiển thị sơ đồ ghế hoặc form thêm/sửa) */
+.room-modal-container {
+  background: #1a1a1a; /* Màu nền đen đậm */
+  padding: 20px; /* Khoảng cách bên trong */
+  border-radius: 10px; /* Bo góc modal */
+  position: relative; /* Để định vị nút đóng (close-form-btn) */
+  width: 90%; /* Chiều rộng tối đa 90% màn hình */
+  max-width: 900px; /* Giới hạn chiều rộng tối đa cho sơ đồ ghế */
+  max-height: 95vh; /* Giới hạn chiều cao tối đa */
+  overflow-y: auto; /* Hỗ trợ cuộn dọc khi nội dung vượt quá chiều cao */
+}
+
+/* Container cho modal thêm/sửa phòng chiếu */
+.room-modal-container.form-modal-container {
+  max-width: 500px; /* Chiều rộng nhỏ hơn cho modal thêm/sửa */
+  max-height: 80vh; /* Chiều cao tối đa nhỏ hơn để tránh chiếm toàn màn hình */
+}
+
+/* Nút đóng modal (dấu X ở góc trên bên phải) */
+.close-form-btn {
+  position: absolute; /* Định vị tuyệt đối trong modal */
+  top: 10px; /* Cách đỉnh 10px */
+  right: 10px; /* Cách bên phải 10px */
+  background: none; /* Không có màu nền */
+  border: none; /* Không có viền */
+  font-size: 24px; /* Kích thước chữ */
+  color: #fff; /* Màu chữ trắng */
+  cursor: pointer; /* Con trỏ chuột dạng bàn tay khi hover */
+}
+/* #endregion */
+
+/* #region Khu vực Sơ đồ Ghế */
+/* Container chứa sơ đồ ghế */
+.seat-selection {
+  margin-top: 30px; /* Khoảng cách trên cùng */
+  color: #fff; /* Màu chữ trắng */
+}
+
+/* Thanh "Màn Hình" trong sơ đồ ghế */
+.screen {
+  width: 80%; /* Chiều rộng chiếm 80% container */
+  height: 30px; /* Chiều cao cố định */
+  background-color: #ff6200; /* Màu nền cam */
+  margin: 20px auto; /* Căn giữa và tạo khoảng cách trên/dưới */
+  border-radius: 5px; /* Bo góc */
+  display: flex; /* Sử dụng flexbox để căn chỉnh chữ */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  color: #fff; /* Màu chữ trắng */
+  font-weight: bold; /* Chữ đậm */
+}
+
+/* Container chứa tất cả các hàng ghế */
+.seat-grid {
+  display: flex; /* Sử dụng flexbox */
+  flex-direction: column; /* Xếp các hàng ghế theo chiều dọc */
+  align-items: center; /* Căn giữa các hàng ghế theo chiều ngang */
+  margin-top: 20px; /* Khoảng cách trên cùng */
+  gap: 5px; /* Khoảng cách giữa các hàng ghế */
+}
+
+/* Một hàng ghế (A, B, C, D) */
+.seat-row {
+  display: flex; /* Sử dụng flexbox để xếp các ghế trong hàng */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  gap: 5px; /* Khoảng cách giữa các ghế trong hàng */
+  margin-bottom: 5px; /* Khoảng cách dưới hàng */
+}
+
+/* Nhãn của hàng ghế (A, B, C, D) */
+.row-label {
+  width: 20px; /* Chiều rộng cố định của nhãn */
+  text-align: center; /* Căn giữa chữ */
+  color: #ff6200; /* Màu chữ cam */
+  font-weight: bold; /* Chữ đậm */
+  font-size: 12px; /* Kích thước chữ */
+}
+
+/* Một ghế trong hàng */
+.seat {
+  width: 30px; /* Chiều rộng ghế */
+  height: 30px; /* Chiều cao ghế */
+  background-color: #555; /* Màu nền xám (ghế trống) */
+  border-radius: 5px; /* Bo góc ghế */
+  display: flex; /* Sử dụng flexbox để căn chỉnh chữ */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  font-size: 10px; /* Kích thước chữ */
+  color: #fff; /* Màu chữ trắng */
+}
+
+/* Ghế đã bán (màu đỏ) */
+.seat.sold {
+  background-color: #ff0000; /* Màu đỏ cho ghế đã bán */
+}
+/* #endregion */

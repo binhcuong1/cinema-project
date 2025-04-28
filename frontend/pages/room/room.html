@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản Lý Phòng Chiếu</title>
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="/frontend/assets/css/shares/header.css" />
+  <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css" />
+  <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css" />
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="/frontend/assets/css/room/room.css" />
+  <link rel="stylesheet" href="/frontend/assets/css/style.css" />
+  <link rel="stylesheet" href="/frontend/assets/css/login.css">
+</head>
+
+<body data-page="room">
+  <!-- Header & Sidebar -->
+  <div id="header-placeholder"></div>
+  <div id="sidebar-placeholder"></div>
+
+  <main class="main-content">
+    <div class="room-container">
+      <div class="page-header" id="page-header"></div>
+      <nav class="breadcrumb">
+        <a href="/frontend/pages/theater/theater.html">Quản Lý Rạp</a> /
+        <span>Quản Lý Phòng Chiếu</span>
+      </nav>
+
+      <section class="room-list-section">
+        <div id="room-lis" class="card-grid">
+          <div class="room-card">
+            <div class="room-info">
+              <h3>Phòng A</h3>
+              <p><i class="fas fa-users"></i> Sức chứa: 64 người</p>
+            </div>
+            <div class="room-actions">
+              <button class="view-seats-btn" onclick="viewSeats()"><i class="fas fa-chair"></i> Xem ghế</button>
+              <button class="edit-room-btn" onclick="editRoom()"><i class="fas fa-edit"></i> Sửa</button>
+              <button class="delete-room-btn" onclick="deleteRoom()"><i class="fas fa-trash-alt"></i> Xóa</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="footer-container"></footer>
+
+  <!-- Scripts -->
+  <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/frontend/assets/js/main.js"></script>
+  <script src="/frontend/assets/js/admin.js"></script>
+  <script src="/frontend/assets/js/room.js"></script>
+</body>
+
+</html>

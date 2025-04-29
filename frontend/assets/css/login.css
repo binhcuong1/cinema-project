@@ -7,9 +7,19 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
+    z-index: 2200; /* Tăng z-index lên cao hơn sidebar và nút admin */
     justify-content: center;
     align-items: center;
+}
+
+.modal-overlay.active ~ #adminBtn,
+.modal-overlay.active ~ .admin-system-btn,
+body.modal-open #adminBtn,
+body.modal-open .admin-system-btn,
+body.modal-open .sidebar {
+    opacity: 0.3;
+    pointer-events: none; /* Không cho click vào khi modal đang mở */
+    transition: opacity 0.3s ease;
 }
 
 .auth-container {
@@ -21,7 +31,7 @@
     /* Giảm chiều rộng vì các trường xếp dọc */
     width: 90%;
     position: relative;
-    z-index: 1001;
+    z-index: 2300; /* Cao hơn modal-overlay */
     transform: translateY(-20px);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
@@ -197,22 +207,23 @@
 }
 
 .auth-btn {
-    background: #ffd700;
-    color: #1a2a44;
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: #fff;
     padding: 10px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
     width: 100%;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
 .auth-btn:hover {
-    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    background: linear-gradient(45deg, #304352, #4a5564);
     color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+    box-shadow: 0 6px 20px rgba(10, 14, 23, 0.5);
 }
 
 .required {

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BiCyHD Cinema - Quản lý thông tin cá nhân, lịch sử đặt vé và ưu đãi tại BiCyHD Cinema.">
+    <meta name="keywords" content="hồ sơ khách hàng, BiCyHD Cinema, thông tin cá nhân, lịch sử đặt vé">
+    <meta property="og:title" content="Hồ Sơ Khách Hàng - BiCyHD Cinema">
+    <meta property="og:description" content="Quản lý thông tin cá nhân và lịch sử đặt vé tại BiCyHD Cinema.">
+    <meta property="og:image" content="/frontend/assets/images/logo.jpg">
+    <title>Hồ Sơ Khách Hàng - BiCyHD Cinema</title>
+    <!-- Favicon -->
+    <link rel="icon" href="/frontend/assets/images/favicon.ico" type="image/x-icon">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/frontend/assets/css/shares/header.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css">
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="/frontend/assets/css/login.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css">
+    <link rel="stylesheet" href="/frontend/assets/css/profile-customer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body data-page="profile-customer">
+    <!-- Placeholder cho header -->
+    <div id="header-placeholder">
+        <header>Header mặc định nếu JavaScript không tải</header>
+    </div>
+    
+    <!-- Placeholder cho sidebar -->
+    <div id="sidebar-placeholder">
+        <aside>Sidebar mặc định nếu JavaScript không tải</aside>
+    </div>
+
+    <!-- Nội dung chính của trang -->
+    <main class="profile-container">
+        <!-- Sidebar bên trái -->
+        <div class="profile-sidebar">
+            <!-- Thông tin người dùng -->
+            <div class="profile-user-section active">
+                <div class="profile-user">
+                    <img src="/frontend/assets/images/user-avatar.png" alt="Avatar" class="user-avatar">
+                    <h3>Che Quoc Dat</h3>
+                    <label for="avatar-upload" class="avatar-upload-btn">
+                        <i class="fas fa-camera"></i> Thay đổi ảnh
+                    </label>
+                    <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
+                </div>
+
+                <div class="divider"></div>
+                <ul class="profile-menu">
+                    <li class="active" data-section="personal-info"><i class="fas fa-user"></i> Thông tin khách hàng</li>
+                    <li data-section="purchase-history"><i class="fas fa-shopping-cart"></i> Lịch sử mua hàng</li>
+                    <li data-section="logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Form bên phải -->
+        <div class="profile-content">
+            <h2>Thông tin khách hàng</h2>
+            
+            <!-- Form Thông tin cá nhân và Đổi mật khẩu -->
+            <section id="personal-info-section" class="personal-info active">
+                <h3>Thông tin cá nhân</h3>
+                <form id="personal-info-form">
+                    <div class="form-group">
+                        <label>Họ và tên <span class="required">*</span></label>
+                        <input type="text" id="fullname" value="Che Quoc Dat">
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày sinh <span class="required">*</span></label>
+                        <input type="date" id="birthdate" value="2004-06-01">
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại <span class="required">*</span></label>
+                        <input type="text" id="phone" value="0985266194">
+                    </div>
+                    <div class="form-group">
+                        <label>Email <span class="required">*</span></label>
+                        <input type="email" id="email" value="datd20985@gmail.com">
+                        <small class="form-text text-muted">Vui lòng cung cấp email hợp lệ để sử dụng làm tài khoản đăng nhập</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Lưu thông tin</button>
+                    </div>
+                </form>
+
+                <!-- Form Đổi mật khẩu -->
+                <h3>Đổi mật khẩu</h3>
+                <form id="password-change-form">
+                    <div class="form-group">
+                        <label>Mật khẩu cũ <span class="required">*</span></label>
+                        <div class="password-field">
+                            <input type="password" id="old-password" required>
+                            <i class="fas fa-eye-slash toggle-password"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu mới <span class="required">*</span></label>
+                        <div class="password-field">
+                            <input type="password" id="new-password" required>
+                            <i class="fas fa-eye-slash toggle-password"></i>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-indicator" style="width: 0%;"></div>
+                            </div>
+                            <small class="strength-text">Độ mạnh mật khẩu</small>
+                        </div>
+                        <small class="form-text text-muted">Mật khẩu cần có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Xác thực mật khẩu mới <span class="required">*</span></label>
+                        <div class="password-field">
+                            <input type="password" id="confirm-password" required>
+                            <i class="fas fa-eye-slash toggle-password"></i>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="change-password-btn">Đổi mật khẩu</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Section Lịch sử mua hàng -->
+            <section id="purchase-history-section" class="purchase-history">
+                <div class="purchase-history-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã đơn hàng</th>
+                                <th>Ngày mua</th>
+                                <th>Tên phim</th>
+                                <th>Rạp</th>
+                                <th>Suất chiếu</th>
+                                <th>Ghế</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#12345</td>
+                                <td>01/04/2025</td>
+                                <td>Âm Dương Lộ</td>
+                                <td>CINESTAR Hà Nội</td>
+                                <td>18:00</td>
+                                <td>A1, A2</td>
+                                <td>200,000 VNĐ</td>
+                                <td>Đã thanh toán</td>
+                            </tr>
+                            <tr>
+                                <td>#12346</td>
+                                <td>02/04/2025</td>
+                                <td>Phim 2</td>
+                                <td>CINESTAR TP.HCM</td>
+                                <td>14:00</td>
+                                <td>B3, B4</td>
+                                <td>150,000 VNĐ</td>
+                                <td>Đã thanh toán</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="footer-container">
+        <p>Footer mặc định nếu JavaScript không tải</p>
+    </footer>
+
+    <!-- Thông báo thành công -->
+    <div class="notification-toast" id="notification-toast">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="notification-message">Thông tin đã được lưu thành công!</span>
+        </div>
+    </div>
+
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Module: Main khởi tạo layout + auth -->
+    <script type="module" src="/frontend/assets/js/main.js"></script>
+
+    <!-- Sau khi DOM đã có modal, mới load các xử lý phía người dùng -->
+    <script type="module" src="./js/user.js"></script>
+    <script type="module" src="./js/auth.js"></script>
+    <script type="module" src="/frontend/assets/js/movie.js"></script>
+    <script defer src="/frontend/assets/js/admin.js"></script>
+    <script defer src="/frontend/assets/js/profile-customer.js"></script>
+
+    <!-- Cloudflare Security Script -->
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'935c28187f04c016',t:'MTc0NTU2NjQ1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'937e13fd7d43b029',t:'MTc0NTkyMjE0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'937e2e0a7b956764',t:'MTc0NTkyMzIxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'937e712cafff7b9a',t:'MTc0NTkyNTk2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+
+</html>

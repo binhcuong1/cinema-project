@@ -29,16 +29,22 @@
         </div>
 
         <!-- Phần đăng nhập -->
-        <div class="auth">
+        <!-- Phần đăng nhập -->
+        <div class="auth dropdown">
             <!-- Nút đăng nhập / hiển thị tên -->
-            <button id="auth-btn" class="nav-btn login-btn" onclick="showLoginForm()">
+            <button id="auth-btn" class="nav-btn login-btn">
                 <i class="fas fa-user"></i> Đăng Nhập
             </button>
-
-            <!-- Nút đăng xuất -->
-            <button id="logout-btn" class="nav-btn" style="display: none;">
-                <i class="fas fa-sign-out-alt"></i> Đăng Xuất
-            </button>
+            
+            <!-- Dropdown menu cho đăng nhập -->
+            <div class="dropdown-menu auth-dropdown">
+                <a href="/frontend/pages/profile-customer.html" class="dropdown-item">
+                    <i class="fas fa-user-circle"></i> Thông tin cá nhân
+                </a>
+                <div id="login-dropdown-option" onclick="showLoginForm()">
+                    <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                </div>
+            </div>
         </div>
     </div>
 
@@ -67,7 +73,7 @@
             <!-- Nút Khuyến Mãi -->
             <a href="/frontend/pages/promotion.html" class="nav-link">Khuyến Mãi</a>
             <!-- Nút Giới Thiệu -->
-            <a href="#" class="nav-link">Giới Thiệu</a>
+            <a href="" class="nav-link">Giới Thiệu</a>
         </div>
     </div>
 

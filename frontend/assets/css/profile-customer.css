@@ -1,0 +1,421 @@
+/* Kiểu dáng cho trang hồ sơ khách hàng */
+.profile-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 25px auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 600px;
+    padding-top: 150px;
+}
+
+/* Sidebar bên trái */
+.profile-sidebar {
+    width: 280px;
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    padding: 30px 0;
+    border-right: 1px solid #eaeaea;
+}
+
+.profile-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.profile-user h3 {
+    margin: 10px 0;
+    color: #fff;
+    font-size: 18px;
+}
+
+.avatar-upload-btn {
+    color: #ff6600;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.avatar-upload-btn:hover {
+    color: #e55c00;
+}
+
+.divider {
+    height: 1px;
+    background-color: #eaeaea;
+    margin: 15px 0;
+}
+
+.profile-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-menu li {
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.profile-menu li i {
+    margin-right: 10px;
+    color: #666;
+    width: 20px;
+    text-align: center;
+}
+
+.profile-menu li:hover {
+    background-color: #f0f0f0;
+    color: #ff6600;
+}
+
+.profile-menu li:hover i {
+    color: #ff6600;
+}
+
+.profile-menu li.active {
+    background-color: #ff6600;
+    color: #fff;
+    font-weight: 500;
+}
+
+.profile-menu li.active i {
+    color: #fff;
+}
+
+/* Nội dung bên phải */
+.profile-content {
+    flex: 1;
+    padding: 30px;
+    background-color: #fff;
+}
+
+.profile-content h2 {
+    color: #000;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f5a623; /* Đường viền dưới màu cam giống Cinestar */
+    text-transform: uppercase; /* Chữ in hoa */
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Các section trong profile-content */
+.personal-info, .purchase-history {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 0;
+    transition: all 0.5s ease;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.personal-info.active, .purchase-history.active {
+    max-height: 800px; /* Tăng max-height để chứa cả hai form */
+    overflow: visible;
+}
+
+/* Ẩn .purchase-history khi .personal-info đang active */
+.personal-info.active ~ .purchase-history {
+    display: none;
+}
+
+/* Ẩn .personal-info khi .purchase-history đang active */
+.purchase-history.active ~ .personal-info {
+    display: none;
+}
+
+.personal-info h3, .purchase-history h3 {
+    color: #000;
+    font-size: 18px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    text-transform: uppercase; /* Chữ in hoa giống Cinestar */
+    font-weight: 600;
+}
+
+/* Bố cục cho form Thông tin cá nhân (2 cột) */
+.personal-info form#personal-info-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 cột bằng nhau */
+    gap: 20px; /* Khoảng cách giữa các trường */
+}
+
+/* Bố cục cho form Đổi mật khẩu (1 cột) */
+.personal-info form#password-change-form {
+    display: flex;
+    flex-direction: column; /* Hiển thị dọc */
+    gap: 10px; /* Khoảng cách giữa các trường */
+}
+
+/* Bảng Lịch sử mua hàng */
+.purchase-history-table {
+    width: 120%;
+    overflow-x: auto; /* Cho phép cuộn ngang trên màn hình nhỏ */
+}
+
+.purchase-history-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.purchase-history-table th, .purchase-history-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.purchase-history-table th {
+    background-color: #f5f5f5;
+    color: #333;
+    font-weight: 500;
+}
+
+.purchase-history-table td {
+    color: #555;
+}
+
+.purchase-history-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #4a4a4a; /* Màu xám đậm giống Cinestar */
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    font-size: 14px;
+    color: #666; /* Màu chữ trong input giống Cinestar */
+}
+
+.form-group input:focus {
+    border-color: #ccc;
+    outline: none;
+    box-shadow: none;
+}
+
+.form-group input:read-only {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.form-text {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #888;
+}
+
+.required {
+    color: #ff0000;
+}
+
+/* Nút bấm */
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.personal-info form#personal-info-form .form-actions {
+    grid-column: span 2; /* Đảm bảo nút trong form Thông tin cá nhân chiếm toàn bộ chiều rộng của grid */
+}
+
+.save-btn, .change-password-btn {
+    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Màu cam giống Cinestar */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase; /* Chữ in hoa giống Cinestar */
+}
+
+.save-btn:hover, .change-password-btn:hover {
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3); /* Màu cam đậm hơn khi hover */
+}
+
+/* Xóa nút Cancel vì Cinestar không có */
+.cancel-btn {
+    display: none;
+}
+
+/* Field mật khẩu */
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+    transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: #555;
+}
+
+/* Độ mạnh mật khẩu */
+.password-strength {
+    margin-top: 10px;
+}
+
+.strength-bar {
+    height: 5px;
+    background-color: #ddd;
+    border-radius: 3px;
+    overflow: hidden; 
+    margin-bottom: 5px;
+}
+
+.strength-indicator {
+    height: 100%;
+    background-color: #e55c00;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-indicator.weak {
+    background-color: #ff4d4d;
+    width: 25%;
+}
+
+.strength-indicator.medium {
+    background-color: #ffaa00;
+    width: 50%;
+}
+
+.strength-indicator.strong {
+    background-color: #00cc44;
+    width: 75%;
+}
+
+.strength-indicator.very-strong {
+    background-color: #00aa00;
+    width: 100%;
+}
+
+.strength-text {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Thông báo thành công */
+.notification-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #4caf50;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.notification-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notification-content i {
+    font-size: 20px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .profile-container {
+        flex-direction: column;
+        margin: 20px 10px;
+        padding-top: 60px;
+    }
+    
+    .profile-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .personal-info form#personal-info-form {
+        grid-template-columns: 1fr; /* Chuyển thành 1 cột trên màn hình nhỏ */
+    }
+
+    .personal-info form#personal-info-form .form-actions {
+        grid-column: span 1; /* Điều chỉnh cho 1 cột */
+    }
+
+    .personal-info form#password-change-form {
+        flex-direction: column; /* Đảm bảo form Đổi mật khẩu vẫn là 1 cột */
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-menu li {
+        padding: 12px 15px;
+    }
+    
+    .profile-content {
+        padding: 20px 15px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .save-btn, .change-password-btn {
+        width: 100%;
+    }
+}

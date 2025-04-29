@@ -254,7 +254,7 @@ button {
 }
 
 .dropdown-menu div:hover {
-    background-color: linear-gradient(to bottom, #1a2a44, #0a0e17);
+    background-color: rgba(255, 98, 0, 0.1);
     color: #ff6200;
 }
 
@@ -299,4 +299,20 @@ body, #header-placeholder {
 
 main {
     margin-top: 150px; /* Tuỳ vào chiều cao header thực tế */
+}
+
+/* CSS mới cho dropdown đăng nhập */
+.auth-dropdown {
+    right: 0;
+    left: auto;
+    min-width: 180px;
+}
+
+.auth-dropdown:before {
+    left: auto;
+    right: 20px;
+}
+
+.auth {
+    position: relative;
 }

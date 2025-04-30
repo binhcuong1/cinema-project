@@ -31,7 +31,7 @@ button {
     left: 0;
     width: 100%;
     z-index: 2000;
-    padding: 15px 40px;
+    padding: 10px 10px;
     background: linear-gradient(to right, #0a0e17, #1a2a44);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
@@ -46,24 +46,46 @@ button {
     padding-bottom: 10px;
 }
 
+/* Thay đổi cách logo hiển thị */
 .logo {
     position: relative;
-    left: 80px; /* Dịch logo sang phải 20px */
+    left: 0;
+    width: auto;
+    /* Thiết lập chiều cao của container logo nhỏ hơn logo thực tế */
+    height: 80px; /* Điều chỉnh chiều cao này theo mong muốn của header */
+    overflow: visible; /* Cho phép logo tràn ra khỏi container */
 }
 
 .logo img {
-    height: 60px;
+    height: 110px;
+    width: auto;
+    object-fit: contain;
+    position: absolute; /* Định vị tuyệt đối so với container .logo */
+    bottom: -10px; /* Điều chỉnh vị trí để logo hiển thị đẹp */
+    left: 0;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.logo img:hover {
-    transform: scale(1.1);
-    filter: brightness(1.2);
+/* Điều chỉnh chiều cao của thanh điều hướng phù hợp với thiết kế */
+.fancy-nav {
+    padding: 10px 40px;
+    height: auto; /* Để chiều cao tự động theo nội dung */
 }
 
-.logo img:not(:hover) {
-    transform: scale(1);
-    filter: brightness(1);
+/* Điều chỉnh margin-top của main content */
+main {
+    margin-top: 130px; /* Điều chỉnh theo chiều cao thực tế của header sau khi sửa */
+}
+
+/* Có thể cần điều chỉnh các phần tử khác để cân đối với header mới */
+.nav-top {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+/* Đảm bảo nội dung nằm trong thanh header */
+.nav-bottom {
+    padding: 5px 0;
 }
 
 .search-bar {

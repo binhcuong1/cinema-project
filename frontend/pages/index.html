@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BiCyHD Cinema - Đặt vé xem phim nhanh chóng, ưu đãi hấp dẫn. Xem lịch chiếu phim mới nhất tại các rạp trên toàn quốc.">
+    <meta name="description"
+        content="BiCyHD Cinema - Đặt vé xem phim nhanh chóng, ưu đãi hấp dẫn. Xem lịch chiếu phim mới nhất tại các rạp trên toàn quốc.">
     <meta name="keywords" content="đặt vé xem phim, lịch chiếu phim, rạp chiếu phim, BiCyHD Cinema">
     <meta property="og:title" content="BiCyHD Cinema">
     <meta property="og:description" content="Đặt vé xem phim nhanh chóng tại BiCyHD Cinema.">
@@ -26,7 +27,7 @@
     <div id="header-placeholder">
         <header>Header mặc định nếu JavaScript không tải</header>
     </div>
-    
+
     <!-- Placeholder cho sidebar -->
     <div id="sidebar-placeholder">
         <aside>Sidebar mặc định nếu JavaScript không tải</aside>
@@ -42,7 +43,8 @@
                     <button onclick="nextBanner()"><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="banner-content">
-                    <img id="banner-image" src="/frontend/assets/images/panner-am-duon-lo.png" alt="Banner phim Âm Dương Lộ">
+                    <img id="banner-image" src="/frontend/assets/images/panner-am-duon-lo.png"
+                        alt="Banner phim Âm Dương Lộ">
                     <div class="banner-info">
                         <h1>Âm Dương Lộ</h1>
                         <p class="movie-genre">Phim kinh dị, Hành động</p>
@@ -115,7 +117,6 @@
             </div>
         </section>
 
-        <br>
         <!-- Movie Categories -->
         <section class="movie-categories-nowShowing">
             <div class="category-tabs">
@@ -123,66 +124,143 @@
                     <i class="fas fa-play"></i> Phim Đang Chiếu
                 </button>
             </div>
-            <div id="movie-list-nowShowing" class="movie-grid">
-                <p class="loading">Đang tải phim...</p>
+            <div class="movie-grid-container"> <!-- Thêm container mới -->
+                <div id="movie-list-nowShowing" class="movie-grid">
+                    <p class="loading">Đang tải phim...</p>
+                </div>
             </div>
         </section>
-        <br>
         <section class="movie-categories-comingSoon">
             <div class="category-tabs">
                 <button class="category-tab active">
                     <i class="fas fa-play"></i> Phim Sắp Chiếu
                 </button>
             </div>
-            <div id="movie-list-comingSoon" class="movie-grid">
-                <p class="loading">Đang tải phim...</p>
+            <div class="movie-grid-container"> <!-- Thêm container mới -->
+                <div id="movie-list-comingSoon" class="movie-grid">
+                    <p class="loading">Đang tải phim...</p>
+                </div>
             </div>
         </section>
 
         <!-- Promotions -->
         <section class="promotions">
-            <h2 class="section-title">Ưu Đãi Đặc Biệt</h2>
+            <h2 class="section-title">Khuyến Mãi</h2>
+            <input type="checkbox" id="promo-toggle" style="display: none;">
             <div class="promo-slider">
-                <div class="promo-card">
-                    <img src="/frontend/assets/images/promo1.jpg" alt="Ưu đãi sinh nhật tặng vé miễn phí">
-                    <div class="promo-info">
-                        <h3>Ưu đãi sinh nhật</h3>
-                        <p>Tặng vé xem phim miễn phí cho thành viên vào tháng sinh nhật</p>
-                        <a href="promotions.html" class="promo-btn">Xem chi tiết</a>
-                    </div>
+                <div class="promo-grid">
+                    <a href="promotion1.html"><img src="/frontend/assets/images/vé-khuyen-mai.png"
+                            alt="Promotion 1"></a>
+                    <a href="promotion2.html"><img src="/frontend/assets/images/vé-khuyenmai2.jpg"
+                            alt="Promotion 2"></a>
+                    <a href="promotion3.html"><img src="/frontend/assets/images/vé-khuyenmai3.png"
+                            alt="Promotion 3"></a>
+                    <a href="promotion4.html"><img src="/frontend/assets/images/vé-khuyenmai4.png"
+                            alt="Promotion 4"></a>
                 </div>
-                <div class="promo-card">
-                    <img src="/frontend/assets/images/promo2.jpg" alt="Ngày hội thành viên giảm 50% thứ Tư">
-                    <div class="promo-info">
-                        <h3>Ngày hội thành viên</h3>
-                        <p>Giảm 50% cho thành viên vào thứ Tư hàng tuần</p>
-                        <a href="promotions.html" class="promo-btn">Xem chi tiết</a>
+                <div class="promo-arrows">
+                    <label for="promo-toggle" class="left">&lt;</label>
+                    <label for="promo-toggle" class="right">&gt;</label>
+                </div>
+            </div>
+            <div class="promo-button">
+                <a href="promotion.html" class="btn">Tất cả ưu đãi</a>
+            </div>
+        </section>
+
+        <!-- Thành viên BiCYHD -->
+        <section class="membership">
+            <div class="membership-container">
+                <img src="/frontend/assets/images/Dino game banner.jpg" alt="Thành viên BiCYHD" class="membership-bg">
+                <div class="membership-content">
+                    <h2>Thành viên BiCYHD</h2>
+                    <p class="membership-stats">0/10000</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tất cả các giải trí -->
+        <section class="entertainment">
+            <h2>Tất Cả Các Giải Trí</h2>
+            <p class="entertainment-description">Ngoài hệ thống rạp chiếu phim chất lượng cao, BiCYHD còn cung cấp cho
+                bạn nhiều loại hình giải trí tuyệt vời khác.</p>
+            <div class="entertainment-grid">
+                <!-- Hàng 1: 3 khung -->
+                <div class="entertainment-row">
+                    <a href="#" class="entertainment-card">
+                        <img src="/frontend/assets/images/giai-tri1.webp" alt="Giải trí 1">
+                    </a>
+                    <a href="#" class="entertainment-card">
+                        <img src="/frontend/assets/images/giai-tri2.webp" alt="Giải trí 2">
+                    </a>
+                    <a href="#" class="entertainment-card">
+                        <img src="/frontend/assets/images/giai-tri3.webp" alt="Giải trí 3">
+                    </a>
+                </div>
+                <!-- Hàng 2: 3 khung -->
+                <div class="entertainment-row">
+                    <a href="#" class="entertainment-card">
+                        <img src="/frontend/assets/images/giai-tri4.webp" alt="Giải trí 4">
+                    </a>
+                    <a href="#" class="entertainment-card">
+                        <img src="/frontend/assets/images/giai-tri5.webp" alt="Giải trí 5">
+                    </a>
+                    <a href="#" class="entertainment-card">
+                        <img src="/frontend/assets/images/giai-tri6.webp" alt="Giải trí 6">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Liên hệ với chúng tôi -->
+        <section class="contact">
+            <h2>Liên hệ với chúng tôi</h2>
+            <div class="contact-container">
+                <div class="contact-social">
+                    <a href="https://www.facebook.com/binhh.cuongg" class="social-btn facebook-btn">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </a>
+                    <a href="#" class="social-btn zalo-btn">
+                        <i class="fas fa-comment-alt"></i> Zalo Chat
+                    </a>
+                </div>
+                <div class="contact-info-form">
+                    <h3>Thông tin liên hệ</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> cskh@bicyhd.com.vn</p>
+                        <p><i class="fas fa-phone-alt"></i> 1900 0085</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 135 Hai Bà Trưng, phường Bến Nghé, Quận 1, TPHCM</p>
+                    </div>
+                    <div class="contact-form">
+                        <input type="text" placeholder="Họ và tên" required>
+                        <input type="email" placeholder="Điền email" required>
+                        <textarea placeholder="Thông tin bạn cần hỗ trợ" required></textarea>
+                        <button type="submit" class="submit-btn">Gửi ngay</button>
                     </div>
                 </div>
             </div>
         </section>
-    </main>
 
-    <!-- FOOTER -->
-    <footer id="footer-container">
-        <p>Footer mặc định nếu JavaScript không tải</p>
-    </footer>
+        <!-- FOOTER -->
+        <footer id="footer-container">
+            <p>Footer mặc định nếu JavaScript không tải</p>
+        </footer>
 
-    <!-- Axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <!-- Axios -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <!-- Module: Main khởi tạo layout + auth -->
-    <script type="module" src="/frontend/assets/js/main.js"></script>
+        <!-- Module: Main khởi tạo layout + auth -->
+        <script src="/frontend/assets/js/main.js"></script>
 
-    <!-- Sau khi DOM đã có modal, mới load các xử lý phía người dùng -->
-    <script type="module" src="./js/user.js"></script>
-    <script type="module" src="./js/auth.js"></script>
-    <script type="module" src="/frontend/assets/js/movie.js"></script>
-    <script defer src="/frontend/assets/js/admin.js"></script>
-    <!-- <script defer src="/frontend/assets/js/movie.js"></script> -->
+        <!-- Sau khi DOM đã có modal, mới load các xử lý phía người dùng -->
+        <script type="module" src="./js/user.js"></script>
+        <script type="module" src="./js/auth.js"></script>
+        <script type="module" src="/frontend/assets/js/movie.js"></script>
+        <script defer src="/frontend/assets/js/admin.js"></script>
+        <!-- <script defer src="/frontend/assets/js/movie.js"></script> -->
 
-    <!-- Cloudflare Security Script -->
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'935c28187f04c016',t:'MTc0NTU2NjQ1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+        <!-- Cloudflare Security Script -->
+        <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'935c28187f04c016',t:'MTc0NTU2NjQ1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
 </body>
 
 </html>

@@ -1,6 +1,65 @@
-axios.defaults.baseURL = 'http://127.0.0.1:3000';
+axios.defaults.baseURL = "http://localhost:3000";
 
-// Hàm hiển thị danh sách rạp
+//#region === Khu vực Hàm Chung ===
+
+// Hàm hiển thị thông báo lỗi trong container
+function showError(container, message) {
+  container.innerHTML = `<p class='error'>${message}</p>`;
+}
+
+// Hàm tạo HTML cho một thẻ rạp
+function createTheaterCard(theater) {
+  return `
+    <div class="theater-card">
+      <div class="theater-info">
+        <img src="${theater.image}" alt="${theater.ten_rap}" class="theater-image" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0;">
+        <h3>${theater.ten_rap}</h3>
+        <p><i class="fas fa-map-marker-alt"></i> ${theater.dia_chi}</p>
+      </div>
+      <div class="theater-actions">
+        <button class="roomList-btn" onclick="hrefToRoomList('${theater.ma_rap}')"><i class="fas fa-door-open"></i> Phòng chiếu</button>
+        <button class="edit-btn" onclick="editTheater('${theater.ma_rap}')"><i class="fas fa-edit"></i> Sửa</button>
+        <button class="delete-btn" onclick="deleteTheater('${theater.ma_rap}', ${theater.da_xoa})"><i class="fas fa-trash-alt"></i> Xóa</button>
+      </div>
+    </div>
+  `;
+}
+
+// Hàm tạo HTML cho modal thêm/sửa rạp
+function createTheaterModalHTML(id, theater = null) {
+  return `
+    <div class="auth-container">
+      <button class="close-form-btn">×</button>
+      <h2>${id ? "Sửa Rạp" : "Thêm Rạp"}</h2>
+      <form id="theater-form">
+        <div class="input-group">
+          <label for="theater-name">Tên rạp</label>
+          <input type="text" id="theater-name" name="ten_rap" value="${theater ? theater.ten_rap : ""}" placeholder="Nhập tên rạp" required>
+        </div>
+        <div class="input-group">
+          <label for="theater-address">Địa chỉ</label>
+          <input type="text" id="theater-address" name="dia_chi" value="${theater ? theater.dia_chi : ""}" placeholder="Nhập địa chỉ" required>
+        </div>
+        <div class="input-group">
+          <label for="theater-phone">Số điện thoại</label>
+          <input type="text" id="theater-phone" name="sdt" value="${theater ? theater.sdt : ""}" placeholder="Nhập số điện thoại" required>
+        </div>
+        <div class="input-group">
+          <label for="theater-image">Hình ảnh</label>
+          ${theater && theater.image ? `<img src="${theater.image}" alt="Hình ảnh hiện tại" style="width: 100px; height: auto; margin-bottom: 10px;">` : ""}
+          <input type="file" id="image" name="image" accept="image/*" ${id ? "" : "required"}>
+        </div>
+        <button type="submit" class="auth-btn">${id ? "Cập Nhật" : "Thêm"}</button>
+      </form>
+    </div>
+  `;
+}
+
+//#endregion
+
+//#region === Khu vực Hiển thị Danh sách Rạp ===
+
+// Hiển thị danh sách rạp
 async function renderList() {
   const theaterList = document.getElementById("theater-list");
   if (!theaterList) return;
@@ -18,35 +77,32 @@ async function renderList() {
       return;
     }
 
-    theaters.data.forEach((t) => {
+    const fragment = document.createDocumentFragment();
+    theaters.data.forEach((theater) => {
       const card = document.createElement("div");
-      card.className = "theater-card";
-      card.innerHTML = `
-                <div class="theater-info">
-                    <img src="${t.image}" alt="${t.ten_rap}" class="theater-image" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0;">
-                    <h3>${t.ten_rap}</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> ${t.dia_chi}</p>
-                </div>
-                <div class="theater-actions">
-                    <button class="edit-btn" onclick="editTheater('${t.ma_rap}')"><i class="fas fa-edit"></i> Sửa</button>
-                    <button class="delete-btn" onclick="deleteTheater('${t.ma_rap}', ${t.da_xoa})"><i class="fas fa-trash-alt"></i> Xóa</button>
-                </div>
-            `;
-      theaterList.appendChild(card);
+      card.innerHTML = createTheaterCard(theater);
+      fragment.appendChild(card);
     });
+
+    theaterList.appendChild(fragment);
   } catch (error) {
     console.error("Lỗi khi lấy danh sách rạp:", error);
-    theaterList.innerHTML = `<p class='error'>${error.message}</p>`;
+    showError(theaterList, error.message);
   }
 }
 
-// Hàm gửi yêu cầu thêm rạp
+//#endregion
+
+//#region === Khu vực Xử lý Thêm Rạp ===
+
+// Gửi yêu cầu thêm rạp
 async function submitAddTheater(form, modal) {
   try {
     const formData = new FormData(form);
     const response = await axios.post("/api/theaters/", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+
     if (response.status === 201) {
       alert("Thêm rạp thành công!");
       await renderList();
@@ -60,14 +116,24 @@ async function submitAddTheater(form, modal) {
   }
 }
 
-// Hàm gửi yêu cầu sửa rạp
+// Mở modal để thêm rạp
+function addTheater() {
+  openTheaterModal();
+}
+
+//#endregion
+
+//#region === Khu vực Xử lý Sửa Rạp ===
+
+// Gửi yêu cầu sửa rạp
 async function submitUpdateTheater(id, form, modal) {
   try {
     const formData = new FormData(form);
-    console.log("Dữ liệu gửi lên:", [...formData.entries()]); // Log dữ liệu gửi lên
+    console.log("Dữ liệu gửi lên:", [...formData.entries()]);
     const response = await axios.put(`/api/theaters/${id}`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+
     if (response.status === 200) {
       alert("Cập nhật rạp thành công!");
       await renderList();
@@ -82,97 +148,16 @@ async function submitUpdateTheater(id, form, modal) {
   }
 }
 
-// Hàm tạo và mở modal thêm/sửa rạp
-async function openTheaterModal(id = null) {
-  let theater = null;
-  if (id) {
-    try {
-      const response = await axios.get(`/api/theaters/${id}`);
-      if (response.data.success !== "true") {
-        throw new Error("Không thể lấy dữ liệu rạp!");
-      }
-      theater = response.data.data;
-      console.log("Dữ liệu rạp:", theater); // Kiểm tra dữ liệu
-      if (!theater || !theater.ten_rap) {
-        throw new Error("Dữ liệu rạp không hợp lệ!");
-      }
-    } catch (error) {
-      console.error("Lỗi khi lấy dữ liệu rạp:", error);
-      alert("Lỗi: " + (error.message || "Không thể lấy dữ liệu rạp."));
-      return; // Thoát nếu không lấy được dữ liệu
-    }
-  }
-
-  const modal = document.createElement("div");
-  modal.className = "modal-overlay";
-  modal.id = "theater-modal";
-  modal.innerHTML = `
-        <div class="auth-container">
-            <button class="close-form-btn">×</button>
-            <h2>${id ? "Sửa Rạp" : "Thêm Rạp"}</h2>
-            <form id="theater-form">
-                <div class="input-group">
-                    <label for="theater-name">Tên rạp</label>
-                    <input type="text" id="theater-name" name="ten_rap" value="${theater ? theater.ten_rap : ""
-    }" placeholder="Nhập tên rạp" required>
-                </div>
-                <div class="input-group">
-                    <label for="theater-address">Địa chỉ</label>
-                    <input type="text" id="theater-address" name="dia_chi" value="${theater ? theater.dia_chi : ""
-    }" placeholder="Nhập địa chỉ" required>
-                </div>
-                <div class="input-group">
-                    <label for="theater-phone">Số điện thoại</label>
-                    <input type="text" id="theater-phone" name="sdt" value="${theater ? theater.sdt : ""
-    }" placeholder="Nhập số điện thoại" required>
-                </div>
-                <div class="input-group">
-                    <label for="theater-image">Hình ảnh</label>
-                    ${theater && theater.image
-      ? `<img src="${theater.image}" alt="Hình ảnh hiện tại" style="width: 100px; height: auto; margin-bottom: 10px;">`
-      : ""
-    }
-                    <input type="file" id="image" name="image" accept="image/*" ${id ? "" : "required"
-    }>
-                </div>
-                <button type="submit" class="auth-btn">${id ? "Cập Nhật" : "Thêm"
-    }</button>
-            </form>
-        </div>
-    `;
-
-  document.body.appendChild(modal);
-  modal.classList.add("active");
-
-  // Đóng modal
-  const closeBtn = modal.querySelector(".close-form-btn");
-  closeBtn.addEventListener("click", () => {
-    modal.remove();
-  });
-
-  // Xử lý form submit
-  const form = modal.querySelector("#theater-form");
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (id) {
-      await submitUpdateTheater(id, form, modal);
-    } else {
-      await submitAddTheater(form, modal);
-    }
-  });
-}
-
-// Hàm thêm rạp (mở modal)
-function addTheater() {
-  openTheaterModal();
-}
-
-// Hàm sửa rạp (mở modal với dữ liệu đã có)
+// Mở modal để sửa rạp
 function editTheater(id) {
   openTheaterModal(id);
 }
 
-// Hàm xóa rạp
+//#endregion
+
+//#region === Khu vực Xử lý Xóa Rạp ===
+
+// Xóa rạp (xóa mềm)
 async function deleteTheater(id, status) {
   if (status == 1) {
     alert("Rạp này đã xóa rồi không xóa nữa!");
@@ -194,9 +179,72 @@ async function deleteTheater(id, status) {
   }
 }
 
+//#endregion
+
+//#region === Khu vực Modal Thêm/Sửa Rạp ===
+
+// Mở modal để thêm hoặc sửa rạp
+async function openTheaterModal(id = null) {
+  let theater = null;
+  if (id) {
+    try {
+      const response = await axios.get(`/api/theaters/${id}`);
+      if (response.data.success !== "true") {
+        throw new Error("Không thể lấy dữ liệu rạp!");
+      }
+      theater = response.data.data;
+      console.log("Dữ liệu rạp:", theater);
+      if (!theater || !theater.ten_rap) {
+        throw new Error("Dữ liệu rạp không hợp lệ!");
+      }
+    } catch (error) {
+      console.error("Lỗi khi lấy dữ liệu rạp:", error);
+      alert("Lỗi: " + (error.message || "Không thể lấy dữ liệu rạp."));
+      return;
+    }
+  }
+
+  const modal = document.createElement("div");
+  modal.className = "modal-overlay";
+  modal.id = "theater-modal";
+  modal.innerHTML = createTheaterModalHTML(id, theater);
+
+  document.body.appendChild(modal);
+  modal.classList.add("active");
+
+  const closeBtn = modal.querySelector(".close-form-btn");
+  closeBtn.addEventListener("click", () => {
+    modal.remove();
+  });
+
+  const form = modal.querySelector("#theater-form");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (id) {
+      await submitUpdateTheater(id, form, modal);
+    } else {
+      await submitAddTheater(form, modal);
+    }
+  });
+}
+
+//#endregion
+
+//#region === Khu vực Xử Lý Phòng Chiếu ===
+
+function hrefToRoomList(theaterID) {
+  window.location.href = `/frontend/pages/room/room.html?id=${theaterID}`;
+}
+
+//#endregion
+
+//#region === Khu vực Khởi tạo ===
+
 // Khởi tạo khi trang tải
 document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.getElementById("add-theater-btn");
   addBtn.addEventListener("click", addTheater);
   renderList();
 });
+
+//#endregion

@@ -109,9 +109,9 @@
 
 .btn-outline {
     /* Định dạng nút viền: nền gradient giống footer */
-    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    background: linear-gradient(45deg, #4b6cb7, #182848);
     /* Màu chữ cam */
-    color: #ff6200;
+    color: #fff;
     /* Viền 2px màu cam */
     border: 2px solid #ff6200;
     /* Đặt chiều rộng tối thiểu để khớp với nút .btn-yellow */
@@ -120,7 +120,7 @@
 
 .btn-outline:hover {
     /* Khi hover: đổi nền thành gradient từ xanh đậm (#0a0e17) sang xanh nhạt (#1a2a44) */
-    background: linear-gradient(to right, #aac330, #277171);
+    background: linear-gradient(to right, #c39230, #5e6223);
     /* Đổi màu chữ thành trắng */
     color: #ffffff;
     /* Đổi màu viền thành xanh nhạt */

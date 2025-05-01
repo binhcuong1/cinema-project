@@ -34,6 +34,7 @@ const upload = multer({ storage: storage });
 
 router.get('/', movieController.getMovies);
 router.get('/now-showing', movieController.getNowShowing);
+router.get('/coming-soon', movieController.getComingSoon);
 router.get('/:id', movieController.getMovieByID);
 router.get('/theater/:id', movieController.getMovieByTheater);
 router.post('/', upload.single('poster'), movieController.createMovie);

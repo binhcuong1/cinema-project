@@ -4,7 +4,16 @@ const table_name = 'rap';
 
 const theater = {
     getAll: (callback) => {
-        db.query(`SELECT * FROM ${table_name}`, (err, result) => {
+        const query = `
+            SELECT t.*, 
+                   (SELECT COUNT(*) 
+                    FROM phong_chieu p 
+                    WHERE p.ma_rap = t.ma_rap AND p.da_xoa = 0) AS room_count
+            FROM rap t
+            WHERE t.da_xoa = 0      
+        `;
+
+        db.query(query, (err, result) => {
             if (err) 
                 return callback(err, null);
             callback(null, result);
@@ -12,7 +21,15 @@ const theater = {
     },
 
     getByID: (id, callback) => {
-        const query = `SELECT * FROM ${table_name} WHERE ma_rap = ?`;
+        const query = `
+            SELECT t.*, 
+                   (SELECT COUNT(*) 
+                    FROM phong_chieu p 
+                    WHERE p.ma_rap = t.ma_rap AND p.da_xoa = 0) AS room_count
+            FROM rap t
+            WHERE t.ma_rap = ? AND t.da_xoa = 0
+        `;
+
         db.query(query, [id], (err, result) => {
             if (err)
                 return callback(err,null);

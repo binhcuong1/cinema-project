@@ -159,22 +159,6 @@ INSERT INTO phim (ten_phim, mo_ta, ngay_phat_hanh, thoi_luong_phut, noi_dung_phi
 ('The Lion King', 'Bộ phim hoạt hình về vua sư tử', '2019-07-19', 118, 'Simba trở thành vua của Pride Lands.', 0, 0),
 ('Joker', 'Bộ phim tâm lý về nhân vật Joker', '2019-10-04', 122, 'Hành trình trở thành Joker của Arthur Fleck.', 18, 0);
 
--- TẠO THÊM BẢNG KHUYẾN MÃI VÀ THÊM DỮ LIỆU
-
-CREATE TABLE khuyen_mai (
-    ma_khuyen_mai INT PRIMARY KEY AUTO_INCREMENT,
-    ten_khuyen_mai VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-    dieu_kieu VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-    luu_y VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-    image VARCHAR(255),
-    da_xoa TINYINT(1) DEFAULT 0
-);
-
-INSERT INTO khuyen_mai (ten_khuyen_mai, dieu_kieu, luu_y, image, da_xoa) VALUES
-('Giảm 20% vé thường', 'Đặt ít nhất 2 vé thường', 'Chỉ áp dụng cho vé thường, không áp dụng cho vé VIP', '/images/khuyenmai1.jpg', 0),
-('Mua 1 tặng 1 combo nhỏ', 'Mua combo nhỏ trong ngày thứ 4', 'Áp dụng vào thứ 4 hàng tuần', '/images/khuyenmai2.jpg', 0),
-('Giảm 10% cho khách hàng mới', 'Áp dụng cho khách hàng lần đầu đặt vé', 'Chỉ áp dụng cho đơn đầu tiên', '/images/khuyenmai3.jpg', 0);
-
 -- Thêm thuộc tính trang_thai cho bảng phim
 alter table phim
 add column trang_thai enum('dang-chieu', 'sap-chieu', 'khong-chieu') default 'sap-chieu';
@@ -188,8 +172,8 @@ CREATE TABLE khuyen_mai (
     trang_thai ENUM('dang_hoat_dong', 'het_han', 'chua_kich_hoat') DEFAULT 'chua_kich_hoat',
     image VARCHAR(255),
     da_xoa TINYINT(1) DEFAULT 0,
-    gia_2d INT, -- Giá 2D khuyến mãi
-    gia_3d INT, -- Giá 3D khuyến mãi
+    -- gia_2d INT, -- Giá 2D khuyến mãi
+    -- gia_3d INT, -- Giá 3D khuyến mãi
     gio_bat_dau TIME,
     gio_ket_thuc TIME,
     ngay_trong_tuan VARCHAR(10),

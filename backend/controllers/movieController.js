@@ -17,6 +17,15 @@ exports.getNowShowing = (req, res) => {
     });
 }
 
+exports.getComingSoon = (req, res) => {
+    const limit = 7;
+    movie.getComingSoon(limit, (err, result) => {
+        if (err)
+            return res.status(500).json({ error: err });
+        res.json({ success: 'true', data: result });
+    });
+}
+
 exports.getMovieByID = (req, res) => {
     let movieID = req.params.id;
 

@@ -1,201 +1,273 @@
-/* PHẦN FOOTER */
-footer {
+/* CSS cho Footer Cinestar */
+/* Mô tả: Tệp CSS định dạng giao diện cho footer của website Cinestar */
+
+.footer {
+    /* Định dạng nền cho footer, sử dụng gradient chuyển từ màu xanh đậm (#0a0e17) sang xanh nhạt hơn (#1a2a44) */
     background: linear-gradient(to right, #0a0e17, #1a2a44);
-    /* Gradient nền giống header */
-    color: #fff;
-    /* Màu chữ trắng */
-    padding: 40px 20px;
-    /* Khoảng cách bên trong: 40px trên/dưới, 20px trái/phải */
-    font-family: Arial, sans-serif;
-    /* Font chữ Arial */
-    font-size: 14px;
-    /* Kích thước chữ mặc định là 14px */
-    line-height: 1.6;
-    /* Khoảng cách dòng là 1.6 lần kích thước chữ */
+    /* Màu chữ trắng cho toàn bộ footer */
+    color: #ffffff;
+    /* Khoảng cách đệm trên và dưới là 40px, trái và phải là 0 */
+    padding: 40px 0;
+    /* Font chữ chính là Segoe UI, với các font dự phòng nếu Segoe UI không khả dụng */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-html,
-body {
-    height: 100%;
+.container {
+    /* Giới hạn chiều rộng tối đa của nội dung footer là 1200px */
+    max-width: 1200px;
+    /* Căn giữa container bằng cách đặt margin trái và phải là auto */
+    margin: 0 auto;
+    /* Thêm đệm trái và phải 15px để nội dung không sát mép */
+    padding: 0 15px;
+}
+
+/* Footer Top - Logo và các nút chức năng */
+/* Mô tả: Phần đầu của footer chứa logo, nút hành động, mạng xã hội và chọn ngôn ngữ */
+
+.footer-top {
+    /* Sử dụng flexbox để sắp xếp các phần tử (logo, nút, mạng xã hội) trên một hàng */
+    display: flex;
+    /* Cho phép các phần tử tự động xuống dòng nếu không đủ không gian */
+    flex-wrap: wrap;
+    /* Căn chỉnh các phần tử theo chiều dọc ở giữa */
+    align-items: center;
+    /* Khoảng cách dưới của footer-top là 40px */
+    margin-bottom: 40px;
+}
+
+.footer-logo {
+    /* Đẩy logo về phía bên trái bằng cách đặt margin-right tự động */
+    margin-right: auto;
+}
+
+.footer-logo img {
+    /* Đặt chiều cao của logo là 150px */
+    height: 150px;
+    /* Thêm khoảng cách dưới logo là 2px để slogan gần hơn */
+    margin-bottom: 2px;
+}
+
+.slogan {
+    /* Định dạng kích thước chữ cho slogan là 18px */
+    font-size: 18px;
+    /* Chữ đậm để nhấn mạnh slogan */
+    font-weight: bold;
+    /* Loại bỏ margin mặc định và đặt margin-top là 0 để gần logo */
+    margin: 0;
+    margin-top: 0;
+}
+
+.action-buttons {
+    /* Sử dụng flexbox để sắp xếp các nút hành động trên một hàng */
+    display: flex;
+    /* Khoảng cách giữa các nút là 10px */
+    gap: 10px;
+    /* Thêm khoảng cách phải 20px để tách biệt với các phần tử khác */
+    margin-right: 20px;
+}
+
+.btn {
+    /* Định dạng nút chung: hiển thị dạng inline-block để căn chỉnh dễ dàng */
+    display: inline-block;
+    /* Đệm trong nút: 10px trên/dưới, 20px trái/phải */
+    padding: 10px 20px;
+    /* Chữ đậm cho nút */
+    font-weight: bold;
+    /* Loại bỏ gạch chân mặc định của liên kết */
+    text-decoration: none;
+    /* Chuyển chữ trong nút thành chữ in hoa */
+    text-transform: uppercase;
+    /* Bo góc nút với bán kính 4px */
+    border-radius: 4px;
+    /* Kích thước chữ của nút là 14px */
+    font-size: 14px;
+    /* Thêm hiệu ứng chuyển đổi mượt mà cho tất cả thuộc tính trong 0.3 giây */
+    transition: all 0.3s ease;
+    /* Căn giữa nội dung chữ trong nút */
+    text-align: center;
+}
+
+.btn-yellow {
+    /* Định dạng nút màu vàng: nền gradient từ cam đậm (#ff6200) sang cam nhạt (#ff8c00) */
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    /* Màu chữ trắng */
+    color: #ffffff;
+    /* Viền 2px màu cam đậm */
+    border: 2px solid #ff6200;
+    /* Đặt chiều rộng tối thiểu để khớp với nút .btn-outline */
+    min-width: 150px;
+}
+
+.btn-yellow:hover {
+    /* Khi hover: đổi nền thành gradient từ xanh đậm (#0a0e17) sang xanh nhạt (#1a2a44) */
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    /* Đổi màu chữ thành trắng */
+    color: #ffffff;
+    /* Đổi màu viền thành xanh nhạt */
+    border-color: #1a2a44;
+}
+
+.btn-outline {
+    /* Định dạng nút viền: nền gradient giống footer */
+    background: linear-gradient(45deg, #4b6cb7, #182848);
+    /* Màu chữ cam */
+    color: #fff;
+    /* Viền 2px màu cam */
+    border: 2px solid #ff6200;
+    /* Đặt chiều rộng tối thiểu để khớp với nút .btn-yellow */
+    min-width: 140px;
+}
+
+.btn-outline:hover {
+    /* Khi hover: đổi nền thành gradient từ xanh đậm (#0a0e17) sang xanh nhạt (#1a2a44) */
+    background: linear-gradient(to right, #c39230, #5e6223);
+    /* Đổi màu chữ thành trắng */
+    color: #ffffff;
+    /* Đổi màu viền thành xanh nhạt */
+    border-color: #1a2a44;
+}
+
+.social-links {
+    /* Sử dụng flexbox để sắp xếp các biểu tượng mạng xã hội trên một hàng */
+    display: flex;
+    /* Khoảng cách giữa các biểu tượng là 15px */
+    gap: 15px;
+    /* Thêm khoảng cách phải 20px để tách biệt với phần tử khác */
+    margin-right: 20px;
+}
+
+.social-links a {
+    /* Màu chữ/biểu tượng mạng xã hội là trắng */
+    color: #ffffff;
+    /* Kích thước chữ/biểu tượng là 20px */
+    font-size: 20px;
+}
+
+.language-selector {
+    /* Sử dụng flexbox để căn chỉnh các phần tử trong bộ chọn ngôn ngữ */
+    display: flex;
+    /* Căn giữa các phần tử theo chiều dọc */
+    align-items: center;
+    /* Kích thước chữ là 14px */
+    font-size: 14px;
+}
+
+.language-selector span {
+    /* Thêm khoảng cách phải 10px cho nhãn ngôn ngữ */
+    margin-right: 10px;
+}
+
+.language-selector a {
+    /* Sử dụng flexbox để căn chỉnh biểu tượng và chữ trong liên kết ngôn ngữ */
+    display: flex;
+    /* Căn giữa các phần tử theo chiều dọc */
+    align-items: center;
+    /* Màu chữ trắng */
+    color: #ffffff;
+    /* Loại bỏ gạch chân mặc định của liên kết */
+    text-decoration: none;
+}
+
+.language-selector img {
+    /* Đặt chiều rộng biểu tượng ngôn ngữ là 20px */
+    width: 20px;
+    /* Thêm khoảng cách phải 5px cho biểu tượng */
+    margin-right: 5px;
+}
+
+/* Footer Nav - Các cột menu */
+/* Mô tả: Phần điều hướng footer với các cột menu */
+
+.footer-nav {
+    /* Sử dụng grid để tạo bố cục cột tự động */
+    display: grid;
+    /* Tạo các cột với kích thước tối thiểu 160px, tự động chia đều không gian */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    /* Khoảng cách giữa các cột là 30px */
+    gap: 30px;
+}
+
+.column-title {
+    /* Màu chữ trắng cho tiêu đề cột */
+    color: #ffffff;
+    /* Kích thước chữ 16px */
+    font-size: 16px;
+    /* Chữ đậm để nhấn mạnh */
+    font-weight: bold;
+    /* Chuyển chữ thành in hoa */
+    text-transform: uppercase;
+    /* Thêm khoảng cách dưới 20px */
+    margin-bottom: 20px;
+    /* Đặt vị trí tương đối để hỗ trợ các hiệu ứng sau này nếu cần */
+    position: relative;
+}
+
+.footer-column ul {
+    /* Loại bỏ kiểu danh sách mặc định (dấu đầu dòng) */
+    list-style: none;
+    /* Loại bỏ padding mặc định của danh sách */
+    padding: 0;
+    /* Loại bỏ margin mặc định của danh sách */
     margin: 0;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    /* Đảm bảo chiều cao tối thiểu bằng màn hình */
+.footer-column li {
+    /* Thêm khoảng cách dưới 12px cho mỗi mục danh sách */
+    margin-bottom: 12px;
 }
 
-.main-content {
-    /* Class của phần nội dung chính */
-    flex: 1 0 auto;
-    /* Nội dung chính sẽ chiếm hết không gian còn lại */
-}
-
-footer {
-    flex-shrink: 0;
-    /* Footer không co lại */
-    position: static;
-    /* Xóa position: fixed nếu có */
-}
-
-.footer-container {
-    max-width: 1200px;
-    /* Chiều rộng tối đa của nội dung footer là 1200px */
-    margin: 0 auto;
-    /* Căn giữa nội dung footer */
-    display: flex;
-    /* Sử dụng flexbox để xếp ngang các cột */
-    justify-content: space-between;
-    /* Căn đều các cột, khoảng cách tối ưu */
-    flex-wrap: wrap;
-    /* Nếu không đủ chỗ, các cột sẽ xuống dòng */
-}
-
-.footer-section {
-    flex: 1;
-    /* Mỗi cột chiếm đều không gian trong flexbox */
-    min-width: 200px;
-    /* Chiều rộng tối thiểu của mỗi cột là 200px */
-    margin: 0 15px 20px;
-    /* Khoảng cách bên ngoài: 15px trái/phải, 20px dưới */
-}
-
-.footer-section h3 {
-    color: #fff;
-    /* Màu chữ trắng cho tiêu đề */
-    font-size: 16px;
-    /* Kích thước chữ tiêu đề là 16px */
-    margin-bottom: 15px;
-    /* Khoảng cách dưới tiêu đề là 15px */
-    text-transform: uppercase;
-    /* Chuyển tiêu đề thành chữ in hoa */
-}
-
-.footer-section ul {
-    list-style: none;
-    /* Bỏ dấu đầu dòng của danh sách */
-    padding: 0;
-    /* Bỏ khoảng cách bên trong danh sách */
-}
-
-.footer-section ul li {
-    margin-bottom: 8px;
-    /* Khoảng cách dưới mỗi mục là 8px */
-}
-
-.footer-section ul li a {
-    color: #ccc;
-    /* Màu chữ xám nhạt cho liên kết */
+.footer-column a {
+    /* Màu chữ trắng cho liên kết trong cột */
+    color: #ffffff;
+    /* Loại bỏ gạch chân mặc định của liên kết */
     text-decoration: none;
-    /* Bỏ gạch chân liên kết */
-    transition: color 0.3s;
-    /* Hiệu ứng đổi màu trong 0.3 giây khi hover */
+    /* Kích thước chữ 14px */
+    font-size: 14px;
+    /* Hiệu ứng chuyển màu mượt mà trong 0.3 giây */
+    transition: color 0.3s ease;
 }
 
-.footer-section ul li a:hover {
-    color: #fff;
-    /* Đổi màu chữ thành trắng khi hover */
+.footer-column a:hover {
+    /* Khi hover: đổi màu chữ thành cam */
+    color: #ff6200;
+    /* Thêm gạch chân khi hover */
+    text-decoration: underline;
 }
 
-.footer-right {
-    text-align: right;
-    /* Căn phải nội dung phần này (logo, mạng xã hội) */
-}
+/* Responsive */
+/* Mô tả: Các quy tắc CSS cho giao diện responsive trên thiết bị nhỏ hơn */
 
-.footer-right img {
-    max-width: 150px;
-    /* Chiều rộng tối đa của logo là 150px */
-    margin-bottom: 10px;
-    /* Khoảng cách dưới logo là 10px */
-}
-
-.social-icons {
-    margin-bottom: 15px;
-    /* Khoảng cách dưới các biểu tượng mạng xã hội là 15px */
-}
-
-.social-icons a {
-    margin-left: 10px;
-    /* Khoảng cách giữa các biểu tượng là 10px */
-    font-size: 24px;
-    /* Kích thước biểu tượng là 24px */
-    color: #fff;
-    /* Màu trắng cho biểu tượng */
-    text-decoration: none;
-    /* Bỏ gạch chân liên kết */
-}
-
-.social-icons a:hover {
-    color: #ccc;
-    /* Đổi màu thành xám nhạt khi hover */
-}
-
-.certification img {
-    max-width: 120px;
-    /* Chiều rộng tối đa của biểu tượng chứng nhận là 120px */
-}
-
-.footer-bottom {
-    border-top: 1px solid #4a5b7b;
-    /* Đổi viền trên thành xanh nhạt để phù hợp với nền */
-    padding-top: 20px;
-    /* Khoảng cách trên là 20px */
-    margin-top: 20px;
-    /* Khoảng cách ngoài trên là 20px */
-    font-size: 12px;
-    /* Kích thước chữ là 12px */
-    color: #ccc;
-    /* Đổi màu chữ thành xám nhạt để nổi bật hơn */
-    display: flex;
-    /* Sử dụng flexbox để xếp ngang nội dung */
-    align-items: center;
-    /* Căn giữa theo chiều dọc */
-    justify-content: space-between;
-    /* Căn đều nội dung, khoảng cách tối ưu */
-}
-
-.footer-bottom img {
-    max-width: 100px;
-    /* Chiều rộng tối đa của logo là 100px */
-    margin-right: 10px;
-    /* Khoảng cách bên phải là 10px */
-}
-
-.footer-bottom a {
-    color: #ccc;
-    /* Đổi màu chữ thành xám nhạt */
-    text-decoration: none;
-    /* Bỏ gạch chân liên kết */
-}
-
-.footer-bottom a:hover {
-    color: #fff;
-    /* Đổi màu thành trắng khi hover */
-}
-
-/* Responsive cho màn hình nhỏ */
 @media (max-width: 768px) {
-    .footer-container {
+    /* Media query cho màn hình nhỏ hơn hoặc bằng 768px */
+    .footer-top {
+        /* Chuyển bố cục footer-top thành cột dọc */
         flex-direction: column;
-        /* Xếp dọc các cột trên màn hình nhỏ */
+        /* Căn chỉnh các phần tử về bên trái */
+        align-items: flex-start;
     }
-
-    .footer-right {
-        text-align: left;
-        /* Căn trái nội dung phần footer-right */
+    
+    .footer-logo, .action-buttons, .social-links, .language-selector {
+        /* Thêm khoảng cách dưới 20px cho các phần tử trong footer-top */
+        margin-bottom: 20px;
     }
+    
+    .footer-nav {
+        /* Chuyển bố cục grid thành 2 cột */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
-    .footer-bottom {
+@media (max-width: 480px) {
+    /* Media query cho màn hình nhỏ hơn hoặc bằng 480px */
+    .action-buttons {
+        /* Chuyển bố cục các nút hành động thành cột dọc */
         flex-direction: column;
-        /* Xếp dọc nội dung footer-bottom */
-        text-align: center;
-        /* Căn giữa nội dung */
+        /* Chiếm toàn bộ chiều rộng */
+        width: 100%;
     }
-
-    .footer-bottom img {
-        margin-bottom: 10px;
-        /* Khoảng cách dưới logo là 10px */
+    
+    .footer-nav {
+        /* Chuyển Bố cục grid thành 1 cột */
+        grid-template-columns: 1fr;
     }
 }

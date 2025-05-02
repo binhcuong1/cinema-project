@@ -1,4 +1,4 @@
-#adminBtn {
+#adminBtn, .admin-system-btn {
   padding: 12px 24px;
   font-weight: bold;
   font-size: 16px;
@@ -7,9 +7,12 @@
   background: linear-gradient(45deg, #304352, #4a5564);
   box-shadow: 0 4px 15px rgba(48, 67, 82, 0.3);
   transition: all 0.3s ease;
+  z-index: 2100; /* Cao hơn z-index của header (2000) */
+  position: relative;
+  display: inline-block;
 }
 
-#adminBtn:hover {
+#adminBtn:hover, .admin-system-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(48, 67, 82, 0.5);
 }
@@ -23,7 +26,7 @@ body {
 /* Sidebar */
 .sidebar {
   width: 250px;
-  background: linear-gradient(to bottom, #1a2a44, #0a0e17); /* Gradient màu xanh đậm giống ảnh */
+  background: linear-gradient(to bottom, #1a2a44, #0a0e17);
   position: fixed;
   top: 0;
   left: 0;
@@ -31,8 +34,14 @@ body {
   padding: 20px;
   transform: translateX(-100%); /* Ẩn sidebar mặc định */
   transition: transform 0.3s ease; /* Hiệu ứng mượt mà */
-  z-index: 2100;
+  z-index: 2100; /* Cao hơn z-index của header (2000) */
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3); /* Thêm bóng đổ */
+  padding-top: 15px 40px; /* Để tránh bị đè bởi header */
+  overflow-y: auto; /* Cho phép cuộn khi nội dung dài */
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%); /* Ẩn sidebar */
 }
 
 .sidebar:not(.hidden) {
@@ -95,5 +104,5 @@ body {
 
 /* Đảm bảo nút Trang Quản Lý không bị che */
 #adminBtn {
-  z-index: 1100;
+  z-index: 2100;
 }

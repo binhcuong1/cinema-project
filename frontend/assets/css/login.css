@@ -7,7 +7,7 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 2100;
+    z-index: 4000;
     justify-content: center;
     align-items: center;
 }
@@ -30,7 +30,7 @@
     /* Giảm chiều rộng vì các trường xếp dọc */
     width: 90%;
     position: relative;
-    z-index: 1001;
+    z-index: 4001;
     transform: translateY(-20px);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;

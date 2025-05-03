@@ -1,112 +1,176 @@
 /* assets/css/style.css */
 /* Phần banner chính (Hero Banner) */
 .hero-banner {
-    position: relative; /* Định vị tương đối để chứa các phần tử con */
-    overflow: hidden; /* Ẩn nội dung tràn ra ngoài */
-    height: 500px; /* Chiều cao banner là 500px */
-    margin-bottom: 50px; /* Khoảng cách dưới là 50px */
+    position: relative;
+    /* Định vị tương đối để chứa các phần tử con */
+    overflow: hidden;
+    /* Ẩn nội dung tràn ra ngoài */
+    height: 500px;
+    /* Chiều cao banner là 500px */
+    margin-bottom: 50px;
+    /* Khoảng cách dưới là 50px */
 }
 
 .banner-container {
-    position: relative; /* Định vị tương đối để chứa nội dung */
-    height: 100%; /* Chiều cao bằng container cha */
+    position: relative;
+    /* Định vị tương đối để chứa nội dung */
+    height: 100%;
+    /* Chiều cao bằng container cha */
 }
 
 .banner-arrows {
-    position: absolute; /* Định vị tuyệt đối để đặt nút điều hướng */
-    z-index: 10; /* Độ ưu tiên hiển thị cao */
-    width: 100%; /* Chiều rộng 100% */
-    display: flex; /* Sử dụng flexbox để xếp ngang các nút */
-    justify-content: space-between; /* Căn hai nút ra hai bên */
-    padding: 0 30px; /* Khoảng cách trái/phải là 30px */
-    top: 50%; /* Đặt ở giữa theo chiều dọc */
-    transform: translateY(-50%); /* Dịch chuyển lên 50% để căn giữa */
+    position: absolute;
+    /* Định vị tuyệt đối để đặt nút điều hướng */
+    z-index: 10;
+    /* Độ ưu tiên hiển thị cao */
+    width: 100%;
+    /* Chiều rộng 100% */
+    display: flex;
+    /* Sử dụng flexbox để xếp ngang các nút */
+    justify-content: space-between;
+    /* Căn hai nút ra hai bên */
+    padding: 0 30px;
+    /* Khoảng cách trái/phải là 30px */
+    top: 50%;
+    /* Đặt ở giữa theo chiều dọc */
+    transform: translateY(-50%);
+    /* Dịch chuyển lên 50% để căn giữa */
 }
 
 .banner-arrows button {
-    background-color: rgba(0, 0, 0, 0.5); /* Màu nền đen mờ */
-    border: none; /* Bỏ viền */
-    width: 40px; /* Chiều rộng nút là 40px */
-    height: 40px; /* Chiều cao nút là 40px */
-    border-radius: 50%; /* Bo góc tròn hoàn toàn */
-    color: white; /* Màu chữ/icon trắng */
-    font-size: 18px; /* Kích thước icon là 18px */
-    display: flex; /* Sử dụng flexbox để căn giữa icon */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    transition: all 0.3s ease; /* Hiệu ứng mượt mà trong 0.3 giây */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Màu nền đen mờ */
+    border: none;
+    /* Bỏ viền */
+    width: 40px;
+    /* Chiều rộng nút là 40px */
+    height: 40px;
+    /* Chiều cao nút là 40px */
+    border-radius: 50%;
+    /* Bo góc tròn hoàn toàn */
+    color: white;
+    /* Màu chữ/icon trắng */
+    font-size: 18px;
+    /* Kích thước icon là 18px */
+    display: flex;
+    /* Sử dụng flexbox để căn giữa icon */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    transition: all 0.3s ease;
+    /* Hiệu ứng mượt mà trong 0.3 giây */
 }
 
 .banner-arrows button:hover {
-    background-color: rgba(255, 98, 0, 0.8); /* Màu nền cam mờ khi hover */
+    background-color: rgba(255, 98, 0, 0.8);
+    /* Màu nền cam mờ khi hover */
 }
 
 .banner-content {
-    position: relative; /* Định vị tương đối để chứa hình ảnh và thông tin */
-    height: 100%; /* Chiều cao bằng container cha */
+    position: relative;
+    /* Định vị tương đối để chứa hình ảnh và thông tin */
+    height: 100%;
+    /* Chiều cao bằng container cha */
 }
 
 .banner-content img {
-    width: 100%; /* Chiều rộng hình ảnh 100% */
-    height: 100%; /* Chiều cao hình ảnh 100% */
-    object-fit: cover; /* Cắt hình ảnh để vừa khung mà không méo */
-    object-position: center; /* Căn giữa hình ảnh */
+    width: 100%;
+    /* Chiều rộng hình ảnh 100% */
+    height: 100%;
+    /* Chiều cao hình ảnh 100% */
+    object-fit: cover;
+    /* Cắt hình ảnh để vừa khung mà không méo */
+    object-position: center;
+    /* Căn giữa hình ảnh */
 }
 
 .banner-info {
-    position: absolute; /* Định vị tuyệt đối để đặt thông tin lên hình ảnh */
-    bottom: 0; /* Đặt ở dưới cùng */
-    left: 0; /* Căn trái */
-    width: 100%; /* Chiều rộng 100% */
-    padding: 50px; /* Khoảng cách bên trong là 50px */
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8)); /* Gradient từ trong suốt xuống đen mờ */
+    position: absolute;
+    /* Định vị tuyệt đối để đặt thông tin lên hình ảnh */
+    bottom: 0;
+    /* Đặt ở dưới cùng */
+    left: 0;
+    /* Căn trái */
+    width: 100%;
+    /* Chiều rộng 100% */
+    padding: 50px;
+    /* Khoảng cách bên trong là 50px */
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    /* Gradient từ trong suốt xuống đen mờ */
 }
 
 .banner-info h1 {
-    font-size: 42px; /* Kích thước chữ tiêu đề là 42px */
-    margin-bottom: 10px; /* Khoảng cách dưới là 10px */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Bóng chữ để nổi bật trên nền tối */
+    font-size: 42px;
+    /* Kích thước chữ tiêu đề là 42px */
+    margin-bottom: 10px;
+    /* Khoảng cách dưới là 10px */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    /* Bóng chữ để nổi bật trên nền tối */
 }
 
 .movie-genre {
-    font-size: 16px; /* Kích thước chữ thể loại là 16px */
-    margin-bottom: 15px; /* Khoảng cách dưới là 15px */
-    opacity: 0.8; /* Độ mờ 80% */
+    font-size: 16px;
+    /* Kích thước chữ thể loại là 16px */
+    margin-bottom: 15px;
+    /* Khoảng cách dưới là 15px */
+    opacity: 0.8;
+    /* Độ mờ 80% */
 }
 
 .rating {
-    display: flex; /* Sử dụng flexbox để xếp ngang đánh giá và thời lượng */
-    gap: 20px; /* Khoảng cách giữa các phần tử là 20px */
-    margin-bottom: 20px; /* Khoảng cách dưới là 20px */
-    font-size: 14px; /* Kích thước chữ là 14px */
+    display: flex;
+    /* Sử dụng flexbox để xếp ngang đánh giá và thời lượng */
+    gap: 20px;
+    /* Khoảng cách giữa các phần tử là 20px */
+    margin-bottom: 20px;
+    /* Khoảng cách dưới là 20px */
+    font-size: 14px;
+    /* Kích thước chữ là 14px */
 }
 
 .rating span {
-    display: flex; /* Sử dụng flexbox để căn giữa icon và chữ */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    gap: 8px; /* Khoảng cách giữa icon và chữ là 8px */
+    display: flex;
+    /* Sử dụng flexbox để căn giữa icon và chữ */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    gap: 8px;
+    /* Khoảng cách giữa icon và chữ là 8px */
 }
 
 .rating span i {
-    color: #f9c80e; /* Màu vàng cho icon ngôi sao */
+    color: #f9c80e;
+    /* Màu vàng cho icon ngôi sao */
 }
 
 .banner-btn {
-    padding: 12px 30px; /* Khoảng cách bên trong: 12px trên/dưới, 30px trái/phải */
-    font-size: 16px; /* Kích thước chữ là 16px */
-    font-weight: 600; /* Chữ đậm */
-    border-radius: 50px; /* Bo góc tròn hoàn toàn */
-    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient từ cam đậm sang cam nhạt */
-    color: white; /* Màu chữ trắng */
-    border: none; /* Bỏ viền */
-    cursor: pointer; /* Con trỏ chuột khi hover */
-    transition: all 0.3s ease; /* Hiệu ứng mượt mà trong 0.3 giây */
-    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3); /* Bóng đổ màu cam nhạt */
+    padding: 12px 30px;
+    /* Khoảng cách bên trong: 12px trên/dưới, 30px trái/phải */
+    font-size: 16px;
+    /* Kích thước chữ là 16px */
+    font-weight: 600;
+    /* Chữ đậm */
+    border-radius: 50px;
+    /* Bo góc tròn hoàn toàn */
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    /* Gradient từ cam đậm sang cam nhạt */
+    color: white;
+    /* Màu chữ trắng */
+    border: none;
+    /* Bỏ viền */
+    cursor: pointer;
+    /* Con trỏ chuột khi hover */
+    transition: all 0.3s ease;
+    /* Hiệu ứng mượt mà trong 0.3 giây */
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+    /* Bóng đổ màu cam nhạt */
 }
 
 .banner-btn:hover {
-    transform: translateY(-2px); /* Nâng nút lên 2px khi hover */
-    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5); /* Bóng đổ đậm hơn khi hover */
+    transform: translateY(-2px);
+    /* Nâng nút lên 2px khi hover */
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+    /* Bóng đổ đậm hơn khi hover */
 }
 
 
@@ -118,115 +182,180 @@
 
 /* Phần đặt vé nhanh (Quick Booking) */
 .quick-booking {
-    padding: 0 40px; /* Khoảng cách trái/phải là 40px */
-    margin-bottom: 50px; /* Khoảng cách dưới là 50px */
+    padding: 0 40px;
+    /* Khoảng cách trái/phải là 40px */
+    margin-bottom: 50px;
+    /* Khoảng cách dưới là 50px */
 }
 
 .booking-card {
-    background: linear-gradient(135deg, #0a0e17, #1a2a44); /* Gradient từ xanh đậm sang xanh xám */
-    border-radius: 10px; /* Bo góc 10px */
-    padding: 30px; /* Khoảng cách bên trong là 30px */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Bóng đổ */
+    background: linear-gradient(135deg, #0a0e17, #1a2a44);
+    /* Gradient từ xanh đậm sang xanh xám */
+    border-radius: 10px;
+    /* Bo góc 10px */
+    padding: 30px;
+    /* Khoảng cách bên trong là 30px */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    /* Bóng đổ */
 }
 
 .booking-card h2 {
-    font-size: 24px; /* Kích thước chữ tiêu đề là 24px */
-    margin-bottom: 25px; /* Khoảng cách dưới là 25px */
-    display: flex; /* Sử dụng flexbox để căn giữa icon và chữ */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    gap: 10px; /* Khoảng cách giữa icon và chữ là 10px */
-    color: #ff6200; /* Màu chữ cam */
+    font-size: 24px;
+    /* Kích thước chữ tiêu đề là 24px */
+    margin-bottom: 25px;
+    /* Khoảng cách dưới là 25px */
+    display: flex;
+    /* Sử dụng flexbox để căn giữa icon và chữ */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    gap: 10px;
+    /* Khoảng cách giữa icon và chữ là 10px */
+    color: #ff6200;
+    /* Màu chữ cam */
 }
 
 .booking-steps {
-    display: grid; /* Sử dụng grid để xếp các bước */
-    grid-template-columns: repeat(4, 1fr); /* 4 cột đều nhau */
-    gap: 15px; /* Khoảng cách giữa các bước là 15px */
-    margin-bottom: 20px; /* Khoảng cách dưới là 20px */
+    display: grid;
+    /* Sử dụng grid để xếp các bước */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 cột đều nhau */
+    gap: 15px;
+    /* Khoảng cách giữa các bước là 15px */
+    margin-bottom: 20px;
+    /* Khoảng cách dưới là 20px */
 }
 
 .booking-step {
-    position: relative; /* Định vị tương đối để chứa dropdown */
+    position: relative;
+    /* Định vị tương đối để chứa dropdown */
 }
 
 .step-btn {
-    width: 100%; /* Chiều rộng nút chiếm 100% container cha */
-    background-color: rgba(255, 255, 255, 0.1); /* Màu nền trắng mờ nhạt */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Đường viền trắng mờ nhạt */
-    border-radius: 8px; /* Bo góc 8px */
-    padding: 12px 15px; /* Khoảng cách bên trong: 12px trên/dưới, 15px trái/phải */
-    color: #fff; /* Màu chữ trắng */
-    display: flex; /* Sử dụng flexbox để bố trí các phần tử bên trong */
-    justify-content: space-between; /* Phân bố không gian giữa các phần tử */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt */
+    width: 100%;
+    /* Chiều rộng nút chiếm 100% container cha */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Màu nền trắng mờ nhạt */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Đường viền trắng mờ nhạt */
+    border-radius: 8px;
+    /* Bo góc 8px */
+    padding: 12px 15px;
+    /* Khoảng cách bên trong: 12px trên/dưới, 15px trái/phải */
+    color: #fff;
+    /* Màu chữ trắng */
+    display: flex;
+    /* Sử dụng flexbox để bố trí các phần tử bên trong */
+    justify-content: space-between;
+    /* Phân bố không gian giữa các phần tử */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    transition: all 0.3s ease;
+    /* Hiệu ứng chuyển đổi mượt */
 }
 
 .step-btn:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Màu nền khi hover */
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Màu nền khi hover */
 }
 
 .step-btn:disabled {
-    opacity: 0.5; /* Giảm độ mờ khi bị khóa */
-    cursor: not-allowed; /* Con trỏ chuột thành dấu cấm */
+    opacity: 0.5;
+    /* Giảm độ mờ khi bị khóa */
+    cursor: not-allowed;
+    /* Con trỏ chuột thành dấu cấm */
 }
 
 .step-btn.active {
-    background-color: rgba(255, 98, 0, 0.2); /* Màu nền cam mờ khi active */
-    border-color: #ff6200; /* Viền cam khi active */
+    background-color: rgba(255, 98, 0, 0.2);
+    /* Màu nền cam mờ khi active */
+    border-color: #ff6200;
+    /* Viền cam khi active */
 }
 
 .step-number {
-    background-color: #ff6200; /* Màu nền số bước là cam */
-    color: white; /* Màu chữ trắng */
-    width: 24px; /* Chiều rộng 24px */
-    height: 24px; /* Chiều cao 24px */
-    border-radius: 50%; /* Bo tròn thành hình tròn */
-    display: flex; /* Flexbox để căn giữa số */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    font-size: 12px; /* Kích thước chữ 12px */
-    margin-right: 8px; /* Khoảng cách phải 8px */
+    background-color: #ff6200;
+    /* Màu nền số bước là cam */
+    color: white;
+    /* Màu chữ trắng */
+    width: 24px;
+    /* Chiều rộng 24px */
+    height: 24px;
+    /* Chiều cao 24px */
+    border-radius: 50%;
+    /* Bo tròn thành hình tròn */
+    display: flex;
+    /* Flexbox để căn giữa số */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    font-size: 12px;
+    /* Kích thước chữ 12px */
+    margin-right: 8px;
+    /* Khoảng cách phải 8px */
 }
 
 .step-label {
-    flex: 1; /* Chiếm toàn bộ không gian còn lại */
-    text-align: left; /* Căn trái chữ */
+    flex: 1;
+    /* Chiếm toàn bộ không gian còn lại */
+    text-align: left;
+    /* Căn trái chữ */
 }
 
 /* Dropdown menu styling */
 .step-dropdown {
-    position: absolute; /* Định vị tuyệt đối */
-    top: calc(100% + 5px); /* Vị trí cách nút 5px */
-    left: 0; /* Căn trái */
-    width: 100%; /* Chiều rộng 100% */
-    background-color: #1a2a44; /* Màu nền xanh đậm */
-    border-radius: 8px; /* Bo góc 8px */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Bóng đổ */
-    z-index: 100; /* Lớp hiển thị trên cùng */
-    max-height: 0; /* Ban đầu không có chiều cao */
-    overflow: hidden; /* Ẩn nội dung vượt quá */
-    transition: max-height 0.3s ease; /* Hiệu ứng mở/đóng mượt */
-    opacity: 0; /* Ban đầu không hiển thị */
-    visibility: hidden; /* Ẩn khỏi view */
+    position: absolute;
+    /* Định vị tuyệt đối */
+    top: calc(100% + 5px);
+    /* Vị trí cách nút 5px */
+    left: 0;
+    /* Căn trái */
+    width: 100%;
+    /* Chiều rộng 100% */
+    background-color: #1a2a44;
+    /* Màu nền xanh đậm */
+    border-radius: 8px;
+    /* Bo góc 8px */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    /* Bóng đổ */
+    z-index: 100;
+    /* Lớp hiển thị trên cùng */
+    max-height: 0;
+    /* Ban đầu không có chiều cao */
+    overflow: hidden;
+    /* Ẩn nội dung vượt quá */
+    transition: max-height 0.3s ease;
+    /* Hiệu ứng mở/đóng mượt */
+    opacity: 0;
+    /* Ban đầu không hiển thị */
+    visibility: hidden;
+    /* Ẩn khỏi view */
 }
 
 /* Hiển thị dropdown khi có class active (khớp với JavaScript) */
 .step-dropdown.active {
-    max-height: 200px; /* Chiều cao tối đa khi hiển thị */
-    opacity: 1; /* Hiển thị đầy đủ */
-    visibility: visible; /* Hiển thị trong view */
+    max-height: 200px;
+    /* Chiều cao tối đa khi hiển thị */
+    opacity: 1;
+    /* Hiển thị đầy đủ */
+    visibility: visible;
+    /* Hiển thị trong view */
 }
 
 .step-dropdown div {
-    padding: 10px 15px; /* Khoảng cách bên trong */
-    color: #fff; /* Màu chữ trắng */
-    cursor: pointer; /* Con trỏ chuột thành bàn tay */
-    transition: background-color 0.2s; /* Hiệu ứng đổi màu nền */
+    padding: 10px 15px;
+    /* Khoảng cách bên trong */
+    color: #fff;
+    /* Màu chữ trắng */
+    cursor: pointer;
+    /* Con trỏ chuột thành bàn tay */
+    transition: background-color 0.2s;
+    /* Hiệu ứng đổi màu nền */
 }
 
 .step-dropdown div:hover {
-    background-color: rgba(255, 98, 0, 0.2); /* Màu nền cam mờ khi hover */
+    background-color: rgba(255, 98, 0, 0.2);
+    /* Màu nền cam mờ khi hover */
 }
 
 /* Định dạng cho movie-selection-step */
@@ -251,10 +380,12 @@
 }
 
 .movie-selection.active {
-    max-height: 500px; /* Tăng chiều cao để chứa danh sách phim */
+    max-height: 500px;
+    /* Tăng chiều cao để chứa danh sách phim */
     opacity: 1;
     visibility: visible;
-    overflow-y: auto; /* Cho phép cuộn nếu danh sách dài */
+    overflow-y: auto;
+    /* Cho phép cuộn nếu danh sách dài */
 }
 
 /* Định dạng tab phim */
@@ -287,9 +418,12 @@
 }
 
 .movie-grid-container {
-    max-width: 1200px; /* Giới hạn chiều rộng tối đa */
-    margin: 0 auto; /* Căn giữa container trên trang */
-    padding: 0 15px; /* Thêm padding để không sát mép */
+    max-width: 1200px;
+    /* Giới hạn chiều rộng tối đa */
+    margin: 0 auto;
+    /* Căn giữa container trên trang */
+    padding: 0 15px;
+    /* Thêm padding để không sát mép */
 }
 
 /* Ẩn thanh cuộn nhưng vẫn cho phép cuộn */
@@ -299,25 +433,34 @@
 
 /* Định dạng lưới phim */
 .movie-grid {
-    display: flex; /* Chuyển sang flex để xếp ngang */
-    flex-wrap: nowrap; /* Không cho phép xuống dòng */
-    gap: 15px; /* Giữ khoảng cách giữa các thẻ phim */
+    display: flex;
+    /* Chuyển sang flex để xếp ngang */
+    flex-wrap: nowrap;
+    /* Không cho phép xuống dòng */
+    gap: 15px;
+    /* Giữ khoảng cách giữa các thẻ phim */
     padding: 15px;
-    overflow-x: auto; /* Cho phép cuộn ngang */
-    scroll-snap-type: x mandatory; /* Tùy chọn: cuộn theo từng thẻ phim */
+    overflow-x: auto;
+    /* Cho phép cuộn ngang */
+    scroll-snap-type: x mandatory;
+    /* Tùy chọn: cuộn theo từng thẻ phim */
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    justify-content: center; /* Căn giữa các thẻ phim */
+    justify-content: center;
+    /* Căn giữa các thẻ phim */
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
 @media (max-width: 768px) {
     .movie-card {
-        flex: 0 0 200px; /* Giảm kích thước trên mobile */
+        flex: 0 0 200px;
+        /* Giảm kích thước trên mobile */
     }
+
     .movie-poster img {
-        height: 300px; /* Giảm chiều cao hình ảnh trên mobile */
+        height: 300px;
+        /* Giảm chiều cao hình ảnh trên mobile */
     }
 }
 
@@ -326,7 +469,8 @@
     overflow: hidden;
     border-radius: 8px;
     transition: transform 0.3s ease;
-    flex: 0 0 250px; /* Cố định chiều rộng 200px */
+    flex: 0 0 250px;
+    /* Cố định chiều rộng 200px */
 }
 
 .movie-card:hover {
@@ -334,9 +478,12 @@
 }
 
 .movie-poster img {
-    width: 100%; /* Hình ảnh chiếm toàn bộ chiều rộng của thẻ */
-    height: 350px; /* Cố định chiều cao hình ảnh */
-    object-fit: cover; /* Đảm bảo hình ảnh không méo */
+    width: 100%;
+    /* Hình ảnh chiếm toàn bộ chiều rộng của thẻ */
+    height: 350px;
+    /* Cố định chiều cao hình ảnh */
+    object-fit: cover;
+    /* Đảm bảo hình ảnh không méo */
     border-radius: 8px;
 }
 
@@ -414,39 +561,84 @@
 
 /* Nút đặt vé */
 .book-now-btn {
-    width: 100%; /* Chiều rộng 100% */
-    padding: 15px; /* Khoảng cách bên trong 15px */
-    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient cam */
-    color: white; /* Màu chữ trắng */
-    border: none; /* Không có viền */
-    border-radius: 8px; /* Bo góc 8px */
-    font-weight: bold; /* Chữ đậm */
-    font-size: 16px; /* Kích thước chữ 16px */
-    display: flex; /* Flexbox để căn giữa icon và chữ */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    gap: 10px; /* Khoảng cách giữa icon và chữ 10px */
-    cursor: pointer; /* Con trỏ chuột thành bàn tay */
-    transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt */
-    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3); /* Bóng đổ cam */
+    width: 100%;
+    /* Chiều rộng 100% */
+    padding: 15px;
+    /* Khoảng cách bên trong 15px */
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    /* Gradient cam */
+    color: white;
+    /* Màu chữ trắng */
+    border: none;
+    /* Không có viền */
+    border-radius: 8px;
+    /* Bo góc 8px */
+    font-weight: bold;
+    /* Chữ đậm */
+    font-size: 16px;
+    /* Kích thước chữ 16px */
+    display: flex;
+    /* Flexbox để căn giữa icon và chữ */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    gap: 10px;
+    /* Khoảng cách giữa icon và chữ 10px */
+    cursor: pointer;
+    /* Con trỏ chuột thành bàn tay */
+    transition: all 0.3s ease;
+    /* Hiệu ứng chuyển đổi mượt */
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+    /* Bóng đổ cam */
 }
 
 .book-now-btn:hover {
-    transform: translateY(-2px); /* Hiệu ứng nâng lên 2px khi hover */
-    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5); /* Bóng đổ đậm hơn */
+    transform: translateY(-2px);
+    /* Hiệu ứng nâng lên 2px khi hover */
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+    /* Bóng đổ đậm hơn */
 }
 
 .book-now-btn:disabled {
-    opacity: 0.5; /* Giảm độ mờ khi bị khóa */
-    cursor: not-allowed; /* Con trỏ chuột thành dấu cấm */
-    transform: none; /* Không có hiệu ứng nâng lên */
+    opacity: 0.5;
+    /* Giảm độ mờ khi bị khóa */
+    cursor: not-allowed;
+    /* Con trỏ chuột thành dấu cấm */
+    transform: none;
+    /* Không có hiệu ứng nâng lên */
 }
 
 /* Animation for chevron icon */
 .step-btn .fas.fa-chevron-down {
-    transition: transform 0.3s ease; /* Hiệu ứng xoay mượt */
+    transition: transform 0.3s ease;
+    /* Hiệu ứng xoay mượt */
 }
 
 .step-btn.active .fas.fa-chevron-down {
-    transform: rotate(180deg); /* Xoay icon 180 độ khi active */
+    transform: rotate(180deg);
+    /* Xoay icon 180 độ khi active */
+}
+
+
+/* Khuyến mãi  */
+.promo-home-card {
+    display: inline-block;
+    margin: 10px;
+    max-width: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.promo-home-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.promo-home-card:hover {
+    transform: scale(1.05);
 }

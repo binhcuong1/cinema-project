@@ -1,87 +1,84 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thêm khuyến mãi</title>
-    <link rel="stylesheet" href="/frontend/assets/css/add.css" />
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Thêm Khuyến Mãi</title>
+    <link rel="stylesheet" href="/frontend/assets/css/shares/header.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css" />
+    <!-- <link rel="stylesheet" href="/frontend/assets/css/style.css" /> -->
+    <link rel="stylesheet" href="/frontend/assets/css/login.css" />
 </head>
 
 <body data-page="promotion-add">
-    <div class="add-promotion-container">
-        <h2>Thêm khuyến mãi</h2>
+    <div id="header-placeholder"></div>
+    <div id="sidebar-placeholder"></div>
 
-        <form id="add-promotion-form">
-            <div class="form-group">
-                <label for="ten_khuyen_mai">Tên khuyến mãi:</label>
-                <input type="text" id="ten_khuyen_mai" required />
+    <main class="main-content">
+        <div class="movies-container">
+            <div class="page-header">
+                <h1><i class="fas fa-gift"></i> Thêm Khuyến Mãi</h1>
+                <nav class="breadcrumb">
+                    <a href="/frontend/pages/index.html">Trang Chủ</a> /
+                    <a href="/frontend/pages/promotion/list.html">Quản Lý Khuyến Mãi</a> /
+                    <span>Thêm Khuyến Mãi</span>
+                </nav>
             </div>
 
-            <div class="form-group">
-                <label for="mo_ta">Mô tả:</label>
-                <textarea id="mo_ta" required></textarea>
-            </div>
+            <form id="add-promotion-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="ten_khuyen_mai">Tên khuyến mãi:</label>
+                    <input type="text" id="ten_khuyen_mai" name="ten_khuyen_mai" required />
+                </div>
 
-            <div class="form-group">
-                <label for="dieu_kien">Điều kiện:</label>
-                <input type="text" id="dieu_kien" />
-            </div>
+                <div class="form-group">
+                    <label for="mo_ta">Mô tả:</label>
+                    <textarea id="mo_ta" name="mo_ta" required></textarea>
+                </div>
 
-            <div class="form-group">
-                <label for="luu_y">Lưu ý:</label>
-                <textarea id="luu_y"></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="dieu_kien">Điều kiện:</label>
+                    <textarea id="dieu_kien" name="dieu_kien"></textarea>
+                </div>
 
-            <div class="form-group">
-                <label for="trang_thai">Trạng thái:</label>
-                <select id="trang_thai" required>
-                    <option value="dang_hoat_dong">Đang hoạt động</option>
-                    <option value="chua_kich_hoat">Chưa kích hoạt</option>
-                    <option value="het_han">Hết hạn</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="luu_y">Lưu ý:</label>
+                    <textarea id="luu_y" name="luu_y"></textarea>
+                </div>
 
-            <div class="form-group">
-                <label for="image">Link ảnh:</label>
-                <input type="url" id="image" />
-            </div>
+                <div class="form-group">
+                    <label for="gio_bat_dau">Giờ bắt đầu:</label>
+                    <input type="time" id="gio_bat_dau" name="gio_bat_dau" required />
+                </div>
 
-            <div class="form-group">
-                <label for="gia_2d">Giá vé 2D:</label>
-                <input type="number" id="gia_2d" />
-            </div>
+                <div class="form-group">
+                    <label for="gio_ket_thuc">Giờ kết thúc:</label>
+                    <input type="time" id="gio_ket_thuc" name="gio_ket_thuc" required />
+                </div>
 
-            <div class="form-group">
-                <label for="gia_3d">Giá vé 3D:</label>
-                <input type="number" id="gia_3d" />
-            </div>
+                <div class="form-group">
+                    <label for="ngay_trong_tuan">Ngày trong tuần (vd: Monday, Tuesday,...):</label>
+                    <input type="text" id="ngay_trong_tuan" name="ngay_trong_tuan"
+                        placeholder="VD: Monday,Wednesday,Friday" />
+                </div>
 
-            <div class="form-group">
-                <label for="gio_bat_dau">Giờ bắt đầu:</label>
-                <input type="time" id="gio_bat_dau" />
-            </div>
+                <div class="form-group">
+                    <label for="image">Ảnh khuyến mãi:</label>
+                    <input type="file" id="image" name="image" accept="image/*" required />
+                </div>
+                <button type="button" class="back-btn"
+                    onclick="window.location.href='/frontend/pages/promotion/list.html'">← Quay lại</button>
+                <button type="submit"><i class="fas fa-plus-circle"></i> Thêm Khuyến Mãi</button>
+            </form>
+        </div>
+    </main>
 
-            <div class="form-group">
-                <label for="gio_ket_thuc">Giờ kết thúc:</label>
-                <input type="time" id="gio_ket_thuc" />
-            </div>
-
-            <div class="form-group">
-                <label for="ngay_trong_tuan">Ngày trong tuần:</label>
-                <input type="text" id="ngay_trong_tuan" placeholder="Ví dụ: Monday, Tuesday..." />
-            </div>
-
-            <div class="form-group">
-                <label for="doi_tuong">Đối tượng áp dụng:</label>
-                <input type="text" id="doi_tuong" />
-            </div>
-
-            <button type="submit">Thêm khuyến mãi</button>
-        </form>
-    </div>
-
+    <footer id="footer-container"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/frontend/assets/js/main.js"></script>
+    <script src="/frontend/assets/js/admin.js"></script>
     <script src="/frontend/assets/js/promotion.js"></script>
 </body>
 

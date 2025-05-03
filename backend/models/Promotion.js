@@ -3,7 +3,7 @@ const table_name = 'khuyen_mai';
 
 const promotion = {
     getAll: (callback) => {
-        db.query(`SELECT * FROM ${table_name} WHERE da_xoa = 0`, (err, result) => {
+        db.query(`SELECT * FROM ${table_name}`, (err, result) => {
             if (err) return callback(err, null);
             callback(null, result);
         });

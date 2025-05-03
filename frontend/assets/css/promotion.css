@@ -1,59 +1,86 @@
 .promo-slider {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 50px auto;
+    padding: 0 20px;
 }
+
+/* Khối chương trình khuyến mãi */
 .promo-card {
     display: flex;
     align-items: center;
-    padding: 20px;
-    background: linear-gradient(to right, #0a0e17, #1a2a44);
-    border-radius: 10px;
-    color: white;
-    margin-bottom: 30px; /* Tạo khoảng cách giữa hai chương trình khuyến mãi */
+    justify-content: space-between;
+    gap: 30px;
+    padding: 30px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #1f2c4c, #0c1323);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin-bottom: 40px;
+    color: #fff;
+    overflow: hidden;
 }
+
+/* Nếu cần đảo chiều ảnh và nội dung */
 .promo-card.reversed {
-    flex-direction: row-reverse ;
+    flex-direction: row-reverse;
 }
+
 .promo-info {
     flex: 1;
-    padding: 0 20px;
 }
+
 .promo-info h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #fff;
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #ffcc00;
+    font-weight: 700;
 }
+
 .promo-info p {
-    margin: 5px 0;
     font-size: 16px;
+    margin: 8px 0;
+    line-height: 1.6;
 }
+
 .promo-info ul {
     list-style-type: disc;
     padding-left: 20px;
+    margin-top: 10px;
 }
+
 .promo-info ul li {
     margin: 5px 0;
 }
+
 .promo-btn {
     display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient nền mặc định */
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(90deg, #ffc400, #ff6200);
     color: #000;
+    border-radius: 50px;
     text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+    box-shadow: 0 4px 12px rgba(255, 98, 0, 0.4);
+    transition: all 0.3s ease;
 }
+
 .promo-btn:hover {
-    background: linear-gradient(to right, #0a0e17, #1a2a44); /* Gradient nền khi hover */
-    color: #fff; /* Đổi màu chữ để dễ đọc trên nền tối */
+    background: linear-gradient(90deg, #0a0e17, #1a2a44);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
 }
+
 .promo-image {
     flex: 1;
     text-align: center;
 }
+
 .promo-image img {
     max-width: 100%;
-    border-radius: 10px;
+    max-height: 280px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
 }

@@ -10,7 +10,7 @@ const promotion = {
     },
 
     getByID: (id, callback) => {
-        db.query(`SELECT * FROM ${table_name} WHERE ma_khuyen_mai = ? AND da_xoa = 0`, [id], (err, result) => {
+        db.query(`SELECT * FROM ${table_name} WHERE ma_khuyen_mai = ?`, [id], (err, result) => {
             if (err) return callback(err, null);
             if (result.length === 0) return callback(null, null);
             callback(null, result);

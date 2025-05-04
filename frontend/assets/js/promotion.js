@@ -1,7 +1,83 @@
 axios.defaults.baseURL = 'http://127.0.0.1:3000';
 
-//#region === Hiển thị danh sách khuyến mãi ===
+
+//#region === Hàm chung để lấy dữ liệu khuyến mãi ===
+async function fetchPromotions() {
+    try {
+        const res = await axios.get("/api/promotions");
+        if (!res.data || !res.data.data) {
+            console.error("API không trả về dữ liệu hợp lệ:", res.data);
+            return [];
+        }
+        console.log("Dữ liệu khuyến mãi thô:", res.data.data);
+        return res.data.data;
+    } catch (err) {
+        console.error("Lỗi khi gọi API /api/promotions:", err.message, err.stack);
+        return null;
+    }
+}
+//#endregion
+
+//#region === Hiển thị danh sách khuyến mãi (trang quản lý) ===
 function renderPromotionCard(promo) {
+    const card = document.createElement("div");
+    card.className = "movie-card";
+    const statusMapping = {
+        dang_hoat_dong: "Đang hoạt động",
+        chua_kich_hoat: "Chưa kích hoạt",
+        het_han: "Hết hạn"
+    };
+
+    const trangThaiHienThi = statusMapping[promo.trang_thai] || promo.trang_thai;
+
+    card.innerHTML = `
+        <div class="movie-poster">
+            <img src="${promo.image}" alt="${promo.ten_khuyen_mai}" />
+        </div>
+        <div class="movie-overlay">
+            <button onclick="hrefToPromotionDetail('${promo.ma_khuyen_mai}')">Chi tiết</button>
+            <button onclick="hrefToEditPromotion('${promo.ma_khuyen_mai}')">Sửa</button>
+            <button class="delete-btn" onclick="deletePromotion('${promo.ma_khuyen_mai}', '${promo.da_xoa}')">Xóa</button>
+        </div>
+        <div class="movie-info">
+            <h3>${promo.ten_khuyen_mai}</h3>
+            <div class="movie-meta">
+                <span><i class="fas fa-toggle-on"></i> ${trangThaiHienThi}</span>
+                ${promo.da_xoa == 1 ? '<span class="deleted">(Đã xóa)</span>' : ''}
+            </div>
+        </div>
+    `;
+
+    return card;
+}
+
+async function fetchPromotionsToList() {
+    const container = document.getElementById("promotion-list");
+    if (!container) {
+        console.error("Không tìm thấy #promotion-list! Kiểm tra HTML.");
+        return;
+    }
+
+    const data = await fetchPromotions();
+    if (data === null) {
+        container.innerHTML = "<p class='error'>Không thể tải dữ liệu! Vui lòng kiểm tra kết nối hoặc server.</p>";
+        return;
+    }
+
+    container.innerHTML = "";
+    if (data.length === 0) {
+        container.innerHTML = '<p class="no-results">Không có khuyến mãi nào.</p>';
+        return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    data.forEach(p => fragment.appendChild(renderPromotionCard(p)));
+    container.appendChild(fragment);
+}
+//#endregion
+
+//#region === Hiển thị carousel khuyến mãi (trang chủ) ===
+function renderHomePromotionCard(promo) {
     const card = document.createElement("a");
     card.href = `/frontend/pages/promotion/detail.html?id=${promo.ma_khuyen_mai}`;
     card.className = "promo-card";
@@ -18,72 +94,80 @@ function renderPromotionCard(promo) {
 async function fetchHomePromotions() {
     const container = document.querySelector(".promo-grid");
     if (!container) {
-        console.error("Không tìm thấy .promo-grid!");
+        console.error("Không tìm thấy .promo-grid! Kiểm tra HTML trong index.html.");
         return;
     }
 
-    try {
-        const res = await axios.get("/api/promotions");
-        const allPromos = res.data.data;
-
-        const filteredPromos = allPromos.filter(p =>
-            p.trang_thai === "dang_hoat_dong" && p.da_xoa == 0
-        );
-
-        console.log("Số lượng khuyến mãi:", filteredPromos.length);
-
-        container.innerHTML = "";
-        if (filteredPromos.length === 0) {
-            container.innerHTML = "<p class='no-results'>Không có khuyến mãi hoạt động.</p>";
-            return;
-        }
-
-        const fragment = document.createDocumentFragment();
-        filteredPromos.forEach(promo => {
-            fragment.appendChild(renderPromotionCard(promo));
-        });
-        container.appendChild(fragment);
-
-        // Khởi tạo điều hướng carousel
-        const grid = document.querySelector(".promo-grid");
-        const leftArrow = document.querySelector("#promo-left");
-        const rightArrow = document.querySelector("#promo-right");
-
-        if (!leftArrow || !rightArrow) {
-            console.error("Không tìm thấy nút điều hướng:", { leftArrow, rightArrow });
-            return;
-        }
-
-        const cardWidth = grid.querySelector(".promo-card").offsetWidth + 20; // Chiều rộng card + gap
-        console.log("Chiều rộng card:", cardWidth);
-
-        function updateArrowState() {
-            leftArrow.disabled = grid.scrollLeft <= 0;
-            rightArrow.disabled = grid.scrollLeft >= grid.scrollWidth - grid.clientWidth - 1;
-            console.log("Scroll position:", grid.scrollLeft, "Max scroll:", grid.scrollWidth - grid.clientWidth);
-        }
-
-        leftArrow.addEventListener("click", () => {
-            console.log("Nhấn nút trái");
-            grid.scrollLeft -= cardWidth; // Cuộn trái 1 card
-            updateArrowState();
-        });
-
-        rightArrow.addEventListener("click", () => {
-            console.log("Nhấn nút phải");
-            grid.scrollLeft += cardWidth; // Cuộn phải 1 card
-            updateArrowState();
-        });
-
-        grid.addEventListener("scroll", updateArrowState);
-        updateArrowState();
-    } catch (err) {
-        console.error("Lỗi khi tải khuyến mãi:", err);
-        container.innerHTML = "<p class='error'>Không thể tải khuyến mãi!</p>";
+    const allPromos = await fetchPromotions();
+    if (allPromos === null) {
+        container.innerHTML = "<p class='error'>Không thể tải khuyến mãi! Vui lòng kiểm tra kết nối hoặc server.</p>";
+        return;
     }
-}
 
+    // Lọc khuyến mãi cho trang chủ
+    const filteredPromos = allPromos.filter(p => {
+        const status = p.trang_thai?.toLowerCase();
+        return (
+            (status === "dang_hoat_dong" || status === "đang hoạt động" || status === "active") &&
+            p.da_xoa == 0
+        );
+    });
+
+    console.log("Số lượng khuyến mãi sau lọc:", filteredPromos.length);
+    console.log("Danh sách khuyến mãi:", filteredPromos);
+
+    container.innerHTML = "";
+    if (filteredPromos.length === 0) {
+        console.warn("Không có khuyến mãi nào thỏa mãn điều kiện!");
+        container.innerHTML = "<p class='no-results'>Không có khuyến mãi hoạt động.</p>";
+        return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    filteredPromos.forEach(promo => {
+        const card = renderHomePromotionCard(promo);
+        fragment.appendChild(card);
+        console.log("Đã thêm card:", promo.ten_khuyen_mai);
+    });
+    container.appendChild(fragment);
+
+    // Khởi tạo điều hướng carousel
+    const grid = document.querySelector(".promo-grid");
+    const leftArrow = document.querySelector("#promo-left");
+    const rightArrow = document.querySelector("#promo-right");
+
+    if (!leftArrow || !rightArrow) {
+        console.error("Không tìm thấy nút điều hướng:", { leftArrow, rightArrow });
+        return;
+    }
+
+    const cardWidth = grid.querySelector(".promo-card")?.offsetWidth + 20 || 400; // Chiều rộng card + gap, mặc định 400px
+    console.log("Chiều rộng card:", cardWidth);
+
+    function updateArrowState() {
+        leftArrow.disabled = grid.scrollLeft <= 0;
+        rightArrow.disabled = grid.scrollLeft >= grid.scrollWidth - grid.clientWidth - 1;
+        console.log("Scroll position:", grid.scrollLeft, "Max scroll:", grid.scrollWidth - grid.clientWidth);
+    }
+
+    leftArrow.addEventListener("click", () => {
+        console.log("Nhấn nút trái");
+        grid.scrollLeft -= cardWidth; // Cuộn trái 1 card
+        updateArrowState();
+    });
+
+    rightArrow.addEventListener("click", () => {
+        console.log("Nhấn nút phải");
+        grid.scrollLeft += cardWidth; // Cuộn phải 1 card
+        updateArrowState();
+    });
+
+    grid.addEventListener("scroll", updateArrowState);
+    updateArrowState();
+}
 //#endregion
+
+
 
 //#region === Chuyển trang ===
 function hrefToPromotionDetail(id) {

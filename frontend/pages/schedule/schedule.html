@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BiCyHD Cinema - Quản lý lịch chiếu phim tại các rạp trên toàn quốc." />
+  <meta name="keywords" content="quản lý lịch chiếu, rạp chiếu phim, BiCyHD Cinema" />
+  <meta property="og:title" content="BiCyHD Cinema - Quản Lý Lịch Chiếu" />
+  <meta property="og:description" content="Quản lý lịch chiếu phim nhanh chóng tại BiCyHD Cinema." />
+  <meta property="og:image" content="/frontend/assets/images/logo.jpg" />
+  <title>Quản Lý Lịch Chiếu - BiCyHD Cinema</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/frontend/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="/frontend/assets/css/shares/header.css" />
+  <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css" />
+  <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css" />
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="/frontend/assets/css/schedule/schedule.css" />
+  <link rel="stylesheet" href="/frontend/assets/css/style.css" />
+  <link rel="stylesheet" href="/frontend/assets/css/login.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body data-page="schedule">
+  <!-- Header & Sidebar -->
+  <div id="header-placeholder">
+    <header>Header mặc định nếu JavaScript không tải</header>
+  </div>
+  <div id="sidebar-placeholder">
+    <aside>Sidebar mặc định nếu JavaScript không tải</aside>
+  </div>
+
+  <main class="main-content">
+    <div class="schedule-container">
+      <div class="schedule-header" id="schedule-header">
+        <div class="filter">
+          <label for="theater">Rạp:</label>
+          <select id="theater">
+            <option value="">Chọn rạp</option>
+          </select>
+          <label for="date">Ngày chiếu:</label>
+          <input type="date" id="date" />
+        </div>
+        <button class="filter-btn" onclick="loadSchedules()">
+          Chấp nhận
+        </button>
+      </div>
+      <!-- Danh sách lịch chiếu sẽ được render động -->
+      <div id="schedule-list">
+        <p>Chọn rạp và ngày để xem lịch chiếu.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer id="footer-container">
+    <p>Footer mặc định nếu JavaScript không tải</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/frontend/assets/js/main.js"></script>
+  <script src="/frontend/assets/js/admin.js"></script>
+  <script src="/frontend/assets/js/schedule.js"></script>
+</body>
+
+</html>

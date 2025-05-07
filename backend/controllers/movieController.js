@@ -34,7 +34,7 @@ exports.getMovieByID = (req, res) => {
             return res.status(500).json({ error: err });
         if (!result)
             return res.status(404).json({ error: 'Không tìm thấy phim!' });
-        res.json({ success: 'true', data: result });
+        res.json({ success: 'true', data: result[0] });
     });
 }
 

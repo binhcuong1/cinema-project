@@ -25,7 +25,7 @@ passport.use(new GoogleStrategy({
         // chưa có → tạo mới
         const newUser = {
             ten_dang_nhap: email,
-            mat_khau: '', // Hoặc có thể đặt mật khẩu giả để tránh null
+            mat_khau: null, 
             ho_va_ten,
             sdt: '',
             diachi: '',

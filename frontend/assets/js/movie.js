@@ -73,7 +73,7 @@ async function fetchAndRenderMovies(endpoint, containerId, renderCallback) {
     const response = await axios.get(endpoint);
     const data = response.data;
 
-    if (data.success !== "true") throw new Error("Dữ liệu không hợp lệ");
+    if (data.success !== true) throw new Error("Dữ liệu không hợp lệ");
 
     container.innerHTML = "";
 
@@ -352,7 +352,7 @@ async function showMovieEdit() {
 
     if (movie.success !== "true") throw new Error("Không thể tải thông tin phim!");
 
-    const data = movie.data[0];
+    const data = movie.data;
     const movieDetail = document.getElementById("sectionEdit");
     movieDetail.innerHTML = `
       <div class="form-container">
@@ -446,7 +446,7 @@ async function showMovieDetail() {
 
   try {
     const response = await axios.get(`/api/movies/${movieId}`);
-    const movie = response.data.data[0];
+    const movie = response.data.data;
     const isDeleted = movie.da_xoa == 1 ? "Đã xóa" : "Chưa xóa";
 
     const movieDetail = document.getElementById("movieDetail");
@@ -524,4 +524,3 @@ window.onload = () => {
   // Khởi tạo sự kiện tìm kiếm
   initializeSearch();
 };
-

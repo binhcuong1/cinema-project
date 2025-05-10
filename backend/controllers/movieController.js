@@ -4,7 +4,7 @@ exports.getMovies = (req, res) => {
     movie.getAll((err, result) => {
         if (err)
             return res.status(500).json({ error: err });
-        res.json({ success: 'true', data: result });
+        res.json({ success: true, data: result });
     });
 }
 

@@ -4,7 +4,7 @@ exports.getTheaters = (req, res) => {
     theater.getAll((err, result) => {
         if (err)
             return res.status(500).json({error: err});
-        res.status(200).json({success: 'true', data: result});
+        res.status(200).json({success: true, data: result});
     });
 };
 
@@ -16,7 +16,7 @@ exports.getTheaterByID = (req, res) => {
             return res.status(500).json({error: err});
         if (!result)
             return res.status(404).json({error: 'Không tìm thấy rạp!'});
-        res.json({success: 'true', data: result[0]});
+        res.json({success: true, data: result[0]});
     });
 }
 
@@ -36,7 +36,7 @@ exports.createTheater = (req, res) => {
 
     theater.create(theaterData, (err, result) => {
         if (err) return res.status(500).json({error: err});
-        res.status(201).json({success: 'true', image: imagePath});
+        res.status(201).json({success: true, image: imagePath});
     });
 }
 

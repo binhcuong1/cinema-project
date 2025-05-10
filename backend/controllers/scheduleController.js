@@ -1,9 +1,21 @@
 const schedule = require('../models/Schedule');
 
+exports.getById = (req, res) => {
+    let scheduleId = req.params.id;
+
+    schedule.getById(scheduleId, (err, result) => {
+        if (err)
+            return res.status(500).json({ error: err });
+        if (!result)
+            return res.status(404).json({ error: 'Không tìm thấy lịch chiếu!' });
+        res.json({ success: 'true', data: result[0] });
+    });
+};
+
 exports.getByRoom = (req, res) => {
     const roomID = parseInt(req.params.id); // Chuyển đổi thành số
     const date = req.query.date; // Lấy tham số date từ query string
-    
+
     // Kiểm tra date hợp lệ (YYYY-MM-DD)
     if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
         return res.status(400).json({ error: 'Ngày chiếu không hợp lệ! Định dạng: YYYY-MM-DD' });
@@ -25,6 +37,60 @@ exports.getAudios = (req, res) => {
         if (err)
             return res.status(500).json({ error: err });
         res.json({ success: 'true', data: result });
+    });
+};
+
+exports.getDatesByTheaterAndMovie = (req, res) => {
+    const { movieId } = req.params; // Lấy movieId từ URL params
+    const { theaterId } = req.query; // Lấy theaterId từ query params
+
+    // Kiểm tra tham số đầu vào
+    if (!movieId || !theaterId) {
+        return res.status(400).json({
+            success: false,
+            error: "Thiếu movieId hoặc theaterId"
+        });
+    }
+
+    schedule.getDatesByTheaterAndMovie(movieId, theaterId, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Lỗi server: ' + err.message });
+        }
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'Không tìm thấy lịch chiếu!' });
+        }
+        res.json({ success: true, data: result });
+    });
+};
+
+exports.getShowtimesByMovieAndDate = (req, res) => {
+    const { movieId } = req.params;
+    const { date } = req.params;
+    const { theaterId } = req.query;
+
+    if (!movieId || !date || !theaterId) {
+        return res.status(400).json({
+            success: false,
+            error: "Thiếu movieId, date hoặc theaterId"
+        });
+    }
+
+    // Kiểm tra định dạng ngày
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+        return res.status(400).json({
+            success: false,
+            error: "Định dạng ngày không hợp lệ! Vui lòng dùng YYYY-MM-DD"
+        });
+    }
+
+    schedule.getShowtimesByMovieAndDate(movieId, date, theaterId, (err, result) => {
+        if (err) {
+            return res.status(500).json({ success: false, error: 'Lỗi server: ' + err.message });
+        }
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'Không tìm thấy suất chiếu!' });
+        }
+        res.json({ success: true, data: result });
     });
 };
 
@@ -120,8 +186,8 @@ exports.createSchedules = async (req, res) => {
                 const existingStart = new Date(existing.thoi_gian_bat_dau);
                 const existingEnd = new Date(existing.thoi_gian_ket_thuc);
                 return (startTime >= existingStart && startTime < existingEnd) ||
-                       (endTime > existingStart && endTime <= existingEnd) ||
-                       (startTime <= existingStart && endTime >= existingEnd);
+                    (endTime > existingStart && endTime <= existingEnd) ||
+                    (startTime <= existingStart && endTime >= existingEnd);
             });
 
             if (hasConflict) {
@@ -165,12 +231,13 @@ exports.createSchedules = async (req, res) => {
 
 exports.deleteSchedule = (req, res) => {
     const scheduleID = req.params.id;
-    
+
     schedule.delete(scheduleID, (err, result) => {
         if (err)
-            return res.status(500).json( {error: err } );
+            return res.status(500).json({ error: err });
         if (result.affectedRows === 0)
             return res.status(404).json({ error: 'Không tìm thấy thông tin lịch chiếu!' });
 
-        res.status(200).json({ success: true, message: "Xóa lịch chiếu thành công" });    });
+        res.status(200).json({ success: true, message: "Xóa lịch chiếu thành công" });
+    });
 };

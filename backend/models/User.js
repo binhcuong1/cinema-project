@@ -49,22 +49,53 @@ exports.updatePassword = (userId, newPassword, callback) => {
 };
 
 exports.create = (data, callback) => {
-    bcrypt.hash(data.mat_khau, 10, (err, hashedPassword) => {
-        if (err) return callback(err);
-
+    if (!data.mat_khau) {
+        // Google account không cần hash
         const sql = `
             INSERT INTO tai_khoan (ten_dang_nhap, mat_khau, ho_va_ten, sdt, diachi, role_id)
-            VALUES (?, ?, ?, ?, ?, ?)
+            VALUES (?, NULL, ?, ?, ?, ?)
         `;
         const values = [
             data.ten_dang_nhap,
-            hashedPassword,
             data.ho_va_ten,
             data.sdt,
             data.diachi,
             data.role_id
         ];
-
         db.query(sql, values, callback);
+    } else {
+        // Tài khoản thường → hash mật khẩu
+        bcrypt.hash(data.mat_khau, 10, (err, hashedPassword) => {
+            if (err) return callback(err);
+            const sql = `
+                INSERT INTO tai_khoan (ten_dang_nhap, mat_khau, ho_va_ten, sdt, diachi, role_id)
+                VALUES (?, ?, ?, ?, ?, ?)
+            `;
+            const values = [
+                data.ten_dang_nhap,
+                hashedPassword,
+                data.ho_va_ten,
+                data.sdt,
+                data.diachi,
+                data.role_id
+            ];
+            db.query(sql, values, callback);
+        });
+    }
+};
+
+exports.updateProfile = (userId, fullname, phone, email, callback) => {
+    const checkEmailSql = 'SELECT ma_tai_khoan FROM tai_khoan WHERE ten_dang_nhap = ? AND ma_tai_khoan != ?';
+    db.query(checkEmailSql, [email, userId], (err, results) => {
+        if (err) return callback(err);
+        if (results.length > 0) {
+            return callback(null, { emailTaken: true });
+        }
+
+        const updateSql = 'UPDATE tai_khoan SET ho_va_ten = ?, sdt = ?, ten_dang_nhap = ? WHERE ma_tai_khoan = ?';
+        db.query(updateSql, [fullname, phone, email, userId], (err, updateResult) => {
+            if (err) return callback(err);
+            callback(null, { success: true });
+        });
     });
 };

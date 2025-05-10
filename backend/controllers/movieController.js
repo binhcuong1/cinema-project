@@ -106,3 +106,17 @@ exports.deleteMovie = (req, res) => {
         res.status(200).json({ success: 'true' });
     });
 }
+
+exports.searchMovies = (req, res) => {
+    const keyword = req.query.keyword;
+    
+    if (!keyword) {
+        return res.status(400).json({ success: "false", error: "Thiếu từ khóa tìm kiếm" });
+    }
+
+    movie.search(keyword, (err, result) => {
+        if (err)
+            return res.status(500).json({ success: "false", error: err });
+        res.json({ success: "true", data: result });
+    });
+};

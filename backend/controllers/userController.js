@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const JWT_SECRET = 'bi_mat_token';
 const nodemailer = require('nodemailer');
+const bcrypt = require('bcryptjs');
+
 
 require('dotenv').config();
 const EMAIL_USER = process.env.EMAIL_USER;
@@ -49,7 +51,16 @@ exports.getCurrentUser = (req, res) => {
             if (err || !user) {
                 return res.status(404).json({ success: 'false', error: 'Không tìm thấy user' });
             }
-            res.json({ success: 'true', data: { ho_va_ten: user.ho_va_ten } });
+            res.json({
+    success: 'true',
+    data: {
+        id: user.id,
+        ten_dang_nhap: user.ten_dang_nhap,
+        ho_va_ten: user.ho_va_ten,
+        sdt: user.sdt,
+        role_id: user.role_id
+    }
+    });
         });
     } catch (err) {
         return res.status(401).json({ success: 'false', error: 'Token không hợp lệ' });
@@ -72,6 +83,10 @@ exports.forgotPassword = (req, res) => {
     User.findByEmail(email, (err, user) => {
         if (err || !user) {
             return res.status(404).json({ error: 'Không tìm thấy người dùng với email này!' });
+        }
+
+        if (!user.mat_khau || user.mat_khau.trim() === '') {
+            return res.status(400).json({ error: 'Tài khoản này sử dụng Google để đăng nhập. Không thể đặt lại mật khẩu tại đây.' });
         }
 
         // Tạo token JWT
@@ -147,7 +162,7 @@ exports.resetPassword = (req, res) => {
 };
 
 exports.register = (req, res) => {
-    const { ten_dang_nhap, mat_khau, ho_va_ten, sdt, diachi, ngay_sinh } = req.body;
+    const { ten_dang_nhap, mat_khau, ho_va_ten, sdt, diachi } = req.body;
 
     if (!ten_dang_nhap || !mat_khau || !ho_va_ten) {
         return res.status(400).json({ success: false, error: 'Thiếu thông tin bắt buộc' });
@@ -178,3 +193,76 @@ exports.register = (req, res) => {
     });
 };
 
+exports.updateProfile = (req, res) => {
+    const { fullname, phone, email } = req.body;
+    const token = req.cookies.jwt;
+
+    if (!token) return res.status(401).json({ success: false, error: 'Chưa đăng nhập' });
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const userId = decoded.ma_tai_khoan;
+
+        User.updateProfile(userId, fullname, phone, email, (err, result) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ success: false, error: 'Lỗi server khi cập nhật thông tin' });
+            }
+
+            if (result.emailTaken) {
+                return res.status(409).json({ success: false, error: 'Email này đã được sử dụng cho tài khoản khác.' });
+            }
+
+            res.json({ success: true, message: 'Cập nhật thành công!' });
+        });
+    } catch (err) {
+        return res.status(401).json({ success: false, error: 'Token không hợp lệ' });
+    }
+};
+
+exports.changePassword = (req, res) => {
+    const token = req.cookies.jwt;
+    const { oldPassword, newPassword } = req.body;
+
+    if (!token) return res.status(401).json({ success: false, error: 'Chưa đăng nhập' });
+
+    if (!oldPassword || !newPassword ) {
+        return res.status(400).json({ success: false, error: 'Thiếu thông tin mật khẩu' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const userId = decoded.ma_tai_khoan;
+
+        // Lấy user để kiểm tra mật khẩu
+        User.findById(userId, (err, user) => {
+            if (err || !user) {
+                return res.status(404).json({ success: false, error: 'Không tìm thấy người dùng' });
+            }
+
+            if (!user.mat_khau || user.mat_khau.trim() === '') {
+                return res.status(400).json({
+                    success: false,
+                    error: 'Tài khoản của bạn sử dụng Google để đăng nhập. Vui lòng đổi mật khẩu trên Google.'
+                });
+            }
+
+            // So sánh mật khẩu cũ
+            bcrypt.compare(oldPassword, user.mat_khau, (err, isMatch) => {
+                if (err) return res.status(500).json({ success: false, error: 'Lỗi xác thực mật khẩu' });
+                if (!isMatch) return res.status(401).json({ success: false, error: 'Mật khẩu cũ không đúng' });
+
+                // Cập nhật mật khẩu mới
+                User.updatePassword(userId, newPassword, (err) => {
+                    if (err) {
+                        return res.status(500).json({ success: false, error: 'Không thể cập nhật mật khẩu' });
+                    }
+
+                    res.json({ success: true, message: 'Đổi mật khẩu thành công!' });
+                });
+            });
+        });
+    } catch (err) {
+        return res.status(401).json({ success: false, error: 'Token không hợp lệ' });
+    }
+};

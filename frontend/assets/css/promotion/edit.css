@@ -1,0 +1,205 @@
+/* Định dạng container chính */
+.movies-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  /* Định dạng tiêu đề và breadcrumb */
+  .page-header {
+    margin-bottom: 30px;
+  }
+  
+  .page-header h1 {
+    font-size: 24px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .breadcrumb {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  .breadcrumb a, .breadcrumb span {
+    color: #ccc;
+    text-decoration: none;
+  }
+  
+  .breadcrumb a:hover {
+    color: #ff6200;
+  }
+  
+  .breadcrumb span {
+    color: #ff6200;
+  }
+  
+  /* Định dạng section thêm phim */
+  .add-movie-section {
+    background: linear-gradient(135deg, #1a2a44, #304352);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Định dạng container của form */
+  .form-container {
+    max-width: 100%;
+  }
+  
+  /* Định dạng form */
+  .add-movie-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Định dạng lưới form */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  
+  .form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Định dạng label */
+  .form-group label {
+    color: #fff; /* Đổi màu chữ của label thành trắng để nổi bật trên nền tối */
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  /* Định dạng input và textarea */
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #ff6200;
+  }
+  
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  /* Định dạng các option trong dropdown */
+  .form-group select option {
+    background-color: #1a2a44; /* Nền của các option */
+    color: #fff; /* Màu chữ trắng để nổi bật */
+  }
+  
+  /* Định dạng phần tải lên poster */
+  .poster-upload {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .poster-preview-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .poster-preview {
+    width: 150px;
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #ccc;
+  }
+  
+  .upload-controls {
+    flex: 1;
+  }
+  
+  .custom-file-upload {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+  }
+  
+  .custom-file-upload:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+  }
+  
+  .file-requirements {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #ccc;
+  }
+  
+  /* Định dạng nút Quay lại và Thêm Phim */
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .back-btn, .next-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .back-btn {
+    background-color: #ddd;
+    color: #333;
+  }
+  
+  .back-btn:hover {
+    background-color: #ccc;
+  }
+  
+  .next-btn {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+  }
+  
+  .next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+  }

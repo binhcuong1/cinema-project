@@ -1,0 +1,83 @@
+/* Định dạng container chính */
+.movies-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Định dạng tiêu đề và nút Thêm Khuyến Mãi */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.page-header h1 {
+    font-size: 24px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    flex: 1; /* Đảm bảo tiêu đề chiếm không gian bên trái */
+    text-align: left;
+}
+
+.add-movie-btn {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+    flex-shrink: 0; /* Ngăn nút co lại, giữ vị trí bên phải */
+}
+
+.add-movie-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+}
+
+/* Định dạng breadcrumb */
+.breadcrumb {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.breadcrumb a, .breadcrumb span {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #ff6200;
+}
+
+.breadcrumb span {
+    color: #ff6200;
+}
+
+/* Định dạng nút Xóa trong movie-overlay */
+.movie-overlay .delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.movie-overlay .delete-btn:hover {
+    background-color: #c82333;
+}

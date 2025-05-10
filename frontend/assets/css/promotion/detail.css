@@ -1,0 +1,151 @@
+/* Định dạng container chính */
+.movies-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Định dạng tiêu đề và breadcrumb */
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 24px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.breadcrumb {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.breadcrumb a, .breadcrumb span {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #ff6200;
+}
+
+.breadcrumb span {
+    color: #ff6200;
+}
+
+/* Định dạng section chi tiết phim */
+.movie-details-section {
+    background: linear-gradient(135deg, #1a2a44, #304352);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Định dạng container chi tiết phim */
+.movie-details-container {
+    display: flex;
+    gap: 30px;
+}
+
+/* Định dạng poster */
+.movie-poster {
+    flex: 0 0 300px;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Định dạng thông tin chi tiết */
+.movie-info-details {
+    flex: 1;
+    color: #fff;
+}
+
+.movie-info-details h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.movie-meta-details p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.movie-meta-details p i {
+    margin-right: 8px;
+}
+
+.movie-meta-details p strong {
+    margin-right: 5px;
+}
+
+.movie-description, .movie-content {
+    margin-top: 20px;
+}
+
+.movie-description h3, .movie-content h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ff6200;
+}
+
+.movie-description p, .movie-content p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Định dạng các nút hành động */
+.movie-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.movie-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.book-btn {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+}
+
+.book-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+}
+
+.edit-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}

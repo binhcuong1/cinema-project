@@ -1,5 +1,67 @@
 axios.defaults.baseURL = 'http://127.0.0.1:3000';
 
+// === Khởi tạo các biến DOM === //
+let movieListNowShowing, btnLeftNowShowing, btnRightNowShowing;
+let movieListComingSoon, btnLeftComingSoon, btnRightComingSoon;
+
+function initializeDOM() {
+  movieListNowShowing = document.getElementById("movie-list-nowShowing");
+  btnLeftNowShowing = document.getElementById("nowShowing-left");
+  btnRightNowShowing = document.getElementById("nowShowing-right");
+  movieListComingSoon = document.getElementById("movie-list-comingSoon");
+  btnLeftComingSoon = document.getElementById("comingSoon-left");
+  btnRightComingSoon = document.getElementById("comingSoon-right");
+}
+
+// === Xử lý cuộn trái/phải cho cả hai phần phim === //
+
+// Hàm xác định số lượng phim cuộn dựa trên kích thước màn hình
+function getScrollAmount() {
+  const width = window.innerWidth;
+  if (width <= 480) return 1; // Mobile: 1 phim
+  if (width <= 768) return 2; // Tablet: 2 phim
+  return 4; // Desktop: 4 phim
+}
+
+// Hàm cuộn cho phim đang chiếu
+function scrollMoviesNowShowing(amount) {
+  if (!movieListNowShowing) return;
+  const card = movieListNowShowing.querySelector(".movie-card");
+  if (!card) return; // Không có phim, thoát
+  const cardWidth = card.offsetWidth + 15; // Chiều rộng thẻ + gap
+  const scrollCount = getScrollAmount();
+  movieListNowShowing.scrollBy({ left: amount * cardWidth * scrollCount, behavior: "smooth" });
+}
+
+// Hàm cuộn cho phim sắp chiếu
+function scrollMoviesComingSoon(amount) {
+  if (!movieListComingSoon) return;
+  const card = movieListComingSoon.querySelector(".movie-card");
+  if (!card) return; // Không có phim, thoát
+  const cardWidth = card.offsetWidth + 15; // Chiều rộng thẻ + gap
+  const scrollCount = getScrollAmount();
+  movieListComingSoon.scrollBy({ left: amount * cardWidth * scrollCount, behavior: "smooth" });
+}
+
+// Khởi tạo sự kiện khi DOM sẵn sàng
+document.addEventListener("DOMContentLoaded", () => {
+  initializeDOM();
+
+  if (movieListNowShowing && btnLeftNowShowing && btnRightNowShowing) {
+    // Thêm sự kiện cho nút điều hướng phim đang chiếu
+    btnLeftNowShowing.addEventListener("click", () => scrollMoviesNowShowing(-1));
+    btnRightNowShowing.addEventListener("click", () => scrollMoviesNowShowing(1));
+  }
+
+  if (movieListComingSoon && btnLeftComingSoon && btnRightComingSoon) {
+    // Thêm sự kiện cho nút điều hướng phim sắp chiếu
+    btnLeftComingSoon.addEventListener("click", () => scrollMoviesComingSoon(-1));
+    btnRightComingSoon.addEventListener("click", () => scrollMoviesComingSoon(1));
+  }
+});
+
+
+
 //#region  // === Khu vực Hàm Chung === //
 
 // Hàm chung để lấy và hiển thị danh sách phim
@@ -78,6 +140,8 @@ function renderComingSoonMovie(movie) {
   return movieCard;
 }
 
+
+
 async function fetchNowShowingMovies() {
   await fetchAndRenderMovies("/api/movies/now-showing", "movie-list-nowShowing", renderNowShowingMovie);
 }
@@ -112,6 +176,73 @@ function renderAllMovie(movie) {
 async function fetchAllMovieToList() {
   await fetchAndRenderMovies("/api/movies/", "movie-list", renderAllMovie);
 }
+
+// Hiển thị phim trong kết quả tìm kiếm
+function renderSearchMovie(movie) {
+  const movieCard = document.createElement("div");
+  movieCard.classList.add("movie-card");
+  movieCard.innerHTML = `
+    <div class="movie-poster">
+      <img src="${movie.image}" alt="${movie.ten_phim}">
+      <div class="movie-overlay">
+        ${movie.trang_thai === 'dang-chieu' ? `<button onclick="window.location.href='booking.html'">Đặt vé</button>` : ''}
+      </div>
+    </div>
+    <div class="movie-info">
+      <div class="movie-title-wrapper">
+        <h3 style="display: inline; margin-right: 10px;">${movie.ten_phim}</h3>
+        <span class="age-restriction"><i class="fas fa-user-shield"></i> ${movie.gioi_han_tuoi}</span>
+      </div>
+      <div class="movie-meta">
+        <span><i class="fas fa-clock"></i> ${movie.thoi_luong_phut} phút</span>
+      </div>
+    </div>
+  `;
+  return movieCard;
+}
+
+// Hiển thị kết quả tìm kiếm
+async function fetchSearchMovies(keyword) {
+  if (!keyword) {
+    const container = document.getElementById("search-results");
+    if (container) {
+      container.innerHTML = "<p class='no-results'>Vui lòng nhập từ khóa tìm kiếm.</p>";
+    }
+    return;
+  }
+  await fetchAndRenderMovies(`/api/movies/search?keyword=${encodeURIComponent(keyword)}`, "search-results", renderSearchMovie);
+}
+
+// Gắn sự kiện tìm kiếm
+function initializeSearch() {
+  const searchBtn = document.getElementById("search-btn");
+  const searchInput = document.getElementById("search-input");
+
+  if (searchBtn && searchInput) {
+    searchBtn.addEventListener("click", () => {
+      const keyword = searchInput.value.trim();
+      if (keyword) {
+        window.location.href = `/frontend/pages/search.html?keyword=${encodeURIComponent(keyword)}`;
+      } else {
+        alert("Vui lòng nhập từ khóa tìm kiếm!");
+      }
+    });
+
+    searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const keyword = searchInput.value.trim();
+        if (keyword) {
+          window.location.href = `/frontend/pages/search.html?keyword=${encodeURIComponent(keyword)}`;
+        } else {
+          alert("Vui lòng nhập từ khóa tìm kiếm!");
+        }
+      }
+    });
+  } else {
+    console.error("Không tìm thấy search-btn hoặc search-input trong header");
+  }
+}
+
 //#endregion
 
 //#region // === Khu vực Chuyển hướng === //
@@ -380,7 +511,17 @@ window.onload = () => {
     case "edit":
       showMovieEdit();
       break;
+    case "search":
+      const urlParams = new URLSearchParams(window.location.search);
+      const keyword = urlParams.get("keyword");
+      fetchSearchMovies(keyword);
+      break;
     default:
       console.log("Trang không xác định:", currentPage);
   }
+
+
+  // Khởi tạo sự kiện tìm kiếm
+  initializeSearch();
 };
+

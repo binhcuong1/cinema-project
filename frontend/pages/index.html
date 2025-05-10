@@ -39,19 +39,16 @@
         <section class="hero-banner">
             <div class="banner-container">
                 <div class="banner-arrows">
-                    <button onclick="prevBanner()"><i class="fas fa-chevron-left"></i></button>
-                    <button onclick="nextBanner()"><i class="fas fa-chevron-right"></i></button>
+                    <button><i class="fas fa-chevron-left"></i></button>
+                    <button><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="banner-content">
-                    <img id="banner-image" src="/frontend/assets/images/panner-am-duon-lo.png"
-                        alt="Banner phim Âm Dương Lộ">
+                    <img id="banner-image" 
+                    alt="">
                     <div class="banner-info">
-                        <h1>Âm Dương Lộ</h1>
-                        <p class="movie-genre">Phim kinh dị, Hành động</p>
-                        <div class="rating">
-                            <span>2 giờ 15 phút</span>
-                        </div>
-                        <button onclick="bookTicket()" class="banner-btn">Đặt Vé Ngay</button>
+                        <a href="/frontend/pages/booking/select-showtime.html">
+                            <button class="banner-btn">Đặt Vé Ngay</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -154,12 +151,14 @@
 
         <!-- Promotions -->
         <section class="promotions">
-            <div class="promo-slider">
-                <h2 class="section-title">Khuyến Mãi</h2>
-                <input type="checkbox" id="promo-toggle" style="display: none;">
-                <div class="promo-arrows">
-                    <label for="promo-toggle" class="left"><i class="fas fa-chevron-left"></i></label>
-                    <label for="promo-toggle" class="right"><i class="fas fa-chevron-right"></i></label>
+            <h2 class="section-title">Khuyến Mãi</h2>
+            <div class="promo-arrows">
+                <button id="promo-left" class="left"><i class="fas fa-chevron-left"></i></button>
+                <button id="promo-right" class="right"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="promo-grid-container">
+                <div class="promo-grid">
+                    <p class="loading">Đang tải khuyến mãi...</p>
                 </div>
             </div>
             <div class="promo-button">
@@ -237,16 +236,6 @@
                         <button type="submit" class="submit-btn">Gửi ngay</button>
                     </div>
                 </div>
-
-                <div class="promo-slider">
-                    <i class="promotion"></i> Khuyến mãi
-                    <h2 class="section-title">Khuyến Mãi</h2>
-                    <input type="checkbox" id="promo-toggle" style="display: none;">
-                    <div class="promo-arrows">
-                        <label for="promo-toggle" class="left"><i class="fas fa-chevron-left"></i></label>
-                        <label for="promo-toggle" class="right"><i class="fas fa-chevron-right"></i></label>
-                    </div>
-                </div>
         </section>
 
         <!-- FOOTER -->
@@ -264,9 +253,11 @@
         <!-- Sau khi DOM đã có modal, mới load các xử lý phía người dùng -->
         <script type="module" src="./js/user.js"></script>
         <script type="module" src="./js/auth.js"></script>
+        <script type="module" src="../assets/js/banner.js"></script>
         <script type="module" src="/frontend/assets/js/movie.js"></script>
         <script type="module" src="/frontend/assets/js/promotion.js"></script>
         <script defer src="/frontend/assets/js/admin.js"></script>
+        
         <!-- <script defer src="/frontend/assets/js/movie.js"></script> -->
 
 

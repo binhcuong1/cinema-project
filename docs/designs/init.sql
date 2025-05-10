@@ -213,3 +213,12 @@ CREATE TABLE trang_thai_ghe_suat_chieu (
     FOREIGN KEY (ma_ghe) REFERENCES ghe(ma_ghe),
     FOREIGN KEY (ma_dat_ve) REFERENCES dat_ve(ma_dat_ve)
 );
+-- them bang banner
+CREATE TABLE banner (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ten VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    ngay_bat_dau DATE NOT NULL,
+    ngay_ket_thuc DATE NOT NULL,
+    da_xoa TINYINT(1) DEFAULT 0
+);

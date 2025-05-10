@@ -221,7 +221,7 @@
 
 /* Container chính của modal (dùng để hiển thị sơ đồ ghế hoặc form thêm/sửa) */
 .room-modal-container {
-  background: #1a1a1a; /* Màu nền đen đậm */
+  background: #101010; /* Màu nền đen đậm */
   padding: 20px; /* Khoảng cách bên trong */
   border-radius: 10px; /* Bo góc modal */
   position: relative; /* Để định vị nút đóng (close-form-btn) */

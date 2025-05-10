@@ -264,51 +264,116 @@ async function showEditPromotionForm() {
 
         section.innerHTML = `
         <div class="form-container">
-            <form id="edit-promotion-form" class="add-movie-form" enctype="multipart/form-data">
+    <form id="edit-promotion-form" class="add-movie-form" enctype="multipart/form-data">
+        <div class="form-grid">
+            <div class="form-column">
                 <div class="form-group">
-                    <label>Tên khuyến mãi:</label>
-                    <input type="text" name="ten_khuyen_mai" value="${promo.ten_khuyen_mai}" required />
+                    <label for="promotion-name">Tên khuyến mãi:</label>
+                    <input type="text" id="promotion-name" name="ten_khuyen_mai" value="${promo.ten_khuyen_mai}" required />
                 </div>
                 <div class="form-group">
-                    <label>Mô tả:</label>
-                    <textarea name="mo_ta" required>${promo.mo_ta}</textarea>
+                    <label for="promotion-description">Mô tả:</label>
+                    <textarea id="promotion-description" name="mo_ta" required>${promo.mo_ta}</textarea>
                 </div>
                 <div class="form-group">
-                    <label>Điều kiện:</label>
-                    <input type="text" name="dieu_kien" value="${promo.dieu_kien || ''}" required />
+                    <label for="promotion-condition">Điều kiện:</label>
+                    <input type="text" id="promotion-condition" name="dieu_kien" value="${promo.dieu_kien || ''}" required />
                 </div>
                 <div class="form-group">
-                    <label>Lưu ý:</label>
-                    <textarea name="luu_y">${promo.luu_y || ''}</textarea>
+                    <label for="promotion-note">Lưu ý:</label>
+                    <textarea id="promotion-note" name="luu_y">${promo.luu_y || ''}</textarea>
+                </div>
+            </div>
+            <div class="form-column">
+                <div class="form-group">
+                    <label for="start-time">Giờ bắt đầu:</label>
+                    <input type="time" id="start-time" name="gio_bat_dau" value="${promo.gio_bat_dau ? promo.gio_bat_dau.slice(0, 5) : ''}" required />
                 </div>
                 <div class="form-group">
-                    <label>Giờ bắt đầu:</label>
-                    <input type="time" name="gio_bat_dau" value="${promo.gio_bat_dau ? promo.gio_bat_dau.slice(0, 5) : ''}" required />
+                    <label for="end-time">Giờ kết thúc:</label>
+                    <input type="time" id="end-time" name="gio_ket_thuc" value="${promo.gio_ket_thuc ? promo.gio_ket_thuc.slice(0, 5) : ''}" required />
                 </div>
                 <div class="form-group">
-                    <label>Giờ kết thúc:</label>
-                    <input type="time" name="gio_ket_thuc" value="${promo.gio_ket_thuc ? promo.gio_ket_thuc.slice(0, 5) : ''}" required />
-                </div>
-                <div class="form-group">
-                    <label>Trạng thái:</label>
-                    <select name="trang_thai">
+                    <label for="promotion-status">Trạng thái:</label>
+                    <select id="promotion-status" name="trang_thai" required>
                         <option value="chua_kich_hoat" ${promo.trang_thai === 'chua_kich_hoat' ? 'selected' : ''}>Chưa kích hoạt</option>
                         <option value="dang_hoat_dong" ${promo.trang_thai === 'dang_hoat_dong' ? 'selected' : ''}>Đang hoạt động</option>
                         <option value="het_han" ${promo.trang_thai === 'het_han' ? 'selected' : ''}>Hết hạn</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Hình ảnh:</label>
-                    <input type="file" name="image" accept="image/*" />
-                    <p>Hiện tại: <img src="${promo.image}" style="max-height: 100px" /></p>
+                <div class="form-group poster-upload">
+                    <label for="promotion-image">Hình ảnh:</label>
+                    <div class="poster-preview-container">
+                        <div class="upload-controls">
+                            <label for="promotion-image" class="custom-file-upload">
+                                <i class="fas fa-upload"></i> Chọn ảnh
+                            </label>
+                            <input type="file" id="promotion-image" name="image" accept="image/*" />
+                            <p class="file-requirements">Định dạng: JPG, PNG. Kích thước tối đa: 5MB</p>
+                            <p>Hình ảnh hiện tại: <img src="${promo.image}" alt="Hình ảnh khuyến mãi hiện tại" style="max-width: 100px; max-height: 100px;" /></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-actions">
-                    <button type="button" class="back-btn" onclick="window.location.href='/frontend/pages/promotion/list.html'">← Quay lại</button>
-                    <button type="submit">Cập nhật</button>
-                </div>
-            </form>
+            </div>
         </div>
-        `;
+        <div class="form-actions">
+            <button type="button" class="back-btn" onclick="window.location.href='/frontend/pages/promotion/list.html'">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </button>
+            <button type="submit" class="next-btn">
+                <i class="fas fa-edit"></i> Cập nhật
+            </button>
+        </div>
+    </form>
+</div>
+    `;
+        // section.innerHTML = `
+        // <div class="form-container">
+        //     <form id="edit-promotion-form" class="add-movie-form" enctype="multipart/form-data">
+        //         <div class="form-group">
+        //             <label>Tên khuyến mãi:</label>
+        //             <input type="text" name="ten_khuyen_mai" value="${promo.ten_khuyen_mai}" required />
+        //         </div>
+        //         <div class="form-group">
+        //             <label>Mô tả:</label>
+        //             <textarea name="mo_ta" required>${promo.mo_ta}</textarea>
+        //         </div>
+        //         <div class="form-group">
+        //             <label>Điều kiện:</label>
+        //             <input type="text" name="dieu_kien" value="${promo.dieu_kien || ''}" required />
+        //         </div>
+        //         <div class="form-group">
+        //             <label>Lưu ý:</label>
+        //             <textarea name="luu_y">${promo.luu_y || ''}</textarea>
+        //         </div>
+        //         <div class="form-group">
+        //             <label>Giờ bắt đầu:</label>
+        //             <input type="time" name="gio_bat_dau" value="${promo.gio_bat_dau ? promo.gio_bat_dau.slice(0, 5) : ''}" required />
+        //         </div>
+        //         <div class="form-group">
+        //             <label>Giờ kết thúc:</label>
+        //             <input type="time" name="gio_ket_thuc" value="${promo.gio_ket_thuc ? promo.gio_ket_thuc.slice(0, 5) : ''}" required />
+        //         </div>
+        //         <div class="form-group">
+        //             <label>Trạng thái:</label>
+        //             <select name="trang_thai">
+        //                 <option value="chua_kich_hoat" ${promo.trang_thai === 'chua_kich_hoat' ? 'selected' : ''}>Chưa kích hoạt</option>
+        //                 <option value="dang_hoat_dong" ${promo.trang_thai === 'dang_hoat_dong' ? 'selected' : ''}>Đang hoạt động</option>
+        //                 <option value="het_han" ${promo.trang_thai === 'het_han' ? 'selected' : ''}>Hết hạn</option>
+        //             </select>
+        //         </div>
+        //         <div class="form-group">
+        //             <label>Hình ảnh:</label>
+        //             <input type="file" name="image" accept="image/*" />
+        //             <p>Hiện tại: <img src="${promo.image}" style="max-height: 100px" /></p>
+        //         </div>
+        //         <div class="form-actions">
+        //             <button type="button" class="back-btn" onclick="window.location.href='/frontend/pages/promotion/list.html'">← Quay lại</button>
+        //             <button type="submit">Cập nhật</button>
+        //         </div>
+        //     </form>
+        // </div>
+        // `;
 
         const form = document.getElementById("edit-promotion-form");
         if (form) {
@@ -344,21 +409,47 @@ async function showPromotionDetail() {
 
         section.innerHTML = `
         <div class="movie-details-container">
-          <div class="movie-poster">
-            <img src="${promo.image}" alt="${promo.ten_khuyen_mai}" />
-          </div>
-          <div class="movie-info-details">
-            <h2>${promo.ten_khuyen_mai}</h2>
-            <p><strong>Mô tả:</strong> ${promo.mo_ta}</p>
-            <p><strong>Điều kiện:</strong> ${promo.dieu_kien}</p>
-            <p><strong>Lưu ý:</strong> ${promo.luu_y || 'Không có'}</p>
-            <p><strong>Giờ bắt đầu:</strong> ${promo.gio_bat_dau}</p>
-            <p><strong>Giờ kết thúc:</strong> ${promo.gio_ket_thuc}</p>
-            <p><strong>Trạng thái:</strong> ${trangThaiHienThi}</p>
-            <p><strong>Xóa mềm:</strong> ${trangThaiXoa}</p>
-          </div>
+    <div class="movie-poster">
+        <img src="${promo.image}" alt="${promo.ten_khuyen_mai}" aria-label="Hình ảnh khuyến mãi ${promo.ten_khuyen_mai}">
+    </div>
+    <div class="movie-info-details">
+        <h2>${promo.ten_khuyen_mai}</h2>
+        <div class="movie-meta-details">
+            <p><i class="fas fa-clock"></i> <strong>Giờ bắt đầu:</strong> ${promo.gio_bat_dau}</p>
+            <p><i class="fas fa-clock"></i> <strong>Giờ kết thúc:</strong> ${promo.gio_ket_thuc}</p>
+            <p><i class="fas fa-tags"></i> <strong>Trạng thái:</strong> ${trangThaiHienThi}</p>
+            <p><i class="fas fa-exclamation-circle"></i> <strong>Điều kiện:</strong> ${promo.dieu_kien || 'Không có'}</p>
+            <p><i class="fas fa-trash"></i> <strong>Xóa mềm:</strong> ${trangThaiXoa}</p>
         </div>
-      `;
+        <div class="movie-description">
+            <h3>Mô tả:</h3>
+            <p>${promo.mo_ta}</p>
+        </div>
+        <div class="movie-content">
+            <h3>Lưu ý:</h3>
+            <p>${promo.luu_y || 'Không có'}</p>
+        </div>
+    </div>
+</div>
+        `;
+
+        //     section.innerHTML = `
+        //     <div class="movie-details-container">
+        //       <div class="movie-poster">
+        //         <img src="${promo.image}" alt="${promo.ten_khuyen_mai}" />
+        //       </div>
+        //       <div class="movie-info-details">
+        //         <h2>${promo.ten_khuyen_mai}</h2>
+        //         <p><strong>Mô tả:</strong> ${promo.mo_ta}</p>
+        //         <p><strong>Điều kiện:</strong> ${promo.dieu_kien}</p>
+        //         <p><strong>Lưu ý:</strong> ${promo.luu_y || 'Không có'}</p>
+        //         <p><strong>Giờ bắt đầu:</strong> ${promo.gio_bat_dau}</p>
+        //         <p><strong>Giờ kết thúc:</strong> ${promo.gio_ket_thuc}</p>
+        //         <p><strong>Trạng thái:</strong> ${trangThaiHienThi}</p>
+        //         <p><strong>Xóa mềm:</strong> ${trangThaiXoa}</p>
+        //       </div>
+        //     </div>
+        //   `;
     } catch (error) {
         console.error("Lỗi khi tải chi tiết khuyến mãi:", error);
         section.innerHTML = `<p class="error">Không thể tải chi tiết: ${error.message}</p>`;

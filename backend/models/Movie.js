@@ -2,6 +2,16 @@ const db = require('../config/db');
 const table_name = 'phim';
 
 const movie = {
+    getByID: (id, callback) => {
+        db.query(`SELECT * FROM ${table_name} WHERE ma_phim = ?`, [id], (err, result) => {
+            if (err)
+                return callback(err,null);
+            if (result.length === 0)
+                return callback(null, null);
+            callback(null, result);
+        });
+    },
+
     getAll: (callback) => {
         db.query(`SELECT * FROM ${table_name}`, (err, result) => {
             if (err)
@@ -30,16 +40,6 @@ const movie = {
                 callback(null, result);
             }
         );
-    },
-
-    getByID: (id, callback) => {
-        db.query(`SELECT * FROM ${table_name} WHERE ma_phim = ?`, [id], (err, result) => {
-            if (err)
-                return callback(err,null);
-            if (result.length === 0)
-                return callback(null, null);
-            callback(null, result);
-        });
     },
 
     getByTheater: (theaterID, callback) => {

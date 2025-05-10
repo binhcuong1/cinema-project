@@ -1,0 +1,635 @@
+/* ==========================================================================
+   #REGION 1: Global Styles
+   ========================================================================== */
+   body {
+    background-color: #0a0e17;
+    color: #fff;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   #REGION 2: Container and Header Styles
+   ========================================================================== */
+.schedule-container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: #1a2a44;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.schedule-header .filter {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex: 1;
+}
+
+.schedule-header label {
+    color: #fff;
+    font-weight: 500;
+}
+
+.schedule-header select,
+.schedule-header input[type="date"] {
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: border-color 0.3s ease;
+    flex: 1;
+}
+
+.schedule-header select:focus,
+.schedule-header input[type="date"]:focus {
+    border-color: #ff6200;
+    outline: none;
+}
+
+.schedule-header select option {
+    background-color: #1a2a44;
+    color: #fff;
+}
+
+.schedule-header .filter-btn {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 10px rgba(255, 98, 0, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.schedule-header .filter-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.5);
+}
+
+.schedule-add-btn {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+}
+
+.schedule-add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+}
+
+/* ==========================================================================
+   #REGION 3: Room and Table Styles
+   ========================================================================== */
+.room-section {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.room-header {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.room-header span {
+    font-weight: bold;
+    color: #fff;
+}
+
+.room-header i {
+    transition: transform 0.3s ease;
+}
+
+.room-header.active i {
+    transform: rotate(180deg);
+}
+
+.room-content {
+    display: none;
+    padding: 20px;
+}
+
+.room-content.active {
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+th,
+td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+th {
+    background-color: rgba(255, 255, 255, 0.05);
+    font-weight: bold;
+}
+
+.status-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.status-btn.offline {
+    background-color: #6c757d;
+    color: white;
+}
+
+.status-btn.online {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+}
+
+.action-footer th {
+    padding: 10px 20px;
+    text-align: left;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.action-footer .add-showtime-btn {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    box-shadow: 0 2px 10px rgba(255, 98, 0, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.action-footer .add-showtime-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.5);
+}
+
+.action-footer .delete-room-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    box-shadow: 0 2px 10px rgba(220, 53, 69, 0.3);
+    transition: all 0.3s ease;
+}
+
+.action-footer .delete-room-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.5);
+}
+
+/* ==========================================================================
+   #REGION 4: Modal Styles
+   ========================================================================== */
+.schedule-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 4000;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.schedule-modal-overlay.active {
+    display: flex;
+}
+
+.schedule-modal-overlay.active .schedule-modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.schedule-modal-content {
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    max-width: 800px;
+    width: 90%;
+    position: relative;
+    z-index: 4001;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.schedule-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.schedule-close-btn:hover {
+    color: #ff6200;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff6200;
+    text-align: center;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.modal-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.schedule-input-group {
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.modal-form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+}
+
+.schedule-input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #fff;
+    flex: 0 0 120px;
+}
+
+.schedule-input-group .input-wrapper {
+    flex: 1;
+    position: relative;
+}
+
+.schedule-input-group input[type="time"],
+.schedule-input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    appearance: none;
+}
+
+.schedule-input-group input[type="time"]:focus,
+.schedule-input-group select:focus {
+    border-color: #ff6200;
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.schedule-input-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='5' viewBox='0 0 10 5'%3E%3Cpath fill='%23ffffff' d='M0 0h10L5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.schedule-input-group select option {
+    background: #1a2a44;
+    color: #fff;
+}
+
+.schedule-input-group .audio-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.schedule-input-group select#audio {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='5' viewBox='0 0 10 5'%3E%3Cpath fill='%23ffffff' d='M0 0h10L5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.schedule-input-group select#audio:focus {
+    border-color: #ff6200;
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.schedule-input-group select#audio option {
+    background: #1a2a44;
+    color: #fff;
+}
+
+.add-audio-btn {
+    width: 28%;
+    padding: 10px;
+    background: #ff6200;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.add-audio-btn:hover {
+    background: #ff8c00;
+}
+
+.schedule-input-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #ff6200;
+}
+
+.schedule-input-group .input-wrapper:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.schedule-auth-btn {
+    background: #ffd700;
+    color: #1a2a44;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    margin-top: 15px;
+}
+
+.schedule-auth-btn:hover {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+}
+
+.add-audio-modal {
+    max-width: 350px;
+    width: 90%;
+}
+
+.schedule-input-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 16px;
+}
+
+.schedule-input-group input[type="text"]:focus {
+    border-color: #ff6200;
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.schedule-input-group input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.schedule-input-group input[type="number"]:focus {
+    border-color: #ff6200;
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================================================
+   #REGION 5: Seat Layout Styles
+   ========================================================================== */
+.seat-selection {
+    margin-top: 30px;
+    color: #fff;
+}
+
+.screen {
+    width: 80%;
+    height: 30px;
+    background-color: #ff6200;
+    margin: 20px auto;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.seat-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 5px;
+}
+
+.seat-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.row-label {
+    width: 20px;
+    text-align: center;
+    color: #ff6200;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    background-color: #555;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #fff;
+}
+
+.seat.sold {
+    background-color: #ff0000;
+}
+
+/* ==========================================================================
+   #REGION 6: Room Modal Styles
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.room-modal-container {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    max-height: 95vh;
+    overflow-y: auto;
+}
+
+.room-modal-container.form-modal-container {
+    max-width: 500px;
+    max-height: 80vh;
+}
+
+.close-form-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   #REGION 7: Action Button Styles
+   ========================================================================== */
+.view-seat-layout-btn {
+    background: linear-gradient(45deg, #00c4cc, #00e1e8);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 196, 204, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.view-seat-layout-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 196, 204, 0.5);
+}
+
+.delete-schedule-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(220, 53, 69, 0.3);
+    transition: all 0.3s ease;
+}
+
+.delete-schedule-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.5);
+}

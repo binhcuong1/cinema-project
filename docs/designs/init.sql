@@ -202,3 +202,23 @@ ALTER TABLE phim
 ADD COLUMN gioi_han_tuoi VARCHAR(10),
 ADD CONSTRAINT fk_gioi_han_tuoi
 FOREIGN KEY (gioi_han_tuoi) REFERENCES gioi_han_do_tuoi(ma_gioi_han);
+
+CREATE TABLE trang_thai_ghe_suat_chieu (
+    ma_lich_chieu INT,
+    ma_ghe INT,
+    trang_thai enum('chua-dat', 'dang-dat', 'da-dat') DEFAULT 'chua-dat',
+    ma_dat_ve INT,
+    PRIMARY KEY (ma_lich_chieu, ma_ghe),
+    FOREIGN KEY (ma_lich_chieu) REFERENCES lich_chieu(ma_lich_chieu),
+    FOREIGN KEY (ma_ghe) REFERENCES ghe(ma_ghe),
+    FOREIGN KEY (ma_dat_ve) REFERENCES dat_ve(ma_dat_ve)
+);
+-- them bang banner
+CREATE TABLE banner (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ten VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    ngay_bat_dau DATE NOT NULL,
+    ngay_ket_thuc DATE NOT NULL,
+    da_xoa TINYINT(1) DEFAULT 0
+);

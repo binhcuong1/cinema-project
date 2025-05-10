@@ -39,19 +39,16 @@
         <section class="hero-banner">
             <div class="banner-container">
                 <div class="banner-arrows">
-                    <button onclick="prevBanner()"><i class="fas fa-chevron-left"></i></button>
-                    <button onclick="nextBanner()"><i class="fas fa-chevron-right"></i></button>
+                    <button><i class="fas fa-chevron-left"></i></button>
+                    <button><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="banner-content">
-                    <img id="banner-image" src="/frontend/assets/images/panner-am-duon-lo.png"
-                        alt="Banner phim Âm Dương Lộ">
+                    <img id="banner-image" 
+                    alt="">
                     <div class="banner-info">
-                        <h1>Âm Dương Lộ</h1>
-                        <p class="movie-genre">Phim kinh dị, Hành động</p>
-                        <div class="rating">
-                            <span>2 giờ 15 phút</span>
-                        </div>
-                        <button onclick="bookTicket()" class="banner-btn">Đặt Vé Ngay</button>
+                        <a href="/frontend/pages/booking/select-showtime.html">
+                            <button class="banner-btn">Đặt Vé Ngay</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -256,9 +253,11 @@
         <!-- Sau khi DOM đã có modal, mới load các xử lý phía người dùng -->
         <script type="module" src="./js/user.js"></script>
         <script type="module" src="./js/auth.js"></script>
+        <script type="module" src="../assets/js/banner.js"></script>
         <script type="module" src="/frontend/assets/js/movie.js"></script>
         <script type="module" src="/frontend/assets/js/promotion.js"></script>
         <script defer src="/frontend/assets/js/admin.js"></script>
+        
         <!-- <script defer src="/frontend/assets/js/movie.js"></script> -->
 
 

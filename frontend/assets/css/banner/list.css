@@ -1,0 +1,184 @@
+/* Định dạng container chính */
+.movies-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Định dạng tiêu đề và nút Thêm Banner */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 24px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-movie-btn {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+}
+
+.add-movie-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+}
+
+/* Định dạng breadcrumb */
+.breadcrumb {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.breadcrumb a, .breadcrumb span {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #ff6200;
+}
+
+.breadcrumb span {
+    color: #ff6200;
+}
+
+/* Định dạng nút Xóa trong banner-overlay */
+.banner-overlay .delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.banner-overlay .delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Định dạng danh sách banner */
+.movie-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Định dạng thẻ banner */
+.banner-card {
+    background: linear-gradient(135deg, #1a2a44, #304352);
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 700px; /* Tăng chiều rộng để chứa hình ảnh dài hơn */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.banner-card img {
+    width: 100%;
+    max-width: 800px; /* Tăng chiều rộng tối đa để khung hình dài hơn */
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.banner-card h3 {
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.banner-card p {
+    font-size: 14px;
+    color: #ccc;
+    margin: 5px 0;
+}
+
+.banner-card p strong {
+    color: #fff;
+}
+
+/* Định dạng nút hành động */
+.banner-card .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.banner-card .actions button {
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+/* Nút chỉnh sửa */
+.banner-card .actions button:first-child {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+}
+
+.banner-card .actions button:first-child:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 98, 0, 0.5);
+}
+
+/* Nút xóa */
+.banner-card .actions button:last-child {
+    background-color: #dc3545; /* Background đỏ giống .banner-overlay .delete-btn */
+}
+
+.banner-card .actions button:last-child:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.banner-card .actions button i {
+    font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .banner-card {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .banner-card img {
+        max-width: 300px; /* Giảm kích thước hình ảnh trên màn hình nhỏ */
+    }
+
+    .category-tab {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}

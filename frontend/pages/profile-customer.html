@@ -41,7 +41,9 @@
             <div class="profile-user-section active">
                 <div class="profile-user">
                     <img src="/frontend/assets/images/user-avatar.png" alt="Avatar" class="user-avatar">
-                    <h3>Che Quoc Dat</h3>
+
+                    <h3 id="customer-name">Tên Khách Hàng</h3>
+
                     <label for="avatar-upload" class="avatar-upload-btn">
                         <i class="fas fa-camera"></i> Thay đổi ảnh
                     </label>
@@ -67,19 +69,15 @@
                 <form id="personal-info-form">
                     <div class="form-group">
                         <label>Họ và tên <span class="required">*</span></label>
-                        <input type="text" id="fullname" value="Che Quoc Dat">
-                    </div>
-                    <div class="form-group">
-                        <label>Ngày sinh <span class="required">*</span></label>
-                        <input type="date" id="birthdate" value="2004-06-01">
+                        <input type="text" id="customer-fullname">
                     </div>
                     <div class="form-group">
                         <label>Số điện thoại <span class="required">*</span></label>
-                        <input type="text" id="phone" value="0985266194">
+                        <input type="text" id="customer-phone">
                     </div>
                     <div class="form-group">
                         <label>Email <span class="required">*</span></label>
-                        <input type="email" id="email" value="datd20985@gmail.com">
+                        <input type="email" id="customer-email">
                         <small class="form-text text-muted">Vui lòng cung cấp email hợp lệ để sử dụng làm tài khoản đăng nhập</small>
                     </div>
                     <div class="form-actions">
@@ -90,17 +88,20 @@
                 <!-- Form Đổi mật khẩu -->
                 <h3>Đổi mật khẩu</h3>
                 <form id="password-change-form">
+                    <!-- Mật khẩu cũ -->
                     <div class="form-group">
-                        <label>Mật khẩu cũ <span class="required">*</span></label>
+                        <label for="old-password">Mật khẩu cũ <span class="required">*</span></label>
                         <div class="password-field">
-                            <input type="password" id="old-password" required>
+                            <input type="password" id="old-password" placeholder="Nhập mật khẩu cũ" required>
                             <i class="fas fa-eye-slash toggle-password"></i>
                         </div>
                     </div>
+
+                    <!-- Mật khẩu mới -->
                     <div class="form-group">
-                        <label>Mật khẩu mới <span class="required">*</span></label>
+                        <label for="new-password">Mật khẩu mới <span class="required">*</span></label>
                         <div class="password-field">
-                            <input type="password" id="new-password" required>
+                            <input type="password" id="new-password" placeholder="Nhập mật khẩu mới" required>
                             <i class="fas fa-eye-slash toggle-password"></i>
                         </div>
                         <div class="password-strength">
@@ -109,15 +110,12 @@
                             </div>
                             <small class="strength-text">Độ mạnh mật khẩu</small>
                         </div>
-                        <small class="form-text text-muted">Mật khẩu cần có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt</small>
+                        <small class="form-text text-muted">
+                            Mật khẩu cần có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt
+                        </small>
                     </div>
-                    <div class="form-group">
-                        <label>Xác thực mật khẩu mới <span class="required">*</span></label>
-                        <div class="password-field">
-                            <input type="password" id="confirm-password" required>
-                            <i class="fas fa-eye-slash toggle-password"></i>
-                        </div>
-                    </div>
+
+                    <!-- Nút -->
                     <div class="form-actions">
                         <button type="submit" class="change-password-btn">Đổi mật khẩu</button>
                     </div>
@@ -192,7 +190,9 @@
     <script type="module" src="./js/auth.js"></script>
     <script type="module" src="/frontend/assets/js/movie.js"></script>
     <script defer src="/frontend/assets/js/admin.js"></script>
-    <script defer src="/frontend/assets/js/profile-customer.js"></script>
+    <script type="module" defer src="/frontend/assets/js/profile-customer.js"></script>
+
+
 
     <!-- Cloudflare Security Script -->
     <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'935c28187f04c016',t:'MTc0NTU2NjQ1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>

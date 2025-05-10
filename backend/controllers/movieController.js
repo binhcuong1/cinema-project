@@ -13,7 +13,7 @@ exports.getNowShowing = (req, res) => {
     movie.getNowShowing(limit, (err, result) => {
         if (err)
             return res.status(500).json({ error: err });
-        res.json({ success: 'true', data: result });
+        res.json({ success: true, data: result });
     });
 }
 
@@ -22,7 +22,7 @@ exports.getComingSoon = (req, res) => {
     movie.getComingSoon(limit, (err, result) => {
         if (err)
             return res.status(500).json({ error: err });
-        res.json({ success: 'true', data: result });
+        res.json({ success: true, data: result });
     });
 }
 

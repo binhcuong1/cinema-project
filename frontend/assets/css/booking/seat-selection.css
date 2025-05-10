@@ -345,3 +345,78 @@
     width: 20px;
     text-align: center;
 }
+
+/* CSS cho phần hiển thị chi tiết đặt vé */
+.booking-details-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.booking-poster {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.movie-poster {
+    width: 500px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.booking-info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+
+.movie-title {
+    margin: 0;
+    font-size: 18px;
+    color: #ff6200;
+    text-transform: uppercase;
+}
+
+.movie-details {
+    margin: 5px 0;
+}
+
+.detail-item {
+    margin: 2px 0;
+}
+
+.section-title {
+    margin: 10px 0 5px;
+    font-size: 16px;
+    color: #ff6200;
+}
+
+.info-item {
+    margin: 5px 0;
+}
+
+.trailer-link {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #ff6200;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: fit-content;
+    display: inline-block; /* Đảm bảo hành vi như inline-block */
+}
+
+.trailer-link:hover {
+    background-color: #e05500;
+}
+
+.trailer-link:active {
+    background-color: #ff6200; /* Trở lại màu ban đầu khi nhả chuột */
+}

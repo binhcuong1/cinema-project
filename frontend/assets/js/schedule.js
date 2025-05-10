@@ -434,6 +434,7 @@ async function loadAudiosForModal(selectElement) {
   try {
     selectElement.innerHTML = '<option value="">Đang tải âm thanh...</option>';
     const response = await axios.get("/api/schedules/audios");
+    console.table(response); // Kiểm tra dữ liệu từ API
     const audios = response.data.data;
     selectElement.innerHTML = '<option value="">Chọn âm thanh</option>';
     audios.forEach((audio) => {
@@ -625,6 +626,11 @@ function generateSeatRowInputs(
 }
 
 //#endregion
+
+
+
+
+
 
 // Khởi tạo khi trang tải
 document.addEventListener("DOMContentLoaded", () => {

@@ -32,6 +32,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+router.get('/search', movieController.searchMovies);
 router.get('/', movieController.getMovies);
 router.get('/now-showing', movieController.getNowShowing);
 router.get('/coming-soon', movieController.getComingSoon);

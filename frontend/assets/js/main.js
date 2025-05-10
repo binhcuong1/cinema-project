@@ -47,6 +47,9 @@ async function initializeHeaderAndSidebar() {
         // Kiểm tra trạng thái đăng nhập
         await checkAuthStatus();
 
+        // Gắn sự kiện cho thanh search
+        await initializeSearch();
+
         // Gắn sự kiện cho nút "Đăng Nhập"
         const loginBtn = document.querySelector('.login-btn');
         if (loginBtn) {

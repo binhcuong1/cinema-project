@@ -112,6 +112,73 @@ function renderAllMovie(movie) {
 async function fetchAllMovieToList() {
   await fetchAndRenderMovies("/api/movies/", "movie-list", renderAllMovie);
 }
+
+// Hiển thị phim trong kết quả tìm kiếm
+function renderSearchMovie(movie) {
+  const movieCard = document.createElement("div");
+  movieCard.classList.add("movie-card");
+  movieCard.innerHTML = `
+    <div class="movie-poster">
+      <img src="${movie.image}" alt="${movie.ten_phim}">
+      <div class="movie-overlay">
+        ${movie.trang_thai === 'dang-chieu' ? `<button onclick="window.location.href='booking.html'">Đặt vé</button>` : ''}
+      </div>
+    </div>
+    <div class="movie-info">
+      <div class="movie-title-wrapper">
+        <h3 style="display: inline; margin-right: 10px;">${movie.ten_phim}</h3>
+        <span class="age-restriction"><i class="fas fa-user-shield"></i> ${movie.gioi_han_tuoi}</span>
+      </div>
+      <div class="movie-meta">
+        <span><i class="fas fa-clock"></i> ${movie.thoi_luong_phut} phút</span>
+      </div>
+    </div>
+  `;
+  return movieCard;
+}
+
+// Hiển thị kết quả tìm kiếm
+async function fetchSearchMovies(keyword) {
+  if (!keyword) {
+    const container = document.getElementById("search-results");
+    if (container) {
+      container.innerHTML = "<p class='no-results'>Vui lòng nhập từ khóa tìm kiếm.</p>";
+    }
+    return;
+  }
+  await fetchAndRenderMovies(`/api/movies/search?keyword=${encodeURIComponent(keyword)}`, "search-results", renderSearchMovie);
+}
+
+// Gắn sự kiện tìm kiếm
+function initializeSearch() {
+  const searchBtn = document.getElementById("search-btn");
+  const searchInput = document.getElementById("search-input");
+
+  if (searchBtn && searchInput) {
+    searchBtn.addEventListener("click", () => {
+      const keyword = searchInput.value.trim();
+      if (keyword) {
+        window.location.href = `/frontend/pages/search.html?keyword=${encodeURIComponent(keyword)}`;
+      } else {
+        alert("Vui lòng nhập từ khóa tìm kiếm!");
+      }
+    });
+
+    searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const keyword = searchInput.value.trim();
+        if (keyword) {
+          window.location.href = `/frontend/pages/search.html?keyword=${encodeURIComponent(keyword)}`;
+        } else {
+          alert("Vui lòng nhập từ khóa tìm kiếm!");
+        }
+      }
+    });
+  } else {
+    console.error("Không tìm thấy search-btn hoặc search-input trong header");
+  }
+}
+
 //#endregion
 
 //#region // === Khu vực Chuyển hướng === //
@@ -380,7 +447,15 @@ window.onload = () => {
     case "edit":
       showMovieEdit();
       break;
+    case "search":
+      const urlParams = new URLSearchParams(window.location.search);
+      const keyword = urlParams.get("keyword");
+      fetchSearchMovies(keyword);
+      break;
     default:
       console.log("Trang không xác định:", currentPage);
   }
+
+  // Khởi tạo sự kiện tìm kiếm
+  initializeSearch();
 };

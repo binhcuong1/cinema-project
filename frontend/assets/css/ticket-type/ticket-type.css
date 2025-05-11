@@ -1,0 +1,216 @@
+/* Đặt màu nền cho toàn bộ trang */
+body {
+  background-color: #0a0e17; /* Màu xanh đậm từ style.css */
+  margin: 0;
+  padding: 0;
+}
+
+/* Đảm bảo main-content có màu nền khớp với body và không bị header che */
+.main-content {
+  margin: 0;
+  padding: 0;
+  padding-top: 70px; /* Thêm khoảng cách phía trên để tránh header che khuất (giả định header cao 70px) */
+  min-height: calc(100vh - 200px); /* Trừ chiều cao của header và footer */
+  background-color: #0a0e17; /* Khớp với màu nền của body */
+}
+
+/* Định dạng container chính */
+.ticket-type-container {
+  max-width: 1200px;
+  margin: 20px auto; /* Giữ margin để tạo khoảng cách với header/footer */
+  padding: 20px;
+  background-color: #0a0e17; /* Màu nền khớp với body để xóa khung */
+}
+
+/* Định dạng tiêu đề trang */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #1a2a44; /* Màu xanh đậm từ style.css */
+  padding: 15px;
+  border-radius: 8px 8px 0 0;
+}
+
+.page-header h1 {
+  font-size: 24px;
+  color: #fff; /* Chữ trắng trên nền xanh */
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.page-header h1 i {
+  margin-right: 10px;
+  color: #ff6200; /* Icon màu cam từ theater.css và style.css */
+}
+
+.add-btn {
+  background-color: #ff6200; /* Màu cam từ theater.css và style.css */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.add-btn:hover {
+  background-color: #e55a00; /* Cam đậm hơn khi hover, từ theater.css */
+  transform: scale(1.05);
+}
+
+/* Định dạng breadcrumb */
+.breadcrumb {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #1a2a44; /* Nền xanh đậm */
+  padding: 10px;
+  border-radius: 0 0 8px 8px;
+}
+
+.breadcrumb a {
+  color: #007bff; /* Màu xanh dương cho liên kết */
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  color: #ccc; /* Màu xám nhạt từ style.css */
+}
+
+/* Định dạng danh sách loại vé */
+.ticket-type-list-section {
+  margin-top: 20px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Định dạng thẻ loại vé */
+.ticket-type-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.ticket-type-card:hover {
+  transform: translateY(-5px); /* Hiệu ứng nâng card khi hover */
+}
+
+.ticket-type-info h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333; /* Màu chữ tối */
+}
+
+.ticket-type-info p {
+  margin: 5px 0;
+  color: #666; /* Màu chữ nhạt */
+}
+
+.ticket-type-info p i {
+  margin-right: 5px;
+  color: #ff6200; /* Icon màu cam */
+}
+
+/* Định dạng khu vực nút thao tác */
+.ticket-type-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+/* Định dạng chung cho các nút */
+.ticket-type-actions button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+/* Nút "Sửa" */
+.edit-btn {
+  background-color: #007bff; /* Màu xanh dương */
+}
+
+/* Nút "Xóa" */
+.delete-btn {
+  background-color: #dc3545; /* Màu đỏ */
+}
+
+/* Hiệu ứng hover */
+.edit-btn:hover {
+  background-color: #0056b3; /* Màu xanh dương đậm hơn khi hover */
+  transform: scale(1.05);
+}
+
+.delete-btn:hover {
+  background-color: #c82333; /* Màu đỏ đậm hơn khi hover */
+  transform: scale(1.05);
+}
+
+/* Định dạng thông báo không có dữ liệu */
+.no-results {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* Định dạng modal (tương thích với style.css) */
+.auth-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.auth-container h2 {
+  color: #1a2a44;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  color: #333;
+}
+
+.input-group input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.auth-btn {
+  background-color: #ff6200; /* Màu cam từ style.css */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.auth-btn:hover {
+  background-color: #e55a00; /* Cam đậm hơn khi hover */
+}

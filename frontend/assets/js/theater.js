@@ -10,18 +10,19 @@ function showError(container, message) {
 // Hàm tạo HTML cho một thẻ rạp
 function createTheaterCard(theater) {
   return `
-    <div class="theater-card">
-      <div class="theater-info">
-        <img src="${theater.image}" alt="${theater.ten_rap}" class="theater-image" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0;">
-        <h3>${theater.ten_rap}</h3>
-        <p><i class="fas fa-map-marker-alt"></i> ${theater.dia_chi}</p>
+      <div class="theater-card">
+          <div class="theater-info">
+              <img src="${theater.image}" alt="${theater.ten_rap}" class="theater-image" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0;">
+              <h3>${theater.ten_rap}</h3>
+              <p><i class="fas fa-map-marker-alt"></i> ${theater.dia_chi}</p>
+              <p><i class="fas fa-door-open"></i> Số phòng chiếu: ${theater.room_count}</p>
+          </div>
+          <div class="theater-actions">
+              <button class="roomList-btn" onclick="hrefToRoomList('${theater.ma_rap}')"><i class="fas fa-door-open"></i> Phòng chiếu</button>
+              <button class="edit-btn" onclick="editTheater('${theater.ma_rap}')"><i class="fas fa-edit"></i> Sửa</button>
+              <button class="delete-btn" onclick="deleteTheater('${theater.ma_rap}', ${theater.da_xoa})"><i class="fas fa-trash-alt"></i> Xóa</button>
+          </div>
       </div>
-      <div class="theater-actions">
-        <button class="roomList-btn" onclick="openRoomList('${theater.ma_rap}')"><i class="fas fa-door-open"></i> Phòng chiếu</button>
-        <button class="edit-btn" onclick="editTheater('${theater.ma_rap}')"><i class="fas fa-edit"></i> Sửa</button>
-        <button class="delete-btn" onclick="deleteTheater('${theater.ma_rap}', ${theater.da_xoa})"><i class="fas fa-trash-alt"></i> Xóa</button>
-      </div>
-    </div>
   `;
 }
 
@@ -34,9 +35,6 @@ function createTheaterModalHTML(id, theater = null) {
       <form id="theater-form">
         <div class="input-group">
           <label for="theater-name">Tên rạp</label>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
           <input type="text" id="theater-name" name="ten_rap" value="${
             theater ? theater.ten_rap : ""
           }" placeholder="Nhập tên rạp" required>
@@ -67,34 +65,6 @@ function createTheaterModalHTML(id, theater = null) {
         <button type="submit" class="auth-btn">${
           id ? "Cập Nhật" : "Thêm"
         }</button>
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-          <input type="text" id="theater-name" name="ten_rap" value="${theater ? theater.ten_rap : ""}" placeholder="Nhập tên rạp" required>
-        </div>
-        <div class="input-group">
-          <label for="theater-address">Địa chỉ</label>
-          <input type="text" id="theater-address" name="dia_chi" value="${theater ? theater.dia_chi : ""}" placeholder="Nhập địa chỉ" required>
-        </div>
-        <div class="input-group">
-          <label for="theater-phone">Số điện thoại</label>
-          <input type="text" id="theater-phone" name="sdt" value="${theater ? theater.sdt : ""}" placeholder="Nhập số điện thoại" required>
-        </div>
-        <div class="input-group">
-          <label for="theater-image">Hình ảnh</label>
-          ${theater && theater.image ? `<img src="${theater.image}" alt="Hình ảnh hiện tại" style="width: 100px; height: auto; margin-bottom: 10px;">` : ""}
-          <input type="file" id="image" name="image" accept="image/*" ${id ? "" : "required"}>
-        </div>
-        <button type="submit" class="auth-btn">${id ? "Cập Nhật" : "Thêm"}</button>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
       </form>
     </div>
   `;
@@ -228,15 +198,6 @@ async function deleteTheater(id, status) {
     console.error("Lỗi khi xóa rạp:", error);
     alert("❌ Xóa rạp thất bại!");
   }
-}
-
-//#endregion
-
-//#region === Khu vực Xử lý Danh sách phòng chiếu ===
-
-// Hàm mở trang danh sách phòng chiếu
-function openRoomList(ma_rap) {
-  window.location.href = `room.html?ma_rap=${ma_rap}`;
 }
 
 //#endregion

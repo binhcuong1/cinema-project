@@ -20,6 +20,7 @@ exports.getBannerById = (req, res) => {
 exports.createBanner = (req, res) => {
     const { ten, ngay_bat_dau, ngay_ket_thuc } = req.body;
     const image = req.file?.filename || '';
+    const da_xoa = 0;
 
     if (!ten || !ngay_bat_dau || !ngay_ket_thuc || !image) {
         return res.status(400).json({ error: 'Thiếu thông tin banner' });
@@ -29,7 +30,8 @@ exports.createBanner = (req, res) => {
         ten,
         image: `/frontend/assets/images/banner/${req.file.filename}`,
         ngay_bat_dau,
-        ngay_ket_thuc
+        ngay_ket_thuc,
+        da_xoa
     };
 
     Banner.create(newBanner, (err, result) => {

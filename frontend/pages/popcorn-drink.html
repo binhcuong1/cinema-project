@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đặt Bắp Nước</title>
+  <link rel="stylesheet" href="/frontend/assets/css/shares/header.css" />
+  <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css" />
+  <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css">
+  <link rel="stylesheet" href="/frontend/assets/css/popcorn-drink.css/popcorn.css" />
+</head>
+<body data-page="popcorn">
+
+  <div id="header-placeholder"></div>
+  <div id="sidebar-placeholder"></div>
+
+  <main class="popcorn-main">
+    <h2 class="section-title">Chọn Combo Bắp Nước</h2>
+
+    <!-- Tabs loại bắp nước -->
+    <div class="popcorn-tabs" id="popcorn-tabs"></div>
+
+    <!-- Danh sách sản phẩm -->
+    <div class="popcorn-list" id="popcorn-list"></div>
+
+    <div id="popcorn-cart-wrapper" class="cart-wrapper hidden">
+      <h4>Tạm tính</h4>
+      <div id="popcorn-cart"></div>
+      <p><strong>Tổng cộng:</strong> <span id="popcorn-total">0</span> đ</p>
+      <button id="checkout-btn">Thanh toán</button>
+    </div>
+</div>
+
+  </main>
+
+  <footer id="footer-container"></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/frontend/assets/js/main.js"></script>
+  <script src="/frontend/assets/js/popcorn-drink.js"></script>
+</body>
+</html>

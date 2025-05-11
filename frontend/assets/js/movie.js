@@ -215,34 +215,43 @@ async function fetchSearchMovies(keyword) {
 
 // Gắn sự kiện tìm kiếm
 function initializeSearch() {
-  const searchBtn = document.getElementById("search-btn");
-  const searchInput = document.getElementById("search-input");
+    console.log("✅ Hàm initializeSearch đã chạy");
 
-  if (searchBtn && searchInput) {
-    searchBtn.addEventListener("click", () => {
-      const keyword = searchInput.value.trim();
-      if (keyword) {
-        window.location.href = `/frontend/pages/search.html?keyword=${encodeURIComponent(keyword)}`;
-      } else {
-        alert("Vui lòng nhập từ khóa tìm kiếm!");
-      }
-    });
+    const tryInitialize = () => {
+        const searchBtn = document.getElementById("search-btn");
+        const searchInput = document.getElementById("search-input");
 
-    searchInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        const keyword = searchInput.value.trim();
-        if (keyword) {
-          window.location.href = `/frontend/pages/search.html?keyword=${encodeURIComponent(keyword)}`;
+        if (searchBtn && searchInput) {
+            console.log("✅ Tìm thấy search-btn và search-input");
+            searchBtn.addEventListener("click", () => {
+                const keyword = searchInput.value.trim();
+                console.log("🔍 Nhấn nút tìm kiếm với từ khóa:", keyword);
+                if (keyword) {
+                    window.location.href = `/frontend/pages/search.html?keyword=${encodeURIComponent(keyword)}`;
+                } else {
+                    alert("Vui lòng nhập từ khóa tìm kiếm!");
+                }
+            });
+
+            searchInput.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                    const keyword = searchInput.value.trim();
+                    console.log("🔍 Nhấn Enter với từ khóa:", keyword);
+                    if (keyword) {
+                        window.location.href = `/frontend/pages/search.html?keyword=${encodeURIComponent(keyword)}`;
+                    } else {
+                        alert("Vui lòng nhập từ khóa tìm kiếm!");
+                    }
+                }
+            });
         } else {
-          alert("Vui lòng nhập từ khóa tìm kiếm!");
+            console.warn("⏳ Chưa tìm thấy search-btn hoặc search-input, thử lại...");
+            setTimeout(tryInitialize, 100); // Thử lại sau 100ms
         }
-      }
-    });
-  } else {
-    console.error("Không tìm thấy search-btn hoặc search-input trong header");
-  }
-}
+    };
 
+    tryInitialize();
+}
 //#endregion
 
 //#region // === Khu vực Chuyển hướng === //
@@ -491,6 +500,7 @@ async function showMovieDetail() {
 window.onload = () => {
   const currentPage = document.body.dataset.page;
 
+  initializeSearch();
   switch (currentPage) {
     case "index":
       fetchNowShowingMovies();
@@ -519,8 +529,4 @@ window.onload = () => {
     default:
       console.log("Trang không xác định:", currentPage);
   }
-
-
-  // Khởi tạo sự kiện tìm kiếm
-  initializeSearch();
 };

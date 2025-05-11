@@ -1,75 +1,69 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thêm Banner - CiBYHD</title>
-  <!-- CSS -->
+  <title>Thêm Bắp Nước - CiBYHD</title>
   <link rel="stylesheet" href="/frontend/assets/css/shares/header.css" />
   <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css" />
   <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css" />
-  <link rel="stylesheet" href="/frontend/assets/css/banner/add.css" />
   <link rel="stylesheet" href="/frontend/assets/css/style.css" />
   <link rel="stylesheet" href="/frontend/assets/css/login.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
-
-<body data-page="add-banner">
-  <!-- Header + Sidebar -->
+<body data-page="add-popcorn">
   <div id="header-placeholder"></div>
   <div id="sidebar-placeholder"></div>
 
-  <!-- Nội dung chính -->
   <main class="main-content">
     <div class="movies-container">
       <div class="page-header">
-        <h1><i class="fas fa-gift"></i> Thêm Banner</h1>
+        <h1><i class="fas fa-popcorn"></i> Thêm Bắp Nước</h1>
         <nav class="breadcrumb">
           <a href="/frontend/pages/index.html">Trang Chủ</a> /
-          <a href="/frontend/pages/banner/list.html">Quản Lý Baner</a> /
-          <span>Thêm Baner Mới</span>
+          <a href="/frontend/pages/popcorn-drink/list.html">Quản Lý Bắp Nước</a> /
+          <span>Thêm Mới</span>
         </nav>
       </div>
 
       <div class="form-container">
-        <form id="add-banner-form" enctype="multipart/form-data">
+        <form id="add-popcorn-form" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="ten">Tên Banner</label>
-            <input type="text" id="ten" name="ten" required />
+            <label for="ten_bap_nuoc">Tên bắp nước</label>
+            <input type="text" id="ten_bap_nuoc" name="ten_bap_nuoc" required />
           </div>
 
           <div class="form-group">
-            <label for="image">Ảnh Banner</label>
+            <label for="image">Hình Ảnh</label>
             <input type="file" id="image" name="image" accept="image/*" required />
           </div>
 
           <div class="form-group">
-            <label for="ngay_bat_dau">Ngày Bắt Đầu</label>
-            <input type="date" id="ngay_bat_dau" name="ngay_bat_dau" required />
+            <label for="ma_loai">Loại</label>
+            <select id="ma_loai" name="ma_loai" required>
+              <option value="">-- Chọn loại --</option>
+            </select>
           </div>
 
           <div class="form-group">
-            <label for="ngay_ket_thuc">Ngày Kết Thúc</label>
-            <input type="date" id="ngay_ket_thuc" name="ngay_ket_thuc" required />
+            <label for="don_gia">Đơn Giá (VND)</label>
+            <input type="number" id="don_gia" name="don_gia" required />
           </div>
+
           <div class="form-actions">
             <button type="submit" class="save-btn"><i class="fas fa-save"></i> Thêm mới</button>
-            <button type="button" onclick="window.history.back()" class="cancel-btn"><i class="fas fa-times"></i>
-              Hủy</button>
+            <button type="button" onclick="window.history.back()" class="cancel-btn"><i class="fas fa-times"></i> Hủy</button>
           </div>
         </form>
       </div>
+    </div>
   </main>
 
-  <!-- Footer -->
   <footer id="footer-container"></footer>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="/frontend/assets/js/main.js"></script>
   <script src="/frontend/assets/js/admin.js"></script>
-  <script type="module" src="/frontend/assets/js/banner.js"></script>
+  <script src="/frontend/assets/js/popcorn-drink.js"></script>
 </body>
-
 </html>

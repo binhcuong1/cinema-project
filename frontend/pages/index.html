@@ -151,14 +151,12 @@
 
         <!-- Promotions -->
         <section class="promotions">
-            <h2 class="section-title">Khuyến Mãi</h2>
-            <div class="promo-arrows">
-                <button id="promo-left" class="left"><i class="fas fa-chevron-left"></i></button>
-                <button id="promo-right" class="right"><i class="fas fa-chevron-right"></i></button>
-            </div>
-            <div class="promo-grid-container">
-                <div class="promo-grid">
-                    <p class="loading">Đang tải khuyến mãi...</p>
+            <div class="promo-slider">
+                <h2 class="section-title">Khuyến Mãi</h2>
+                <input type="checkbox" id="promo-toggle" style="display: none;">
+                <div class="promo-arrows">
+                    <label for="promo-toggle" class="left"><i class="fas fa-chevron-left"></i></label>
+                    <label for="promo-toggle" class="right"><i class="fas fa-chevron-right"></i></label>
                 </div>
             </div>
             <div class="promo-button">
@@ -234,6 +232,16 @@
                         <input type="email" placeholder="Điền email" required>
                         <textarea placeholder="Thông tin bạn cần hỗ trợ" required></textarea>
                         <button type="submit" class="submit-btn">Gửi ngay</button>
+                    </div>
+                </div>
+
+                <div class="promo-slider">
+                    <i class="promotion"></i> Khuyến mãi
+                    <h2 class="section-title">Khuyến Mãi</h2>
+                    <input type="checkbox" id="promo-toggle" style="display: none;">
+                    <div class="promo-arrows">
+                        <label for="promo-toggle" class="left"><i class="fas fa-chevron-left"></i></label>
+                        <label for="promo-toggle" class="right"><i class="fas fa-chevron-right"></i></label>
                     </div>
                 </div>
         </section>

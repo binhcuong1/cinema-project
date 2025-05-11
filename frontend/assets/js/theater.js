@@ -83,7 +83,7 @@ async function renderList() {
     const response = await axios.get("/api/theaters/");
     const theaters = response.data;
 
-    if (theaters.success !== "true") throw new Error("Dữ liệu không hợp lệ");
+    if (theaters.success !== true) throw new Error("Dữ liệu không hợp lệ");
 
     theaterList.innerHTML = "";
 

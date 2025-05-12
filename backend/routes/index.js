@@ -13,6 +13,7 @@ const scheduleRoutes = require('./scheduleRoutes');
 const bookingRoutes = require('./bookingRoutes');
 const bannerRoutes = require('./bannerRoutes')
 const ticketTypeRoutes = require('./ticket-typeRoutes');
+const popcornDrinkRouters = require('./popcorn-drinkRoutes');
 
 router.use('/movies', movieRoutes);
 router.use('/theaters', theaterRoutes);
@@ -26,5 +27,6 @@ router.use('/schedules', scheduleRoutes);
 router.use('/bookings', bookingRoutes);
 router.use('/banners', bannerRoutes)
 router.use('/ticket-types', ticketTypeRoutes);
+router.use('/popcorn-drink', popcornDrinkRouters)
 
 module.exports = router;

@@ -117,6 +117,6 @@ exports.searchMovies = (req, res) => {
     movie.search(keyword, (err, result) => {
         if (err)
             return res.status(500).json({ success: "false", error: err });
-        res.json({ success: "true", data: result });
+        res.json({ success: true, data: result });
     });
 };

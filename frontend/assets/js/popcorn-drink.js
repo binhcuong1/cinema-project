@@ -146,6 +146,27 @@ function renderCart() {
   }
 }
 
+async function loadTheaterList() {
+  try {
+    const res = await axios.get('/api/theaters');
+    const theaters = res.data.data;
+
+    const select = document.getElementById('theater-select');
+    if (!select) return;
+
+    theaters
+      .filter(t => t.da_xoa !== 1)
+      .forEach(theater => {
+        const option = document.createElement('option');
+        option.value = theater.ma_rap;
+        option.textContent = theater.ten_rap;
+        select.appendChild(option);
+      });
+  } catch (error) {
+    console.error('Lỗi khi tải danh sách rạp:', error);
+  }
+}
+
 // === Hiển thị dạng quản trị: danh sách có sửa/xóa ===
 async function loadPopcornList() {
   try {
@@ -281,10 +302,13 @@ async function loadEditPopcornForm() {
 // === Khởi tạo ===
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.body.dataset.page;
-  if (page === 'popcorn') 
+  if (page === 'popcorn') {
     fetchAllPopcornDrinks();
-  else if (page === 'popcorn-admin') 
+    loadTheaterList(); 
+  }
+  else if (page === 'popcorn-admin') {
     loadPopcornList();
+  }
   else if (page === 'add-popcorn') {
     const form = document.getElementById('add-popcorn-form');
     if (form) form.addEventListener('submit', handleAddPopcorn);
@@ -294,3 +318,4 @@ document.addEventListener('DOMContentLoaded', () => {
     loadEditPopcornForm();
   }
 });
+

@@ -19,7 +19,11 @@ async function loadBannerList() {
                 <h3>${banner.ten}</h3>
                 <p><strong>Bắt đầu:</strong> ${new Date(banner.ngay_bat_dau).toLocaleString()}</p>
                 <p><strong>Kết thúc:</strong> ${new Date(banner.ngay_ket_thuc).toLocaleString()}</p>
-                <p><strong>Trạng thái:</strong> ${banner.da_xoa ? 'Ẩn' : 'Hiển thị'}</p>
+                <p><strong>Trạng thái:</strong>
+                <span style="color: ${banner.da_xoa ? 'red' : 'green'};">
+                    ${banner.da_xoa ? 'Đã xóa' : 'Chưa xóa'}
+                </span>
+                </p>
                 <div class="actions">
                     <button onclick="editBanner(${banner.id})"><i class="fas fa-edit"></i></button>
                     <button onclick="deleteBanner(${banner.id})"><i class="fas fa-trash-alt"></i></button>
@@ -118,7 +122,7 @@ async function createBanner(event) {
         });
 
         alert('Thêm banner thành công!');
-        window.location.href = "/frontend/pages/banner/list.html";s
+        window.location.href = "/frontend/pages/banner/list.html";
     } catch (err) {
         console.error('Lỗi khi thêm banner:', err);
         alert('Không thể thêm banner.');

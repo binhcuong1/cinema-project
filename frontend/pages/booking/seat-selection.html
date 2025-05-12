@@ -24,7 +24,7 @@
 
     <!-- Nội dung chính -->
     <main class="main-content">
-        
+
         <div class="movies-container">
             <!-- Phần hiển thị kết quả đặt vé (tĩnh) -->
             <div id="booking-details">
@@ -62,40 +62,8 @@
             </div>
 
             <!-- Phần chọn loại vé -->
-            <div class="ticket-selection">
-                <h3>Chọn Loại Vé</h3>
-                <div class="ticket-options">
-                    <div class="ticket-option">
-                        <p>Người Lớn</p>
-                        <p>Đơn</p>
-                        <p class="price">45,000 VNĐ</p>
-                        <div class="counter">
-                            <button onclick="updateTicketQuantity('adult-single', -1)">-</button>
-                            <span id="adult-single-quantity">0</span>
-                            <button onclick="updateTicketQuantity('adult-single', 1)">+</button>
-                        </div>
-                    </div>
-                    <div class="ticket-option">
-                        <p>HSSV-Người Cao Tuổi</p>
-                        <p>Đơn</p>
-                        <p class="price">45,000 VNĐ</p>
-                        <div class="counter">
-                            <button onclick="updateTicketQuantity('senior-student', -1)">-</button>
-                            <span id="senior-student-quantity">0</span>
-                            <button onclick="updateTicketQuantity('senior-student', 1)">+</button>
-                        </div>
-                    </div>
-                    <div class="ticket-option">
-                        <p>Người Lớn</p>
-                        <p>Đôi</p>
-                        <p class="price">95,000 VNĐ</p>
-                        <div class="counter">
-                            <button onclick="updateTicketQuantity('adult-couple', -1)">-</button>
-                            <span id="adult-couple-quantity">0</span>
-                            <button onclick="updateTicketQuantity('adult-couple', 1)">+</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="ticket-options" id="ticket-options">
+                <!-- Danh sách loại vé sẽ được render động -->
             </div>
 
             <!-- Phần chọn ghế - rạp -->
@@ -352,6 +320,225 @@
 
     <script src="/frontend/assets/js/booking/seat-selection.js"></script>
 
+    <script>
+        /**************************
+         * KHU VỰC KHỞI TẠO VÀ XỬ LÝ CHUNG
+         * - Các sự kiện khởi tạo trang và xử lý hành vi mặc định
+         **************************/
+
+        // Ngăn submit form mặc định (nếu có form)
+        document.querySelector('.schedule-form')?.addEventListener('submit', function (event) {
+            event.preventDefault();
+        });
+
+        // Khởi tạo ghế khi trang tải
+        document.addEventListener('DOMContentLoaded', renderSeats);
+
+        /**************************
+         * KHU VỰC CHỌN NGÀY, SUẤT CHIẾU VÀ LỌC RẠP
+         * - Quản lý việc chọn ngày, suất chiếu, và lọc rạp theo thành phố
+         **************************/
+
+        // Hàm chọn ngày và cập nhật trạng thái nút
+        function selectDate(date, button) {
+            document.getElementById('date-display').innerHTML = `<strong>Ngày:</strong> ${date}`; // Hiển thị ngày đã chọn
+            const buttons = document.querySelectorAll('.schedule-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active'); // Bỏ trạng thái active của các nút khác
+            });
+            button.classList.add('active'); // Đánh dấu nút đã chọn
+            updateSummaryBarVisibility(); // Cập nhật hiển thị thanh tạm tính
+        }
+
+        // Hàm chọn suất chiếu và cập nhật trạng thái nút
+        function selectShowtime(time, theater, button, theaterId) {
+            document.getElementById('theater-display').innerHTML = `<strong>Rạp:</strong> ${theater}`; // Hiển thị rạp đã chọn
+            document.getElementById('showtime-display').innerHTML = `<strong>Suất chiếu:</strong> ${time}`; // Hiển thị suất chiếu
+            document.getElementById('summary-theater').textContent = theater; // Cập nhật rạp trong thanh tạm tính
+            document.getElementById('summary-showtime').textContent = time; // Cập nhật suất chiếu trong thanh tạm tính
+            const allShowtimeButtons = document.querySelectorAll('.showtime-btn');
+            allShowtimeButtons.forEach(btn => {
+                btn.classList.remove('active'); // Bỏ trạng thái active của các nút khác
+            });
+            button.classList.add('active'); // Đánh dấu nút đã chọn
+            updateSummaryBarVisibility(); // Cập nhật hiển thị thanh tạm tính
+        }
+
+        // Hàm lọc rạp theo thành phố
+        function filterTheatersByCity(city) {
+            const theaterItems = document.querySelectorAll('.theater-item');
+            theaterItems.forEach(item => {
+                if (item.getAttribute('data-city') === city) {
+                    item.style.display = 'block'; // Hiển thị rạp thuộc thành phố được chọn
+                } else {
+                    item.style.display = 'none'; // Ẩn các rạp không thuộc thành phố
+                }
+            });
+            const selectedTheater = document.getElementById('theater-display').textContent.split(': ')[1];
+            if (!selectedTheater || !Array.from(document.querySelectorAll('.theater-item[data-city="' + city + '"] summary')).some(summary => summary.textContent.includes(selectedTheater))) {
+                document.getElementById('theater-display').innerHTML = `<strong>Rạp:</strong> Chưa chọn`; // Reset rạp nếu không hợp lệ
+                document.getElementById('showtime-display').innerHTML = `<strong>Suất chiếu:</strong> Chưa chọn`; // Reset suất chiếu
+                document.getElementById('summary-bar').style.display = 'none'; // Ẩn thanh tạm tính
+            }
+            updateSummaryBarVisibility(); // Cập nhật hiển thị thanh tạm tính
+        }
+
+        /**************************
+         * KHU VỰC QUẢN LÝ VÉ
+         * - Quản lý số lượng vé và tính tổng tiền liên quan đến vé
+         **************************/
+
+        // Biến lưu số lượng và giá vé
+        const ticketQuantities = {
+            'adult-single': 0,
+            'senior-student': 0,
+            'adult-couple': 0
+        };
+
+        const ticketPrices = {
+            'adult-single': 45000,
+            'senior-student': 45000,
+            'adult-couple': 95000
+        };
+
+        // Hàm cập nhật số lượng vé
+        function updateTicketQuantity(type, change) {
+            const quantityElement = document.getElementById(`${type}-quantity`);
+            let quantity = ticketQuantities[type];
+            quantity += change;
+
+            // Giới hạn số lượng từ 0 đến 10
+            if (quantity < 0) quantity = 0;
+            if (quantity > 10) quantity = 10;
+
+            ticketQuantities[type] = quantity;
+            quantityElement.textContent = quantity; // Cập nhật số lượng hiển thị
+
+            // Cập nhật tổng tiền
+            updateTotalPrice();
+
+            // Cập nhật trạng thái nút - và +
+            const minusButton = quantityElement.previousElementSibling;
+            const plusButton = quantityElement.nextElementSibling;
+            minusButton.disabled = quantity === 0; // Vô hiệu hóa nút - nếu số lượng = 0
+            plusButton.disabled = quantity === 10; // Vô hiệu hóa nút + nếu số lượng = 10
+
+            // Cập nhật hiển thị thanh tạm tính
+            updateSummaryBarVisibility();
+        }
+
+        // Hàm tính tổng số lượng vé
+        function getTotalTickets() {
+            let totalTickets = 0;
+            for (const type in ticketQuantities) {
+                totalTickets += ticketQuantities[type];
+            }
+            return totalTickets;
+        }
+
+        /**************************
+         * KHU VỰC QUẢN LÝ BẮP NƯỚC (SNACKS)
+         * - Quản lý số lượng bắp nước và tính tổng tiền liên quan đến bắp nước
+         **************************/
+
+        // Biến lưu số lượng và giá bắp nước
+        const snackQuantities = {
+            'combo-gau': 0,
+            'combo-co-gau': 0,
+            'combo-nhi-gau': 0,
+            'sprite-32oz': 0,
+            'coke-zero-32oz': 0,
+            'coke-32oz': 0,
+            'fanta-32oz': 0,
+            'nuoc-cam-teppy': 0,
+            'nuoc-suoi-dasani': 0,
+            'nuoc-trai-cay-nutriboost': 0,
+            'snack-thai': 0,
+            'poca-wavy-54gr': 0,
+            'khoai-tay-lays-stax-100g': 0,
+            'snack-partyz-30-33gr': 0,
+            'poca-khoai-tay-54gr': 0
+        };
+
+        const snackPrices = {
+            'combo-gau': 119000,
+            'combo-co-gau': 129000,
+            'combo-nhi-gau': 259000,
+            'sprite-32oz': 37000,
+            'coke-zero-32oz': 37000,
+            'coke-32oz': 37000,
+            'fanta-32oz': 37000,
+            'nuoc-cam-teppy': 28000,
+            'nuoc-suoi-dasani': 20000,
+            'nuoc-trai-cay-nutriboost': 28000,
+            'snack-thai': 25000,
+            'poca-wavy-54gr': 28000,
+            'khoai-tay-lays-stax-100g': 59000,
+            'snack-partyz-30-33gr': 20000,
+            'poca-khoai-tay-54gr': 28000
+        };
+
+        // Hàm cập nhật số lượng bắp nước
+        function updateSnackQuantity(type, change) {
+            const quantityElement = document.getElementById(`${type}-quantity`);
+            let quantity = snackQuantities[type];
+            quantity += change;
+
+            // Giới hạn số lượng từ 0 đến 10
+            if (quantity < 0) quantity = 0;
+            if (quantity > 10) quantity = 10;
+
+            snackQuantities[type] = quantity;
+            quantityElement.textContent = quantity; // Cập nhật số lượng hiển thị
+
+            // Cập nhật tổng tiền
+            updateTotalPrice();
+
+            // Cập nhật trạng thái nút - và +
+            const minusButton = quantityElement.previousElementSibling;
+            const plusButton = quantityElement.nextElementSibling;
+            minusButton.disabled = quantity === 0; // Vô hiệu hóa nút - nếu số lượng = 0
+            plusButton.disabled = quantity === 10; // Vô hiệu hóa nút + nếu số lượng = 10
+
+            // Cập nhật hiển thị thanh tạm tính
+            updateSummaryBarVisibility();
+        }
+
+        /**************************
+         * KHU VỰC TÍNH TỔNG TIỀN VÀ THANH TẠM TÍNH
+         * - Tính tổng tiền và điều khiển hiển thị thanh tạm tính
+         **************************/
+
+        // Hàm tính tổng tiền vé và bắp nước
+        function updateTotalPrice() {
+            let totalTickets = 0;
+            for (const type in ticketQuantities) {
+                totalTickets += ticketQuantities[type] * ticketPrices[type];
+            }
+
+            let totalSnacks = 0;
+            for (const type in snackQuantities) {
+                totalSnacks += snackQuantities[type] * snackPrices[type];
+            }
+
+            const total = totalTickets + totalSnacks;
+            document.getElementById('summary-total').textContent = `${total.toLocaleString('vi-VN')} VNĐ`; // Hiển thị tổng tiền
+            return total;
+        }
+
+        // Hàm điều khiển hiển thị thanh tạm tính
+        function updateSummaryBarVisibility() {
+            const theater = document.getElementById('theater-display').textContent.split(': ')[1];
+            const showtime = document.getElementById('showtime-display').textContent.split(': ')[1];
+            const summaryBar = document.getElementById('summary-bar');
+
+            if (theater !== 'Chưa chọn' && showtime !== 'Chưa chọn') {
+                summaryBar.style.display = 'flex'; // Hiển thị thanh tạm tính nếu đã chọn rạp và suất chiếu
+            } else {
+                summaryBar.style.display = 'none'; // Ẩn thanh tạm tính nếu chưa chọn đầy đủ
+            }
+        }
+    </script>
 </body>
 
 </html>

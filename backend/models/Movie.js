@@ -80,6 +80,7 @@ const movie = {
             callback(null, results);
         });
     },
+    
     search: (keyword, callback) => {
         const query = `SELECT * FROM ${table_name} WHERE ten_phim LIKE ? AND da_xoa = 0`;
         const searchTerm = `%${keyword}%`;

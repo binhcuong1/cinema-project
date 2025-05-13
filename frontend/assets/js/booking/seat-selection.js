@@ -91,6 +91,9 @@ async function initializeSeatSelection() {
 
         // Render danh sách loại vé
         await renderTicketOptions();
+
+        // Render sơ đồ ghế
+        await renderSeats();
     } catch (error) {
         console.error("Lỗi khi khởi tạo:", error);
         showError(document.getElementById('booking-details'), error.message || "Đã xảy ra lỗi khi tải thông tin phim.");
@@ -140,8 +143,6 @@ async function renderTicketOptions() {
                 }
             }
         });
-        console.table(ticketQuantities);
-        console.table(ticketPrices);
     } catch (error) {
         console.error('Lỗi khi tải danh sách loại vé:', error);
         showError(ticketOptionsContainer, 'Không thể tải danh sách loại vé.');
@@ -281,6 +282,152 @@ function updateSummaryBarVisibility() {
         summaryBar.style.display = 'flex';
     } else {
         summaryBar.style.display = 'none';
+    }
+}
+
+//#endregion
+
+//#region === Khu vực Quản lý Ghế ===
+
+// Biến lưu danh sách ghế và ghế đã chọn
+let seats = [];
+const selectedSeats = [];
+
+// Hàm render sơ đồ ghế
+async function renderSeats() {
+    const seatGrid = document.getElementById('seat-grid');
+    const bookingData = JSON.parse(sessionStorage.getItem('bookingData'));
+    if (!bookingData || !bookingData.showtimeId) {
+        showError(seatGrid, 'Không có thông tin lịch chiếu để tải sơ đồ ghế.');
+        return;
+    }
+
+    try {
+        // Lấy thông tin lịch chiếu để biết phòng chiếu
+        const scheduleResponse = await fetchData(`/api/schedules/${bookingData.showtimeId}`);
+        const scheduleData = scheduleResponse;
+        if (!scheduleData || !scheduleData.ma_phong) 
+            throw new Error('Không có thông tin phòng chiếu.');
+        const ma_phong = scheduleData.ma_phong;
+
+        // Lấy cấu trúc ghế từ API
+        const roomSeatsResponse = await axios.get(`/api/seats/${ma_phong}`);
+        const roomSeatsData = roomSeatsResponse.data;
+        if (!roomSeatsData || !roomSeatsData.seats_per_row) {
+            throw new Error('Không thể lấy cấu trúc ghế.');
+        }
+        
+        const seatsPerRow = roomSeatsData.seats_per_row;
+        
+        // Tạo danh sách ghế từ seats_per_row
+        seats = [];
+        for (let i = 0; i < seatsPerRow.length; i++) {
+            const rowLabel = String.fromCharCode(65 + i);
+            const seatCount = seatsPerRow[i];
+            for (let j = 1; j <= seatCount; j++) {
+                const seatId = `${rowLabel}${j}`;
+                seats.push({ id: seatId, status: 'available' });
+            }
+        }
+        
+        // Lấy danh sách ghế đã đặt từ API
+        const bookedSeatsResponse = await fetchData(`/api/bookings/${bookingData.showtimeId}`);
+        const bookedSeats = bookedSeatsResponse?.booked_seats || [];
+        console.table(bookedSeats);
+        // Cập nhật trạng thái ghế đã đặt
+        seats.forEach(seat => {
+            if (bookedSeats.includes(seat.id)) {
+                seat.status = 'sold';
+            }
+        });
+        
+        // Khôi phục trạng thái ghế đã chọn từ sessionStorage
+        const previouslySelectedSeats = JSON.parse(sessionStorage.getItem('selectedSeats')) || [];
+        seats.forEach(seat => {
+            if (previouslySelectedSeats.includes(seat.id) && seat.status !== 'sold') {
+                seat.status = 'selected';
+                selectedSeats.push(seat.id);
+            }
+        });
+
+        // Render ghế
+        seatGrid.innerHTML = '';
+        const rows = [...new Set(seats.map(seat => seat.id.charAt(0)))]; // Lấy danh sách hàng duy nhất
+        rows.forEach(row => {
+            const rowSeats = seats.filter(seat => seat.id.startsWith(row));
+            const rowElement = document.createElement('div');
+            rowElement.classList.add('seat-row');
+            const labelElement = document.createElement('div');
+            labelElement.classList.add('row-label');
+            labelElement.textContent = row;
+            rowElement.appendChild(labelElement);
+            rowSeats.forEach(seat => {
+                const seatElement = document.createElement('div');
+                seatElement.classList.add('seat', seat.status);
+                seatElement.textContent = seat.id;
+                seatElement.addEventListener('click', () => selectSeat(seat.id));
+                rowElement.appendChild(seatElement);
+            });
+            seatGrid.appendChild(rowElement);
+        });
+
+    } catch (error) {
+        console.error('Lỗi khi tải sơ đồ ghế:', error);
+        showError(seatGrid, 'Không thể tải sơ đồ ghế.');
+    }
+}
+
+// Hàm xử lý chọn ghế
+function selectSeat(seatId) {
+    const seat = seats.find(s => s.id === seatId);
+    if (!seat) return;
+
+    const totalTickets = getTotalTickets();
+
+    if (seat.status === 'sold') {
+        return; // Không cho phép chọn ghế đã bán
+    }
+
+    if (seat.status === 'available') {
+        // Kiểm tra giới hạn số ghế được chọn
+        if (selectedSeats.length >= totalTickets) {
+            alert('Bạn đã chọn đủ số ghế theo số lượng vé!');
+            return;
+        }
+        seat.status = 'selected';
+        selectedSeats.push(seatId);
+    } else if (seat.status === 'selected') {
+        seat.status = 'available';
+        const index = selectedSeats.indexOf(seatId);
+        if (index > -1) {
+            selectedSeats.splice(index, 1);
+        }
+    }
+
+    // Lưu danh sách ghế đã chọn vào sessionStorage
+    sessionStorage.setItem('selectedSeats', JSON.stringify(selectedSeats));
+
+    // Cập nhật giao diện
+    renderSeats();
+    updateSummaryBarVisibility();
+}
+
+// Hàm cập nhật giới hạn chọn ghế dựa trên số lượng vé
+function updateSeatSelectionLimit() {
+    const totalTickets = getTotalTickets();
+    const seatGrid = document.getElementById('seat-grid');
+
+    // Nếu số lượng vé thay đổi, kiểm tra số ghế đã chọn
+    if (selectedSeats.length > totalTickets) {
+        while (selectedSeats.length > totalTickets) {
+            const seatId = selectedSeats.pop();
+            const seat = seats.find(s => s.id === seatId);
+            if (seat) {
+                seat.status = 'available';
+            }
+        }
+        sessionStorage.setItem('selectedSeats', JSON.stringify(selectedSeats));
+        renderSeats();
     }
 }
 

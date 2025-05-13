@@ -10,5 +10,8 @@ router.post('/reset-password', userController.resetPassword);
 router.post('/register', userController.register);
 router.post('/update-profile', userController.updateProfile);
 router.post('/change-password', userController.changePassword);
+router.get('/', userController.getAllUsers);
+router.put('/:id/role', userController.updateRole);
+
 
 module.exports = router;

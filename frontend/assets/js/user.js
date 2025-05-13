@@ -175,7 +175,76 @@ async function handleRegister(e) {
             errorDiv.style.display = 'block';
         }
     }
+}// Lấy danh sách người dùng
+async function fetchUsers() {
+  const userList = document.getElementById('user-list');
+  const errorMessage = document.getElementById('error-message');
+
+  try {
+    const response = await axios.get('/api/users', { withCredentials: true });
+
+    if (response.data.success === true && Array.isArray(response.data.data)) {
+      userList.innerHTML = '';
+
+      response.data.data.forEach(user => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${user.ma_tai_khoan}</td>
+          <td>${user.ten_dang_nhap}</td>
+          <td>${user.ho_va_ten}</td>
+          <td>${user.sdt || ''}</td>
+          <td>${user.diachi || ''}</td>
+          <td>
+            <select class="role-select" data-id="${user.ma_tai_khoan}">
+              <option value="1" ${user.role_id === 1 ? 'selected' : ''}>Admin</option>
+              <option value="2" ${user.role_id === 2 ? 'selected' : ''}>Nhân viên</option>
+              <option value="3" ${user.role_id === 3 ? 'selected' : ''}>Người dùng</option>
+            </select>
+            <button class="update-role-btn" data-id="${user.ma_tai_khoan}">Cập nhật</button>
+          </td>
+        `;
+        userList.appendChild(row);
+      });
+
+      // ✅ Gắn sự kiện sau khi render
+      document.querySelectorAll('.update-role-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const userId = btn.getAttribute('data-id');
+          const select = document.querySelector(`.role-select[data-id="${userId}"]`);
+          const newRole = select.value;
+
+          try {
+            const res = await axios.put(`/api/users/${userId}/role`, { role_id: newRole });
+            if (res.data.success) {
+              alert('✅ Cập nhật vai trò thành công!');
+            } else {
+              throw new Error(res.data.error || 'Thất bại!');
+            }
+          } catch (err) {
+            console.error('Lỗi cập nhật vai trò:', err);
+            alert('❌ Không thể cập nhật vai trò!');
+          }
+        });
+      });
+
+    } else {
+      throw new Error('Dữ liệu không hợp lệ hoặc không có người dùng.');
+    }
+  } catch (err) {
+    console.error('Lỗi khi lấy danh sách người dùng:', err);
+    if (errorMessage) {
+      errorMessage.textContent = err.response?.data?.error || 'Không thể tải danh sách người dùng.';
+      errorMessage.style.display = 'block';
+    }
+  }
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.body.getAttribute('data-page') === 'user-list') {
+        fetchUsers();
+    }
+});
 
 export function initLoginEvents() {
     const loginForm = document.getElementById('login-form-submit');

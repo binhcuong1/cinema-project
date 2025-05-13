@@ -134,6 +134,10 @@ function setupProfileMenuNavigation() {
  */
 function setupHeaderNavigation() {
     const personalInfoHeaderBtn = document.getElementById('personal-info-header-btn');
+    if (!personalInfoHeaderBtn) {
+        console.warn('personal-info-header-btn not found, skipping header navigation setup.');
+        return;
+    }
     const sections = document.querySelectorAll('.profile-content section');
     const mainTitle = document.querySelector('.profile-content h2');
     const profileUserSection = document.querySelector('.profile-user-section');
@@ -289,12 +293,10 @@ function changePassword() {
     if (!form) return;
 
     // Toggle hiện/ẩn mật khẩu
-    document.querySelectorAll('.toggle-password').forEach(icon => {
-        icon.addEventListener('click', function () {
-            const input = this.previousElementSibling;
-            input.type = input.type === 'password' ? 'text' : 'password';
-            this.classList.toggle('fa-eye-slash');
-            this.classList.toggle('fa-eye');
+    document.querySelectorAll('.view-combo-details-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const orderId = button.getAttribute('data-id');
+            showComboDetailModal(orderId);
         });
     });
 
@@ -343,15 +345,299 @@ function changePassword() {
         }
     });
 }
-// Khởi tạo sau khi DOM sẵn sàng
+
+//Load lịch sử mua hàng 
+async function loadCombinedPurchaseHistory() {
+    try {
+        const [comboRes, ticketRes] = await Promise.all([
+            axios.get('/api/orders/popcorn-drink-history', { withCredentials: true }),
+            axios.get('/api/orders/ticket-history', { withCredentials: true })
+        ]);
+
+        const comboList = comboRes.data.success ? comboRes.data.data : [];
+        const ticketList = ticketRes.data.success ? ticketRes.data.data : [];
+
+        const allOrders = [
+            ...comboList.map(item => ({
+                id: item.ma_don_dat,
+                hoat_dong: item.hoat_dong,
+                chi_nhanh: item.chi_nhanh,
+                ngay: item.ngay,
+                tong_tien: item.tong_tien,
+                type: 'combo'
+            })),
+            ...ticketList.map(item => ({
+                id: item.ma_dat_ve,
+                hoat_dong: item.hoat_dong,
+                chi_nhanh: item.chi_nhanh,
+                ngay: item.ngay,
+                tong_tien: item.tong_tien,
+                type: 'ticket'
+            }))
+        ];
+
+        // Sắp xếp theo ngày giảm dần
+        allOrders.sort((a, b) => new Date(b.ngay) - new Date(a.ngay));
+
+        const tbody = document.getElementById('purchase-history-body');
+        tbody.innerHTML = '';
+
+        if (allOrders.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6">Bạn chưa có giao dịch nào.</td></tr>`;
+            return;
+        }
+
+        allOrders.forEach(order => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${order.id}</td>
+                <td>${order.hoat_dong}</td>
+                <td>${order.chi_nhanh}</td>
+                <td>${new Date(order.ngay).toLocaleString()}</td>
+                <td>${parseInt(order.tong_tien).toLocaleString()} VNĐ</td>
+                <td>
+                    ${order.type === 'combo' ? `<button class="view-combo-details-btn" data-id="${order.id}">Xem chi tiết</button>` 
+                                              : `<button class="view-ticket-details-btn" data-id="${order.id}">Xem chi tiết</button>`}
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+
+        // Gắn sự kiện xem chi tiết combo
+        document.querySelectorAll('.view-combo-details-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                showComboDetailModal(id);
+            });
+        });
+
+        // (Tuỳ bạn) Gắn sự kiện xem chi tiết vé
+        document.querySelectorAll('.view-ticket-details-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                showTicketDetailModal(id);
+            });
+            });
+
+    } catch (err) {
+        console.error('Lỗi khi tải lịch sử mua hàng:', err);
+        showNotification('Không thể tải lịch sử mua hàng.', 'error');
+    }
+}
+
+//Xem chi tiết bắp nước
+function showComboDetailModal(orderId) {
+  const popup = document.getElementById('combo-detail-popup');
+  const body = document.getElementById('combo-detail-body');
+  popup.classList.remove('hidden');
+  body.innerHTML = '<p>Đang tải chi tiết đơn...</p>';
+
+  axios.get(`/api/orders/popcorn-drink-history/${orderId}`, { withCredentials: true })
+    .then(res => {
+      if (res.data.success) {
+        const items = res.data.data;
+        if (items.length === 0) {
+          body.innerHTML = '<p>Không tìm thấy chi tiết đơn.</p>';
+          return;
+        }
+
+        const maDon = orderId;
+        const chiNhanh = items[0]?.ten_rap || 'Không rõ';
+        const tongTien = parseInt(items[0]?.tong_tien || 0);
+
+        let html = `
+          <div style="margin-bottom: 10px;">
+            <strong>Mã đơn hàng:</strong> ${maDon}<br>
+            <strong>Rạp:</strong> ${chiNhanh}
+          </div>
+
+          <table style="width:100%;border-collapse:collapse;">
+            <thead>
+              <tr>
+                <th>Tên bắp nước</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        items.forEach(i => {
+          const donGia = parseInt(i.don_gia || 0);
+          const soLuong = parseInt(i.so_luong || 0);
+          const thanhTien = donGia * soLuong;
+
+          html += `
+            <tr>
+              <td>${i.ten_bap_nuoc}</td>
+              <td>${donGia.toLocaleString()} VNĐ</td>
+              <td>${soLuong}</td>
+              <td>${thanhTien.toLocaleString()} VNĐ</td>
+            </tr>
+          `;
+        });
+
+        html += `
+            </tbody>
+          </table>
+
+          <div style="margin-top: 10px; text-align: right;">
+            <strong>Tổng cộng:</strong> ${tongTien.toLocaleString()} VNĐ
+          </div>
+        `;
+
+        body.innerHTML = html;
+      } else {
+        body.innerHTML = '<p>Không tìm thấy chi tiết đơn.</p>';
+      }
+    })
+    .catch(err => {
+      console.error('Lỗi khi load chi tiết combo:', err);
+      body.innerHTML = '<p>Lỗi hệ thống.</p>';
+    });
+}
+
+//Xem chi tiết vé
+
+function showTicketDetailModal(orderId) {
+    const popup = document.getElementById('ticket-detail-popup');
+    const body = document.getElementById('ticket-detail-body');
+    popup.classList.remove('hidden');
+    body.innerHTML = '<p>Đang tải chi tiết vé...</p>';
+
+    axios.get(`/api/orders/ticket-history/${orderId}`, { withCredentials: true })
+        .then(res => {
+            if (res.data.success && res.data.data) {
+                const { thongTin, ghe, loai_ve, combo } = res.data.data;
+
+                let html = `
+                    <div class="ticket-detail-info">
+                        <div class="left-align"><strong>Mã đặt vé:</strong> ${thongTin.ma_dat_ve}</div>
+                        <div class="right-align"></div> <!-- Placeholder để giữ cấu trúc -->
+                        <div class="left-align"><strong>Phim:</strong> ${thongTin.ten_phim}</div>
+                        <div class="right-align"></div> <!-- Placeholder để giữ cấu trúc -->
+                        <div class="left-align"><strong>Rạp:</strong> ${thongTin.ten_rap}</div>
+                        <div class="right-align"><strong>Phòng chiếu:</strong> ${thongTin.ten_phong}</div>
+                        <div class="left-align"><strong>Thời lượng:</strong> ${thongTin.thoi_luong_phut} phút</div>
+                        <div class="right-align"><strong>Thời gian đặt:</strong> ${new Date(thongTin.thoi_gian_dat).toLocaleString()}</div>
+                        <div class="full-width"><strong>Ghế đã chọn:</strong> ${ghe.join(', ')}</div>
+                    </div>
+
+                    <h4 style="margin-top: 15px;">Chi tiết vé</h4>
+                    <table id="ticket-detail-table" style="width:100%; margin-top:10px; border-collapse:collapse;">
+                        <thead>
+                            <tr><th>Loại vé</th><th>Đơn giá</th><th>Số lượng</th><th>Thành tiền</th></tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                let tongTienVe = 0;
+                loai_ve.forEach(v => {
+                    const tien = v.don_gia * v.so_luong;
+                    tongTienVe += tien;
+                    html += `
+                        <tr>
+                            <td title="${v.ten_loai}">${v.ten_loai}</td>
+                            <td>${v.don_gia.toLocaleString()} VNĐ</td>
+                            <td>${v.so_luong}</td>
+                            <td>${tien.toLocaleString()} VNĐ</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                        </tbody>
+                    </table>
+                    <div style="text-align: right; margin-top: 10px;">
+                        <strong>Tổng tiền vé:</strong> ${tongTienVe.toLocaleString()} VNĐ
+                    </div>
+                `;
+
+                // Nếu có combo bắp nước
+                let tongTienCombo = 0;
+                if (combo && combo.length > 0) {
+                    html += `
+                        <h4 style="margin-top: 20px;">Combo bắp nước</h4>
+                        <table id="ticket-combo-table" style="width:100%; margin-top:5px; border-collapse: collapse;">
+                            <thead>
+                                <tr><th>Sản phẩm</th><th>Đơn giá</th><th>Số lượng</th><th>Thành tiền</th></tr>
+                            </thead>
+                            <tbody>
+                    `;
+
+                    combo.forEach(c => {
+                        const dg = parseInt(c.don_gia), sl = parseInt(c.so_luong);
+                        const thanhTien = dg * sl;
+                        tongTienCombo += thanhTien;
+                        html += `
+                            <tr>
+                                <td title="${c.ten_bap_nuoc}">${c.ten_bap_nuoc}</td>
+                                <td>${dg.toLocaleString()} VNĐ</td>
+                                <td>${sl}</td>
+                                <td>${thanhTien.toLocaleString()} VNĐ</td>
+                            </tr>
+                        `;
+                    });
+
+                    html += `
+                            </tbody>
+                        </table>
+                        <div style="text-align: right; margin-top: 10px;">
+                            <strong>Tổng tiền combo:</strong> ${tongTienCombo.toLocaleString()} VNĐ
+                        </div>
+                    `;
+                }
+
+                html += `
+                    <div style="text-align: right; margin-top: 15px; font-size: 16px;">
+                        <strong>Tổng cộng đơn hàng:</strong> ${parseInt(thongTin.tong_tien).toLocaleString()} VNĐ
+                    </div>
+                `;
+
+                body.innerHTML = html;
+            } else {
+                body.innerHTML = '<p>Không tìm thấy chi tiết vé.</p>';
+            }
+        })
+        .catch(err => {
+            console.error('Lỗi khi load chi tiết vé:', err);
+            body.innerHTML = '<p>Lỗi hệ thống.</p>';
+        });
+}
+
+
+// Sự kiện đóng popup
+document.getElementById('close-combo-popup').addEventListener('click', () => {
+  document.getElementById('combo-detail-popup').classList.add('hidden');
+});
+
+document.getElementById('close-ticket-popup').addEventListener('click', () => {
+  document.getElementById('ticket-detail-popup').classList.add('hidden');
+});
+
+
 document.addEventListener('DOMContentLoaded', function () {
     loadCustomerProfile();
-    // CHỜ DOM & layout xong, rồi mới bind logic còn lại
     requestAnimationFrame(() => {
         setupAvatarUpload();
         setupProfileMenuNavigation();
         setupHeaderNavigation();
         updateCustomerProfile();
-        changePassword(); 
-    }, 100);
+        changePassword();
+        loadCombinedPurchaseHistory()
+
+        // 👇 Xử lý đóng popup
+        const closeBtn = document.getElementById('close-combo-popup');
+        const popup = document.getElementById('combo-detail-popup');
+        if (closeBtn && popup) {
+            closeBtn.addEventListener('click', () => {
+                console.log('Closing popup');
+                popup.classList.add('hidden');
+            });
+        }
+    });
 });
+
+
+

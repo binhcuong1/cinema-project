@@ -99,3 +99,20 @@ exports.updateProfile = (userId, fullname, phone, email, callback) => {
         });
     });
 };
+
+exports.updateRole = (userId, roleId, callback) => {
+    const sql = 'UPDATE tai_khoan SET role_id = ? WHERE ma_tai_khoan = ?';
+    db.query(sql, [roleId, userId], (err, result) => {
+        if (err) return callback(err);
+        callback(null, result);
+    });
+};
+
+exports.getAll = (callback) => {
+  const sql = 'SELECT ma_tai_khoan, ten_dang_nhap, ho_va_ten, sdt, diachi, role_id FROM tai_khoan';
+  db.query(sql, (err, results) => {
+    if (err) return callback(err);
+    callback(null, results);
+  });
+};
+

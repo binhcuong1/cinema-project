@@ -171,8 +171,8 @@
 
 /* Bảng Lịch sử mua hàng */
 .purchase-history-table {
-    width: 120%;
-    overflow-x: auto; /* Cho phép cuộn ngang trên màn hình nhỏ */
+    width: 100%; /* Sửa từ 120% thành 100% */
+    overflow-x: auto; /* Giữ nguyên để hỗ trợ cuộn ngang */
 }
 
 .purchase-history-table table {
@@ -418,4 +418,243 @@
     .save-btn, .change-password-btn {
         width: 100%;
     }
+}
+
+
+/* Modal overlay */
+.combo-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* ✅ Center perfectly */
+  background-color: #fff; /* ✅ Không trong suốt */
+  color: #222; /* ✅ Màu chữ đậm, dễ đọc */
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  width: 420px;
+  max-width: 90%;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.hidden {
+  display: none !important;
+}
+
+/* Kiểu dáng cho nút Xem chi tiết */
+.view-combo-details-btn, .view-ticket-details-btn {
+    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Màu cam giống Cinestar */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase; /* Chữ in hoa giống Cinestar */
+    font-size: 12px; /* Kích thước chữ nhỏ hơn để vừa cột */
+}
+
+.view-combo-details-btn:hover, .view-ticket-details-btn:hover {
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3); /* Hiệu ứng bóng khi hover */
+}
+
+/* Ngăn xuống hàng trong bảng lịch sử mua hàng */
+.purchase-history-table th, .purchase-history-table td {
+    white-space: nowrap; /* Ngăn văn bản xuống hàng */
+    overflow: hidden; /* Ẩn nội dung tràn */
+    text-overflow: ellipsis; /* Hiển thị dấu ba chấm cho văn bản dài */
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Đặt chiều rộng cụ thể cho các cột */
+.purchase-history-table th:nth-child(1), .purchase-history-table td:nth-child(1) { /* Mã đơn hàng */
+    width: 120px;
+}
+.purchase-history-table th:nth-child(2), .purchase-history-table td:nth-child(2) { /* Hoạt động */
+    width: 200px;
+}
+.purchase-history-table th:nth-child(3), .purchase-history-table td:nth-child(3) { /* Chi nhánh */
+    width: 150px;
+}
+.purchase-history-table th:nth-child(4), .purchase-history-table td:nth-child(4) { /* Ngày */
+    width: 180px;
+}
+.purchase-history-table th:nth-child(5), .purchase-history-table td:nth-child(5) { /* Tổng tiền */
+    width: 120px;
+}
+.purchase-history-table th:nth-child(6), .purchase-history-table td:nth-child(6) { /* Hành động */
+    width: 100px;
+    text-align: center; /* Căn giữa nút */
+}
+
+/* Đảm bảo bảng có thể cuộn ngang */
+.purchase-history-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Kiểu dáng cho popup chi tiết */
+.combo-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    color: #222;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    max-width: 95%;
+    width: 600px; /* Đủ rộng để chứa bảng và nội dung */
+    overflow-x: auto;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Ẩn popup khi không sử dụng */
+.hidden {
+    display: none !important;
+}
+
+/* Kiểu dáng nút đóng popup */
+.close-popup-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Đặt ở góc phải */
+    font-size: 24px;
+    color: #ff0000; /* Màu đỏ */
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.close-popup-btn:hover {
+    color: #cc0000; /* Màu đỏ đậm hơn khi hover */
+}
+
+/* Bố cục cho thông tin chi tiết vé */
+.ticket-detail-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Hai cột để căn trái/phải */
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.ticket-detail-info div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Căn trái */
+.ticket-detail-info .left-align {
+    text-align: left;
+}
+
+/* Căn phải */
+.ticket-detail-info .right-align {
+    text-align: right;
+}
+
+/* Ghế đã chọn chiếm cả hai cột */
+.ticket-detail-info .full-width {
+    grid-column: span 2;
+    text-align: left;
+}
+
+/* Kiểu dáng cho bảng trong popup */
+.combo-popup table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 500px;
+}
+
+/* Ngăn văn bản xuống hàng */
+.combo-popup th, .combo-popup td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Chiều rộng cột cho bảng chi tiết combo */
+.combo-popup table#combo-detail-table th:nth-child(1),
+.combo-popup table#combo-detail-table td:nth-child(1) { /* Tên bắp nước */
+    width: 35%;
+}
+.combo-popup table#combo-detail-table th:nth-child(2),
+.combo-popup table#combo-detail-table td:nth-child(2) { /* Đơn giá */
+    width: 20%;
+}
+.combo-popup table#combo-detail-table th:nth-child(3),
+.combo-popup table#combo-detail-table td:nth-child(3) { /* Số lượng */
+    width: 15%;
+}
+.combo-popup table#combo-detail-table th:nth-child(4),
+.combo-popup table#combo-detail-table td:nth-child(4) { /* Thành tiền */
+    width: 30%;
+}
+
+/* Chiều rộng cột cho bảng chi tiết vé */
+.combo-popup table#ticket-detail-table th:nth-child(1),
+.combo-popup table#ticket-detail-table td:nth-child(1) { /* Loại vé */
+    width: 35%;
+}
+.combo-popup table#ticket-detail-table th:nth-child(2),
+.combo-popup table#ticket-detail-table td:nth-child(2) { /* Đơn giá */
+    width: 20%;
+}
+.combo-popup table#ticket-detail-table th:nth-child(3),
+.combo-popup table#ticket-detail-table td:nth-child(3) { /* Số lượng */
+    width: 15%;
+}
+.combo-popup table#ticket-detail-table th:nth-child(4),
+.combo-popup table#ticket-detail-table td:nth-child(4) { /* Thành tiền */
+    width: 30%;
+}
+
+/* Chiều rộng cột cho bảng combo trong chi tiết vé */
+.combo-popup table#ticket-combo-table th:nth-child(1),
+.combo-popup table#ticket-combo-table td:nth-child(1) { /* Sản phẩm */
+    width: 35%;
+}
+.combo-popup table#ticket-combo-table th:nth-child(2),
+.combo-popup table#ticket-combo-table td:nth-child(2) { /* Đơn giá */
+    width: 20%;
+}
+.combo-popup table#ticket-combo-table th:nth-child(3),
+.combo-popup table#ticket-combo-table td:nth-child(3) { /* Số lượng */
+    width: 15%;
+}
+.combo-popup table#ticket-combo-table th:nth-child(4),
+.combo-popup table#ticket-combo-table td:nth-child(4) { /* Thành tiền */
+    width: 30%;
+}
+
+/* Tiêu đề bảng */
+.combo-popup th {
+    background-color: #f5f5f5;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Tiêu đề popup */
+.combo-popup h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #222;
+    text-align: left;
 }

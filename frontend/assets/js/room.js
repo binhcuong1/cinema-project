@@ -458,7 +458,7 @@ async function renderPageHeader() {
   let tenRap = "Không xác định";
   try {
     const response = await axios.get(`/api/theaters/${maRap}`);
-    if (response.data.success === "true" && response.data.data) {
+    if (response.data.success === true && response.data.data) {
       tenRap = response.data.data.ten_rap || "Không xác định";
     }
   } catch (error) {

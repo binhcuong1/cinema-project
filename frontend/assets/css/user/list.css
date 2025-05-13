@@ -1,0 +1,140 @@
+/* Container chính */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 120px; /* Khoảng cách để tránh header (80px header + 20px buffer) */
+    box-sizing: border-box;
+}
+
+/* Tiêu đề trang */
+.container h2 {
+    font-size: 24px;
+    color: #222;
+    text-align: left;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Bảng danh sách người dùng */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    min-width: 800px; /* Đảm bảo bảng không quá hẹp */
+}
+
+/* Thanh cuộn ngang cho bảng */
+.user-table-wrapper {
+    overflow-x: auto;
+    margin-top: 150px; /* Giữ khoảng cách từ header */
+}
+
+/* Tiêu đề bảng */
+.user-table thead {
+    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient cam Cinestar */
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.user-table th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 500;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Nội dung bảng */
+.user-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* Ngăn xuống hàng */
+    overflow: hidden; /* Ẩn nội dung tràn */
+    text-overflow: ellipsis; /* Thêm dấu ba chấm cho văn bản dài */
+}
+
+/* Hiệu ứng hover cho hàng */
+.user-table tbody tr:hover {
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+/* Đặt chiều rộng cụ thể cho cột */
+.user-table th:nth-child(1), .user-table td:nth-child(1) { /* Mã tài khoản */
+    width: 10%;
+}
+.user-table th:nth-child(2), .user-table td:nth-child(2) { /* Tên đăng nhập */
+    width: 15%;
+}
+.user-table th:nth-child(3), .user-table td:nth-child(3) { /* Họ và tên */
+    width: 20%;
+}
+.user-table th:nth-child(4), .user-table td:nth-child(4) { /* Số điện thoại */
+    width: 15%;
+}
+.user-table th:nth-child(5), .user-table td:nth-child(5) { /* Địa chỉ */
+    width: 25%;
+}
+.user-table th:nth-child(6), .user-table td:nth-child(6) { /* Vai trò */
+    width: 15%;
+    text-align: center; /* Căn giữa select và nút */
+}
+
+/* Kiểu dáng cho select vai trò */
+.role-select {
+    padding: 6px 10px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    max-width: 120px; /* Giới hạn chiều rộng */
+}
+
+.role-select:focus {
+    outline: none;
+    border-color: #ff6200; /* Viền cam khi focus */
+    box-shadow: 0 0 5px rgba(255, 98, 0, 0.3);
+}
+
+/* Kiểu dáng cho nút cập nhật vai trò */
+.update-role-btn {
+    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient cam Cinestar */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-left: 10px;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+}
+
+.update-role-btn:hover {
+    background: linear-gradient(45deg, #e65a00, #ff6200); /* Gradient đậm hơn */
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+}
+
+.update-role-btn:active {
+    transform: translateY(1px); /* Hiệu ứng nhấn */
+}
+
+/* Thông báo lỗi */
+.error-message {
+    color: #dc3545; /* Màu đỏ */
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #f8d7da;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    margin-top: 10px;
+    display: none; /* Ẩn mặc định */
+}

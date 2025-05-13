@@ -37,15 +37,17 @@ async function fetchAllPopcornDrinks() {
           const card = document.createElement('div');
           card.className = 'popcorn-card';
           card.innerHTML = `
-            <img src="${item.image || '/frontend/assets/images/popcorn-drink/default.jpg'}" alt="${item.ten_bap_nuoc}">
-            <h4>${item.ten_bap_nuoc}</h4>
-            <p>${item.don_gia.toLocaleString()} đ</p>
-            <div class="quantity-control" data-id="${item.ma_bap_nuoc}" data-price="${item.don_gia}">
-              <button class="minus">−</button>
-              <span class="quantity">${quantity}</span>
-              <button class="plus">+</button>
-            </div>
-          `;
+        <img src="${item.image || '/frontend/assets/images/popcorn-drink/default.jpg'}" alt="${item.ten_bap_nuoc}">
+        <div class="card-content">
+          <h4>${item.ten_bap_nuoc}</h4>
+          <p>${item.don_gia.toLocaleString()} đ</p>
+          <div class="quantity-control" data-id="${item.ma_bap_nuoc}" data-price="${item.don_gia}">
+            <button class="minus">−</button>
+            <span class="quantity">0</span>
+            <button class="plus">+</button>
+          </div>
+        </div>
+      `;
           groupList.appendChild(card);
         });
       }

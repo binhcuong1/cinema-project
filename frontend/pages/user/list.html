@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quản Lý Rạp - CiBYHD</title>
+   <link rel="stylesheet" href="/frontend/assets/css/shares/header.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/style.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/login.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/user/list.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body data-page="user-list">
+    <div id="header-placeholder"></div>
+    <div id="sidebar-placeholder"></div>
+
+
+    <div class="container">
+        <h2>Danh Sách Người Dùng</h2>
+        <table class="user-table">
+        <thead>
+            <tr>
+            <th>Mã Tài Khoản</th>
+            <th>Tên Đăng Nhập</th>
+            <th>Họ và Tên</th>
+            <th>Số Điện Thoại</th>
+            <th>Địa Chỉ</th>
+            <th>Vai Trò</th>
+            </tr>
+        </thead>
+        <tbody id="user-list">
+            <!-- Danh sách người dùng sẽ được thêm bằng JavaScript -->
+        </tbody>
+        </table>
+        <p id="error-message" class="error-message" style="display: none;"></p>
+    </div>
+    
+    <!-- Footer -->
+  <footer id="footer-container"></footer>
+    
+    <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/frontend/assets/js/main.js"></script>
+    <script src="/frontend/assets/js/admin.js"></script>
+    <script type="module" src="/frontend/assets/js/user.js"></script>
+</body>
+</html>

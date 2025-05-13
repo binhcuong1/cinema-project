@@ -124,45 +124,24 @@
 
             <!-- Section Lịch sử mua hàng -->
             <section id="purchase-history-section" class="purchase-history">
-                <div class="purchase-history-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Mã đơn hàng</th>
-                                <th>Ngày mua</th>
-                                <th>Tên phim</th>
-                                <th>Rạp</th>
-                                <th>Suất chiếu</th>
-                                <th>Ghế</th>
-                                <th>Tổng tiền</th>
-                                <th>Trạng thái</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#12345</td>
-                                <td>01/04/2025</td>
-                                <td>Âm Dương Lộ</td>
-                                <td>CINESTAR Hà Nội</td>
-                                <td>18:00</td>
-                                <td>A1, A2</td>
-                                <td>200,000 VNĐ</td>
-                                <td>Đã thanh toán</td>
-                            </tr>
-                            <tr>
-                                <td>#12346</td>
-                                <td>02/04/2025</td>
-                                <td>Phim 2</td>
-                                <td>CINESTAR TP.HCM</td>
-                                <td>14:00</td>
-                                <td>B3, B4</td>
-                                <td>150,000 VNĐ</td>
-                                <td>Đã thanh toán</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+    <div class="purchase-history-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã đơn hàng</th>
+                    <th>Hoạt động</th>
+                    <th>Chi nhánh</th>
+                    <th>Ngày</th>
+                    <th>Tổng tiền</th>
+                    <th>Hành động</th> <!-- Thêm cột tiêu đề cho nút Xem chi tiết -->
+                </tr>
+            </thead>
+            <tbody id="purchase-history-body">
+                <!-- Dữ liệu sẽ được load bằng JS -->
+            </tbody>
+        </table>
+    </div>
+</section>
         </div>
     </main>
 
@@ -178,6 +157,21 @@
             <span id="notification-message">Thông tin đã được lưu thành công!</span>
         </div>
     </div>
+    <!-- Chi tiết đặt bắp nước -->
+    <div id="combo-detail-popup" class="combo-popup hidden">
+        <span id="close-combo-popup" class="close-popup-btn">&times;</span>
+        <h3>Chi tiết đơn Combo</h3>
+        <div id="combo-detail-body"></div>
+    </div>
+
+    <!-- Chi tiết đặt vé -->
+    <div id="ticket-detail-popup" class="combo-popup hidden">
+        <span id="close-ticket-popup" class="close-popup-btn">&times;</span>
+        <h3>Chi tiết đơn Vé</h3>
+        <div id="ticket-detail-body"></div>
+    </div>
+
+
 
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -1,0 +1,253 @@
+/* search.css */
+.search-results {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 80px 20px 40px; /* Thêm padding-top để tránh header đè lên */
+    position: relative; /* Để chứa nút điều hướng carousel */
+}
+
+.search-results h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 800; /* In đậm */
+    color: #fff;
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.movie-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 10px 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.movie-list::-webkit-scrollbar {
+    display: none;
+}
+
+.movie-card {
+    flex: 0 0 250px;
+    background: linear-gradient(45deg, #304352, #4a5564);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(48, 67, 82, 0.5);
+}
+
+.movie-poster {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.movie-card:hover .movie-poster img {
+    transform: scale(1.05);
+}
+
+.movie-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .movie-overlay {
+    opacity: 1;
+}
+
+.movie-overlay button {
+    background: #ff6200;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.movie-overlay button:hover {
+    background: #e55a00;
+}
+
+.movie-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.movie-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.movie-info h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.age-restriction {
+    font-size: 14px;
+    color: #ff6200;
+    font-weight: 600;
+}
+
+.movie-meta {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #b3b3b3;
+}
+
+.movie-meta span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.no-results, .error {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #ff6200;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Nút điều hướng carousel */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+    z-index: 10; /* Đảm bảo nút không bị che */
+}
+
+.carousel-btn:hover {
+    background: #e55a00;
+}
+
+.carousel-btn.left {
+    left: -50px; /* Nhích ra ngoài bên trái */
+}
+
+.carousel-btn.right {
+    right: -50px; /* Nhích ra ngoài bên phải */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-results {
+        padding: 60px 15px 40px; /* Giảm padding-top cho tablet */
+    }
+
+    .movie-card {
+        flex: 0 0 200px;
+    }
+
+    .movie-poster {
+        height: 300px;
+    }
+
+    .search-results h2 {
+        font-size: 24px;
+    }
+
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
+
+    .carousel-btn.left {
+        left: -40px; /* Giảm khoảng cách cho tablet */
+    }
+
+    .carousel-btn.right {
+        right: -40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-results {
+        padding: 50px 10px 40px; /* Giảm padding-top cho mobile */
+    }
+
+    .movie-card {
+        flex: 0 0 180px;
+    }
+
+    .movie-poster {
+        height: 250px;
+    }
+
+    .movie-info h3 {
+        font-size: 16px;
+    }
+
+    .movie-overlay button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .carousel-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+
+    .carousel-btn.left {
+        left: -30px; /* Giảm khoảng cách cho mobile */
+    }
+
+    .carousel-btn.right {
+        right: -30px;
+    }
+}

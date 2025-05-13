@@ -266,3 +266,22 @@ exports.changePassword = (req, res) => {
         return res.status(401).json({ success: false, error: 'Token không hợp lệ' });
     }
 };
+
+exports.updateRole = (req, res) => {
+    const { role_id } = req.body;
+    const { id } = req.params;
+
+    User.updateRole(id, role_id, (err, result) => {
+        if (err) return res.status(500).json({ success: false, error: 'Lỗi khi cập nhật vai trò' });
+        res.json({ success: true, message: 'Đã cập nhật vai trò' });
+    });
+};
+
+exports.getAllUsers = (req, res) => {
+  User.getAll((err, users) => {
+    if (err) return res.status(500).json({ success: false, error: 'Không thể lấy danh sách người dùng' });
+    res.json({ success: true, data: users });
+  });
+};
+
+

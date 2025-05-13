@@ -3,62 +3,81 @@ axios.defaults.baseURL = 'http://127.0.0.1:3000';
 // === Khởi tạo các biến DOM === //
 let movieListNowShowing, btnLeftNowShowing, btnRightNowShowing;
 let movieListComingSoon, btnLeftComingSoon, btnRightComingSoon;
+let movieListSearch, btnLeftSearch, btnRightSearch; // Biến cho carousel tìm kiếm
 
 function initializeDOM() {
-  movieListNowShowing = document.getElementById("movie-list-nowShowing");
-  btnLeftNowShowing = document.getElementById("nowShowing-left");
-  btnRightNowShowing = document.getElementById("nowShowing-right");
-  movieListComingSoon = document.getElementById("movie-list-comingSoon");
-  btnLeftComingSoon = document.getElementById("comingSoon-left");
-  btnRightComingSoon = document.getElementById("comingSoon-right");
+    movieListNowShowing = document.getElementById("movie-list-nowShowing");
+    btnLeftNowShowing = document.getElementById("nowShowing-left");
+    btnRightNowShowing = document.getElementById("nowShowing-right");
+    movieListComingSoon = document.getElementById("movie-list-comingSoon");
+    btnLeftComingSoon = document.getElementById("comingSoon-left");
+    btnRightComingSoon = document.getElementById("comingSoon-right");
+    movieListSearch = document.getElementById("search-results"); // Container kết quả tìm kiếm
+    btnLeftSearch = document.getElementById("search-left"); // Nút trái
+    btnRightSearch = document.getElementById("search-right"); // Nút phải
 }
 
-// === Xử lý cuộn trái/phải cho cả hai phần phim === //
+// === Xử lý cuộn trái/phải cho cả ba phần phim === //
 
 // Hàm xác định số lượng phim cuộn dựa trên kích thước màn hình
 function getScrollAmount() {
-  const width = window.innerWidth;
-  if (width <= 480) return 1; // Mobile: 1 phim
-  if (width <= 768) return 2; // Tablet: 2 phim
-  return 4; // Desktop: 4 phim
+    const width = window.innerWidth;
+    if (width <= 480) return 1; // Mobile: 1 phim
+    if (width <= 768) return 2; // Tablet: 2 phim
+    return 4; // Desktop: 4 phim
 }
 
 // Hàm cuộn cho phim đang chiếu
 function scrollMoviesNowShowing(amount) {
-  if (!movieListNowShowing) return;
-  const card = movieListNowShowing.querySelector(".movie-card");
-  if (!card) return; // Không có phim, thoát
-  const cardWidth = card.offsetWidth + 15; // Chiều rộng thẻ + gap
-  const scrollCount = getScrollAmount();
-  movieListNowShowing.scrollBy({ left: amount * cardWidth * scrollCount, behavior: "smooth" });
+    if (!movieListNowShowing) return;
+    const card = movieListNowShowing.querySelector(".movie-card");
+    if (!card) return;
+    const cardWidth = card.offsetWidth + 15;
+    const scrollCount = getScrollAmount();
+    movieListNowShowing.scrollBy({ left: amount * cardWidth * scrollCount, behavior: "smooth" });
 }
 
 // Hàm cuộn cho phim sắp chiếu
 function scrollMoviesComingSoon(amount) {
-  if (!movieListComingSoon) return;
-  const card = movieListComingSoon.querySelector(".movie-card");
-  if (!card) return; // Không có phim, thoát
-  const cardWidth = card.offsetWidth + 15; // Chiều rộng thẻ + gap
-  const scrollCount = getScrollAmount();
-  movieListComingSoon.scrollBy({ left: amount * cardWidth * scrollCount, behavior: "smooth" });
+    if (!movieListComingSoon) return;
+    const card = movieListComingSoon.querySelector(".movie-card");
+    if (!card) return;
+    const cardWidth = card.offsetWidth + 15;
+    const scrollCount = getScrollAmount();
+    movieListComingSoon.scrollBy({ left: amount * cardWidth * scrollCount, behavior: "smooth" });
+}
+
+// Hàm cuộn cho kết quả tìm kiếm
+function scrollMoviesSearch(amount) {
+    if (!movieListSearch) return;
+    const card = movieListSearch.querySelector(".movie-card");
+    if (!card) return;
+    const cardWidth = card.offsetWidth + 15;
+    const scrollCount = getScrollAmount();
+    movieListSearch.scrollBy({ left: amount * cardWidth * scrollCount, behavior: "smooth" });
 }
 
 // Khởi tạo sự kiện khi DOM sẵn sàng
 document.addEventListener("DOMContentLoaded", () => {
-  initializeDOM();
+    initializeDOM();
 
-  if (movieListNowShowing && btnLeftNowShowing && btnRightNowShowing) {
-    // Thêm sự kiện cho nút điều hướng phim đang chiếu
-    btnLeftNowShowing.addEventListener("click", () => scrollMoviesNowShowing(-1));
-    btnRightNowShowing.addEventListener("click", () => scrollMoviesNowShowing(1));
-  }
+    if (movieListNowShowing && btnLeftNowShowing && btnRightNowShowing) {
+        btnLeftNowShowing.addEventListener("click", () => scrollMoviesNowShowing(-1));
+        btnRightNowShowing.addEventListener("click", () => scrollMoviesNowShowing(1));
+    }
 
-  if (movieListComingSoon && btnLeftComingSoon && btnRightComingSoon) {
-    // Thêm sự kiện cho nút điều hướng phim sắp chiếu
-    btnLeftComingSoon.addEventListener("click", () => scrollMoviesComingSoon(-1));
-    btnRightComingSoon.addEventListener("click", () => scrollMoviesComingSoon(1));
-  }
+    if (movieListComingSoon && btnLeftComingSoon && btnRightComingSoon) {
+        btnLeftComingSoon.addEventListener("click", () => scrollMoviesComingSoon(-1));
+        btnRightComingSoon.addEventListener("click", () => scrollMoviesComingSoon(1));
+    }
+
+    if (movieListSearch && btnLeftSearch && btnRightSearch) {
+        btnLeftSearch.addEventListener("click", () => scrollMoviesSearch(-1));
+        btnRightSearch.addEventListener("click", () => scrollMoviesSearch(1));
+    }
 });
+
+// ... (Phần còn lại của file movie.js giữ nguyên, bao gồm initializeSearch, fetchSearchMovies, v.v.)
 
 
 
@@ -529,4 +548,6 @@ window.onload = () => {
     default:
       console.log("Trang không xác định:", currentPage);
   }
+
 };
+

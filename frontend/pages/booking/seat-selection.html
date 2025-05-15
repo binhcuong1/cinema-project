@@ -34,7 +34,7 @@
                     <div class="booking-poster">
                         <img id="movie-poster" src="" alt="" class="movie-poster">
                     </div>
-                    <!-- Bên phải: Thông tin đặt vé và nút đặt vé -->
+                    <!-- Bên phải: Thông tin phim -->
                     <div class="booking-info">
                         <h3 id="movie-title" class="movie-title"></h3>
                         <div id="movie-details" class="movie-details">
@@ -44,7 +44,7 @@
                             <p id="language" class="detail-item"><i class="fas fa-language"></i></p>
                             <p id="age-rating" class="detail-item"><i class="fas fa-user-alt"></i></p>
                         </div>
-                        <h4 class="section-title">ĐỘI NGŦ</h4>
+                        <h4 class="section-title">MÔ TẢ</h4>
                         <p id="director" class="info-item"><strong>Đạo diễn:</strong></p>
                         <p id="actors" class="info-item"><strong>Diễn viên:</strong></p>
                         <p id="music" class="info-item"><strong>Âm nhạc:</strong></p>
@@ -83,205 +83,8 @@
             <!-- Phần chọn bắp nước -->
             <div class="snack-selection">
                 <h3>Chọn Bắp Nước</h3>
-                <div class="snack-options">
-                    <!-- Combo 2 Người -->
-                    <div style="width: 100%; text-align: center; color: #ff6200; font-size: 18px; margin-bottom: 10px;">
-                        Combo 2 Người</div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/bắp-nước1.png" alt="Combo Gấu">
-                        <div class="info">
-                            <p>Combo Gấu</p>
-                            <p>1 Coke 32oz + 1 Bắp 2 Ngăn 640z Phô Mai + Caramel</p>
-                            <p class="price">119,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('combo-gau', -1)">-</button>
-                                <span id="combo-gau-quantity">0</span>
-                                <button onclick="updateSnackQuantity('combo-gau', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/bắp-nước2.png" alt="Combo Cố Gấu">
-                        <div class="info">
-                            <p>Combo Có Gấu</p>
-                            <p>2 Coke 32oz + 1 Bắp 2 Ngăn 64OZ Phô Mai + Caramel</p>
-                            <p class="price">129,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('combo-co-gau', -1)">-</button>
-                                <span id="combo-co-gau-quantity">0</span>
-                                <button onclick="updateSnackQuantity('combo-co-gau', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/bắp-nước3.png" alt="Combo Nhí Gấu">
-                        <div class="info">
-                            <p>Combo Nhà Gấu</p>
-                            <p>4 Coke 32oz + 2 Bắp 2 Ngăn 64OZ Phô Mai + Caramel</p>
-                            <p class="price">259,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('combo-nhi-gau', -1)">-</button>
-                                <span id="combo-nhi-gau-quantity">0</span>
-                                <button onclick="updateSnackQuantity('combo-nhi-gau', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Nước Ngọt -->
-                    <div style="width: 100%; text-align: center; color: #ff6200; font-size: 18px; margin: 20px 0 10px;">
-                        Nước Ngọt</div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/sprite.png" alt="Sprite 32oz">
-                        <div class="info">
-                            <p>Sprite 32OZ</p>
-                            <p class="price">37,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('sprite-32oz', -1)">-</button>
-                                <span id="sprite-32oz-quantity">0</span>
-                                <button onclick="updateSnackQuantity('sprite-32oz', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/COKE-ZERO.png" alt="Coke Zero 32oz">
-                        <div class="info">
-                            <p>Coke Zero 32OZ</p>
-                            <p class="price">37,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('coke-zero-32oz', -1)">-</button>
-                                <span id="coke-zero-32oz-quantity">0</span>
-                                <button onclick="updateSnackQuantity('coke-zero-32oz', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/coca.png" alt="Coke 32oz">
-                        <div class="info">
-                            <p>Coke 32OZ</p>
-                            <p class="price">37,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('coke-32oz', -1)">-</button>
-                                <span id="coke-32oz-quantity">0</span>
-                                <button onclick="updateSnackQuantity('coke-32oz', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/fanta.jpg" alt="Fanta 32oz">
-                        <div class="info">
-                            <p>Fanta 32OZ</p>
-                            <p class="price">37,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('fanta-32oz', -1)">-</button>
-                                <span id="fanta-32oz-quantity">0</span>
-                                <button onclick="updateSnackQuantity('fanta-32oz', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Nước Đóng Chai -->
-                    <div style="width: 100%; text-align: center; color: #ff6200; font-size: 18px; margin: 20px 0 10px;">
-                        Nước Đóng Chai</div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/TEPPY.png" alt="Nước Cam Teppy 337ml">
-                        <div class="info">
-                            <p>Nước Cam Teppy 337ml</p>
-                            <p class="price">28,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('nuoc-cam-teppy', -1)">-</button>
-                                <span id="nuoc-cam-teppy-quantity">0</span>
-                                <button onclick="updateSnackQuantity('nuoc-cam-teppy', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/dasani.png" alt="Nước Suối Dasani 500/510ml">
-                        <div class="info">
-                            <p>Nước Suối Dasani 500/510ml</p>
-                            <p class="price">20,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('nuoc-suoi-dasani', -1)">-</button>
-                                <span id="nuoc-suoi-dasani-quantity">0</span>
-                                <button onclick="updateSnackQuantity('nuoc-suoi-dasani', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/NUTRI.png" alt="Nước Trái Cây Nutriboost 297ml">
-                        <div class="info">
-                            <p>Nước Trái Cây Nutriboost 297ml</p>
-                            <p class="price">28,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('nuoc-trai-cay-nutriboost', -1)">-</button>
-                                <span id="nuoc-trai-cay-nutriboost-quantity">0</span>
-                                <button onclick="updateSnackQuantity('nuoc-trai-cay-nutriboost', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Snacks (gộp Snack và Poca) -->
-                    <div style="width: 100%; text-align: center; color: #ff6200; font-size: 18px; margin: 20px 0 10px;">
-                        Snacks</div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/snack-que-thai.png" alt="Snack Thái">
-                        <div class="info">
-                            <p>Snack Thái</p>
-                            <p class="price">25,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('snack-thai', -1)">-</button>
-                                <span id="snack-thai-quantity">0</span>
-                                <button onclick="updateSnackQuantity('snack-thai', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/Poca.png" alt="Poca Wavy 54gr">
-                        <div class="info">
-                            <p>Poca Wavy 54gr</p>
-                            <p class="price">28,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('poca-wavy-54gr', -1)">-</button>
-                                <span id="poca-wavy-54gr-quantity">0</span>
-                                <button onclick="updateSnackQuantity('poca-wavy-54gr', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/khoaitaylays.png" alt="Khoai Tây Lay's Stax 100g">
-                        <div class="info">
-                            <p>Khoai Tây Lay's Stax 100g</p>
-                            <p class="price">59,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('khoai-tay-lays-stax-100g', -1)">-</button>
-                                <span id="khoai-tay-lays-stax-100g-quantity">0</span>
-                                <button onclick="updateSnackQuantity('khoai-tay-lays-stax-100g', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/poca-partyz.png" alt="Snack Partyz 30-33gr">
-                        <div class="info">
-                            <p>Snack Partyz 30-33gr</p>
-                            <p class="price">20,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('snack-partyz-30-33gr', -1)">-</button>
-                                <span id="snack-partyz-30-33gr-quantity">0</span>
-                                <button onclick="updateSnackQuantity('snack-partyz-30-33gr', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="snack-option">
-                        <img src="/frontend/assets/images/lays-khoai-tay.png" alt="Poca Khoai Tây 54gr">
-                        <div class="info">
-                            <p>Poca Khoai Tây 54gr</p>
-                            <p class="price">28,000 VNĐ</p>
-                            <div class="counter">
-                                <button onclick="updateSnackQuantity('poca-khoai-tay-54gr', -1)">-</button>
-                                <span id="poca-khoai-tay-54gr-quantity">0</span>
-                                <button onclick="updateSnackQuantity('poca-khoai-tay-54gr', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="snack-options" id="snack-options">
+                    <!-- Bắp nước sẽ được render động -->
                 </div>
             </div>
 

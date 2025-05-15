@@ -30,7 +30,7 @@ exports.create = (req, res) => {
   if (!data.ten_bap_nuoc || !data.ma_loai || !data.don_gia) {
     return res.status(400).json({ success: false, error: 'Thiếu thông tin bắt buộc.' });
   }
-
+  
   if (req.file) {
     data.image = `/frontend/assets/images/popcorn-drink/${req.file.filename}`;
   }

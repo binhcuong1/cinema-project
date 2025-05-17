@@ -75,6 +75,17 @@ function collectBookingData() {
     console.log('Booking Summary:', bookingSummary);
 }
 
+function collectUserData(user) {
+    const userData = {
+        ten_dang_nhap: user.ten_dang_nhap || '',
+        ma_tai_khoan: user.ma_tai_khoan || '',
+    };
+
+    // Lưu vào sessionStorage để sử dụng ở trang thanh toán
+    sessionStorage.setItem('userData', JSON.stringify(userData));
+    console.log('userData', sessionStorage.getItem('userData'));
+}
+
 //#endregion
 
 //#region === Khu vực Hiển thị Chi Tiết ===
@@ -357,7 +368,7 @@ function updateSummaryBarVisibility() {
 }
 
 // Hàm xử lý khi nhấn nút "Đặt Vé"
-function proceedToCheckout(event) {
+async function proceedToCheckout(event) {
     event.preventDefault();
 
     // Kiểm tra xem có ghế nào được chọn không
@@ -376,8 +387,31 @@ function proceedToCheckout(event) {
     // Thu thập dữ liệu
     collectBookingData();
 
-    // Chuyển hướng đến trang thanh toán
-    window.location.href = "/frontend/pages/booking/checkout.html";
+    try {
+        // Gọi API để kiểm tra trạng thái đăng nhập
+        const response = await axios.get('/api/users/me', { withCredentials: true });
+
+        // Kiểm tra trạng thái đăng nhập
+        if (response.data.success === 'true') {
+            collectUserData(response.data.data);
+            window.location.href = "/frontend/pages/booking/checkout.html";
+        } else {
+            alert("Vui lòng đăng nhập để tiếp tục đặt vé!");
+            return;
+        }
+    } catch (error) {
+        console.error('Lỗi khi gọi API /api/users/me:', error);
+        if (error.response) {
+            if (error.response.status === 401) {
+                alert("Vui lòng đăng nhập để tiếp tục đặt vé!");
+            } else {
+                alert("Đã xảy ra lỗi khi kiểm tra trạng thái đăng nhập. Vui lòng thử lại!");
+            }
+        } else {
+            console.log('Lỗi không xác định, có thể do mạng hoặc server');
+            alert("Không thể kết nối đến server. Vui lòng kiểm tra kết nối và thử lại!");
+        }
+    }
 }
 
 // Thêm sự kiện cho nút "Đặt Vé"

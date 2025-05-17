@@ -54,7 +54,7 @@ exports.getCurrentUser = (req, res) => {
             res.json({
     success: 'true',
     data: {
-        id: user.id,
+        ma_tai_khoan: user.ma_tai_khoan,
         ten_dang_nhap: user.ten_dang_nhap,
         ho_va_ten: user.ho_va_ten,
         sdt: user.sdt,

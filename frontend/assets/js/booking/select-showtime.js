@@ -81,7 +81,6 @@ function setupMovies() {
     const movieSelect = document.getElementById('booking-movie');
     theaterSelect.addEventListener('change', async function () {
         const theaterId = this.value;
-        console.log(theaterId);
         if (theaterId) {
             // Bỏ disabled và tải danh sách phim
             movieSelect.disabled = false;

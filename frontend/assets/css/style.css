@@ -205,7 +205,8 @@
 }
 
 .step-dropdown.active {
-    max-height: 200px;
+    max-height: 500px;
+    overflow-y: auto;
     opacity: 1;
     visibility: visible;
 }

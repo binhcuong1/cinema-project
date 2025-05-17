@@ -162,7 +162,7 @@ async function loadHomepageBanner() {
 
 function updateBannerImage() {
     const img = document.getElementById("banner-image");
-    console.log('Active banners:', activeBanners);
+    
     if (activeBanners.length <= 1) {
         document.querySelector('.banner-arrows').style.display = 'none';
     }

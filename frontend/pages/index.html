@@ -11,7 +11,7 @@
     <meta property="og:description" content="Đặt vé xem phim nhanh chóng tại BiCyHD Cinema.">
     <meta property="og:image" content="/frontend/assets/images/logo.jpg">
     <title>CiBYHD Cinema</title>
-    <!-- Favicon -->    
+    <!-- Favicon -->
     <link rel="icon" href="/frontend/assets/images/favicon.ico" type="image/x-icon">
     <!-- CSS -->
     <link rel="stylesheet" href="/frontend/assets/css/shares/header.css">
@@ -43,8 +43,7 @@
                     <button><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="banner-content">
-                    <img id="banner-image" 
-                    alt="">
+                    <img id="banner-image" alt="">
                     <div class="banner-info">
                         <a href="/frontend/pages/booking/select-showtime.html">
                             <button class="banner-btn">Đặt Vé Ngay</button>
@@ -65,11 +64,7 @@
                             <span class="step-label">Chọn Rạp</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="step-dropdown" id="theater-dropdown">
-                            <div onclick="selectTheater('CINESTAR Hà Nội')">CINESTAR Hà Nội</div>
-                            <div onclick="selectTheater('CINESTAR TP.HCM')">CINESTAR TP.HCM</div>
-                            <div onclick="selectTheater('CINESTAR Đà Nẵng')">CINESTAR Đà Nẵng</div>
-                        </div>
+                        <div class="step-dropdown" id="theater-dropdown"></div>
                     </div>
                     <div class="booking-step">
                         <button class="step-btn" id="select-movie" disabled>
@@ -77,11 +72,7 @@
                             <span class="step-label">Chọn Phim</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="step-dropdown" id="movie-dropdown">
-                            <div onclick="selectMovie('Âm Dương Lộ')">Âm Dương Lộ</div>
-                            <div onclick="selectMovie('Phim 2')">Phim 2</div>
-                            <div onclick="selectMovie('Phim 3')">Phim 3</div>
-                        </div>
+                        <div class="step-dropdown" id="movie-dropdown"></div>
                     </div>
                     <div class="booking-step">
                         <button class="step-btn" id="select-date" disabled>
@@ -89,11 +80,7 @@
                             <span class="step-label">Chọn Ngày</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="step-dropdown" id="date-dropdown">
-                            <div onclick="selectDate('01/04/2025')">01/04/2025</div>
-                            <div onclick="selectDate('02/04/2025')">02/04/2025</div>
-                            <div onclick="selectDate('03/04/2025')">03/04/2025</div>
-                        </div>
+                        <div class="step-dropdown" id="date-dropdown"></div>
                     </div>
                     <div class="booking-step">
                         <button class="step-btn" id="select-showtime" disabled>
@@ -101,16 +88,14 @@
                             <span class="step-label">Chọn Suất</span>
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="step-dropdown" id="showtime-dropdown">
-                            <div onclick="selectShowtime('10:00')">10:00</div>
-                            <div onclick="selectShowtime('14:00')">14:00</div>
-                            <div onclick="selectShowtime('18:00')">18:00</div>
-                        </div>
+                        <div class="step-dropdown" id="showtime-dropdown"></div>
                     </div>
                 </div>
-                <button class="book-now-btn" id="book-now" disabled>
-                    <i class="fas fa-ticket-alt"></i> Đặt Ngay
-                </button>
+                <div class="form-group book-now-container">
+                    <button class="book-now-btn" id="book-now" disabled>
+                        <i class="fas fa-ticket-alt"></i> Đặt Ngay
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -257,7 +242,8 @@
         <script type="module" src="/frontend/assets/js/movie.js"></script>
         <script type="module" src="/frontend/assets/js/promotion.js"></script>
         <script defer src="/frontend/assets/js/admin.js"></script>
-        
+        <script src="/frontend/assets/js/quick-booking.js"></script>
+
         <!-- <script defer src="/frontend/assets/js/movie.js"></script> -->
 
 

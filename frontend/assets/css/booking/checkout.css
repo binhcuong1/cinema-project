@@ -223,10 +223,10 @@ header {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.payment-btn.momo {
-  background: linear-gradient(to right, #a50064, #8e0054);
+.payment-btn.vnpay {
+    background: linear-gradient(to right, #0056b3, #003f87);
+    color: #ffffff;
 }
-
 .payment-btn.onsite {
   background: linear-gradient(to right, #ffeb3b, #ffd700);
   color: #000;
@@ -237,8 +237,8 @@ header {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
-.payment-btn.momo:hover {
-  background: linear-gradient(to right, #8e0054, #7b004b);
+.payment-btn.vnpay:hover {
+    background: linear-gradient(to right, #003f87, #002d60);
 }
 
 .payment-btn.onsite:hover {

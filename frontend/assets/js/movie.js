@@ -125,9 +125,6 @@ function renderNowShowingMovie(movie) {
   movieCard.innerHTML = `
     <div class="movie-poster">
       <img src="${movie.image}" alt="${movie.ten_phim}">
-      <div class="movie-overlay">
-        <button onclick="window.location.href='booking.html'">Đặt vé</button>
-      </div>
     </div>
     <div class="movie-info">
       <h3>${movie.ten_phim}</h3>
@@ -145,9 +142,6 @@ function renderComingSoonMovie(movie) {
   movieCard.innerHTML = `
     <div class="movie-poster">
       <img src="${movie.image}" alt="${movie.ten_phim}">
-      <div class="movie-overlay">
-        <button onclick="hrefToViewDetail('${movie.ma_phim}')">Chi tiết</button>
-      </div>
     </div>
     <div class="movie-info">
       <h3>${movie.ten_phim}</h3>
@@ -525,6 +519,10 @@ window.onload = () => {
       fetchNowShowingMovies();
       fetchComingSoonMovies();
       break;
+    case "booking":
+     fetchNowShowingMovies();
+     fetchComingSoonMovies();
+      break; 
     case "add":
       const addForm = document.getElementById("add-movie-form");
       if (addForm) {

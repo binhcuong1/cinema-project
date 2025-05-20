@@ -28,6 +28,8 @@ async function initializeHeaderAndSidebar() {
         headerPlaceholder.innerHTML = headerResponse.data;
         console.log('Header đã được tải thành công');
 
+        checkUserRole();
+
         // Load sidebar
         const sidebarResponse = await axios.get('http://127.0.0.1:5500/frontend/pages/shares/sidebar.html');
         const sidebarPlaceholder = document.getElementById('sidebar-placeholder');
@@ -431,6 +433,35 @@ function initLoginEvents() {
     const registerForm = document.getElementById('register-form-submit');
     if (registerForm) {
         registerForm.addEventListener('submit', handleRegister);
+    }
+}
+
+async function checkUserRole() {
+    try {
+        const response = await axios.get('http://127.0.0.1:3000/api/users/me', {
+            withCredentials: true
+        });
+
+        const adminBtn = document.getElementById('adminBtn');
+        console.table('responseeeeeeeeeeeeee', response);
+        if (adminBtn) {
+            if (response.data.success === 'true') {
+                const user = response.data.data;
+                if (user.role_id === 1) {
+                    adminBtn.style.display = 'inline-block';
+                } else {
+                    adminBtn.style.display = 'none';
+                }
+            } else {
+                adminBtn.style.display = 'none';
+            }
+        }
+    } catch (error) {
+        console.error('Lỗi khi gọi API:', error);
+        const adminBtn = document.getElementById('adminBtn');
+        if (adminBtn) {
+            adminBtn.style.display = 'none'; 
+        }
     }
 }
 

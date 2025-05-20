@@ -210,7 +210,7 @@ async function openTheaterModal(id = null) {
   if (id) {
     try {
       const response = await axios.get(`/api/theaters/${id}`);
-      if (response.data.success !== "true") {
+      if (response.data.success !== true) {
         throw new Error("Không thể lấy dữ liệu rạp!");
       }
       theater = response.data.data;

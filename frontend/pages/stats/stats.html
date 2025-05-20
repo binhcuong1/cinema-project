@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thống Kê - CiBYHD Cinema</title>
+    <link rel="icon" href="/frontend/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/frontend/assets/css/stats.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/header.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css">
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="/frontend/assets/css/login.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body data-page="stats">
+    <div id="header-placeholder">
+        <header>Header mặc định nếu JavaScript không tải</header>
+    </div>
+    <div id="sidebar-placeholder">
+        <aside>Sidebar mặc định nếu JavaScript không tải</aside>
+    </div>
+    <main class="stats-container">
+        <div class="stats-header glassmorphism">
+            <h2>Thống Kê Doanh Thu</h2>
+        </div>
+        <div class="stats-tabs">
+            <button class="stats-tab active neon-border" data-tab="time" title="Xem doanh thu theo ngày hoặc tháng">
+                <i class="fas fa-clock"></i> Theo thời gian
+            </button>
+            <button class="stats-tab neon-border" data-tab="movie" title="Xem doanh thu theo từng phim">
+                <i class="fas fa-film"></i> Theo phim
+            </button>
+            <button class="stats-tab neon-border" data-tab="theater" title="Xem doanh thu theo từng rạp">
+                <i class="fas fa-theater-masks"></i> Theo rạp
+            </button>
+        </div>
+        <div id="time-chart" class="chart-container glassmorphism">
+            <h3>Doanh thu theo thời gian</h3>
+            <select id="time-range" class="neon-select">
+                <option value="day">Theo ngày</option>
+                <option value="month">Theo tháng</option>
+            </select>
+            <div class="chart-wrapper">
+                <div class="loading-spinner" id="time-loading">
+                    <i class="fas fa-spinner fa-spin"></i> Đang tải...
+                </div>
+                <canvas id="timeRevenueChart"></canvas>
+            </div>
+        </div>
+        <div id="movie-chart" class="chart-container glassmorphism" style="display: none;">
+            <h3>Doanh thu theo phim</h3>
+            <div class="chart-wrapper">
+                <div class="loading-spinner" id="movie-loading">
+                    <i class="fas fa-spinner fa-spin"></i> Đang tải...
+                </div>
+                <canvas id="movieRevenueChart"></canvas>
+            </div>
+        </div>
+        <div id="theater-chart" class="chart-container glassmorphism" style="display: none;">
+            <h3>Doanh thu theo rạp</h3>
+            <div class="chart-wrapper">
+                <div class="loading-spinner" id="theater-loading">
+                    <i class="fas fa-spinner fa-spin"></i> Đang tải...
+                </div>
+                <canvas id="theaterRevenueChart"></canvas>
+            </div>
+        </div>
+    </main>
+    <footer id="footer-container">
+        <p>Footer mặc định nếu JavaScript không tải</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/frontend/assets/js/main.js"></script>
+    <script src="/frontend/assets/js/stats.js"></script>
+</body>
+
+</html>

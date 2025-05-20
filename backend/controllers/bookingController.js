@@ -58,7 +58,7 @@ exports.createBooking = (req, res) => {
 
     if (!ma_lich_chieu || !ma_tai_khoan || !thoi_gian_dat || !so_luong_ghe || !tong_tien || !trang_thai_ghe_suat_chieu) {
         return res.status(400).json({ success: false, message: 'Dữ liệu bắt buộc bị thiếu.' });
-    }
+    };
 
     const getSeatsQuery = `
         SELECT g.ma_ghe, g.ten_ghe

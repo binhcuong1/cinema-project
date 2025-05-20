@@ -11,11 +11,11 @@ const EMAIL_PASS = process.env.EMAIL_PASS;
 
 exports.login = (req, res) => {
     const { ten_dang_nhap, mat_khau } = req.body;
-
+    
     if (!ten_dang_nhap || !mat_khau) {
         return res.status(400).json({ success: 'false', error: 'Thiếu thông tin' });
     }
-
+    
     User.login(ten_dang_nhap, mat_khau, (err, user) => {
         if (err) return res.status(500).json({ success: 'false', error: 'Lỗi server' });
         if (!user) return res.status(401).json({ success: 'false', error: 'Tài khoản hoặc mật khẩu không đúng' });
@@ -35,7 +35,7 @@ exports.login = (req, res) => {
             maxAge: 3600000,
             secure: false,
         });
-        res.json({ success: 'true', data: { ho_va_ten: user.ho_va_ten } });
+        res.json({ success: 'true', data: { ho_va_ten: user.ho_va_ten} });
     });
 };
 

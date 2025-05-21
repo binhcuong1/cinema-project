@@ -29,7 +29,6 @@ exports.createQR = async (req, res) => {
         vnp_ExpireDate: dateFormat(new Date(Date.now() + 60 * 60 * 1000)),
     });
 
-    console.log('URL thanh toán:', vnpayResponse);
     return res.status(201).json({ payUrl: vnpayResponse, ma_dat_ve });
 };
 
@@ -38,7 +37,6 @@ exports.checkPaymentVNPAY = async (req, res) => {
     console.log('VNPAY Response:', vnpayResponse);
 
     if (vnpayResponse.vnp_TxnRef) {
-        // Thêm một tham số vào redirect để đánh dấu thanh toán thành công
         return res.redirect(`http://127.0.0.1:5500/frontend/pages/booking/checkout.html?paymentSuccess=true&maDatVe=${vnpayResponse.vnp_TxnRef}`);
     } else {
         return res.status(400).json({

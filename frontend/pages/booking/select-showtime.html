@@ -61,19 +61,39 @@
                     </div>
                 </form>
 
-                <!-- Phần hiển thị kết quả đặt vé -->
-                <div id="booking-results" class="schedule-results">
-                    <h2>Kết Quả Đặt Vé</h2>
-                    <div class="booking-details">
-                        <div class="poster">
-                            <img src="/frontend/assets/images/tim-xac_1.webp" alt="Movie Poster">
-                        </div>
-                        <div class="booking-info">
-                            <p><strong></strong> Tìm xác: Ma Không Đầu(T18)</p>
-                        </div>
-                        <a href="/frontend/pages/booking/seat-selection.html" class="book-button">Đặt Vé</a>
+                <!-- Phần hiển thị danh sách phim -->
+                <section class="movie-categories-nowShowing">
+                    <div class="category-tabs">
+                        <button class="category-tab active">
+                            <i class="fas fa-play"></i> Phim Đang Chiếu
+                        </button>
                     </div>
-                </div>
+                    <div class="movie-grid-container">
+                        <div id="movie-list-nowShowing" class="movie-grid">
+                            <p class="loading">Đang tải phim...</p>
+                        </div>
+                    </div>
+                    <div class="movie-arrows">
+                        <button id="nowShowing-left" class="left"><i class="fas fa-chevron-left"></i></button>
+                        <button id="nowShowing-right" class="right"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </section>
+                <section class="movie-categories-comingSoon">
+                    <div class="category-tabs">
+                        <button class="category-tab active">
+                            <i class="fas fa-play"></i> Phim Sắp Chiếu
+                        </button>
+                    </div>
+                    <div class="movie-grid-container">
+                        <div id="movie-list-comingSoon" class="movie-grid">
+                            <p class="loading">Đang tải phim...</p>
+                        </div>
+                    </div>
+                    <div class="movie-arrows">
+                        <button id="comingSoon-left" class="left"><i class="fas fa-chevron-left"></i></button>
+                        <button id="comingSoon-right" class="right"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </section>
             </section>
         </div>
     </main>
@@ -84,15 +104,10 @@
     <!-- Scripts -->
     <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <!-- <script src="/frontend/assets/js/main.js"></script> -->
     <script src="/frontend/assets/js/main.js"></script>
     <script src="/frontend/assets/js/admin.js"></script>
     <script type="module" src="/frontend/assets/js/movie.js"></script>
     <script src="/frontend/assets/js/booking/select-showtime.js"></script>
-
-    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'934358433cf17b96',t:'MTc0NTMwNjI4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
-    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'934530274a374564',t:'MTc0NTMyNTYxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
-    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'9345368a3d8e53b6',t:'MTc0NTMyNTg3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
 </body>
 
 </html>

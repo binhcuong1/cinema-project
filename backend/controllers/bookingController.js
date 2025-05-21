@@ -189,3 +189,86 @@ exports.sendEmail = async (req, res) => {
         res.status(500).json({ success: false, message: 'Lỗi khi gửi email: ' + error.message });
     }
 };
+
+exports.getBookingDetailById = (req, res) => {
+    const ma_dat_ve = req.params.ma_dat_ve;
+
+    // 1. Lấy thông tin đặt vé + phim + suất chiếu + phòng + rạp + âm thanh
+    const bookingQuery = `
+        SELECT dv.*, 
+               lc.thoi_gian_bat_dau, lc.thoi_gian_ket_thuc, 
+               lc.ma_phim, f.ten_phim, f.image AS phim_image, f.thoi_luong_phut, f.gioi_han_tuoi,
+               lc.ma_phong, pc.ten_phong, pc.ma_rap, r.ten_rap, r.dia_chi, r.image AS rap_image,
+               lc.ma_am_thanh, at.ten_am_thanh
+        FROM dat_ve dv
+        JOIN lich_chieu lc ON dv.ma_lich_chieu = lc.ma_lich_chieu
+        JOIN phim f ON lc.ma_phim = f.ma_phim
+        JOIN phong_chieu pc ON lc.ma_phong = pc.ma_phong
+        JOIN rap r ON pc.ma_rap = r.ma_rap
+        LEFT JOIN am_thanh at ON lc.ma_am_thanh = at.ma_am_thanh
+        WHERE dv.ma_dat_ve = ?
+    `;
+
+    db.query(bookingQuery, [ma_dat_ve], (err, bookingResult) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Lỗi truy vấn đặt vé: ' + err.message });
+        }
+        if (!bookingResult || bookingResult.length === 0) {
+            return res.status(404).json({ success: false, message: 'Không tìm thấy đơn đặt vé.' });
+        }
+
+        const booking = bookingResult[0];
+
+        // 2. Lấy chi tiết loại vé
+        db.query(
+            `SELECT lv.ten_loai, lv.don_gia, clv.so_luong 
+             FROM ct_loai_ve clv 
+             JOIN loai_ve lv ON clv.ma_loai = lv.ma_loai 
+             WHERE clv.ma_dat_ve = ?`,
+            [ma_dat_ve],
+            (err, ticketDetails) => {
+                if (err) {
+                    return res.status(500).json({ success: false, message: 'Lỗi truy vấn loại vé: ' + err.message });
+                }
+
+                // 3. Lấy chi tiết bắp nước
+                db.query(
+                    `SELECT bn.ten_bap_nuoc, bn.don_gia, bn.image, cbn.so_luong 
+                     FROM ct_bap_nuoc cbn 
+                     JOIN bap_nuoc bn ON cbn.ma_bap_nuoc = bn.ma_bap_nuoc 
+                     WHERE cbn.ma_dat_ve = ?`,
+                    [ma_dat_ve],
+                    (err, snackDetails) => {
+                        if (err) {
+                            return res.status(500).json({ success: false, message: 'Lỗi truy vấn bắp nước: ' + err.message });
+                        }
+
+                        // 4. Lấy danh sách ghế đã đặt
+                        db.query(
+                            `SELECT g.ten_ghe, g.hang_ghe 
+                             FROM trang_thai_ghe_suat_chieu ttsc 
+                             JOIN ghe g ON ttsc.ma_ghe = g.ma_ghe 
+                             WHERE ttsc.ma_dat_ve = ?`,
+                            [ma_dat_ve],
+                            (err, seatDetails) => {
+                                if (err) {
+                                    return res.status(500).json({ success: false, message: 'Lỗi truy vấn ghế: ' + err.message });
+                                }
+
+                                res.json({
+                                    success: true,
+                                    data: {
+                                        booking,
+                                        ticketDetails,
+                                        snackDetails,
+                                        seatDetails
+                                    }
+                                });
+                            }
+                        );
+                    }
+                );
+            }
+        );
+    });
+};

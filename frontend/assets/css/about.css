@@ -1,0 +1,287 @@
+/* Đặt biến màu đồng bộ với style.css */
+:root {
+    --primary-color: #0a0e17;
+    --secondary-color: #1a2a44;
+    --highlight-color: #ff6200;
+    --text-color: #ffffff;
+    --background-gradient: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+    --card-background: #1a2a44;
+}
+
+/* Container chính */
+.cc {
+    margin: auto;
+    position: relative;
+    width: 1000px;
+}
+
+.cc img {
+    width: 100%;
+    display: block;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 40px;
+    color: var(--text-color);
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.text-overlay h1 {
+    margin-bottom: 20px;
+    font-size: 36px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.text-overlay p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.about {
+    background: var(--background-gradient);
+    padding: 40px 20px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-container h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    color: var(--highlight-color);
+}
+
+.about-container p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mission-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.mission-card {
+    background: var(--card-background);
+    padding: 25px;
+    border-radius: 10px;
+    flex: 1;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.2);
+    cursor: pointer;
+}
+
+.mission-card:hover {
+    transform: translateY(-2px);
+}
+
+.mission-card h3 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--highlight-color);
+}
+
+.mission-card p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.cinema-locations {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding-bottom: 40px;
+}
+
+.location-card {
+    text-align: center;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.location-card img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #fff;
+    box-shadow: 0 0 15px rgba(255, 98, 0, 0.4);
+}
+
+.location-card:hover {
+    transform: scale(1.05);
+}
+
+.location-card p {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+.headquarters {
+    margin-top: 50px;
+}
+
+.headquarters h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--highlight-color);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.headquarters p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.headquarters-picpic {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.headquarters-picpic img {
+    width: 100%;
+    display: block;
+}
+
+.headquarters-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.headquarters-card {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+}
+
+.cinema-system {
+    background: radial-gradient(circle at center, #1a2a44, #0a0e17);
+    padding: 60px 40px;
+    color: white;
+    font-family: 'Arial', sans-serif;
+}
+
+.cinema-system .highlight {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--highlight-color);
+    text-transform: uppercase;
+}
+
+.cinema-system p {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.cinema-system-content {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.cinema-map img {
+    width: 500px;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.cinema-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 450px;
+    width: 100%;
+}
+
+.cinema-item {
+    background-color: var(--card-background);
+    padding: 20px 25px;
+    border-left: 5px solid var(--highlight-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.2);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.cinema-item:hover {
+    transform: translateY(-2px);
+}
+
+.cinema-item h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.cinema-item p {
+    font-size: 14px;
+    color: #fff;
+    margin: 4px 0;
+}
+
+@media (max-width: 768px) {
+    .mission-grid,
+    .cinema-locations,
+    .cinema-system-content {
+        flex-direction: column;
+    }
+
+    .about-container h1,
+    .headquarters h2,
+    .cinema-system h2 {
+        font-size: 1.6rem;
+    }
+
+    .cinema-map img {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+}

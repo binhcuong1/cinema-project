@@ -222,3 +222,6 @@ CREATE TABLE banner (
     ngay_ket_thuc DATE NOT NULL,
     da_xoa TINYINT(1) DEFAULT 0
 );
+-- Thêm cột trailer vào bảng phim
+ALTER TABLE phim
+ADD COLUMN trailer VARCHAR(255) AFTER image;

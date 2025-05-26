@@ -167,6 +167,48 @@ exports.createBooking = (req, res) => {
     });
 };
 
+exports.createPopcornOrder = (req, res) => {
+    const { ma_tai_khoan, ten_dang_nhap, thoi_gian_dat, items } = req.body;
+
+    if (!ma_tai_khoan || !ten_dang_nhap || !thoi_gian_dat || !Array.isArray(items) || items.length === 0) {
+        return res.status(400).json({ success: false, message: 'Thiếu thông tin đơn đặt bắp nước.' });
+    }
+
+    // 1. Tạo đơn đặt bắp nước riêng
+    const insertOrderQuery = `
+        INSERT INTO don_dat_bap_nuoc_rieng (ma_tai_khoan, thoi_gian_dat, tong_tien, ma_rap, da_xoa)
+        VALUES (?, ?, ?, ?, 0)
+    `;
+    // Tính tổng tiền
+    const tong_tien = items.reduce((sum, item) => sum + (item.don_gia * item.so_luong), 0);
+    // Lấy ma_rap từ frontend nếu có, hoặc bạn có thể truyền thêm từ client
+    const ma_rap = req.body.ma_rap || null;
+
+    db.query(insertOrderQuery, [ma_tai_khoan, thoi_gian_dat, tong_tien, ma_rap], (err, result) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Lỗi khi tạo đơn đặt bắp nước: ' + err.message });
+        }
+        const ma_don_dat = result.insertId;
+
+        // 2. Thêm chi tiết bắp nước
+        const detailValues = items.map(item => [ma_don_dat, item.ma_bap_nuoc, item.so_luong]);
+        db.query(
+            'INSERT INTO ct_don_dat_bap_nuoc (ma_don_dat, ma_bap_nuoc, so_luong) VALUES ?',
+            [detailValues],
+            (err) => {
+                if (err) {
+                    return res.status(500).json({ success: false, message: 'Lỗi khi thêm chi tiết bắp nước: ' + err.message });
+                }
+                res.status(201).json({
+                    success: true,
+                    message: 'Đặt bắp nước thành công.',
+                    data: { ma_don_dat }
+                });
+            }
+        );
+    });
+};
+
 exports.sendEmail = async (req, res) => {
     const { to, subject, html } = req.body;
 
@@ -268,6 +310,51 @@ exports.getBookingDetailById = (req, res) => {
                         );
                     }
                 );
+            }
+        );
+    });
+};
+
+exports.getPopcornOrderDetailById = (req, res) => {
+    const ma_don_dat = req.params.ma_don_dat;
+
+    const popcornOrderQuery = `
+        SELECT ddbn.*, r.ten_rap, r.dia_chi, r.image AS rap_image, tk.ten_dang_nhap, tk.ho_va_ten
+        FROM don_dat_bap_nuoc_rieng ddbn
+        JOIN rap r ON ddbn.ma_rap = r.ma_rap
+        JOIN tai_khoan tk ON ddbn.ma_tai_khoan = tk.ma_tai_khoan
+        WHERE ddbn.ma_don_dat = ?
+    `;
+
+    db.query(popcornOrderQuery, [ma_don_dat], (err, orderResult) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Lỗi truy vấn đơn đặt bắp nước: ' + err.message });
+        }
+        if (!orderResult || orderResult.length === 0) {
+            return res.status(404).json({ success: false, message: 'Không tìm thấy đơn đặt bắp nước.' });
+        }
+
+        const order = orderResult[0];
+
+        // 2. Lấy chi tiết bắp nước
+        db.query(
+            `SELECT bn.ten_bap_nuoc, bn.don_gia, bn.image, ctdbn.so_luong
+             FROM ct_don_dat_bap_nuoc ctdbn
+             JOIN bap_nuoc bn ON ctdbn.ma_bap_nuoc = bn.ma_bap_nuoc
+             WHERE ctdbn.ma_don_dat = ?`,
+            [ma_don_dat],
+            (err, snackDetails) => {
+                if (err) {
+                    return res.status(500).json({ success: false, message: 'Lỗi truy vấn chi tiết bắp nước: ' + err.message });
+                }
+
+                res.json({
+                    success: true,
+                    data: {
+                        order,
+                        snackDetails
+                    }
+                });
             }
         );
     });

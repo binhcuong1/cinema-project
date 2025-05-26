@@ -141,6 +141,7 @@ header {
 }
 
 /* Phần chọn phương thức thanh toán */
+
 .payment-form {
   flex: 1 1 45%;
   background: rgba(255, 255, 255, 0.05);
@@ -223,6 +224,12 @@ header {
     background: linear-gradient(to right, #0056b3, #003f87);
     color: #ffffff;
 }
+
+.payment-btn.momo {
+    background: linear-gradient(to right, #9b26af, #ffd700); /* Gradient từ màu tím MoMo (#9b26af) sang vàng (#ffd700) */
+    color: #ffffff;
+}
+
 .payment-btn.onsite {
   background: linear-gradient(to right, #ffeb3b, #ffd700);
   color: #000;
@@ -235,6 +242,10 @@ header {
 
 .payment-btn.vnpay:hover {
     background: linear-gradient(to right, #003f87, #002d60);
+}
+
+.payment-btn.momo:hover {
+    background: linear-gradient(to right, #800080, #ffcc00); /* Hover effect với màu tím đậm (#800080) và vàng nhạt (#ffcc00) */
 }
 
 .payment-btn.onsite:hover {

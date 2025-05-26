@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quản Lý Phim - CiBYHD</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/frontend/assets/css/shares/header.css">
-    <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css">
-    <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css">
-    <link rel="stylesheet" href="/frontend/assets/css/style.css">
-    <link rel="stylesheet" href="/frontend/assets/css/login.css">
-    <link rel="stylesheet" href="/frontend/assets/css/movie/list.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="/frontend/assets/css/shares/header.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/style.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/login.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/movie/list.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Slick Carousel -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  </head>
 
-<body data-page="list">
+  <body data-page="list">
     <!-- Placeholder cho header -->
     <div id="header-placeholder"></div>
 
@@ -24,38 +34,43 @@
 
     <!-- Nội dung chính -->
     <main class="main-content">
-        <div class="movies-container">
-            <div class="page-header">
-                <h1><i class="fas fa-film"></i> Quản Lý Phim</h1>
-                <button class="add-movie-btn" onclick="window.location.href='/frontend/pages/movie/add.html'">
-                    <i class="fas fa-plus-circle"></i> Thêm Phim
-                </button>
-            </div>  
-            <nav class="breadcrumb">
-                <a href="/frontend/pages/index.html">Trang Chủ</a> /
-                <span>Quản Lý Phim</span>
-            </nav>
-
-            <section class="movie-categories">
-                <div class="category-tabs">
-                    <button class="category-tab active">
-                        <i class="fas fa-play"></i> Danh Sách Phim
-                    </button>
-                </div>
-                <div id="movie-list" class="movie-grid"></div>
-            </section>
+      <div class="movies-container">
+        <div class="page-header">
+          <h1><i class="fas fa-film"></i> Quản Lý Phim</h1>
+          <button
+            class="add-movie-btn"
+            onclick="window.location.href='/frontend/pages/movie/add.html'"
+          >
+            <i class="fas fa-plus-circle"></i> Thêm Phim
+          </button>
         </div>
+        <nav class="breadcrumb">
+          <a href="/frontend/pages/index.html">Trang Chủ</a> /
+          <span>Quản Lý Phim</span>
+        </nav>
+
+        <h2>🎬 Phim Đang Chiếu</h2>
+        <div id="slick-now-showing" class="slick-carousel"></div>
+
+        <h2>🎞️ Phim Sắp Chiếu</h2>
+        <div id="slick-coming-soon" class="slick-carousel"></div>
+
+        <h2>🛑 Phim Không Chiếu</h2>
+        <div id="slick-ended" class="slick-carousel"></div>
+      </div>
     </main>
 
     <!-- Footer -->
     <footer id="footer-container"></footer>
 
     <!-- Scripts -->
-    <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/08325f215d.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/frontend/assets/js/main.js"></script>
     <script src="/frontend/assets/js/admin.js"></script>
     <script src="/frontend/assets/js/movie.js"></script>
-</body>
-
+  </body>
 </html>

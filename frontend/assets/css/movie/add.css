@@ -23,7 +23,8 @@
   font-size: 14px;
 }
 
-.breadcrumb a, .breadcrumb span {
+.breadcrumb a,
+.breadcrumb span {
   color: #ccc;
   text-decoration: none;
 }
@@ -98,7 +99,7 @@
 }
 
 .form-group textarea {
-  min-height: 100px;
+  min-height: 312.5px;
   resize: vertical;
 }
 
@@ -171,7 +172,8 @@
   justify-content: space-between;
 }
 
-.back-btn, .next-btn {
+.back-btn,
+.next-btn {
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
@@ -202,4 +204,11 @@
 .next-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+}
+
+/* Định dạng CKEditor */
+.ck-editor__editable {
+  color: #000 !important;
+  background-color: #fff !important;
+  min-height: 500px;
 }

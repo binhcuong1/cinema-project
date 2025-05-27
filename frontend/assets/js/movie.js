@@ -93,12 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btnRightSearch.addEventListener("click", () => scrollMoviesSearch(1));
   }
 });
-
-<<<<<<< Updated upstream
-=======
 // ... (Phần còn lại của file movie.js giữ nguyên, bao gồm initializeSearch, fetchSearchMovies, v.v.)
-
->>>>>>> Stashed changes
 //#region  // === Khu vực Hàm Chung === //
 
 // Hàm chung để lấy và hiển thị danh sách phim
@@ -269,14 +264,12 @@ function renderSearchMovie(movie) {
     <div class="movie-poster">
       <img src="${movie.image}" alt="${movie.ten_phim}">
       <div class="movie-overlay">
-<<<<<<< Updated upstream
         ${
           movie.trang_thai === "dang-chieu"
-            ? `<button onclick="window.location.href='booking.html'">Đặt vé</button>`
+            ? `<button onclick="window.location.href='/frontend/pages/booking/select-showtime.html'">Đặt vé</button>`
             : ""
         }
       </div>
-=======
   ${
     movie.trang_thai === "dang-chieu"
       ? `
@@ -285,8 +278,7 @@ function renderSearchMovie(movie) {
     </a>`
       : ""
   }
-</div>
->>>>>>> Stashed changes
+</div> 
     </div>
     <div class="movie-info">
       <div class="movie-title-wrapper">
@@ -526,15 +518,12 @@ async function showMovieEdit() {
                 <input type="number" id="new-movie-duration" name="thoi_luong_phut" value="${
                   data.thoi_luong_phut
                 }" required />
-<<<<<<< Updated upstream
               </div>
               <div class="form-group">
                 <label for="new-movie-trailer">Trailer:</label>
                 <input type="text" id="new-movie-trailer" name="trailer" value="${
                   data.trailer || ""
                 }" />
-=======
->>>>>>> Stashed changes
               </div>
             </div>
             <div class="form-column">
@@ -543,17 +532,7 @@ async function showMovieEdit() {
                 <textarea id="new-movie-description" name="mo_ta" required>${
                   data.mo_ta
                 }</textarea>
-<<<<<<< Updated upstream
               </div>   
-=======
-              </div>
-              <div class="form-group">
-                <label for="new-movie-content">Nội dung chi tiết:</label>
-                <textarea id="new-movie-content" name="noi_dung_phim" required>${
-                  data.noi_dung_phim
-                }</textarea>
-              </div>
->>>>>>> Stashed changes
             </div>
           </div>
           <div class="form-group poster-upload">
@@ -723,8 +702,4 @@ window.onload = () => {
     default:
       console.log("Trang không xác định:", currentPage);
   }
-<<<<<<< Updated upstream
 };
-=======
-};
->>>>>>> Stashed changes

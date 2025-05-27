@@ -115,7 +115,7 @@ function updateMovieDetails(movieData, scheduleData) {
     document.getElementById('music').innerHTML = `<strong>Âm thanh:</strong> ${scheduleData.ten_am_thanh}`;
     document.getElementById('release-date').innerHTML = `<strong>Khởi chiếu:</strong> ${movieData.ngay_phat_hanh ? formatDisplayDate(movieData.ngay_phat_hanh) : 'Không có thông tin'}`;
     document.getElementById('synopsis').textContent = movieData.noi_dung_phim || 'Không có mô tả';
-    document.getElementById('trailer-link').href = '#' || '#';
+    document.getElementById('trailer-link').href = movieData.trailer || 'Không có trailer';
 }
 
 // Hàm khởi tạo hiển thị chi tiết khi trang tải

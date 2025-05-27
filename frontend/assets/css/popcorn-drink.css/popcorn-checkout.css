@@ -1,0 +1,554 @@
+/* Reset và CSS cơ bản */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background: linear-gradient(135deg, #0a0e17 0%, #1a2a44 100%);
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* Header giả lập */
+header {
+  background: rgba(0, 0, 0, 0.8);
+  height: 70px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+  color: #ffeb3b;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Main Content */
+.main-content {
+  padding-top: 100px;
+  min-height: calc(100vh - 70px - 60px);
+  position: relative;
+  z-index: 1;
+  padding-bottom: 60px;
+}
+
+/* Container chính */
+.payment-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* Hiệu ứng ánh sáng phía sau */
+.payment-container::before {
+  content: "";
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 200px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 235, 59, 0.2) 0%,
+    rgba(255, 235, 59, 0) 70%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Tiêu đề trang */
+.payment-title {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #fff;
+  margin: 20px 0 30px;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 15px;
+  font-weight: 700;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.payment-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 235, 59, 0.2),
+    #ffeb3b,
+    rgba(255, 235, 59, 0.2)
+  );
+  border-radius: 3px;
+}
+
+/* Timer */
+.timer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.timer-label {
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.timer {
+  background-color: rgba(255, 0, 0, 0.2);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #ffeb3b;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 15px rgba(255, 98, 0, 0.5); }
+    50% { box-shadow: 0 0 25px rgba(255, 98, 0, 0.8); }
+    100% { box-shadow: 0 0 15px rgba(255, 98, 0, 0.5); }
+}
+
+/* Container cho form và thông tin */
+.payment-wrapper {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* Phần chọn phương thức thanh toán */
+
+.payment-form {
+  flex: 1 1 45%;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  min-width: 300px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.payment-form:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  transform: translateY(-5px);
+}
+
+.payment-form::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.payment-options h2 {
+  font-size: 1.5rem;
+  color: #ffeb3b;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.payment-description {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+}
+
+.payment-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(to right, #ff6200, #e55a00);
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 350px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.payment-btn.vnpay {
+    background: linear-gradient(to right, #0056b3, #003f87);
+    color: #ffffff;
+}
+
+.payment-btn.momo {
+    background: linear-gradient(to right, #9b26af, #ffd700);
+    color: #ffffff;
+}
+
+.payment-btn.onsite {
+  background: linear-gradient(to right, #ffeb3b, #ffd700);
+  color: #000;
+}
+
+.payment-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.payment-btn.vnpay:hover {
+    background: linear-gradient(to right, #003f87, #002d60);
+}
+
+.payment-btn.momo:hover {
+    background: linear-gradient(to right, #800080, #ffcc00);
+}
+
+.payment-btn.onsite:hover {
+  background: linear-gradient(to right, #ffd700, #ffcc00);
+}
+
+.payment-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.payment-btn i {
+  font-size: 1.2rem;
+}
+
+.payment-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.payment-btn:hover::after {
+  opacity: 1;
+}
+
+/* Thông tin đơn hàng */
+.ticket-info {
+  flex: 1 1 45%;
+  min-width: 300px;
+}
+
+.ticket-info-box {
+  background: linear-gradient(135deg, #1e3a8a 0%, #152a63 100%);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ticket-info-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.ticket-header {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.ticket-movie-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ffeb3b;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.ticket-theater {
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.ticket-theater-address {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.ticket-info-item {
+  display: flex;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.ticket-info-icon {
+  color: #ffeb3b;
+  margin-right: 15px;
+  font-size: 1.2rem;
+  min-width: 20px;
+}
+
+.ticket-info-text {
+  font-size: 1rem;
+  flex: 1;
+}
+
+.ticket-info-label {
+  font-weight: 600;
+  color: #ffeb3b;
+  margin-right: 5px;
+}
+
+.ticket-info-value {
+  color: #fff;
+}
+
+.ticket-total {
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ticket-total-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffeb3b;
+}
+
+.ticket-total-price {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Footer */
+footer {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copyright {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #ffeb3b;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .payment-wrapper {
+    gap: 30px;
+  }
+
+  header {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 90px;
+  }
+
+  .payment-wrapper {
+    flex-direction: column-reverse;
+    gap: 30px;
+  }
+
+  .payment-title {
+    font-size: 1.8rem;
+  }
+
+  .payment-form,
+  .ticket-info {
+    padding: 20px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .ticket-movie-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 0 15px;
+    height: 60px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .main-content {
+    padding-top: 70px;
+  }
+
+  .payment-title {
+    font-size: 1.5rem;
+    margin: 15px 0 20px;
+  }
+
+  .payment-options h2 {
+    font-size: 1.3rem;
+  }
+
+  .payment-description {
+    font-size: 0.9rem;
+  }
+
+  .payment-btn {
+    font-size: 1rem;
+    padding: 12px 20px;
+  }
+
+  .payment-btn i {
+    font-size: 1rem;
+  }
+
+  .ticket-info-box {
+    padding: 20px;
+  }
+
+  .ticket-info-item {
+    margin: 10px 0;
+  }
+
+  .ticket-info-icon {
+    font-size: 1rem;
+  }
+
+  .ticket-info-text {
+    font-size: 0.9rem;
+  }
+
+  .ticket-total-label {
+    font-size: 1rem;
+  }
+
+  .ticket-total-price {
+    font-size: 1.1rem;
+  }
+}
+
+.success-message {
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+}
+
+.success-message h2 {
+    color: #ffeb3b;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.success-message p {
+    font-size: 1rem;
+    margin: 8px 0;
+    color: #fff;
+}
+
+.success-message a {
+    color: #ff6200;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.success-message a:hover {
+    text-decoration: underline;
+}

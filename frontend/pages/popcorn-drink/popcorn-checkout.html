@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán Bắp Nước</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/frontend/assets/css/shares/header.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css">
+    <link rel="stylesheet" href="/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="/frontend/assets/css/login.css">
+    <link rel="stylesheet" href="/frontend/assets/css/popcorn-drink.css/popcorn-checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body data-page="popcorn-checkout">
+    <!-- Placeholder cho header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Placeholder cho sidebar -->
+    <div id="sidebar-placeholder"></div>
+
+    <main class="main-content">
+        <div class="payment-container">
+            <h1 class="payment-title">THANH TOÁN BẮP NƯỚC</h1>
+
+            <div class="timer-container">
+                <span class="timer-label">Thời gian còn lại:</span>
+                <span class="timer">04:44</span>
+            </div>
+
+            <div class="payment-wrapper">
+                <!-- Phần bên trái: Lựa chọn phương thức thanh toán -->
+                <div class="payment-form">
+                    <div class="payment-options">
+                        <h2>Chọn phương thức thanh toán</h2>
+                        <p class="payment-description">Vui lòng chọn một phương thức thanh toán để tiếp tục:</p>
+                        <button class="payment-btn vnpay" id="vnpay-payment">
+                            <i class="fas fa-credit-card"></i> Thanh toán qua VNPay
+                        </button>
+                        <button class="payment-btn momo" id="momo-payment">
+                            <i class="fas fa-mobile-alt"></i> Thanh toán qua MoMo
+                        </button>
+                        <button class="payment-btn onsite" id="pay-now">
+                            <i class="fas fa-ticket-alt"></i> Thanh toán tại rạp
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Phần bên phải: Thông tin đơn hàng bắp nước -->
+                <div class="ticket-info">
+                    <div class="ticket-info-box">
+                        <div class="ticket-header"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer-container"></footer>
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/08325f215d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/frontend/assets/js/main.js"></script>
+    <script src="/frontend/assets/js/admin.js"></script>
+    <script src="/frontend/assets/js/popcorn-drink/popcorn-checkout.js"></script>
+</body>
+
+</html>

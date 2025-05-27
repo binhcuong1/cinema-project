@@ -148,9 +148,7 @@ async function checkBookingData() {
                 console.timeEnd('saveBooking');
 
                 if (saveResponse && saveResponse.success) {
-                    console.time('sendTicketEmail');
                     const emailSent = await sendTicketEmail(maDatVe);
-                    console.timeEnd('sendTicketEmail');
 
                     const emailStatus = document.getElementById('email-status');
                     if (emailStatus) {

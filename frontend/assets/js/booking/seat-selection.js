@@ -106,19 +106,16 @@ function updateMovieDetails(movieData, scheduleData) {
     document.getElementById('movie-title').textContent = `${movieData.ten_phim?.toUpperCase() || 'Không có tiêu đề'} (${movieData.gioi_han_tuoi || 'N/A'})`;
     document.getElementById('movie-poster').src = movieData.image || '/frontend/assets/images/default-poster.webp';
     document.getElementById('movie-poster').alt = `${movieData.ten_phim || 'Phim'} Poster`;
-    document.getElementById('genre').innerHTML = `<i class="fas fa-ticket-alt"></i> ${'Không có thông tin'}`;
     document.getElementById('duration').innerHTML = `<i class="fas fa-clock"></i> ${movieData.thoi_luong_phut || 'N/A'}'`;
     document.getElementById('country').innerHTML = `<i class="fas fa-globe"></i> ${scheduleData.ten_am_thanh}`;
     document.getElementById('language').innerHTML = `<i class="fas fa-language"></i> ${scheduleData.ten_am_thanh}`;
     const ageRating = movieData.gioi_han_tuoi || 'N/A';
     const ageNumber = ageRating && typeof ageRating === 'string' ? ageRating.replace('T', '') : 'N/A';
     document.getElementById('age-rating').innerHTML = `<i class="fas fa-user-alt"></i> ${ageRating}: Phim dành cho khán giả từ đủ ${ageNumber} tuổi trở lên (${ageRating}+)`;
-    document.getElementById('director').innerHTML = `<strong>Đạo diễn:</strong> ${'Không có thông tin'}`;
-    document.getElementById('actors').innerHTML = `<strong>Diễn viên:</strong> ${'Không có thông tin'}`;
     document.getElementById('music').innerHTML = `<strong>Âm thanh:</strong> ${scheduleData.ten_am_thanh}`;
     document.getElementById('release-date').innerHTML = `<strong>Khởi chiếu:</strong> ${movieData.ngay_phat_hanh ? formatDisplayDate(movieData.ngay_phat_hanh) : 'Không có thông tin'}`;
     document.getElementById('synopsis').textContent = movieData.noi_dung_phim || 'Không có mô tả';
-    document.getElementById('trailer-link').href = '#' || '#';
+    document.getElementById('trailer-link').href = movieData.trailer || 'Không có trailer';
 }
 
 // Hàm khởi tạo hiển thị chi tiết khi trang tải

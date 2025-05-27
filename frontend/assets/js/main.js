@@ -443,11 +443,11 @@ async function checkUserRole() {
         });
 
         const adminBtn = document.getElementById('adminBtn');
-        console.table('responseeeeeeeeeeeeee', response);
+        
         if (adminBtn) {
             if (response.data.success === 'true') {
                 const user = response.data.data;
-                if (user.role_id === 1) {
+                if (user.role_id === 1 || user.role_id === 99) {
                     adminBtn.style.display = 'inline-block';
                 } else {
                     adminBtn.style.display = 'none';

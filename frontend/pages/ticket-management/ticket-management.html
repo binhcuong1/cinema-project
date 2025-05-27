@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quản lý đặt vé tại CiBYHD Cinema - Theo dõi và xử lý vé dễ dàng.">
+    <meta name="keywords" content="quản lý vé, đặt vé, rạp chiếu phim, CiBYHD Cinema">
+    <meta property="og:title" content="Quản Lý Đặt Vé - CiBYHD Cinema">
+    <meta property="og:description" content="Quản lý danh sách đặt vé nhanh chóng tại CiBYHD Cinema.">
+    <meta property="og:image" content="/frontend/assets/images/logo.jpg">
+    <title>Quản Lý Đặt Vé - CiBYHD Cinema</title>
+    <link rel="icon" href="/frontend/assets/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/frontend/assets/css/shares/header.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/admin.css">
+    <link rel="stylesheet" href="/frontend/assets/css/login.css">
+    <link rel="stylesheet" href="/frontend/assets/css/shares/footer.css">
+    <link rel="stylesheet" href="/frontend/assets/css/ticket-management/ticket-management.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Placeholder cho header -->
+    <div id="header-placeholder">
+        <header>Header mặc định nếu JavaScript không tải</header>
+    </div>
+
+    <!-- Placeholder cho sidebar -->
+    <div id="sidebar-placeholder">
+        <aside>Sidebar mặc định nếu JavaScript không tải</aside>
+    </div>
+
+    <main>
+        <div class="ticket-management">
+            <div class="ticket-header">
+                <h2>Quản Lý Đặt Vé</h2>
+            </div>
+            <div class="ticket-filter">
+                <label for="search-input-ticket">Tìm kiếm:</label>
+                <input type="text" id="search-input-ticket" class="neon-input" placeholder="Mã vé, tên, email...">
+                <label for="start-date">Từ ngày:</label>
+                <input type="date" id="start-date" class="neon-input">
+                <label for="end-date">Đến ngày:</label>
+                <input type="date" id="end-date" class="neon-input">
+                <button id="apply-filter" class="filter-btn">Áp dụng</button>
+                <button id="reload-tickets" class="filter-btn"><i class="fas fa-sync-alt"></i></button>
+            </div>
+            <div class="ticket-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã vé</th>
+                            <th>Tên khách hàng</th>
+                            <th>Email</th>
+                            <th>Phim</th>
+                            <th>Rạp</th>
+                            <th>Suất chiếu</th>
+                            <th>Số lượng</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ticket-list">
+                        <!-- Dữ liệu sẽ được render động từ JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination">
+                <button class="neon-button" id="prev-page">Trước</button>
+                <span id="page-info">Trang 1/1</span>
+                <button class="neon-button" id="next-page">Sau</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal chi tiết -->
+    <div id="ticket-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h3 class="modal-title">Chi tiết vé</h3>
+            <p id="modal-content">
+                <!-- Dữ liệu sẽ được render động từ JavaScript -->
+            </p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="footer-container">
+        <p>Footer mặc định nếu JavaScript không tải</p>
+    </footer>
+
+    <!-- Modal xác nhận hủy vé -->
+    <div id="cancel-ticket-modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: #1a2a44; width: 400px; padding: 20px; border-radius: 8px; color: #ffffff;">
+            <h3 style="margin: 0 0 15px 0; font-size: 24px; color: #ff6200; font-weight: 600;">Xác nhận hủy vé</h3>
+            <p style="margin: 0 0 15px 0; font-size: 20px;">Bạn chắc chắn muốn hủy vé này?</p>
+            <div style="margin-bottom: 15px;">
+                <p style="margin: 5px 0; font-size: 16px; color: #ff6200; font-weight: 600;">Lưu ý quan trọng:</p>
+                <ul style="margin: 0; padding-left: 20px; font-size: 16px; line-height: 1.5;">
+                    <li>Bạn chắc chắn về yêu cầu muốn hủy vé của khách hàng.</li>
+                    <li>Một khi hủy vé thì sẽ không tái tạo lại được.</li>
+                    <li>Hành động này không thể hoàn tác.</li>
+                    <li>Chính sách hủy vé: Không hoàn tiền sau khi hủy, trừ trường hợp đặc biệt được admin phê duyệt.
+                    </li>
+                    <li>Vui lòng kiểm tra kỹ thông tin vé trước khi xác nhận hủy.</li>
+                </ul>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button id="cancel-ticket-confirm"
+                    style="padding: 8px 16px; background-color: #ff6200; color: #ffffff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Xác
+                    nhận</button>
+                <button id="cancel-ticket-close"
+                    style="padding: 8px 16px; background-color: #2a3b5a; color: #ffffff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Hủy
+                    bỏ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Module: Main khởi tạo layout + auth -->
+    <script src="/frontend/assets/js/main.js"></script>
+    <!-- Module: Xử lý logic ticket management -->
+    <script type="module" src="/frontend/assets/js/ticket-management.js"></script>
+    <script defer src="/frontend/assets/js/admin.js"></script>
+</body>
+
+</html>

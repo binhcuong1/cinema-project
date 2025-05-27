@@ -13,7 +13,7 @@
             <a href="/frontend/pages/booking/select-showtime.html" class="nav-btn book-ticket">
                 <i class="fas fa-ticket-alt"></i> Đặt Vé Ngay
             </a>
-            <a href="/frontend/pages/popcorn-drink.html" class="nav-btn order-food">
+            <a href="/frontend/pages/popcorn-drink/popcorn-drink.html" class="nav-btn order-food">
                 <i class="fas fa-popcorn"></i> Đặt Bắp Nước
             </a>
             <!-- Nút Trang Quản Lý (tùy chọn) -->
@@ -34,7 +34,7 @@
             <button id="auth-btn" class="nav-btn login-btn">
                 <i class="fas fa-user"></i> Đăng Nhập
             </button>
-            
+
             <!-- Dropdown menu cho đăng nhập -->
             <div class="dropdown-menu auth-dropdown">
                 <a href="/frontend/pages/profile-customer.html" class="dropdown-item">
@@ -53,20 +53,17 @@
             <!-- Nút Chọn Rạp -->
             <div class="theater-selector dropdown">
                 <a href="#" class="theater-link">
-                    <i class="fa-solid fa-location-dot"></i> Chọn Rạp
+                    <i class="fa-solid fa-location-dot"></i> Hệ Thống Rạp
                 </a>
                 <div class="dropdown-menu">
                     <div class="theater-list">
-                        <div onclick="selectTheater('BCHD Hà Nội')">BCHD Hà Nội</div>
-                        <div onclick="selectTheater('BCHD TP.HCM')">BCHD TP.HCM</div>
-                        <div onclick="selectTheater('BCHD Đà Nẵng')">BCHD Đà Nẵng</div>
+                        <a href="https://maps.app.goo.gl/jfXauGEVk1UMdqsr5" target="_blank">CBHD Hai Bà Trưng</a>
+                    </div>
+                    <div class="theater-list">
+                        <a href="https://maps.app.goo.gl/4xsZiCy9YNTxJd5B7" target="_blank">CBHD Quốc Thanh</a>
                     </div>
                 </div>
             </div>
-            <!-- Nút Lịch Chiếu -->
-            <a href="/frontend/pages/booking/select-showtime.html" class="schedule-link">
-                <i class="fa-solid fa-location-dot"></i> Lịch Chiếu
-            </a>
         </div>
         <div class="nav-links-right">
             <!-- Nút Khuyến Mãi -->

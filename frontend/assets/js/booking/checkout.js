@@ -110,11 +110,19 @@ async function checkBookingData() {
         }
 
         // Ẩn phần chọn phương thức thanh toán bên trái
-        const paymentForm = document.querySelector('.payment-form');
-        if (paymentForm) {
-            paymentForm.style.display = 'none';
+        const paymentSelection = document.querySelector('.payment-form');
+        if (paymentSelection) {
+            paymentSelection.style.display = 'none';
         } else {
-            console.warn('Không tìm thấy phần tử .paymentForm để ẩn');
+            console.warn('Không tìm thấy phần tử .payment-form để ẩn');
+        }
+
+        // Ẩn timer container
+        const timerContainer = document.querySelector('.timer-container');
+        if (timerContainer) {
+            timerContainer.style.display = 'none';
+        } else {
+            console.warn('Không tìm thấy phần tử .timer-container để ẩn');
         }
 
         // Hiển thị thông báo đặt vé thành công ngay lập tức
@@ -134,16 +142,13 @@ async function checkBookingData() {
             clearInterval(timeoutId);
             isTimerRunning = false;
 
-            // Thực hiện các tác vụ API trong nền
             try {
                 console.time('saveBooking');
                 const saveResponse = await saveBooking();
                 console.timeEnd('saveBooking');
 
                 if (saveResponse && saveResponse.success) {
-                    console.time('sendTicketEmail');
                     const emailSent = await sendTicketEmail(maDatVe);
-                    console.timeEnd('sendTicketEmail');
 
                     const emailStatus = document.getElementById('email-status');
                     if (emailStatus) {
@@ -334,6 +339,7 @@ async function sendTicketEmail(ma_dat_ve) {
 
 async function handlePaymentSelection(nextPage) {
     const vnpayBtn = document.getElementById('vnpay-payment');
+    const momoBtn = document.getElementById('momo-payment'); // Thêm nút MoMo
     const payNowBtn = document.getElementById('pay-now');
 
     if (payNowBtn) {
@@ -422,6 +428,30 @@ async function handlePaymentSelection(nextPage) {
             } catch (error) {
                 console.error('Lỗi khi tạo link thanh toán VNPay:', error);
                 alert('Lỗi khi tạo link thanh toán VNPay. Vui lòng thử lại!');
+            }
+        });
+    }
+
+    if (momoBtn) {
+        momoBtn.addEventListener('click', async () => {
+            console.log('Chọn thanh toán qua MoMo');
+            sessionStorage.setItem('paymentInfo', JSON.stringify({ paymentMethod: 'momo' }));
+
+            try {
+                const maDatVe = `ORDER_${Date.now()}`;
+                const response = await axios.post('/api/momo/create-payment', {
+                    ma_dat_ve: maDatVe,
+                    tongTien: bookingSummary.tong_tien || 65000,
+                }, { withCredentials: true });
+
+                if (response.data.payUrl) {
+                    window.location.href = response.data.payUrl;
+                } else {
+                    throw new Error('Không thể tạo link thanh toán MoMo');
+                }
+            } catch (error) {
+                console.error('Lỗi khi tạo link thanh toán MoMo:', error);
+                alert('Lỗi khi tạo link thanh toán MoMo. Vui lòng thử lại!');
             }
         });
     }
@@ -559,7 +589,11 @@ async function renderTicketInfo() {
 async function initializeCheckout() {
     try {
         await checkBookingData(); // Kiểm tra callback ngay khi khởi tạo
-        if (!document.querySelector('.success-message')) startTimer(); // Chỉ khởi động timer nếu chưa thành công
+        // Chỉ khởi động timer nếu không phải paymentSuccess=true
+        const urlParams = new URLSearchParams(window.location.search);
+        if (!document.querySelector('.success-message') && urlParams.get('paymentSuccess') !== 'true') {
+            startTimer();
+        }
         handlePaymentSelection('/frontend/pages/booking/ticket-confirmation.html');
     } catch (error) {
         console.error('Lỗi khi khởi tạo checkout:', error);

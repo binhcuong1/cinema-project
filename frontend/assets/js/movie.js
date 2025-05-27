@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btnRightSearch.addEventListener("click", () => scrollMoviesSearch(1));
   }
 });
-
+// ... (Phần còn lại của file movie.js giữ nguyên, bao gồm initializeSearch, fetchSearchMovies, v.v.)
 //#region  // === Khu vực Hàm Chung === //
 
 // Hàm chung để lấy và hiển thị danh sách phim
@@ -266,10 +266,19 @@ function renderSearchMovie(movie) {
       <div class="movie-overlay">
         ${
           movie.trang_thai === "dang-chieu"
-            ? `<button onclick="window.location.href='booking.html'">Đặt vé</button>`
+            ? `<button onclick="window.location.href='/frontend/pages/booking/select-showtime.html'">Đặt vé</button>`
             : ""
         }
       </div>
+  ${
+    movie.trang_thai === "dang-chieu"
+      ? `
+    <a href="/frontend/pages/booking/select-showtime.html" class="booking-link">
+      Đặt vé
+    </a>`
+      : ""
+  }
+</div> 
     </div>
     <div class="movie-info">
       <div class="movie-title-wrapper">

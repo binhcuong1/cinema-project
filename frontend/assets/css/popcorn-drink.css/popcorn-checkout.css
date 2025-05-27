@@ -226,7 +226,7 @@ header {
 }
 
 .payment-btn.momo {
-    background: linear-gradient(to right, #9b26af, #ffd700); /* Gradient từ màu tím MoMo (#9b26af) sang vàng (#ffd700) */
+    background: linear-gradient(to right, #9b26af, #ffd700);
     color: #ffffff;
 }
 
@@ -245,7 +245,7 @@ header {
 }
 
 .payment-btn.momo:hover {
-    background: linear-gradient(to right, #800080, #ffcc00); /* Hover effect với màu tím đậm (#800080) và vàng nhạt (#ffcc00) */
+    background: linear-gradient(to right, #800080, #ffcc00);
 }
 
 .payment-btn.onsite:hover {
@@ -282,7 +282,7 @@ header {
   opacity: 1;
 }
 
-/* Thông tin vé */
+/* Thông tin đơn hàng */
 .ticket-info {
   flex: 1 1 45%;
   min-width: 300px;

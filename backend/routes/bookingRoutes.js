@@ -12,4 +12,6 @@ router.get('/:id', bookingController.getByScheduleID);
 router.get('/detail/:ma_dat_ve', bookingController.getBookingDetailById);
 router.get('/popcorn-order/:ma_don_dat', bookingController.getPopcornOrderDetailById);
 
+router.put('/update-seats', bookingController.updateSeats);
+
 module.exports = router;

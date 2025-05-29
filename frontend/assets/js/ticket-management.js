@@ -79,7 +79,7 @@ function createTicketRow(ticket) {
             <td class="${statusClass}">${status}</td> <!-- Hiển thị trạng thái -->
             <td>
                 <button class="action-btn view-btn" data-id="${ticket.ma_ve}">Xem</button>
-                <button class="action-btn edit-btn" data-id="${ticket.ma_ve}" ${isCanceled ? 'disabled' : ''}>Sửa</button>
+                ${!isCanceled ? `<button class="action-btn edit-btn" data-id="${ticket.ma_ve}">Sửa</button>` : ''}
                 ${!isCanceled ? `<button class="action-btn cancel-btn" data-id="${ticket.ma_ve}">Hủy</button>` : ''}
             </td>
         </tr>
@@ -249,6 +249,188 @@ function updatePagination() {
 
 //#endregion
 
+//#region === Khu vực Xử Lý Sửa Chỗ ngồi ===
+
+async function editTicketSeat(ticketId) {
+    try {
+        const bookingDetail = await fetchData(`/api/bookings/detail/${ticketId}`);
+        const maLichChieu = bookingDetail.booking.ma_lich_chieu;
+        const maPhong = bookingDetail.booking.ma_phong;
+        const tenPhong = bookingDetail.booking.ten_phong;
+
+        if (!maLichChieu || !maPhong || !tenPhong)
+            throw new Error('Không thể lấy thông tin lịch chiếu hoặc phòng chiếu');
+
+        viewSeats(maLichChieu, maPhong, tenPhong, ticketId);
+    } catch (error) {
+        console.error('Lỗi khi mở sơ đồ ghế: ', error);
+        alert("Không thể hiển thị sơ đồ ghế: " + (error.message || "Lỗi không xác định."));
+    }
+}
+
+// Hàm hiển thị modal sơ đồ ghế
+async function viewSeats(ma_lich_chieu, ma_phong, ten_phong, ticketId) {
+    try {
+        // Gọi API để lấy danh sách ghế
+        const seatsResponse = await axios.get(`/api/seats/${ma_phong}`);
+        if (seatsResponse.data.success !== "true") {
+            throw new Error("Không thể lấy danh sách ghế!");
+        }
+
+        const seatsPerRow = seatsResponse.data.seats_per_row || [];
+        if (!seatsPerRow || seatsPerRow.length === 0) {
+            throw new Error("Không có thông tin ghế cho phòng chiếu nàcd y!");
+        }
+
+        const bookingsResponse = await axios.get(`/api/bookings/${ma_lich_chieu}`);
+        if (!bookingsResponse.data.success) {
+            throw new Error("Không thể lấy danh sách ghế đã đặt!");
+        }
+        const bookedSeats = (bookingsResponse.data.data.booked_seats || []).map(
+            (seat) => seat.trim().toUpperCase()
+        );
+
+        // Tạo danh sách ghế
+        const seats = [];
+        for (let i = 0; i < seatsPerRow.length; i++) {
+            const rowLabel = String.fromCharCode(65 + i);
+            const seatCount = seatsPerRow[i];
+            for (let j = 1; j <= seatCount; j++) {
+                const seatId = `${rowLabel}${j}`;
+                const status = bookedSeats.includes(seatId) ? "sold" : "available";
+                seats.push({ id: seatId, status });
+            }
+        }
+        
+        const bookingDetail = await fetchData(`/api/bookings/detail/${ticketId}`);
+        const currentSeats = bookingDetail.seatDetails.map(seat => seat.ten_ghe.trim().toUpperCase());
+
+        // Tạo modal hiển thị sơ đồ ghế
+        const modal = document.createElement("div");
+        modal.className = "modal-overlay";
+        modal.id = "seat-modal";
+        modal.innerHTML = `
+            <div class="room-modal-container">
+                <button class="close-form-btn">×</button>
+                <h2>Sơ đồ ghế phòng chiếu ${ten_phong}</h2>
+                <div class="legend">
+                    <p><span style="background: linear-gradient(to bottom, #ffeb3b, #ffd600);"></span>Ghế màu vàng: Ghế đã chọn bởi vé hiện tại</p>
+                    <p><span style="background: linear-gradient(to bottom, #e53935, #c62828);"></span>Ghế màu đỏ: Ghế đã đặt bởi người khác</p>
+                </div>
+                <div class="seat-selection">
+                    <div class="screen">Màn Hình</div>
+                    <div class="seat-grid" id="seat-grid"></div>
+                </div>
+                <button class="save-seats-btn">Lưu thay đổi</button>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        modal.classList.add("active");
+
+        const closeBtn = modal.querySelector(".close-form-btn");
+        closeBtn.addEventListener("click", () => {
+            modal.remove();
+        });
+
+        // Danh sách ghế được chọn
+        let selectedSeats = [...currentSeats];
+        const initialSeatCount = currentSeats.length;
+
+        const seatGrid = modal.querySelector("#seat-grid");
+        renderSeats(seats, seatGrid, selectedSeats, bookedSeats);
+
+        // Thêm sự kiện chọn ghế
+        seatGrid.addEventListener("click", (e) => {
+            const seatElement = e.target.closest(".seat");
+            if (!seatElement || seatElement.classList.contains("sold")) return;
+
+            const seatId = seatElement.textContent;
+
+            if (selectedSeats.includes(seatId)) {
+                selectedSeats = selectedSeats.filter(id => id !== seatId);
+                seatElement.classList.remove("selected");
+            } else if (!selectedSeats.includes(seatId) && selectedSeats.length < initialSeatCount) {
+                selectedSeats.push(seatId);
+                seatElement.classList.add("selected");
+            }
+        });
+
+        // Thêm sự kiện lưu ghế
+        const saveBtn = modal.querySelector(".save-seats-btn");
+        saveBtn.addEventListener("click", async () => {
+            if (selectedSeats.length != initialSeatCount) {
+                alert('Số lượng đã chọn khác với số lượng ghế ban đầu!');
+                return;
+            }
+
+            try {
+                const response = await axios.put(`/api/bookings/update-seats/`, {
+                    ma_dat_ve: ticketId,
+                    ma_lich_chieu,
+                    seats: selectedSeats,
+                    ma_phong: ma_phong
+                });
+                if (response.data.success) {
+                    alert("Cập nhật ghế thành công!");
+                    modal.remove();
+                    renderTickets(); // Tải lại danh sách vé
+                } else {
+                    throw new Error("Không thể cập nhật ghế!");
+                }
+            } catch (error) {
+                console.error("Lỗi khi cập nhật ghế:", error);
+                alert("Lỗi: " + (error.message || "Không thể cập nhật ghế."));
+            }
+        });
+    } catch (error) {
+        console.error("Lỗi khi lấy danh sách ghế:", error);
+        alert("Lỗi: " + (error.message || "Không thể lấy danh sách ghế."));
+    }
+}
+
+// Hàm render ghế
+function renderSeats(seats, seatGrid, selectedSeats, bookedSeats) {
+    seatGrid.innerHTML = "";
+    const rows = [...new Set(seats.map(row => row.id.charAt(0)))];
+
+    rows.forEach((row) => {
+        const rowSeats = seats.filter((seat) => seat.id.startsWith(row));
+        const rowElement = document.createElement("div");
+        rowElement.classList.add("seat-row");
+
+        const labelElement = document.createElement("div");
+        labelElement.classList.add("row-label");
+        labelElement.textContent = row;
+        rowElement.appendChild(labelElement);
+
+        rowSeats.forEach((seat) => {
+            const seatElement = document.createElement("div");
+            seatElement.classList.add("seat");
+
+            // Ghế đã được đặt bởi người khác
+            if (bookedSeats.includes(seat.id) && !selectedSeats.includes(seat.id)) {
+                seatElement.classList.add("sold");
+            }
+            // Ghế hiện tại được chọn bởi vé này
+            else if (selectedSeats.includes(seat.id)) {
+                seatElement.classList.add("selected");
+            }
+            // Ghế trống
+            else {
+                seatElement.classList.add("available");
+            }
+
+            seatElement.textContent = seat.id;
+            rowElement.appendChild(seatElement);
+        });
+
+        seatGrid.appendChild(rowElement);
+    });
+}
+
+//#endregion
+
 //#region === Khu vực Quản lý Phân Trang ===
 
 // Hàm chuyển đến trang trước
@@ -282,19 +464,12 @@ function handleViewTicket(event) {
 }
 
 // Hàm xử lý khi nhấn nút "Sửa"
-async function handleEditTicket(event) {
+function handleEditTicket(event) {
     const ticketId = event.target.getAttribute('data-id');
-    try {
-        const response = await axios.put(`/api/tickets/${ticketId}`, { /* Dữ liệu cần cập nhật */ }, { withCredentials: true });
-        if (response.data.success) {
-            alert('Cập nhật vé thành công!');
-            renderTickets();
-        } else {
-            throw new Error(response.data.message || 'Không thể cập nhật vé.');
-        }
-    } catch (error) {
-        console.error('Lỗi khi cập nhật vé:', error);
-        alert('Không thể cập nhật vé. Vui lòng thử lại!');
+
+    if (ticketId) {
+        editTicketSeat(ticketId);
+        // document.getElementById('ticket-modal').classList.add('active');
     }
 }
 
@@ -423,7 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault();
-                handleApplyFilter(); 
+                handleApplyFilter();
             }
         });
     });
@@ -435,7 +610,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (event.target.classList.contains('edit-btn')) {
             handleEditTicket(event);
         } else if (event.target.classList.contains('cancel-btn')) {
-            console.log('hi');
             handleCancelTicket(event);
         }
     });
@@ -447,24 +621,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('ticket-modal').addEventListener('click', (event) => {
         if (event.target === document.getElementById('ticket-modal')) {
-            document.getElementById('ticket-modal').classList.remove('active');
-        }
-    });
-
-    // Gắn sự kiện cho nút "Cập nhật" và "Hủy vé" trong modal
-    document.getElementById('update-btn').addEventListener('click', (event) => {
-        const ticketId = document.querySelector('#modal-content').innerHTML.match(/Mã vé: (\w+)/)?.[1];
-        if (ticketId) {
-            handleEditTicket({ target: { getAttribute: () => ticketId } });
-            document.getElementById('ticket-modal').classList.remove('active');
-        }
-    });
-
-    document.getElementById('cancel-btn').addEventListener('click', (event) => {
-        console.log('cancel-btn clicked');
-        const ticketId = document.querySelector('#modal-content').innerHTML.match(/Mã vé: (\w+)/)?.[1];
-        if (ticketId) {
-            handleCancelTicket({ target: { getAttribute: () => ticketId } });
             document.getElementById('ticket-modal').classList.remove('active');
         }
     });

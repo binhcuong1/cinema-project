@@ -189,8 +189,7 @@ function createScheduleModalHTML(date, roomName) {
   return `
       <div class="schedule-modal-content">
           <button class="schedule-close-btn">×</button>
-          <h5 class="modal-title">Thêm Lịch Chiếu</h5>
-          <h5 class="modal-subtitle">${formattedDate} | ${roomName}</h5>
+          <h5 class="modal-title">Thêm Lịch Chiếu - ${formattedDate} | ${roomName}</h5>
           <form id="add-schedule-form">
               <div class="modal-form-row">
                   <div class="schedule-input-group">
@@ -604,26 +603,7 @@ function renderSeats(seats, seatGrid) {
   });
 }
 
-// Hàm tạo input động cho số ghế mỗi hàng
-function generateSeatRowInputs(
-  rowCount,
-  seatRowsContainer,
-  existingSeats = []
-) {
-  seatRowsContainer.innerHTML = "";
-  for (let i = 0; i < rowCount; i++) {
-    const rowLabel = String.fromCharCode(65 + i); // A, B, C...
-    const inputGroup = document.createElement("div");
-    inputGroup.className = "input-group";
-    inputGroup.innerHTML = `
-      <label for="seats-row-${i}">Số ghế hàng ${rowLabel}</label>
-      <input type="number" id="seats-row-${i}" name="seats_row_${i}" value="${
-      existingSeats[i] || ""
-    }" placeholder="Nhập số ghế hàng ${rowLabel}" required>
-    `;
-    seatRowsContainer.appendChild(inputGroup);
-  }
-}
+
 
 //#endregion
 

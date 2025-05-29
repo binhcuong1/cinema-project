@@ -439,7 +439,7 @@ async function handlePaymentSelection(nextPage) {
 
             try {
                 const maDatVe = `ORDER_${Date.now()}`;
-                const response = await axios.post('/api/momo/create-payment', {
+                const response = await axios.post('/api/momo/create-qr', {
                     ma_dat_ve: maDatVe,
                     tongTien: bookingSummary.tong_tien || 65000,
                 }, { withCredentials: true });

@@ -367,7 +367,7 @@ async function handlePaymentSelection(nextPage) {
 
             try {
                 const maDonDat = `ORDER_${Date.now()}`;
-                const response = await axios.post('/api/momo/create-payment', {
+                const response = await axios.post('/api/momo/popcorn/create-qr', {
                     ma_don_dat: maDonDat,
                     tongTien: popcornOrder.tong_tien || 609000,
                 }, { withCredentials: true });

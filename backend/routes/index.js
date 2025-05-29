@@ -17,6 +17,7 @@ const popcornDrinkRouters = require('./popcorn-drinkRoutes');
 const orderRoutes = require('./oderRoutes');
 const vnpayRoutes = require('./vnpayRoutes');
 const revenueRoutes = require('./revenueRoutes');
+const momoRoutes = require('./momoRoutes');
 
 router.use('/movies', movieRoutes);
 router.use('/theaters', theaterRoutes);
@@ -33,6 +34,7 @@ router.use('/ticket-types', ticketTypeRoutes);
 router.use('/popcorn-drink', popcornDrinkRouters)
 router.use('/orders', orderRoutes);
 router.use('/vnpay', vnpayRoutes);
+router.use('/momo', momoRoutes);
 router.use('/revenue', revenueRoutes);
 
 module.exports = router;

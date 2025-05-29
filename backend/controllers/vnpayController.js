@@ -61,7 +61,6 @@ exports.popcorn_CreateQR = async (req, res) => {
 
 exports.checkPaymentVNPAY = async (req, res) => {
     const vnpayResponse = req.query;
-    console.log('VNPAY Response:', vnpayResponse);
 
     if (vnpayResponse.vnp_TxnRef) {
         return res.redirect(`http://127.0.0.1:5500/frontend/pages/booking/checkout.html?paymentSuccess=true&maDatVe=${vnpayResponse.vnp_TxnRef}`);
@@ -74,7 +73,6 @@ exports.checkPaymentVNPAY = async (req, res) => {
 
 exports.popcorn_checkPaymentVNPAY = async (req, res) => {
     const vnpayResponse = req.query;
-    console.log('VNPAY Response:', vnpayResponse);
 
     if (vnpayResponse.vnp_TxnRef) {
         return res.redirect(`http://127.0.0.1:5500/frontend/pages/popcorn-drink/popcorn-checkout.html?paymentSuccess=true&maDatVe=${vnpayResponse.vnp_TxnRef}`);

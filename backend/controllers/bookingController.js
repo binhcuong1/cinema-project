@@ -475,3 +475,65 @@ exports.getPopcornOrderDetailById = (req, res) => {
         );
     });
 };
+
+exports.updateSeats = (req, res) => {
+    const { ma_lich_chieu, ma_dat_ve, seats, ma_phong } = req.body;
+
+    if (!ma_lich_chieu || !ma_dat_ve || !Array.isArray(seats) || seats.length === 0 || !ma_phong) {
+        return res.status(400).json({ success: false, message: 'Thiếu thông tin cập nhật ghế.' });
+    }
+
+    // Tạo placeholders cho IN clause
+    const placeholders = seats.map(() => '?').join(',');
+
+    // Lấy danh sách mã ghế từ tên ghế
+    const getSeatsQuery = `
+        SELECT ma_ghe, ten_ghe
+        FROM ghe
+        WHERE ten_ghe IN (${placeholders}) AND da_xoa = 0 AND ma_phong = ?
+    `;
+
+    db.query(getSeatsQuery, [...seats, ma_phong], (err, seatRows) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Lỗi truy vấn ghế: ' + err.message });
+        }
+        if (!seatRows || seatRows.length !== seats.length) {
+            return res.status(400).json({ success: false, message: 'Một hoặc nhiều ghế không tồn tại.' });
+        }
+
+        // Bước 1: Xóa hoàn toàn trạng thái ghế cũ liên quan đến ma_dat_ve và ma_lich_chieu
+        const deleteOldSeatsQuery = `
+            DELETE FROM trang_thai_ghe_suat_chieu
+            WHERE ma_lich_chieu = ? AND ma_dat_ve = ?
+        `;
+
+        db.query(deleteOldSeatsQuery, [ma_lich_chieu, ma_dat_ve], (err) => {
+            if (err) {
+                return res.status(500).json({ success: false, message: 'Lỗi khi xóa trạng thái ghế cũ: ' + err.message });
+            }
+
+            // Bước 2: Thêm trạng thái ghế mới (thay vì UPDATE, dùng INSERT)
+            const insertPromises = seatRows.map(seat =>
+                new Promise((resolve, reject) => {
+                    db.query(
+                        `INSERT INTO trang_thai_ghe_suat_chieu (ma_lich_chieu, ma_ghe, trang_thai, ma_dat_ve)
+                         VALUES (?, ?, 'da-dat', ?)`,
+                        [ma_lich_chieu, seat.ma_ghe, ma_dat_ve],
+                        (err) => {
+                            if (err) reject(err);
+                            else resolve();
+                        }
+                    );
+                })
+            );
+
+            Promise.all(insertPromises)
+                .then(() => {
+                    res.json({ success: true, message: 'Cập nhật ghế thành công.' });
+                })
+                .catch(error => {
+                    res.status(500).json({ success: false, message: 'Lỗi khi cập nhật ghế: ' + error.message });
+                });
+        });
+    });
+};

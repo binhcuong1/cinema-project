@@ -3,41 +3,46 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    padding-top: 120px; /* Khoảng cách để tránh header (80px header + 20px buffer) */
+    padding-top: 120px;
     box-sizing: border-box;
 }
 
 /* Tiêu đề trang */
 .container h2 {
     font-size: 24px;
-    color: #222;
+    color: #fff;
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
     text-align: left;
     margin-bottom: 20px;
+    margin-top: 50px; /* Thêm margin-top để nhích h2 xuống */
     text-transform: uppercase;
     letter-spacing: 1px;
+    padding: 10px 15px;
+    border-radius: 4px;
 }
-
 /* Bảng danh sách người dùng */
 .user-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
-    color: #333;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    background: linear-gradient(to right, #0a0e17, #1a2a44);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     margin: 20px 0;
-    min-width: 800px; /* Đảm bảo bảng không quá hẹp */
+    min-width: 800px;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 /* Thanh cuộn ngang cho bảng */
 .user-table-wrapper {
     overflow-x: auto;
-    margin-top: 150px; /* Giữ khoảng cách từ header */
+    margin-top: 150px;
 }
 
 /* Tiêu đề bảng */
 .user-table thead {
-    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient cam Cinestar */
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
     color: #fff;
     text-transform: uppercase;
 }
@@ -45,69 +50,69 @@
 .user-table th {
     padding: 12px 15px;
     text-align: left;
-    font-weight: 500;
-    border-bottom: 2px solid #ddd;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Nội dung bảng */
 .user-table td {
     padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-    white-space: nowrap; /* Ngăn xuống hàng */
-    overflow: hidden; /* Ẩn nội dung tràn */
-    text-overflow: ellipsis; /* Thêm dấu ba chấm cho văn bản dài */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Hiệu ứng hover cho hàng */
 .user-table tbody tr:hover {
-    background-color: #f9f9f9;
+    background-color: rgba(255, 255, 255, 0.15);
     transition: background-color 0.3s ease;
 }
 
 /* Đặt chiều rộng cụ thể cho cột */
-.user-table th:nth-child(1), .user-table td:nth-child(1) { /* Mã tài khoản */
-    width: 10%;
-}
-.user-table th:nth-child(2), .user-table td:nth-child(2) { /* Tên đăng nhập */
-    width: 15%;
-}
-.user-table th:nth-child(3), .user-table td:nth-child(3) { /* Họ và tên */
-    width: 20%;
-}
-.user-table th:nth-child(4), .user-table td:nth-child(4) { /* Số điện thoại */
-    width: 15%;
-}
-.user-table th:nth-child(5), .user-table td:nth-child(5) { /* Địa chỉ */
-    width: 25%;
-}
-.user-table th:nth-child(6), .user-table td:nth-child(6) { /* Vai trò */
-    width: 15%;
-    text-align: center; /* Căn giữa select và nút */
-}
+.user-table th:nth-child(1), .user-table td:nth-child(1) { width: 10%; }
+.user-table th:nth-child(2), .user-table td:nth-child(2) { width: 15%; }
+.user-table th:nth-child(3), .user-table td:nth-child(3) { width: 20%; }
+.user-table th:nth-child(4), .user-table td:nth-child(4) { width: 15%; }
+.user-table th:nth-child(5), .user-table td:nth-child(5) { width: 25%; }
+.user-table th:nth-child(6), .user-table td:nth-child(6) { width: 15%; text-align: center; }
 
 /* Kiểu dáng cho select vai trò */
 .role-select {
-    padding: 6px 10px;
+    padding: 8px 12px;
     font-size: 13px;
-    border: 1px solid #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 4px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
     cursor: pointer;
-    max-width: 120px; /* Giới hạn chiều rộng */
+    max-width: 120px;
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .role-select:focus {
     outline: none;
-    border-color: #ff6200; /* Viền cam khi focus */
+    border-color: #ff6200;
+    background-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 5px rgba(255, 98, 0, 0.3);
 }
 
+.role-select option {
+    background: #0a0e17; /* Nền tối mặc định */
+    color: #fff; /* Chữ trắng */
+    padding: 8px;
+    font-size: 13px;
+    transition: background 0.3s ease; /* Hiệu ứng mượt mà */
+}
+
+
+
 /* Kiểu dáng cho nút cập nhật vai trò */
 .update-role-btn {
-    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient cam Cinestar */
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
     color: white;
     border: none;
-    padding: 6px 12px;
+    padding: 8px 12px;
     border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
@@ -118,23 +123,195 @@
 }
 
 .update-role-btn:hover {
-    background: linear-gradient(45deg, #e65a00, #ff6200); /* Gradient đậm hơn */
+    background: linear-gradient(45deg, #e65a00, #ff6200);
     box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
 }
 
 .update-role-btn:active {
-    transform: translateY(1px); /* Hiệu ứng nhấn */
+    transform: translateY(1px);
+}
+
+/* Modal Thêm Người Dùng */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: linear-gradient(to right, #0a0e17, #1a2a44); /* Đổi nền thành gradient xanh đen */
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content h3 {
+    font-size: 20px;
+    color: #fff; /* Đổi chữ thành trắng */
+    text-align: center;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.modal-content label {
+    font-size: 14px;
+    color: #fff; /* Đổi chữ thành trắng */
+    font-weight: 500;
+}
+
+.modal-content input {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Viền trắng nhạt */
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.1); /* Nền trong suốt */
+    color: #fff; /* Chữ trắng */
+}
+
+.modal-content input:focus {
+    outline: none;
+    border-color: #ff6200;
+    box-shadow: 0 0 5px rgba(255, 98, 0, 0.3);
+}
+
+.modal-content input::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Placeholder trắng nhạt */
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    color: #fff; /* Đổi chữ thành trắng */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #ff6200;
+}
+
+.btn.btn-success {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+    align-self: center;
+}
+
+.btn.btn-success:hover {
+    background: linear-gradient(45deg, #e65a00, #ff6200);
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+}
+
+.btn.btn-success:active {
+    transform: translateY(1px);
+}
+
+.btn.btn-primary {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn.btn-primary:hover {
+    background: linear-gradient(45deg, #e65a00, #ff6200);
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+}
+
+.btn.btn-primary:active {
+    transform: translateY(1px);
 }
 
 /* Thông báo lỗi */
 .error-message {
-    color: #dc3545; /* Màu đỏ */
+    color: #fff;
+    background: linear-gradient(45deg, #dc3545, #e4606d);
     text-align: center;
     font-size: 14px;
     padding: 10px;
-    background-color: #f8d7da;
-    border: 1px solid #dc3545;
     border-radius: 4px;
-    margin-top: 10px;
-    display: none; /* Ẩn mặc định */
+    margin: 10px 0;
+    display: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Style khi bảng có nền trắng */
+.user-table.table-white {
+    background: #fff;
+    color: #333;
+}
+
+.user-table.table-white td {
+    border-bottom: 1px solid #ddd;
+}
+
+.user-table.table-white tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.user-table.table-white .role-select {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.user-table.table-white .role-select option {
+    background: #fff;
+    color: #333;
+}
+
+.user-table.table-white .role-select option.role-admin {
+    background: #e6f0ff;
+}
+
+.user-table.table-white .role-select option.role-staff {
+    background: #e6ffe6;
+}
+
+.user-table.table-white .role-select option.role-user {
+    background: #fff;
+}
+
+.user-table.table-white .role-select option.role-superadmin {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: #fff;
+}
+
+.user-table.table-white .role-select option[selected] {
+    background: linear-gradient(45deg, #ff6200, #ff8c00);
+    color: #fff;
+    font-weight: 600;
 }

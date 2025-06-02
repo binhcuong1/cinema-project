@@ -396,9 +396,15 @@ async function deleteMovie(movieId, status) {
 
 async function handleAddMovieSubmit(event) {
   event.preventDefault();
+  // Kiểm tra và lấy nội dung từ CKEditor
   const editorTextarea = document.querySelector("#new-movie-content");
   if (window.editorInstance && editorTextarea) {
-    editorTextarea.value = window.editorInstance.getData();
+    const content = window.editorInstance.getData();
+    if (!content.trim()) {
+      alert("❌ Vui lòng nhập nội dung phim!");
+      return;
+    }
+    editorTextarea.value = content;
   }
   const form = event.target;
   const formData = new FormData(form);
@@ -428,7 +434,12 @@ async function handleEditMovieSubmit(event) {
   event.preventDefault();
   const editorTextarea = document.querySelector("#new-movie-content");
   if (window.editorInstance && editorTextarea) {
-    editorTextarea.value = window.editorInstance.getData();
+    const content = window.editorInstance.getData();
+    if (!content.trim()) {
+      alert("❌ Vui lòng nhập nội dung phim!");
+      return;
+    }
+    editorTextarea.value = content;
   }
   const form = event.target;
   const movieId = form.dataset.movieId;
@@ -529,7 +540,7 @@ async function showMovieEdit() {
             <div class="form-column">
               <div class="form-group">
                 <label for="new-movie-description">Mô tả ngắn:</label>
-                <textarea id="new-movie-description" name="mo_ta" required>${
+                <textarea id="new-movie-description" name="mo_ta" >${
                   data.mo_ta
                 }</textarea>
               </div>   

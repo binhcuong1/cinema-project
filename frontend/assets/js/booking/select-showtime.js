@@ -84,7 +84,7 @@ function setupMovies() {
         if (theaterId) {
             // Bỏ disabled và tải danh sách phim
             movieSelect.disabled = false;
-            await fetchAndRenderOptions(`/api/movies/`, 'booking-movie', 'ma_phim', 'ten_phim', 'phim');
+            await fetchAndRenderOptions(`/api/movies//now-showing`, 'booking-movie', 'ma_phim', 'ten_phim', 'phim');
         } else {
             // Nếu không chọn rạp, disable lại dropdown phim và xóa dữ liệu
             movieSelect.disabled = true;

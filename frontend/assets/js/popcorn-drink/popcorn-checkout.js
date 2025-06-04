@@ -66,7 +66,9 @@ async function checkOrderData() {
     const urlParams = new URLSearchParams(window.location.search);
 
     if (urlParams.get('paymentSuccess') === 'true') {
+
         const maDonDat = urlParams.get('maDonDat') || 'N/A';
+        
         try {
             console.log('Gọi API /api/bookings/popcorn-order với maDonDat:', maDonDat);
             const serverOrderData = await fetchData(`/api/bookings/popcorn-order/${maDonDat}`);
@@ -103,9 +105,9 @@ async function checkOrderData() {
                 <div class="success-message">
                     <h2>Đặt hàng bắp nước thành công!</h2>
                     <p>Chi tiết đơn hàng:</p>
-                    <p>- Rạp: ${popcornOrder.order?.ten_rap || 'Cinema Hai Bà Trưng'}</p>
-                    <p>- Tổng tiền: ${formatCurrency(popcornOrder.order?.tong_tien || 120000)}</p>
-                    <p>- Thời gian đặt: ${new Date(popcornOrder.order?.thoi_gian_dat).toLocaleString('vi-VN')}</p>
+                    <p>- Rạp: ${popcornOrder?.ten_rap || 'Cinema Hai Bà Trưng'}</p>
+                    <p>- Tổng tiền: ${formatCurrency(popcornOrder?.tong_tien || 120000)}</p>
+                    <p>- Thời gian đặt: ${new Date(popcornOrder?.thoi_gian_dat).toLocaleString('vi-VN')}</p>
                     <p id="email-status">Đang gửi email xác nhận...</p>
                 </div>
             `;

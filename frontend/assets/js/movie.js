@@ -134,14 +134,14 @@ async function fetchAndRenderMovies(endpoint, containerId, renderCallback) {
 // Hiển thị phim đang chiếu
 function renderNowShowingMovie(movie) {
   const movieCard = document.createElement("div");
-  movieCard.classList.add("movie-card");
+  movieCard.classList.add("index-movie-card");
   movieCard.innerHTML = `
-    <div class="movie-poster">
+    <div class="index-movie-poster">
       <img src="${movie.image}" alt="${movie.ten_phim}">
     </div>
-    <div class="movie-info">
+    <div class="index-movie-info">
       <h3>${movie.ten_phim}</h3>
-      <div class="movie-meta">
+      <div class="index-movie-meta">
         <span><i class="fas fa-clock"></i> ${movie.thoi_luong_phut} phút</span>
       </div>
     </div>
@@ -151,14 +151,14 @@ function renderNowShowingMovie(movie) {
 
 function renderComingSoonMovie(movie) {
   const movieCard = document.createElement("div");
-  movieCard.classList.add("movie-card");
+  movieCard.classList.add("index-movie-card");
   movieCard.innerHTML = `
-    <div class="movie-poster">
+    <div class="index-movie-poster">
       <img src="${movie.image}" alt="${movie.ten_phim}">
     </div>
-    <div class="movie-info">
+    <div class="index-movie-info">
       <h3>${movie.ten_phim}</h3>
-      <div class="movie-meta">
+      <div class="index-movie-meta">
         <span><i class="fas fa-clock"></i> ${movie.thoi_luong_phut} phút</span>
       </div>
     </div>
@@ -184,25 +184,30 @@ async function fetchComingSoonMovies() {
 
 // Hiển thị tất cả phim trong trang quản lý
 function renderAllMovieHTML(movie) {
+  const statusClass = movie.trang_thai === "dang-chieu" ? "status-now" :
+                     movie.trang_thai === "sap-chieu" ? "status-soon" :
+                     "status-ended";
   return `
-    <div class="movie-card">
+    <div class="movie-card ${statusClass}">
       <div class="movie-poster">
         <img src="${movie.image}" alt="${movie.ten_phim}">
-      </div>
-      <div class="movie-overlay">
-        <button onclick="hrefToViewDetail('${movie.ma_phim}')">Chi tiết</button>
-        <button onclick="hrefToEdit('${movie.ma_phim}')">Sửa</button>
-        <button onclick="deleteMovie('${movie.ma_phim}', '${movie.da_xoa}')" class="delete-btn">Xóa</button>
       </div>
       <div class="movie-info">
         <h3>${movie.ten_phim}</h3>
         <div class="movie-meta">
-          <span><i class="fas fa-clock"></i> ${movie.thoi_luong_phut}</span>
+          <span><i class="fas fa-clock"></i> ${movie.thoi_luong_phut} phút</span>
+          <span class="movie-status">${movie.trang_thai.replace("-", " ").toUpperCase()}</span>
         </div>
+      </div>
+      <div class="movie-overlay">
+        <button onclick="hrefToViewDetail('${movie.ma_phim}')" class="detail-btn">Chi tiết</button>
+        <button onclick="hrefToEdit('${movie.ma_phim}')" class="edit-btn">Sửa</button>
+        <button onclick="deleteMovie('${movie.ma_phim}', '${movie.da_xoa}')" class="delete-btn">Xóa</button>
       </div>
     </div>
   `;
 }
+
 async function fetchAndInitSlickMovies() {
   try {
     const response = await axios.get("/api/movies/");
@@ -250,7 +255,7 @@ async function fetchAndInitSlickMovies() {
 
     renderSlick(now, "slick-now-showing");
     renderSlick(soon, "slick-coming-soon");
-    renderSlick(ended, "slick-ended");
+    renderSlick(end, "slick-ended");
   } catch (error) {
     console.error("Lỗi load phim Slick:", error);
   }
@@ -304,7 +309,7 @@ async function fetchSearchMovies(keyword) {
         "<p class='no-results'>Vui lòng nhập từ khóa tìm kiếm.</p>";
     }
     return;
-  }
+  } c
   await fetchAndRenderMovies(
     `/api/movies/search?keyword=${encodeURIComponent(keyword)}`,
     "search-results",
@@ -525,6 +530,15 @@ async function showMovieEdit() {
                 </select>
               </div>
               <div class="form-group">
+                <label for="status">Trạng thái phim:</label>
+                <select id="status" name="trang_thai" required>
+                  <option value="">Chọn trạng thái</option>
+                  <option value="dang-chieu">Đang chiếu</option>
+                  <option value="sap-chieu">Sắp chiếu</option>
+                  <option value="khong-chieu">Không chiếu</option>
+                </select>
+              </div>
+              <div class="form-group">
                 <label for="new-movie-duration">Thời lượng (phút):</label>
                 <input type="number" id="new-movie-duration" name="thoi_luong_phut" value="${
                   data.thoi_luong_phut
@@ -661,11 +675,118 @@ async function showMovieDetail() {
 
 //#endregion
 
+//#region // === Khu vực xử lý Tìm kiếm phim === //
+
+// Hàm render kết quả tìm kiếm 
+function renderQuickSearchMovie(movie) {
+  const statusClass = movie.trang_thai === "dang-chieu" ? "status-now" :
+                     movie.trang_thai === "sap-chieu" ? "status-soon" :
+                     "status-ended";
+  return `
+    <div class="movie-card ${statusClass}">
+      <div class="movie-poster">
+        <img src="${movie.image}" alt="${movie.ten_phim}">
+      </div>
+      <div class="movie-info">
+        <h3>${movie.ten_phim}</h3>
+        <div class="movie-meta">
+          <span><i class="fas fa-clock"></i> ${movie.thoi_luong_phut} phút</span>
+          <span class="movie-status">${movie.trang_thai.replace("-", " ").toUpperCase()}</span>
+        </div>
+      </div>
+      <div class="movie-overlay">
+        <button onclick="hrefToViewDetail('${movie.ma_phim}')">Chi tiết</button>
+        <button onclick="hrefToEdit('${movie.ma_phim}')">Sửa</button>
+        <button onclick="deleteMovie('${movie.ma_phim}', '${movie.da_xoa}')" class="delete-btn">Xóa</button>
+      </div>
+    </div>
+  `;
+}
+
+// Hàm tìm kiếm nhanh
+async function quickSearchMovies(keyword) {
+  const container = $("#quick-search-results");
+  const resultsSection = document.getElementById("quick-search-results");
+
+  if (!keyword) {
+    resultsSection.style.display = "none";
+    container.html("");
+    return;
+  }
+
+  try {
+    const response = await axios.get(`/api/movies/search?keyword=${encodeURIComponent(keyword)}`);
+    const data = response.data;
+
+    if (!data.success) throw new Error("Dữ liệu không hợp lệ");
+
+    // Hủy Slick nếu đã khởi tạo
+    if (container.hasClass("slick-initialized")) {
+      container.slick("unslick");
+    }
+
+    container.html(""); // Clear kết quả cũ
+    resultsSection.style.display = "block"; // Hiện container kết quả
+
+    if (data.data.length === 0) {
+      container.html("<p class='no-results'>Không tìm thấy phim.</p>");
+      return;
+    }
+
+    data.data.forEach((movie) => container.append(renderQuickSearchMovie(movie)));
+
+    // Khởi tạo lại Slick cho kết quả tìm kiếm
+    container.slick({
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      rows: 1,
+      infinite: false,
+      arrows: true,
+      prevArrow: '<button type="button" class="slick-prev custom-arrow"><i class="fas fa-chevron-left"></i></button>',
+      nextArrow: '<button type="button" class="slick-next custom-arrow"><i class="fas fa-chevron-right"></i></button>',
+      responsive: [
+        { breakpoint: 992, settings: { slidesToShow: 3, rows: 1 } },
+        { breakpoint: 768, settings: { slidesToShow: 2, rows: 1 } },
+        { breakpoint: 480, settings: { slidesToShow: 1, rows: 1 } },
+      ],
+    });
+  } catch (error) {
+    console.error("Lỗi khi tìm kiếm:", error);
+    container.html(`<p class='error'>${error.message}</p>`);
+  }
+}
+
+// Gắn sự kiện cho thanh tìm kiếm nhanh
+function initializeQuickSearch() {
+  const searchInput = document.getElementById("quick-search-input");
+  const searchBtn = document.getElementById("quick-search-btn");
+
+  if (searchInput && searchBtn) {
+    // Tìm kiếm khi nhấn nút
+    searchBtn.addEventListener("click", () => {
+      const keyword = searchInput.value.trim();
+      quickSearchMovies(keyword);
+    });
+
+    // Tìm kiếm khi nhấn Enter
+    searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const keyword = searchInput.value.trim();
+        quickSearchMovies(keyword);
+      }
+    });
+  }
+}
+
+//#endregion
+
+
 // === Khu vực Khởi tạo === //
 window.onload = () => {
   const currentPage = document.body.dataset.page;
 
   initializeSearch();
+  initializeQuickSearch(); 
   switch (currentPage) {
     case "index":
       fetchNowShowingMovies();
@@ -681,7 +802,6 @@ window.onload = () => {
         addForm.addEventListener("submit", handleAddMovieSubmit);
       }
 
-      // Khởi tạo CKEditor
       if (window.ClassicEditor) {
         ClassicEditor.create(document.querySelector("#new-movie-content"))
           .then((editor) => {

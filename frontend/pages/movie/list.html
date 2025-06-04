@@ -37,6 +37,16 @@
       <div class="movies-container">
         <div class="page-header">
           <h1><i class="fas fa-film"></i> Quản Lý Phim</h1>
+          <div class="search-bar">
+            <input
+              type="text"
+              id="quick-search-input"
+              placeholder="Tìm kiếm phim nhanh..."
+            />
+            <button id="quick-search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
           <button
             class="add-movie-btn"
             onclick="window.location.href='/frontend/pages/movie/add.html'"
@@ -48,6 +58,9 @@
           <a href="/frontend/pages/index.html">Trang Chủ</a> /
           <span>Quản Lý Phim</span>
         </nav>
+
+        <!-- Kết quả tìm kiếm -->
+        <div id="quick-search-results" class="slick-carousel" style="display: none;"></div>
 
         <h2>🎬 Phim Đang Chiếu</h2>
         <div id="slick-now-showing" class="slick-carousel"></div>

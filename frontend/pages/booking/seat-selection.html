@@ -26,7 +26,7 @@
     <main class="main-content">
 
         <div class="movies-container">
-            <!-- Phần hiển thị kết quả đặt vé (tĩnh) -->
+            <!-- Phần hiển thị kết quả đặt vé -->
             <div id="booking-details">
                 <br>
                 <div class="booking-details-container">
@@ -51,13 +51,13 @@
                         <p class="info-item" id="theater-display"><strong>Rạp:</strong> Chưa chọn</p>
                         <p class="info-item" id="date-display"><strong>Ngày:</strong> Chưa chọn</p>
                         <p class="info-item" id="showtime-display"><strong>Suất chiếu:</strong> Chưa chọn</p>
-                        <a id="trailer-link" href="" class="trailer-link">
+                        <button id="trailer-btn" class="trailer-btn">
                             <i class="fa-solid fa-play"></i> Xem trailer
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Phần chọn loại vé -->
             <div class="ticket-options" id="ticket-options">
                 <!-- Danh sách loại vé sẽ được render động -->
@@ -102,6 +102,15 @@
                         onmouseout="this.style.backgroundColor='#ffeb3b'">
                         Đặt Vé
                     </a>
+                </div>
+            </div>
+        </div>
+        <!-- Modal để hiển thị trailer -->
+        <div id="trailer-modal" class="trailer-modal">
+            <div class="modal-content">
+                <span id="close-modal" class="close-modal">&times;</span>
+                <div class="video-container">
+                    <iframe id="trailer-iframe" src="" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>

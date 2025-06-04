@@ -87,10 +87,12 @@ async function checkBookingData() {
 
     if (urlParams.get('paymentSuccess') === 'true') {
         const maDatVe = urlParams.get('maDatVe') || 'N/A';
+        console.log('maDatVe: ', maDatVe);
         try {
             // Lấy dữ liệu từ server dựa trên maDatVe
             console.log('Gọi API /api/bookings/detail với maDatVe:', maDatVe);
             const serverBookingData = await fetchData(`/api/bookings/detail/${maDatVe}`);
+
             if (serverBookingData) {
                 bookingSummary = serverBookingData; // Cập nhật nếu server trả về dữ liệu
                 let bookingData = JSON.parse(sessionStorage.getItem('bookingData') || '{}');
@@ -124,7 +126,7 @@ async function checkBookingData() {
         } else {
             console.warn('Không tìm thấy phần tử .timer-container để ẩn');
         }
-
+        
         // Hiển thị thông báo đặt vé thành công ngay lập tức
         const ticketInfoBox = document.querySelector('.ticket-info-box');
         if (ticketInfoBox) {

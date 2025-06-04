@@ -115,7 +115,16 @@ function updateMovieDetails(movieData, scheduleData) {
     document.getElementById('music').innerHTML = `<strong>Âm thanh:</strong> ${scheduleData.ten_am_thanh}`;
     document.getElementById('release-date').innerHTML = `<strong>Khởi chiếu:</strong> ${movieData.ngay_phat_hanh ? formatDisplayDate(movieData.ngay_phat_hanh) : 'Không có thông tin'}`;
     document.getElementById('synopsis').textContent = movieData.noi_dung_phim || 'Không có mô tả';
-    document.getElementById('trailer-link').href = movieData.trailer || 'Không có trailer';
+
+    // Xử lý trailer
+    const trailerLink = movieData.trailer || '';
+    const trailerBtn = document.getElementById('trailer-btn');
+    if (trailerLink) {
+        trailerBtn.style.display = 'inline-flex';
+        trailerBtn.addEventListener('click', () => openTrailerModal(trailerLink));
+    } else {
+        trailerBtn.style.display = 'none';
+    }
 }
 
 // Hàm khởi tạo hiển thị chi tiết khi trang tải
@@ -144,6 +153,61 @@ async function initializeSeatSelection() {
         showError(document.getElementById('booking-details'), error.message || "Đã xảy ra lỗi khi tải thông tin phim.");
     }
 }
+
+// Hàm chuyển link YouTube thành link nhúng
+function getYouTubeEmbedUrl(url) {
+    let videoId = '';
+    // Xử lý các định dạng link YouTube
+    if (url.includes('youtube.com/watch?v=')) {
+        const urlParams = new URLSearchParams(new URL(url).search);
+        videoId = urlParams.get('v');
+    } else if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split('?')[0];
+    }
+
+    if (videoId) {
+        return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    }
+    return '';
+}
+
+// Hàm mở modal và nhúng video
+function openTrailerModal(trailerUrl) {
+    const modal = document.getElementById('trailer-modal');
+    const iframe = document.getElementById('trailer-iframe');
+    const embedUrl = getYouTubeEmbedUrl(trailerUrl);
+
+    if (embedUrl) {
+        iframe.src = embedUrl;
+        modal.classList.add('show');
+    } else {
+        alert('Link trailer không hợp lệ!');
+    }
+}
+
+// Hàm đóng modal và dừng video
+function closeTrailerModal() {
+    const modal = document.getElementById('trailer-modal');
+    const iframe = document.getElementById('trailer-iframe');
+    modal.classList.remove('show');
+    iframe.src = ''; // Dừng video bằng cách xóa src
+}
+
+// Thêm sự kiện đóng modal
+document.addEventListener('DOMContentLoaded', () => {
+    const closeModalBtn = document.getElementById('close-modal');
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeTrailerModal);
+    }
+
+    // Đóng modal khi nhấn ra ngoài video
+    const modal = document.getElementById('trailer-modal');
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeTrailerModal();
+        }
+    });
+});
 
 //#endregion
 
@@ -243,9 +307,9 @@ function createSnackOption(snack) {
                 <p>${snack.ten_bap_nuoc}</p>
                 <p class="price">${price} VNĐ</p>
                 <div class="counter">
-                    <button onclick="updateSnackQuantity('${snackId}', -1)">-</button>
-                    <span id="${snackId}-quantity">${snackQuantities[snackId] || 0}</span>
-                    <button onclick="updateSnackQuantity('${snackId}', 1)">+</button>
+                    <button onclick="updateSnackQuantity('${snackId}', -1, this)">-</button>
+                    <span class="quantity-display" data-snack-id="${snackId}">${snackQuantities[snackId] || 0}</span>
+                    <button onclick="updateSnackQuantity('${snackId}', 1, this)">+</button>
                 </div>
             </div>
         </div>
@@ -258,7 +322,7 @@ async function renderSnacks() {
     try {
         const snacks = await fetchData('/api/popcorn-drink/');
         snackOptionsContainer.innerHTML = '';
-
+        console.table('table: ', snacks);
         // Phân loại bắp nước theo ten_loai
         const groupedSnacks = {};
         snacks.forEach(snack => {
@@ -293,9 +357,16 @@ async function renderSnacks() {
 }
 
 // Hàm cập nhật số lượng bắp nước
-function updateSnackQuantity(type, change) {
-    const quantityElement = document.getElementById(`${type}-quantity`);
-    let quantity = snackQuantities[type];
+function updateSnackQuantity(type, change, button) {
+    const quantityElement = button.parentElement.querySelector('.quantity-display');
+
+    // Kiểm tra quantityElement
+    if (!quantityElement) {
+        console.error(`Không tìm thấy quantity-display cho snack ${type}`);
+        return;
+    }
+
+    let quantity = snackQuantities[type] || 0;
     quantity += change;
 
     if (quantity < 0) quantity = 0;

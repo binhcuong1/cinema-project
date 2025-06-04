@@ -6,11 +6,13 @@
     height: 500px;
     margin-bottom: 50px;
     margin-top: 160px;
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
 }
 
 .banner-container {
     position: relative;
     height: 100%;
+    width: 100%; /* Đảm bảo chiều rộng khớp với hero-banner */
 }
 
 .banner-arrows {
@@ -50,8 +52,10 @@
 .banner-content img {
     width: 100%;
     height: 100%;
+    max-height: 500px; /* Giữ giới hạn chiều cao nếu cần */
     object-fit: cover;
     object-position: center;
+    display: block;
 }
 
 .banner-info {
@@ -309,7 +313,7 @@
     width: 100%;
 }
 
-.movie-grid {
+.index-movie-grid {
     display: flex;
     gap: 15px;
     transition: transform 0.5s ease;
@@ -322,16 +326,16 @@
     margin: 0 auto;
 }
 
-.movie-grid::-webkit-scrollbar {
+.index-movie-grid::-webkit-scrollbar {
     display: none;
 }
 
-.movie-grid {
+.index-movie-grid {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-.movie-card {
+.index-movie-card {
     position: relative;
     overflow: hidden;
     border-radius: 8px;
@@ -340,18 +344,18 @@
     min-width: calc(25% - 12px);
 }
 
-.movie-card:hover {
+.index-movie-card:hover {
     transform: scale(1.05);
 }
 
-.movie-poster img {
+.index-movie-poster img {
     width: 100%;
     height: 350px;
     object-fit: cover;
     border-radius: 8px;
 }
 
-.movie-overlay {
+.index-movie-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -367,11 +371,11 @@
     transition: opacity 0.3s ease;
 }
 
-.movie-card:hover .movie-overlay {
+.index-movie-card:hover .index-movie-overlay {
     opacity: 1;
 }
 
-.movie-overlay button {
+.index-movie-overlay button {
     padding: 8px 15px;
     background: #ff6200;
     color: #fff;
@@ -382,22 +386,22 @@
     transition: background 0.3s ease;
 }
 
-.movie-overlay button:hover {
+.index-movie-overlay button:hover {
     background: #e55a00;
 }
 
-.movie-info {
+.index-movie-info {
     text-align: center;
     padding: 10px 0;
 }
 
-.movie-info h3 {
+.index-movie-info h3 {
     font-size: 18px;
     margin-bottom: 5px;
     color: #fff;
 }
 
-.movie-meta {
+.index-movie-meta {
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -413,7 +417,7 @@
     right: 0;
     display: flex;
     justify-content: space-between;
-    padding: shovel 80px;
+    padding: 0 80px;
     transform: translateY(-50%);
     pointer-events: none;
     z-index: 20;
@@ -452,64 +456,24 @@
 
 /* Thiết kế responsive cho lưới phim và nút điều hướng */
 @media (max-width: 768px) {
-    .movie-card {
-        flex: 0 0 calc(50% - 10px);
-        min-width: calc(50% - 10px);
-    }
-
-    .movie-poster img {
+    .hero-banner {
         height: 300px;
+        margin-top: 100px;
     }
 
-    .movie-grid {
-        min-height: 350px;
-    }
-
-    .movie-categories-nowShowing h2,
-    .movie-categories-comingSoon h2 {
-        font-size: 20px;
-        padding-left: 10px;
-    }
-
-    .movie-categories-nowShowing .movie-grid-container,
-    .movie-categories-comingSoon .movie-grid-container {
-        padding: 0 10px;
-    }
-
-    .movie-arrows button {
-        width: 30px;
-        height: 30px;
-        font-size: 16px;
-    }
-
-    .movie-arrows {
-        padding: 0 5px;
+    .banner-content img {
+        max-height: 300px;
     }
 }
 
 @media (max-width: 480px) {
-    .movie-card {
-        flex: 0 0 calc(100% - 10px);
-        min-width: calc(100% - 10px);
+    .hero-banner {
+        height: 200px;
+        margin-top: 80px;
     }
 
-    .movie-grid {
-        min-height: 350px;
-    }
-
-    .movie-arrows button {
-        width: 30px;
-        height: 30px;
-        font-size: 14px;
-    }
-
-    .movie-arrows {
-        padding: 0 5px;
-    }
-
-    .movie-categories-nowShowing .movie-grid-container,
-    .movie-categories-comingSoon .movie-grid-container {
-        padding: 0 10px;
+    .banner-content img {
+        max-height: 200px;
     }
 }
 

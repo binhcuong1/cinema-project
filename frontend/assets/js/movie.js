@@ -184,9 +184,12 @@ async function fetchComingSoonMovies() {
 
 // Hiển thị tất cả phim trong trang quản lý
 function renderAllMovieHTML(movie) {
-  const statusClass = movie.trang_thai === "dang-chieu" ? "status-now" :
-                     movie.trang_thai === "sap-chieu" ? "status-soon" :
-                     "status-ended";
+  const statusClass =
+    movie.trang_thai === "dang-chieu"
+      ? "status-now"
+      : movie.trang_thai === "sap-chieu"
+      ? "status-soon"
+      : "status-ended";
   return `
     <div class="movie-card ${statusClass}">
       <div class="movie-poster">
@@ -195,14 +198,24 @@ function renderAllMovieHTML(movie) {
       <div class="movie-info">
         <h3>${movie.ten_phim}</h3>
         <div class="movie-meta">
-          <span><i class="fas fa-clock"></i> ${movie.thoi_luong_phut} phút</span>
-          <span class="movie-status">${movie.trang_thai.replace("-", " ").toUpperCase()}</span>
+          <span><i class="fas fa-clock"></i> ${
+            movie.thoi_luong_phut
+          } phút</span>
+          <span class="movie-status">${movie.trang_thai
+            .replace("-", " ")
+            .toUpperCase()}</span>
         </div>
       </div>
       <div class="movie-overlay">
-        <button onclick="hrefToViewDetail('${movie.ma_phim}')" class="detail-btn">Chi tiết</button>
-        <button onclick="hrefToEdit('${movie.ma_phim}')" class="edit-btn">Sửa</button>
-        <button onclick="deleteMovie('${movie.ma_phim}', '${movie.da_xoa}')" class="delete-btn">Xóa</button>
+        <button onclick="hrefToViewDetail('${
+          movie.ma_phim
+        }')" class="detail-btn">Chi tiết</button>
+        <button onclick="hrefToEdit('${
+          movie.ma_phim
+        }')" class="edit-btn">Sửa</button>
+        <button onclick="deleteMovie('${movie.ma_phim}', '${
+    movie.da_xoa
+  }')" class="delete-btn">Xóa</button>
       </div>
     </div>
   `;
@@ -309,7 +322,8 @@ async function fetchSearchMovies(keyword) {
         "<p class='no-results'>Vui lòng nhập từ khóa tìm kiếm.</p>";
     }
     return;
-  } c
+  }
+  c;
   await fetchAndRenderMovies(
     `/api/movies/search?keyword=${encodeURIComponent(keyword)}`,
     "search-results",
@@ -405,11 +419,12 @@ async function handleAddMovieSubmit(event) {
   const editorTextarea = document.querySelector("#new-movie-content");
   if (window.editorInstance && editorTextarea) {
     const content = window.editorInstance.getData();
+    const plainText = content.replace(/<[^>]*>/g, "").trim();
     if (!content.trim()) {
       alert("❌ Vui lòng nhập nội dung phim!");
       return;
     }
-    editorTextarea.value = content;
+    editorTextarea.value = plainText;
   }
   const form = event.target;
   const formData = new FormData(form);
@@ -440,11 +455,12 @@ async function handleEditMovieSubmit(event) {
   const editorTextarea = document.querySelector("#new-movie-content");
   if (window.editorInstance && editorTextarea) {
     const content = window.editorInstance.getData();
+    const plainText = content.replace(/<[^>]*>/g, "").trim();
     if (!content.trim()) {
       alert("❌ Vui lòng nhập nội dung phim!");
       return;
     }
-    editorTextarea.value = content;
+    editorTextarea.value = plainText;
   }
   const form = event.target;
   const movieId = form.dataset.movieId;
@@ -677,11 +693,14 @@ async function showMovieDetail() {
 
 //#region // === Khu vực xử lý Tìm kiếm phim === //
 
-// Hàm render kết quả tìm kiếm 
+// Hàm render kết quả tìm kiếm
 function renderQuickSearchMovie(movie) {
-  const statusClass = movie.trang_thai === "dang-chieu" ? "status-now" :
-                     movie.trang_thai === "sap-chieu" ? "status-soon" :
-                     "status-ended";
+  const statusClass =
+    movie.trang_thai === "dang-chieu"
+      ? "status-now"
+      : movie.trang_thai === "sap-chieu"
+      ? "status-soon"
+      : "status-ended";
   return `
     <div class="movie-card ${statusClass}">
       <div class="movie-poster">
@@ -690,14 +709,20 @@ function renderQuickSearchMovie(movie) {
       <div class="movie-info">
         <h3>${movie.ten_phim}</h3>
         <div class="movie-meta">
-          <span><i class="fas fa-clock"></i> ${movie.thoi_luong_phut} phút</span>
-          <span class="movie-status">${movie.trang_thai.replace("-", " ").toUpperCase()}</span>
+          <span><i class="fas fa-clock"></i> ${
+            movie.thoi_luong_phut
+          } phút</span>
+          <span class="movie-status">${movie.trang_thai
+            .replace("-", " ")
+            .toUpperCase()}</span>
         </div>
       </div>
       <div class="movie-overlay">
         <button onclick="hrefToViewDetail('${movie.ma_phim}')">Chi tiết</button>
         <button onclick="hrefToEdit('${movie.ma_phim}')">Sửa</button>
-        <button onclick="deleteMovie('${movie.ma_phim}', '${movie.da_xoa}')" class="delete-btn">Xóa</button>
+        <button onclick="deleteMovie('${movie.ma_phim}', '${
+    movie.da_xoa
+  }')" class="delete-btn">Xóa</button>
       </div>
     </div>
   `;
@@ -715,7 +740,9 @@ async function quickSearchMovies(keyword) {
   }
 
   try {
-    const response = await axios.get(`/api/movies/search?keyword=${encodeURIComponent(keyword)}`);
+    const response = await axios.get(
+      `/api/movies/search?keyword=${encodeURIComponent(keyword)}`
+    );
     const data = response.data;
 
     if (!data.success) throw new Error("Dữ liệu không hợp lệ");
@@ -733,7 +760,9 @@ async function quickSearchMovies(keyword) {
       return;
     }
 
-    data.data.forEach((movie) => container.append(renderQuickSearchMovie(movie)));
+    data.data.forEach((movie) =>
+      container.append(renderQuickSearchMovie(movie))
+    );
 
     // Khởi tạo lại Slick cho kết quả tìm kiếm
     container.slick({
@@ -742,8 +771,10 @@ async function quickSearchMovies(keyword) {
       rows: 1,
       infinite: false,
       arrows: true,
-      prevArrow: '<button type="button" class="slick-prev custom-arrow"><i class="fas fa-chevron-left"></i></button>',
-      nextArrow: '<button type="button" class="slick-next custom-arrow"><i class="fas fa-chevron-right"></i></button>',
+      prevArrow:
+        '<button type="button" class="slick-prev custom-arrow"><i class="fas fa-chevron-left"></i></button>',
+      nextArrow:
+        '<button type="button" class="slick-next custom-arrow"><i class="fas fa-chevron-right"></i></button>',
       responsive: [
         { breakpoint: 992, settings: { slidesToShow: 3, rows: 1 } },
         { breakpoint: 768, settings: { slidesToShow: 2, rows: 1 } },
@@ -780,13 +811,12 @@ function initializeQuickSearch() {
 
 //#endregion
 
-
 // === Khu vực Khởi tạo === //
 window.onload = () => {
   const currentPage = document.body.dataset.page;
 
   initializeSearch();
-  initializeQuickSearch(); 
+  initializeQuickSearch();
   switch (currentPage) {
     case "index":
       fetchNowShowingMovies();

@@ -217,13 +217,12 @@ async function fetchUsers() {
       response.data.data.forEach((user) => {
         const row = document.createElement("tr");
         row.innerHTML = `
-          <td>${user.ma_tai_khoan}</td>
           <td>${user.ten_dang_nhap}</td>
           <td>${user.ho_va_ten}</td>
           <td>${user.sdt || ""}</td>
           <td>${user.diachi || ""}</td>
           <td>
-            <select class="role-select" data-id="${user.ma_tai_khoan}">
+            <select class="role-select" data-id="${user.ma_tai_khoan}" ${user.role_id === 99 ? "disabled" : ""}>
                 <option value="1" ${
                   user.role_id === 1 ? "selected" : ""
                 }>Admin</option>
@@ -239,9 +238,15 @@ async function fetchUsers() {
                     : ""
                 }
             </select>
-            <button class="update-role-btn" data-id="${
-              user.ma_tai_khoan
-            }" data-role="${user.role_id}">Cập nhật</button>
+            ${
+              user.role_id === 99 
+              ? ""
+              :
+              `<button class="update-role-btn" data-id="${
+                  user.ma_tai_khoan
+                }" data-role="${user.role_id}">Cập nhật</button>
+            `
+            }
           </td>
         `;
         userList.appendChild(row);

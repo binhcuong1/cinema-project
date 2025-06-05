@@ -718,8 +718,12 @@ function renderQuickSearchMovie(movie) {
         </div>
       </div>
       <div class="movie-overlay">
-        <button onclick="hrefToViewDetail('${movie.ma_phim}')">Chi tiết</button>
-        <button onclick="hrefToEdit('${movie.ma_phim}')">Sửa</button>
+        <button onclick="hrefToViewDetail('${
+          movie.ma_phim
+        }')" class="detail-btn">Chi tiết</button>
+        <button onclick="hrefToEdit('${
+          movie.ma_phim
+        }')" class="edit-btn">Sửa</button>
         <button onclick="deleteMovie('${movie.ma_phim}', '${
     movie.da_xoa
   }')" class="delete-btn">Xóa</button>

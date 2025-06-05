@@ -1025,3 +1025,34 @@
         padding: 10px 20px;
     }
 }
+
+.movie-categories-nowShowing,
+.movie-categories-comingSoon {
+    margin-bottom: 40px;
+}
+
+.movie-grid-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.movie-grid {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+}
+
+.movie-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.movie-grid::-webkit-scrollbar-thumb {
+    background: #ff6200;
+    border-radius: 4px;
+}
+
+.movie-grid::-webkit-scrollbar-track {
+    background: #1a2a44;
+}

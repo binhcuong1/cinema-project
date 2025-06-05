@@ -9,7 +9,6 @@ async function fetchPromotions() {
             console.error("API không trả về dữ liệu hợp lệ:", res.data);
             return [];
         }
-        console.log("Dữ liệu khuyến mãi thô:", res.data.data);
         return res.data.data;
     } catch (err) {
         console.error("Lỗi khi gọi API /api/promotions:", err.message, err.stack);
@@ -113,9 +112,6 @@ async function fetchHomePromotions() {
         );
     });
 
-    console.log("Số lượng khuyến mãi sau lọc:", filteredPromos.length);
-    console.log("Danh sách khuyến mãi:", filteredPromos);
-
     container.innerHTML = "";
     if (filteredPromos.length === 0) {
         console.warn("Không có khuyến mãi nào thỏa mãn điều kiện!");
@@ -127,7 +123,6 @@ async function fetchHomePromotions() {
     filteredPromos.forEach(promo => {
         const card = renderHomePromotionCard(promo);
         fragment.appendChild(card);
-        console.log("Đã thêm card:", promo.ten_khuyen_mai);
     });
     container.appendChild(fragment);
 
@@ -142,12 +137,10 @@ async function fetchHomePromotions() {
     }
 
     const cardWidth = grid.querySelector(".promo-card")?.offsetWidth + 20 || 400; // Chiều rộng card + gap, mặc định 400px
-    console.log("Chiều rộng card:", cardWidth);
 
     function updateArrowState() {
         leftArrow.disabled = grid.scrollLeft <= 0;
         rightArrow.disabled = grid.scrollLeft >= grid.scrollWidth - grid.clientWidth - 1;
-        console.log("Scroll position:", grid.scrollLeft, "Max scroll:", grid.scrollWidth - grid.clientWidth);
     }
 
     leftArrow.addEventListener("click", () => {

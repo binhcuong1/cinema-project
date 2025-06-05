@@ -1,3 +1,5 @@
+/* assets/css/style.css */
+
 /* Định dạng container chính */
 .movies-container {
   max-width: 1280px;
@@ -24,7 +26,7 @@
 
 .add-movie-btn {
   padding: 12px 24px;
-  background: #333333;
+  background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient cam */
   color: #ffffff;
   border: none;
   border-radius: 6px;
@@ -34,12 +36,13 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3); /* Thêm shadow nhẹ */
 }
 
 .add-movie-btn:hover {
-  background: #454545;
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* Hiệu ứng nâng lên */
+  box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5); /* Tăng shadow khi hover */
 }
 
 /* Định dạng breadcrumb */
@@ -228,33 +231,44 @@
 #quick-search-input {
   padding: 10px 16px;
   font-size: 14px;
-  border: 1px solid #333333;
-  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Viền trắng mờ */
+  border-radius: 25px; /* Bo góc tròn hơn */
   width: 240px;
-  background-color: #1c1c1c;
+  background-color: #1a2a44; /* Màu nền tối hơn */
   color: #e5e5e5;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+#quick-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5); /* Màu placeholder */
 }
 
 #quick-search-input:focus {
-  border-color: #ffffff;
+  border-color: #ff6200; /* Viền cam khi focus */
+  background-color: #0a0e17; /* Màu nền tối hơn khi focus */
+  box-shadow: 0 0 10px rgba(255, 98, 0, 0.3); /* Hiệu ứng shadow */
   outline: none;
 }
 
 #quick-search-btn {
   padding: 10px 20px;
-  background-color: #333333;
+  background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient cam */
   border: none;
-  border-radius: 6px;
+  border-radius: 25px; /* Bo góc tròn hơn */
   color: #ffffff;
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
-  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
 }
 
 #quick-search-btn:hover {
-  background-color: #454545;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
 }
 
 /* Định dạng kết quả tìm kiếm */
@@ -284,6 +298,18 @@
 
   #quick-search-input {
     width: 100%;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  #quick-search-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .add-movie-btn {
+    font-size: 14px;
+    padding: 10px 20px;
   }
 }
 

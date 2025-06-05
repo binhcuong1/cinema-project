@@ -38,9 +38,8 @@ async function fetchAndRenderOptions(endpoint, dropdownId, valueKey = 'id', labe
 
         const fragment = document.createDocumentFragment();
         data.data.forEach(item => {
-            console.log('item: ', item); // Log từng item để kiểm tra
             const div = document.createElement('div');
-            div.setAttribute('data-value', item[valueKey] || ''); // Đảm bảo data-value luôn có giá trị
+            div.setAttribute('data-value', item[valueKey] || '');
 
             if (labelKey === 'date') {
                 const date = new Date(item[labelKey]);
@@ -53,10 +52,9 @@ async function fetchAndRenderOptions(endpoint, dropdownId, valueKey = 'id', labe
                 const [hours, minutes] = (item[labelKey] || '00:00:00').split(':');
                 div.textContent = `${hours}:${minutes}`;
             } else {
-                div.textContent = item[labelKey] || 'Không có tên'; // Đảm bảo textContent luôn có giá trị
+                div.textContent = item[labelKey] || 'Không có tên';
             }
 
-            console.log('div created: ', div.textContent, 'data-value: ', div.getAttribute('data-value')); // Log để kiểm tra div
             div.addEventListener('click', async () => {
                 const stepElement = div.closest('.booking-step');
                 const stepBtn = stepElement.querySelector('.step-btn');
@@ -79,7 +77,7 @@ async function fetchAndRenderOptions(endpoint, dropdownId, valueKey = 'id', labe
                     if (dropdownId === 'theater-dropdown') {
                         bookingData.theaterId = item[valueKey];
                         bookingData.theaterName = item[labelKey];
-                        await fetchAndRenderOptions(`/api/movies/`, 'movie-dropdown', 'ma_phim', 'ten_phim', 'phim');
+                        await fetchAndRenderOptions(`/api/movies/now-showing`, 'movie-dropdown', 'ma_phim', 'ten_phim', 'phim');
                     } else if (dropdownId === 'movie-dropdown') {
                         bookingData.movieId = item[valueKey];
                         bookingData.movieName = item[labelKey];
@@ -115,7 +113,6 @@ async function fetchAndRenderOptions(endpoint, dropdownId, valueKey = 'id', labe
         });
 
         dropdown.appendChild(fragment);
-        console.log('Number of items added: ', fragment.childNodes.length); // Log số lượng item được thêm
     } catch (error) {
         console.error(`Lỗi khi lấy ${dropdownId}:`, error);
         dropdown.innerHTML = `<div>Không có dữ liệu</div>`;
@@ -143,21 +140,6 @@ function enableNextSteps(dropdownId) {
 // Tải danh sách rạp
 async function loadTheaters() {
     await fetchAndRenderOptions('/api/theaters/', 'theater-dropdown', 'ma_rap', 'ten_rap', 'rạp');
-}
-
-// Tải danh sách phim dựa trên rạp đã chọn
-function setupMovies() {
-    // Logic đã được tích hợp vào fetchAndRenderOptions khi chọn rạp
-}
-
-// Tải danh sách ngày dựa trên phim đã chọn
-function setupDates() {
-    // Logic đã được tích hợp vào fetchAndRenderOptions khi chọn phim
-}
-
-// Tải danh sách suất dựa trên ngày đã chọn
-function setupShowtimes() {
-    // Logic đã được tích hợp vào fetchAndRenderOptions khi chọn ngày
 }
 
 // Xử lý sự kiện mở/đóng dropdown
@@ -209,9 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const page = document.body.getAttribute('data-page');
     if (page === 'index') {
         loadTheaters();
-        setupMovies();
-        setupDates();
-        setupShowtimes();
         setupDropdowns();
         setupBooking();
     }

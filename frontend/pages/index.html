@@ -10,7 +10,7 @@
     <meta property="og:title" content="BiCyHD Cinema">
     <meta property="og:description" content="Đặt vé xem phim nhanh chóng tại BiCyHD Cinema.">
     <meta property="og:image" content="/frontend/assets/images/logo.jpg">
-    <title>CiBYHD Cinema</title>
+    <title>CBHD Cinema</title>
     <!-- Favicon -->
     <link rel="icon" href="/frontend/assets/images/favicon.ico" type="image/x-icon">
     <!-- CSS -->
@@ -107,7 +107,7 @@
                 </button>
             </div>
             <div class="movie-grid-container">
-                <div id="movie-list-nowShowing" class="index-movie-grid">
+                <div id="movie-list-nowShowing" class="movie-grid">
                     <p class="loading">Đang tải phim...</p>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                 </button>
             </div>
             <div class="movie-grid-container">
-                <div id="movie-list-comingSoon" class="index-movie-grid">
+                <div id="movie-list-comingSoon" class="movie-grid">
                     <p class="loading">Đang tải phim...</p>
                 </div>
             </div>
@@ -146,12 +146,9 @@
                 </div>
             </div>
             <div class="promo-button">
-                <a href="promotion.html" class="btn">Tất cả ưu đãi</a>
+                <a href="promotion.html" class="section-button">Tất cả ưu đãi</a>
             </div>
         </section>
-
-        <!-- Thành viên BiCYHD -->
-        
 
         <!-- Tất cả các giải trí -->
         <section class="entertainment">
@@ -184,6 +181,9 @@
                     </a>
                 </div>
             </div>
+            <div class="section-button-container">
+                <a href="#" class="section-button">Xem thêm</a>
+            </div>
         </section>
 
         <!-- Liên hệ với chúng tôi -->
@@ -197,21 +197,14 @@
                     <a href="#" class="social-btn zalo-btn">
                         <i class="fas fa-comment-alt"></i> Zalo Chat
                     </a>
+                    <a href="#" class="social-btn instagram-btn">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    <a href="#" class="social-btn youtube-btn">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </a>
                 </div>
-                <div class="contact-info-form">
-                    <h3>Thông tin liên hệ</h3>
-                    <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> cskh@cibyhd.com.vn</p>
-                        <p><i class="fas fa-phone-alt"></i> 1900 0085</p>
-                        <p><i class="fas fa-map-marker-alt"></i> 135 Hai Bà Trưng, phường Bến Nghé, Quận 1, TPHCM</p>
-                    </div>
-                    <div class="contact-form">
-                        <input type="text" placeholder="Họ và tên" required>
-                        <input type="email" placeholder="Điền email" required>
-                        <textarea placeholder="Thông tin bạn cần hỗ trợ" required></textarea>
-                        <button type="submit" class="submit-btn">Gửi ngay</button>
-                    </div>
-                </div>
+            </div>
         </section>
 
         <!-- FOOTER -->
@@ -234,6 +227,5 @@
 
         <!-- Cloudflare Security Script -->
         <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'935c28187f04c016',t:'MTc0NTU2NjQ1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
-</body>
-
+    </body>
 </html>

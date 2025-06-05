@@ -67,6 +67,38 @@ exports.getCurrentUser = (req, res) => {
     }
 };
 
+exports.checkAdmin = (req, res) => {
+    const token = req.cookies.jwt;
+    if (!token) {
+        return res.status(401).json({ success: 'false', error: 'Chưa đăng nhập' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        User.findById(decoded.ma_tai_khoan, (err, user) => {
+            if (err || !user) {
+                return res.status(404).json({ success: 'false', error: 'Không tìm thấy user' });
+            }
+            if (user.role_id === 1 || user.role_id === 99) {
+                return res.json({
+                    success: 'true',
+                    data: {
+                        ma_tai_khoan: user.ma_tai_khoan,
+                        ten_dang_nhap: user.ten_dang_nhap,
+                        ho_va_ten: user.ho_va_ten,
+                        sdt: user.sdt,
+                        role_id: user.role_id
+                    }
+                });
+            } else {
+                return res.status(403).json({ success: 'false', error: 'Bạn không có quyền truy cập' });
+            }
+        });
+    } catch (err) {
+        return res.status(401).json({ success: 'false', error: 'Token không hợp lệ' });
+    }
+};
+
 exports.logout = (req, res) => {
     res.clearCookie('jwt');
     res.json({ success: 'true', message: 'Đăng xuất thành công' });

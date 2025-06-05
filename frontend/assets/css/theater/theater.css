@@ -129,3 +129,44 @@
 .delete-btn:hover {
     background: #c82333;
 }
+
+/* CSS cho nút "Phòng chiếu" */
+.roomList-btn {
+    padding: 10px 15px;
+    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Màu gradient giống các nút chính */
+    color: #ffffff; /* Văn bản màu trắng */
+    border: none;
+    border-radius: 5px; /* Góc bo tròn nhẹ */
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Hiệu ứng mượt khi hover */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Khoảng cách giữa icon và văn bản */
+    width: 100%; /* Đảm bảo nút chiếm toàn bộ chiều rộng trong container */
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(255, 98, 0, 0.3); /* Đổ bóng nhẹ */
+}
+
+.roomList-btn:hover {
+    transform: translateY(-2px); /* Nâng nút lên khi hover */
+    box-shadow: 0 4px 10px rgba(255, 98, 0, 0.5); /* Đổ bóng mạnh hơn khi hover */
+    background: linear-gradient(45deg, #e55a00, #ff7400); /* Gradient đậm hơn khi hover */
+}
+
+.roomList-btn i {
+    font-size: 14px; /* Kích thước icon khớp với văn bản */
+}
+
+/* Đảm bảo nút nằm trong layout theater-actions */
+.theater-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Khoảng cách giữa các nút */
+    padding: 10px; /* Padding cho container */
+}
+
+.theater-actions button {
+    margin: 0; /* Xóa margin mặc định nếu có */
+}

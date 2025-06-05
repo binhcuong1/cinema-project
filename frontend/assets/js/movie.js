@@ -323,7 +323,6 @@ async function fetchSearchMovies(keyword) {
     }
     return;
   }
-  c;
   await fetchAndRenderMovies(
     `/api/movies/search?keyword=${encodeURIComponent(keyword)}`,
     "search-results",

@@ -1,4 +1,43 @@
-/* assets/css/style.css */
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+body {
+    background-color: #0a0e17;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+}
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
+
+/* Button Styles */
+.section-button {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff; /* Màu trắng đồng nhất */
+    background: linear-gradient(45deg, #ff6200, #ff8c00); /* Gradient nền */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3);
+}
+
+.section-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+}
+
+/* ==========================================================================
+   Sections
+   ========================================================================== */
+
 /* Phần banner chính (Hero Banner) */
 .hero-banner {
     position: relative;
@@ -53,7 +92,7 @@
     width: 100%;
     height: 100%;
     max-height: 500px; /* Giữ giới hạn chiều cao nếu cần */
-    object-fit: cover;
+    object-fit: fill;
     object-position: center;
     display: block;
 }
@@ -526,8 +565,7 @@
     font-size: 40px;
     margin-bottom: 25px;
     color: #ffffff;
-    text-align: left;
-    padding-left: 120px;
+    text-align: center; /* Căn giữa */
 }
 
 .promo-grid-container {
@@ -645,74 +683,6 @@
     margin-top: 30px;
 }
 
-.promo-button a {
-    background: linear-gradient(45deg, #ff6200, #ff8c00);
-    color: #000000;
-    padding: 15px 30px;
-    border-radius: 5px;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.3s ease;
-}
-
-.promo-button a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
-}
-
-/* Responsive cho .promo-arrows */
-@media (max-width: 768px) {
-    .promo-card {
-        flex: 0 0 calc(50% - 10px);
-        min-width: calc(50% - 10px);
-    }
-
-    .promo-card img {
-        height: 200px;
-    }
-
-    .promotions h2 {
-        font-size: 20px;
-        padding-left: 10px;
-    }
-
-    .promo-button a {
-        padding: 10px 20px;
-    }
-
-    .promo-arrows button {
-        width: 30px;
-        height: 30px;
-        font-size: 16px;
-    }
-
-    .promo-arrows {
-        padding: 0 5px;
-    }
-}
-
-@media (max-width: 480px) {
-    .promo-card {
-        flex: 0 0 calc(100% - 10px);
-        min-width: calc(100% - 10px);
-    }
-
-    .promo-card img {
-        height: 150px;
-    }
-
-    .promo-arrows button {
-        width: 30px;
-        height: 30px;
-        font-size: 14px;
-    }
-
-    .promo-arrows {
-        padding: 0 5px;
-    }
-}
-
 /* Phần thành viên CiBYHD */
 .membership {
     position: relative;
@@ -782,7 +752,7 @@
     font-size: 40px;
     margin-bottom: 15px;
     color: #ffffff;
-    text-align: center;
+    text-align: center; /* Căn giữa */
 }
 
 .entertainment-description {
@@ -823,7 +793,120 @@
     border-radius: 10px;
 }
 
+.section-button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Phần LIÊN HỆ */
+.contact {
+    padding: 50px 0;
+    background-color: #0a0e17;
+    text-align: center;
+}
+
+.contact h2 {
+    font-size: 40px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-align: center; /* Căn giữa */
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.contact-social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+    border-radius: 6px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.social-btn i {
+    font-size: 18px;
+}
+
+.facebook-btn {
+    background-color: #3b5998;
+}
+
+.facebook-btn:hover {
+    background-color: #2d4373;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(59, 89, 152, 0.5);
+}
+
+.zalo-btn {
+    background-color: #00c4ff;
+}
+
+.zalo-btn:hover {
+    background-color: #00a3d6;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 196, 255, 0.5);
+}
+
+.instagram-btn {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.instagram-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(188, 24, 136, 0.5);
+}
+
+.youtube-btn {
+    background-color: #ff0000;
+}
+
+.youtube-btn:hover {
+    background-color: #cc0000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.5);
+}
+
+/* Responsive cho .promo-arrows và các section */
 @media (max-width: 768px) {
+    .promo-card {
+        flex: 0 0 calc(50% - 10px);
+        min-width: calc(50% - 10px);
+    }
+
+    .promo-card img {
+        height: 200px;
+    }
+
+    .promotions h2 {
+        font-size: 20px;
+    }
+
+    .promo-arrows {
+        padding: 0 5px;
+    }
+
+    .promo-arrows button {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+
     .entertainment h2 {
         font-size: 20px;
     }
@@ -845,184 +928,50 @@
     .entertainment-card img {
         height: 150px;
     }
-}
 
-/* Phần LIÊN HỆ */
-.contact {
-    padding: 40px;
-    margin-bottom: 50px;
-    position: relative;
-}
-
-.contact h2 {
-    font-size: 40px;
-    margin-bottom: 30px;
-    color: #ffffff;
-    text-align: left;
-    padding-left: 120px;
-}
-
-.contact-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    gap: 40px;
-}
-
-.contact-social {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.social-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-}
-
-.social-btn i {
-    margin-right: 10px;
-}
-
-.social-btn:hover {
-    transform: scale(1.05);
-}
-
-.facebook-btn {
-    background: linear-gradient(45deg, #3b5998, #8b9dc3);
-}
-
-.zalo-btn {
-    background: linear-gradient(45deg, #6b00ff, #00a4ff);
-}
-
-.contact-info-form {
-    flex: 2;
-    background: linear-gradient(to right, #17150a, #182d50);
-    padding: 30px;
-    border-radius: 10px;
-}
-
-.contact-info-form h3 {
-    font-size: 24px;
-    color: #ffffff;
-    margin-bottom: 20px;
-}
-
-.contact-info {
-    margin-bottom: 30px;
-}
-
-.contact-info p {
-    font-size: 16px;
-    color: #ffffff;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.contact-info p i {
-    color: #ff6200;
-}
-
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    background: #ffffff;
-    font-size: 14px;
-    color: #000000;
-}
-
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-    color: #999999;
-}
-
-.contact-form textarea {
-    height: 100px;
-    resize: none;
-}
-
-.contact-form .submit-btn {
-    padding: 12px 30px;
-    background: linear-gradient(45deg, #ff6200, #ff8c00);
-    color: #000000;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    align-self: flex-end;
-}
-
-.contact-form .submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
-}
-
-@media (max-width: 768px) {
     .contact h2 {
         font-size: 20px;
-        padding-left: 10px;
-    }
-
-    .contact-container {
-        flex-direction: column;
-        gap: 20px;
     }
 
     .contact-social {
-        flex-direction: row;
-        justify-content: center;
         gap: 15px;
     }
 
     .social-btn {
         padding: 10px 20px;
-        font-size: 16px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .promo-card {
+        flex: 0 0 calc(100% - 10px);
+        min-width: calc(100% - 10px);
     }
 
-    .contact-info-form {
-        padding: 20px;
+    .promo-card img {
+        height: 150px;
     }
 
-    .contact-info-form h3 {
-        font-size: 20px;
-    }
-
-    .contact-info p {
+    .promo-arrows button {
+        width: 30px;
+        height: 30px;
         font-size: 14px;
     }
 
-    .contact-form input,
-    .contact-form textarea {
-        font-size: 12px;
-        padding: 10px;
+    .contact h2 {
+        font-size: 24px;
     }
 
-    .contact-form .submit-btn {
-        font-size: 14px;
-        padding: 10px 20px;
+    .contact-social {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .social-btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
     }
 }
 

@@ -261,8 +261,26 @@ function hrefToRoomList(theaterID) {
 
 //#region === Khu vực Khởi tạo ===
 
+async function fetchCurrentUser() {
+  try {
+    const res = await axios.get("/api/users/check-admin", { withCredentials: true });
+    console.table('resssssssssssss', res);
+    if (res.data.success === "true") {
+      currentUserId = res.data.data.ma_tai_khoan;
+      currentUserRoleId = parseInt(res.data.data.role_id);
+    } else {
+      alert("Không lấy được thông tin người dùng hiện tại");
+    }
+  } catch (err) {
+    console.error("Lỗi khi lấy người dùng hiện tại:", err);
+    alert("Vui lòng đăng nhập lại!");
+    // window.location.href = "http://127.0.0.1:5500/frontend/pages/index.html";
+  }
+}
+
 // Khởi tạo khi trang tải
 document.addEventListener("DOMContentLoaded", () => {
+  // fetchCurrentUser();
   const addBtn = document.getElementById("add-theater-btn");
   addBtn.addEventListener("click", addTheater);
   renderList();

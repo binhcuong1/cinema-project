@@ -188,18 +188,18 @@ let currentUserRoleId = null;
 // Lấy thông tin người dùng hiện tại từ backend
 async function fetchCurrentUser() {
   try {
-    const res = await axios.get("/api/users/me", { withCredentials: true });
+    const res = await axios.get("/api/users/check-admin", { withCredentials: true });
     if (res.data.success === "true") {
       currentUserId = res.data.data.ma_tai_khoan;
-      currentUserRoleId = parseInt(res.data.data.role_id); // đảm bảo là số
-      fetchUsers(); // gọi sau khi đã có role
+      currentUserRoleId = parseInt(res.data.data.role_id);
+      fetchUsers();
     } else {
       alert("Không lấy được thông tin người dùng hiện tại");
     }
   } catch (err) {
     console.error("Lỗi khi lấy người dùng hiện tại:", err);
     alert("Vui lòng đăng nhập lại!");
-    window.location.href = "/login.html";
+    window.location.href = "http://127.0.0.1:5500/frontend/pages/index.html";
   }
 }
 

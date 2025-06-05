@@ -454,7 +454,7 @@ async function loadMoviesForModal(selectElement) {
     // Thêm trạng thái loading (tùy chọn)
     selectElement.innerHTML = '<option value="">Đang tải phim...</option>';
 
-    const response = await axios.get("/api/movies");
+    const response = await axios.get("/api/movies/now-showing");
     const movies = response.data.data;
 
     // Xóa các option cũ và thêm option mặc định
@@ -610,10 +610,25 @@ function renderSeats(seats, seatGrid) {
 
 
 
-
+async function fetchCurrentUser() {
+  try {
+    const res = await axios.get("/api/users/check-admin", { withCredentials: true });
+    if (res.data.success === "true") {
+      currentUserId = res.data.data.ma_tai_khoan;
+      currentUserRoleId = parseInt(res.data.data.role_id);
+    } else {
+      alert("Không lấy được thông tin người dùng hiện tại");
+    }
+  } catch (err) {
+    console.error("Lỗi khi lấy người dùng hiện tại:", err);
+    alert("Vui lòng đăng nhập lại!");
+    window.location.href = "http://127.0.0.1:5500/frontend/pages/index.html";
+  }
+}
 
 // Khởi tạo khi trang tải
 document.addEventListener("DOMContentLoaded", () => {
+  fetchCurrentUser();
   // Đặt ngày mặc định cho input date
   const today = new Date().toISOString().split("T")[0];
   document.getElementById("date").value = today;

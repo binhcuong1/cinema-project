@@ -4,6 +4,7 @@ const userController = require('../controllers/userController');
 
 router.post('/login', userController.login);
 router.get('/me', userController.getCurrentUser);
+router.get('/check-admin', userController.checkAdmin);
 router.post('/logout', userController.logout);
 router.post('/forgot-password', userController.forgotPassword);
 router.post('/reset-password', userController.resetPassword);
